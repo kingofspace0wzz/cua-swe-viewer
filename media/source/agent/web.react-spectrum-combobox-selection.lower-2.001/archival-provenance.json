@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "role": "viewer_media_recovery",
+  "scored_evaluation": false,
+  "provenance": "non_scoring_archival_screenshot_only_gpt56_cua",
+  "host": "shuli_rl_g6e",
+  "shard_id": "archive-20260829-v2-rl-shard02",
+  "tasks": [
+    "web.react-spectrum-combobox-selection.lower-2.001",
+    "web.vue-sticky-table-columns.001",
+    "web.vue-sticky-table-columns.lower-1.001"
+  ],
+  "command_exit_code": 2,
+  "canonical_results_unchanged": true
+}

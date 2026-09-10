@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "task_id": "v3.slate-softbreak-scroll.002",
+  "provenance": "exact_gold_patch_replay",
+  "gold_patch_sha256": "d71b08231270d997204c13b670041ee9879249f644fbd366d24c0ec0db5fb60d",
+  "task_file_sha256": "707a2dff699cc95021d08d5e1e947330c69ad12e21b09567d909b615e7a99c05",
+  "verifier": "python3 verifiers/browser_check.py",
+  "frame_count": 6
+}

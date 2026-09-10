@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "role": "viewer_media_recovery",
+  "scored_evaluation": false,
+  "provenance": "non_scoring_archival_screenshot_only_gpt56_cua",
+  "host": "shuli_rl_g6e",
+  "shard_id": "archive-20260829-masonry-rerun01",
+  "tasks": [
+    "web.responsive-masonry-overlap.001"
+  ],
+  "command_exit_code": 0,
+  "canonical_results_unchanged": true
+}

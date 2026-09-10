@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "role": "viewer_media_recovery",
+  "scored_evaluation": false,
+  "provenance": "non_scoring_archival_screenshot_only_gpt56_cua",
+  "host": "shuli_llm",
+  "shard_id": "archive-20260829-v3-llm-shard01",
+  "tasks": [
+    "v3.quill-paste-scroll-roundtrip.002",
+    "v3.react-spectrum-grid-tab-jump.003",
+    "v3.ag-grid-master-detail-sticky.003"
+  ],
+  "command_exit_code": 0,
+  "canonical_results_unchanged": true
+}

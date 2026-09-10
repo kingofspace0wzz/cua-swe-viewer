@@ -1,0 +1,94 @@
+diff --git a/js/Game.js b/js/Game.js
+index 93503a14b9023326ba06164b8bd3fddcd8051a13..12577baeda5e85c19377cdcefc6fd3de58afffca 100644
+--- a/js/Game.js
++++ b/js/Game.js
+@@ -253,7 +253,9 @@
+         };
+         this.retry = function(retry){
+             this.resumeGame(retry);
++            this.levelMap.restoreGuideFrame(this.player.spawnGuide);
+             this.player.respawn();
++            this.levelMap.setCameraProgress(this.player.xPos);
+             this.levelMap.showGuide(this.player.spawnGuide);
+             window.timer.start();
+             window.dispatchEvent(new CustomEvent("boxel-restart", {
+diff --git a/js/LevelMap.js b/js/LevelMap.js
+index b57a6f995f0d58427f8879bfa3fac061ede82026..c41093b6cedcc2e6d88d73f0ff8aa0fc7a873a3f 100644
+--- a/js/LevelMap.js
++++ b/js/LevelMap.js
+@@ -203,6 +203,25 @@
+                 tiles: Math.max(1,Math.round((support.right-support.left)/this.box))
+             };
+         };
++        this.restoreGuideFrame = function(frame){
++            if (frame == null) return;
++            var support = this.getSupport(frame.id);
++            if (support == null) return;
++            var offsetY = frame.y-support.baseY;
++            var phaseCosine = 1+(offsetY/support.amplitude);
++            phaseCosine = Math.max(-1,Math.min(1,phaseCosine));
++            // The checkpoint is reached on the earlier half of the lift cycle.
++            var phase = Math.acos(phaseCosine);
++            this.motionTime = (phase/(Math.PI*2))*support.period;
++            for (var i=0; i<this.movingSupports.length; i++){
++                this.movingSupports[i].update(this.motionTime);
++            }
++        };
++        this.setCameraProgress = function(progress){
++            if (typeof progress != "number" || !isFinite(progress)) return;
++            this.cameraProgress = progress;
++            this.x = -progress;
++        };
+         this.showGuide = function(frame){
+             if (this.guideView != null && this.guideView.parent != null){
+                 this.guideView.parent.removeChild(this.guideView);
+@@ -290,6 +309,8 @@
+             this.right = (startCol+length)*map.box;
+             this.baseY = row*map.box;
+             this.top = map.y+this.baseY;
++            this.amplitude = 30;
++            this.period = 2800;
+             this.checkpointCol = -1;
+             for (var c=startCol; c<startCol+length; c++){
+                 if (row > 0 && map.map[row-1][c].type == 3){
+@@ -308,8 +329,8 @@
+             this.view.x = this.left;
+             this.view.y = this.baseY;
+             this.update = function(time){
+-                var phase = (time%2800)/2800*Math.PI*2;
+-                this.offsetY = -30*(1-Math.cos(phase));
++                var phase = (time%this.period)/this.period*Math.PI*2;
++                this.offsetY = -this.amplitude*(1-Math.cos(phase));
+                 this.top = map.y+this.baseY+this.offsetY;
+                 this.view.y = this.baseY+this.offsetY;
+             };
+diff --git a/js/Player.js b/js/Player.js
+index 7a23504b6677e0d461c5ac4d8a04995efb2a0e5f..88db23445d851a5f7d4e6edbb09cc04df02b7d61 100644
+--- a/js/Player.js
++++ b/js/Player.js
+@@ -237,7 +237,13 @@
+             if (this.newSpawn == true){
+                 this.xPos = this.spawnX;
+                 this.y = this.spawnY;
++                this.supportId = this.spawnSupportId;
+                 this.supportOffset = this.spawnSupportOffset;
++                if (this.supportId != null){
++                    var spawnSupport = window.Game.levelMap.getSupport(this.supportId);
++                    if (spawnSupport != null) this.y = spawnSupport.top+this.supportOffset;
++                    else this.supportId = null;
++                }
+             }
+             else { //set to origin
+                 this.setSpeed(1); //reset player speed multiplier
+@@ -291,7 +297,10 @@
+                 if (this.hitBox[i].type == 2 && (i == 0 || i == 1) && Math.abs(this.hitBox[i].slope) > 1){ /* tip tile disabled */ }
+                 else if (this.hitBox[i].type == 3){ //set respawn points
+                     this.spawnX = this.hitBox[i].x - this.x; 
+-                    this.spawnY = this.hitBox[i].y; this.newSpawn = true; 
++                    this.spawnY = this.hitBox[i].y;
++                    this.spawnSupportId = null;
++                    this.spawnGuide = null;
++                    this.newSpawn = true;
+                     window.Game.particles.addParticles(this.x,this.y,this.scaleX/2,window.Game.theme.main_color4,1,25,true);
+                 }
+                 else if (this.hitBox[i].type == 4 && (i == 3 || i == 2) && this.gravity.isFalling()){ this.playerState = 1; createjs.Sound.play("impact"); }

@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "name": "build: python3 build_check.py",
+      "group": "build",
+      "command": "python3 build_check.py",
+      "passed": true,
+      "expected": "exit code 0",
+      "actual": "exit code 0\n{\n  \"missing\": [],\n  \"script_order_ok\": true,\n  \"source_files\": [\n    \"src/input.js\",\n    \"src/bird.js\",\n    \"src/pipes.js\",\n    \"src/renderer.js\",\n    \"src/game.js\",\n    \"src/game_api.js\"\n  ]\n}",
+      "expected_exit_code": 0,
+      "actual_exit_code": 0,
+      "stdout": "{\n  \"missing\": [],\n  \"script_order_ok\": true,\n  \"source_files\": [\n    \"src/input.js\",\n    \"src/bird.js\",\n    \"src/pipes.js\",\n    \"src/renderer.js\",\n    \"src/game.js\",\n    \"src/game_api.js\"\n  ]\n}\n",
+      "stderr": "",
+      "evidence_path": null
+    },
+    {
+      "name": "state: \"${CUA_SWE_PYTHON:-python3}\" verifiers/browser_check.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:4477/}\"",
+      "group": "state",
+      "command": "\"${CUA_SWE_PYTHON:-python3}\" verifiers/browser_check.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:4477/}\"",
+      "passed": false,
+      "expected": "exit code 0",
+      "actual": "exit code 1\nTraceback (most recent call last):\n  File \"/tmp/cua-swe-eval-r22cy6m2/workspace/verifiers/browser_check.py\", line 600, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/tmp/cua-swe-eval-r22cy6m2/workspace/verifiers/browser_check.py\", line 594, in main\n    raise AssertionError(\"; \".join(failures))\nAssertionError: late drill did not retain swept pipe contact; tap trajectory missed its target envelope: {'sample_count': 13, 'target_count': 28, 'checkpoints': [{'pipe_x': 185, 'actual_y': 251.6167, 'target_y': 254.4222, 'error': 2.805499999999995}, {'pipe_x': 150, 'actual_y': None, 'target_y': 239.6056, 'error': None}, {'pipe_x': 115, 'actual_y': None, 'target_y': 233.2278, 'error': None}, {'pipe_x': 85, 'actual_y': None, 'target_y': 234.4778, 'error': None}], 'all_present': False, 'max_error': None}; held trajectory missed its target envelope: {'sample_count': 28, 'target_count': 28, 'checkpoints': [{'pipe_x': 195, 'actual_y': 267.0389, 'target_y': 271.7222, 'error': 4.683299999999974}, {'pipe_x': 170, 'actual_y': 249.65, 'target_y': 253.4722, 'error': 3.822199999999981}, {'pipe_x': 140, 'actual_y': 234.4667, 'target_y': 237.2556, 'error': 2.788899999999984}, {'pipe_x': 110, 'actual_y': 225.4833, 'target_y': 227.2389, 'error': 1.755599999999987}, {'pipe_x': 85, 'actual_y': 222.7333, 'target_y': 223.6278, 'error': 0.8944999999999936}], 'all_present': True, 'max_error': 4.683299999999974}",
+      "expected_exit_code": 0,
+      "actual_exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/cua-swe-eval-r22cy6m2/workspace/verifiers/browser_check.py\", line 600, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/tmp/cua-swe-eval-r22cy6m2/workspace/verifiers/browser_check.py\", line 594, in main\n    raise AssertionError(\"; \".join(failures))\nAssertionError: late drill did not retain swept pipe contact; tap trajectory missed its target envelope: {'sample_count': 13, 'target_count': 28, 'checkpoints': [{'pipe_x': 185, 'actual_y': 251.6167, 'target_y': 254.4222, 'error': 2.805499999999995}, {'pipe_x': 150, 'actual_y': None, 'target_y': 239.6056, 'error': None}, {'pipe_x': 115, 'actual_y': None, 'target_y': 233.2278, 'error': None}, {'pipe_x': 85, 'actual_y': None, 'target_y': 234.4778, 'error': None}], 'all_present': False, 'max_error': None}; held trajectory missed its target envelope: {'sample_count': 28, 'target_count': 28, 'checkpoints': [{'pipe_x': 195, 'actual_y': 267.0389, 'target_y': 271.7222, 'error': 4.683299999999974}, {'pipe_x': 170, 'actual_y': 249.65, 'target_y': 253.4722, 'error': 3.822199999999981}, {'pipe_x': 140, 'actual_y': 234.4667, 'target_y': 237.2556, 'error': 2.788899999999984}, {'pipe_x': 110, 'actual_y': 225.4833, 'target_y': 227.2389, 'error': 1.755599999999987}, {'pipe_x': 85, 'actual_y': 222.7333, 'target_y': 223.6278, 'error': 0.8944999999999936}], 'all_present': True, 'max_error': 4.683299999999974}\n",
+      "evidence_path": null
+    }
+  ],
+  "success": false,
+  "progress": 0.5
+}

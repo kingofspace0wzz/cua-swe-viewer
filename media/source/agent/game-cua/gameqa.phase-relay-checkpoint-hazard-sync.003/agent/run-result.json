@@ -1,0 +1,8 @@
+{
+  "patch_path": "<artifact-path>",
+  "progress": 0.5,
+  "success": false,
+  "task_id": "gameqa.phase-relay-checkpoint-hazard-sync.003",
+  "verifier_report_path": "<artifact-path>",
+  "workspace_path": "<artifact-path>"
+}

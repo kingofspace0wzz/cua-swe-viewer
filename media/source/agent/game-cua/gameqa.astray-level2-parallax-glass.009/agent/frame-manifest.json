@@ -1,0 +1,162 @@
+{
+  "format": "ordered_png_observation_sequence",
+  "frame_count": 9,
+  "frames": [
+    {
+      "action": null,
+      "file": "frames/frame-0001.png",
+      "sequence": 1,
+      "source_frame": "screenshot-0001.png",
+      "timestamp": "2026-09-01T15:21:01.657421+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 550,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "ArrowUp",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0002.png",
+      "sequence": 2,
+      "source_frame": "screenshot-0002.png",
+      "timestamp": "2026-09-01T15:21:50.489215+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 700,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "ArrowUp",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0003.png",
+      "sequence": 3,
+      "source_frame": "screenshot-0003.png",
+      "timestamp": "2026-09-01T15:22:15.358874+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Control+R",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0004.png",
+      "sequence": 4,
+      "source_frame": "screenshot-0004.png",
+      "timestamp": "2026-09-01T15:22:54.155508+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 450,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "ArrowUp",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0005.png",
+      "sequence": 5,
+      "source_frame": "screenshot-0005.png",
+      "timestamp": "2026-09-01T15:22:59.335338+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Control+Shift+R",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0006.png",
+      "sequence": 6,
+      "source_frame": "screenshot-0006.png",
+      "timestamp": "2026-09-01T15:23:13.268595+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 450,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "ArrowUp",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0007.png",
+      "sequence": 7,
+      "source_frame": "screenshot-0007.png",
+      "timestamp": "2026-09-01T15:23:23.402541+00:00"
+    },
+    {
+      "action": null,
+      "file": "frames/frame-0008.png",
+      "sequence": 8,
+      "source_frame": "screenshot-0008.png",
+      "timestamp": "2026-09-01T15:23:41.213223+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Control+L",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0009.png",
+      "sequence": 9,
+      "source_frame": "screenshot-0009.png",
+      "timestamp": "2026-09-01T15:24:05.868890+00:00"
+    }
+  ],
+  "run_label": "cua-01",
+  "task_id": "gameqa.astray-level2-parallax-glass.009"
+}

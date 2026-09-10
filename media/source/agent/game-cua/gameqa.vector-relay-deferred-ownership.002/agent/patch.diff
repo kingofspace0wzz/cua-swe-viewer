@@ -1,0 +1,15 @@
+diff --git a/src/relay_commit.js b/src/relay_commit.js
+index 9562d4bc0004a4a0ca912d95314f4ab69adf4de8..0ec82084c52d1e3b5f40c19d87e22d24db5aa8be 100644
+--- a/src/relay_commit.js
++++ b/src/relay_commit.js
+@@ -38,7 +38,9 @@
+   RelayLane.prototype.take = function (now, owner) {
+     while (this.pending.length && this.pending[0].due <= now) {
+       var entry = this.pending.shift();
+-      if (owner && entry.owner === owner.key) return entry;
++      if (owner && (entry.owner === owner.key || entry.port === owner.port)) {
++        return entry;
++      }
+       this.dropped += 1;
+     }
+     return null;

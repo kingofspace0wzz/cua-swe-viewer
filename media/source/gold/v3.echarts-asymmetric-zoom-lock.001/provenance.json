@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "task_id": "v3.echarts-asymmetric-zoom-lock.001",
+  "provenance": "exact_gold_patch_replay",
+  "gold_patch_sha256": "238ff216f773bbde8ebcc5e1137f89d91966edb5c9e773d00fbffa613e560ce0",
+  "task_file_sha256": "7568ae171123cab7cd10381e403c400da557b637623a9b9799a8e091df5c01b3",
+  "verifier": "python3 verifiers/browser_check.py",
+  "frame_count": 9
+}

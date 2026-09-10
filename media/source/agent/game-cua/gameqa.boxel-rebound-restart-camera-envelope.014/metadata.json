@@ -1,0 +1,29 @@
+{
+  "excluded": [
+    "raw base64-heavy agent transcript",
+    "evaluation workspace and dependencies",
+    "browser profile and caches",
+    "non-representative screenshot sequences",
+    "verifier screenshots and construction artifacts"
+  ],
+  "game": "boxel-rebound",
+  "presentation_policy": "one representative scored CUA run plus aggregate matched results",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 5,
+      "commands": 15,
+      "computer_use_calls": 10,
+      "events": 33,
+      "file_changes": 2,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 9,
+    "label": "cua-02",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "diagnostic failure with most retained observation frames",
+    "success": false
+  },
+  "task_id": "gameqa.boxel-rebound-restart-camera-envelope.014"
+}

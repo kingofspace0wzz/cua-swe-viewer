@@ -1,0 +1,32 @@
+{
+  "progress": 0.5,
+  "results": [
+    {
+      "actual": "exit code 0\n> signal-maze-candidate@1.0.0 build\n> node build.mjs\n\nbuilt Signal Maze",
+      "actual_exit_code": 0,
+      "command": "npm run build",
+      "evidence_path": null,
+      "expected": "exit code 0",
+      "expected_exit_code": 0,
+      "group": "build",
+      "name": "build: npm run build",
+      "passed": true,
+      "stderr": "",
+      "stdout": "\n> signal-maze-candidate@1.0.0 build\n> node build.mjs\n\nbuilt Signal Maze\n"
+    },
+    {
+      "actual": "exit code 1\nTraceback (most recent call last):\n  File \"<artifact-path>\", line 571, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"<artifact-path>\", line 550, in main\n    result = replay(cdp, args.evidence_dir)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<artifact-path>\", line 468, in replay\n    raise AssertionError(\nAssertionError: the route phase did not resume from the pre-warning owner: {\"alert\": {\"active\": false, \"remaining\": 0}, \"metrics\": {\"contacts\": 1, \"pulseCollected\": true, \"releaseRemaining\": -4}, \"phase\": {\"duration\": 5, \"elapsed\": 5, \"mode\": \"track\"}, \"player\": {\"active\": false, \"lives\": 2, \"position\": {\"x\": 6, \"y\": 2}}, \"rover\": {\"alertActive\": false, \"appearance\": \"active\", \"branch\": \"right\", \"hazard\": true, \"mode\": \"track\", \"position\": {\"x\": 6, \"y\": 2}, \"state\": \"branch\"}, \"scenarioSeal\": \"route-seal-kestrel-731\", \"terminal\": {\"isTerminal\": true, \"outcome\": \"collision\"}, \"tick\": 10}",
+      "actual_exit_code": 1,
+      "command": "\"${CUA_SWE_PYTHON:-python3}\" verifiers/browser_check.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:51000/}\" --service-port 51001",
+      "evidence_path": null,
+      "expected": "exit code 0",
+      "expected_exit_code": 0,
+      "group": "state",
+      "name": "state: \"${CUA_SWE_PYTHON:-python3}\" verifiers/browser_check.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:51000/}\" --service-port 51001",
+      "passed": false,
+      "stderr": "Traceback (most recent call last):\n  File \"<artifact-path>\", line 571, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"<artifact-path>\", line 550, in main\n    result = replay(cdp, args.evidence_dir)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<artifact-path>\", line 468, in replay\n    raise AssertionError(\nAssertionError: the route phase did not resume from the pre-warning owner: {\"alert\": {\"active\": false, \"remaining\": 0}, \"metrics\": {\"contacts\": 1, \"pulseCollected\": true, \"releaseRemaining\": -4}, \"phase\": {\"duration\": 5, \"elapsed\": 5, \"mode\": \"track\"}, \"player\": {\"active\": false, \"lives\": 2, \"position\": {\"x\": 6, \"y\": 2}}, \"rover\": {\"alertActive\": false, \"appearance\": \"active\", \"branch\": \"right\", \"hazard\": true, \"mode\": \"track\", \"position\": {\"x\": 6, \"y\": 2}, \"state\": \"branch\"}, \"scenarioSeal\": \"route-seal-kestrel-731\", \"terminal\": {\"isTerminal\": true, \"outcome\": \"collision\"}, \"tick\": 10}\n",
+      "stdout": ""
+    }
+  ],
+  "success": false
+}

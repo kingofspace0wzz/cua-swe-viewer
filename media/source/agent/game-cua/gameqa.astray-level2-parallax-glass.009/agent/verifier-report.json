@@ -1,0 +1,32 @@
+{
+  "progress": 0.5,
+  "results": [
+    {
+      "actual": "exit code 0\nself-contained Astray runtime syntax and packaging checks passed",
+      "actual_exit_code": 0,
+      "command": "python3 verifiers/static_sanity.py",
+      "evidence_path": null,
+      "expected": "exit code 0",
+      "expected_exit_code": 0,
+      "group": "build",
+      "name": "build: python3 verifiers/static_sanity.py",
+      "passed": true,
+      "stderr": "",
+      "stdout": "self-contained Astray runtime syntax and packaging checks passed\n"
+    },
+    {
+      "actual": "exit code 1\nTraceback (most recent call last):\n  File \"<artifact-path>\", line 453, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"<artifact-path>\", line 432, in main\n    raise AssertionError(failure)\nAssertionError: run 1: progressive glass signature is wrong: {'component_counts': {'magenta': 2, 'green': 1, 'amber': 0, 'teal': 0, 'red': 1, 'gold': 4}, 'pixel_counts': {'magenta': 18366, 'green': 7426, 'amber': 0, 'teal': 0, 'red': 3132, 'gold': 1157}, 'centroids': {'magenta': [{'x': 639.5, 'y': 195.99117710350765}, {'x': 639.5, 'y': 363.0}], 'green': [{'x': 639.5, 'y': 544.0}], 'amber': [], 'teal': [], 'red': [{'x': 639.5, 'y': 143.03065134099617}], 'gold': [{'x': 639.5, 'y': 480.58944281524924}, {'x': 639.4869358669833, 'y': 410.48218527315913}, {'x': 577.0, 'y': 490.0}, {'x': 702.0, 'y': 490.0}]}}",
+      "actual_exit_code": 1,
+      "command": "\"${CUA_SWE_PYTHON:-python3}\" verifiers/replay_state.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:42833/?level=2}\"",
+      "evidence_path": null,
+      "expected": "exit code 0",
+      "expected_exit_code": 0,
+      "group": "state",
+      "name": "state: \"${CUA_SWE_PYTHON:-python3}\" verifiers/replay_state.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:42833/?level=2}\"",
+      "passed": false,
+      "stderr": "Traceback (most recent call last):\n  File \"<artifact-path>\", line 453, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"<artifact-path>\", line 432, in main\n    raise AssertionError(failure)\nAssertionError: run 1: progressive glass signature is wrong: {'component_counts': {'magenta': 2, 'green': 1, 'amber': 0, 'teal': 0, 'red': 1, 'gold': 4}, 'pixel_counts': {'magenta': 18366, 'green': 7426, 'amber': 0, 'teal': 0, 'red': 3132, 'gold': 1157}, 'centroids': {'magenta': [{'x': 639.5, 'y': 195.99117710350765}, {'x': 639.5, 'y': 363.0}], 'green': [{'x': 639.5, 'y': 544.0}], 'amber': [], 'teal': [], 'red': [{'x': 639.5, 'y': 143.03065134099617}], 'gold': [{'x': 639.5, 'y': 480.58944281524924}, {'x': 639.4869358669833, 'y': 410.48218527315913}, {'x': 577.0, 'y': 490.0}, {'x': 702.0, 'y': 490.0}]}}\n",
+      "stdout": ""
+    }
+  ],
+  "success": false
+}

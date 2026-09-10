@@ -1,0 +1,1673 @@
+diff --git a/src/board-view.js b/src/board-view.js
+index c9b4d5758cb26ead694d87c50ac2adc26db1636a..fbe8e25fb1f6254584f90cc80d1c4b1a13239a3c 100644
+--- a/src/board-view.js
++++ b/src/board-view.js
+@@ -40,6 +40,8 @@ export class BoardView {
+       rowElement.className = "board-row";
+       rowElement.dataset.row = String(row);
+       for (let column = 0; column < 5; column += 1) {
++        const hop = document.createElement("div");
++        hop.className = "tile-hop";
+         const slot = document.createElement("div");
+         slot.className = "tile-slot";
+         slot.dataset.row = String(row);
+@@ -51,7 +53,8 @@ export class BoardView {
+         motion.append(tileFace("front", "tile-front"));
+         motion.append(tileFace("back", "tile-back"));
+         slot.append(motion);
+-        rowElement.append(slot);
++        hop.append(slot);
++        rowElement.append(hop);
+       }
+       this.boardElement.append(rowElement);
+     }
+@@ -223,6 +226,7 @@ export class BoardView {
+       status: slot.dataset.status,
+       letter: slot.querySelector(".tile-front").textContent.toLowerCase(),
+       celebrating:
++        slot.parentElement.classList.contains("is-celebrating") ||
+         slot.classList.contains("is-celebrating") ||
+         slot.querySelector(".tile-motion").classList.contains("is-celebrating"),
+       ...this.visibleFace(slot)
+diff --git a/src/motion.js b/src/motion.js
+index be131d10cd1fe893a6b365ccabaf5242669f0a09..535e996f8dd1e29c3b97df0c9ac2eced7833ed52 100644
+--- a/src/motion.js
++++ b/src/motion.js
+@@ -103,8 +103,11 @@ export class ResultMotion {
+       const timer = window.setTimeout(() => {
+         this.pending.delete(timer);
+         if (sequence !== this.sequence) return;
+-        const target = slot.querySelector(".tile-motion");
+-        this.startTarget(target, `${rowElement.dataset.row}:${column}`, sequence);
++        this.startTarget(
++          slot.parentElement,
++          `${rowElement.dataset.row}:${column}`,
++          sequence
++        );
+       }, RESULT_LEAD_MS + column * RESULT_STAGGER_MS);
+       this.pending.add(timer);
+     });
+diff --git a/src/styles.css b/src/styles.css
+index 6d038860ee8ef141bdf6ddad0b01d52557812307..d5592c1d042ca57a92f040d7b349240f52641ffa 100644
+--- a/src/styles.css
++++ b/src/styles.css
+@@ -258,10 +258,27 @@ footer {
+   transform: rotateX(180deg);
+ }
+ 
+-.tile-motion.is-celebrating {
++.tile-hop.is-celebrating {
+   animation: result-hop 760ms cubic-bezier(0.25, 0.75, 0.28, 1);
+ }
+ 
++.tile-hop.is-celebrating .tile-motion[data-status="exact"] .tile-front {
++  background: var(--exact);
++  border-color: #7bd6bf;
++  color: #08251e;
++}
++
++.tile-hop.is-celebrating .tile-motion[data-status="present"] .tile-front {
++  background: var(--present);
++  border-color: #f1d18a;
++  color: #30220a;
++}
++
++.tile-hop.is-celebrating .tile-motion[data-status="absent"] .tile-front {
++  background: var(--absent);
++  border-color: #8492a5;
++}
++
+ .board-row.shake {
+   animation: row-shake 260ms linear;
+ }
+@@ -415,7 +432,7 @@ footer {
+   .key {
+     transition-duration: 1ms;
+   }
+-  .tile-motion.is-celebrating,
++  .tile-hop.is-celebrating,
+   .board-row.shake,
+   .tile-slot[data-filled="true"] .tile-front {
+     animation-duration: 1ms;
+
+diff --git a/dist/board-view.js b/dist/board-view.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..fbe8e25fb1f6254584f90cc80d1c4b1a13239a3c
+--- /dev/null
++++ b/dist/board-view.js
+@@ -0,0 +1,257 @@
++import { STATES } from "./evaluate.js";
++import { ResultMotion } from "./motion.js";
++
++const KEY_ROWS = ["qwertyuiop", "asdfghjkl", "zxcvbnm"];
++
++function tileFace(face, className) {
++  const element = document.createElement("div");
++  element.className = `tile-face ${className}`;
++  element.dataset.face = face;
++  return element;
++}
++
++export class BoardView {
++  constructor() {
++    this.boardElement = document.querySelector("#board");
++    this.keyboardElement = document.querySelector("#keyboard");
++    this.noticeElement = document.querySelector("#notice");
++    this.modeNameElement = document.querySelector("#mode-name");
++    this.modeLabelElement = document.querySelector("#mode-label");
++    this.roundElement = document.querySelector("#round-label");
++    this.guidanceElement = document.querySelector("#guidance");
++    this.hardModeElement = document.querySelector("#hard-mode");
++    this.resultElement = document.querySelector("#result");
++    this.motion = new ResultMotion(this.resultElement);
++    this.lastRound = null;
++    this.handlers = {};
++    this.createBoard();
++    this.createKeyboard();
++    this.bindControls();
++  }
++
++  setHandlers(handlers) {
++    this.handlers = handlers;
++  }
++
++  createBoard() {
++    this.boardElement.replaceChildren();
++    for (let row = 0; row < 6; row += 1) {
++      const rowElement = document.createElement("div");
++      rowElement.className = "board-row";
++      rowElement.dataset.row = String(row);
++      for (let column = 0; column < 5; column += 1) {
++        const hop = document.createElement("div");
++        hop.className = "tile-hop";
++        const slot = document.createElement("div");
++        slot.className = "tile-slot";
++        slot.dataset.row = String(row);
++        slot.dataset.column = String(column);
++        slot.dataset.status = STATES.empty;
++        const motion = document.createElement("div");
++        motion.className = "tile-motion";
++        motion.dataset.status = STATES.empty;
++        motion.append(tileFace("front", "tile-front"));
++        motion.append(tileFace("back", "tile-back"));
++        slot.append(motion);
++        hop.append(slot);
++        rowElement.append(hop);
++      }
++      this.boardElement.append(rowElement);
++    }
++  }
++
++  createKey(label, value, wide = false) {
++    const button = document.createElement("button");
++    button.type = "button";
++    button.className = `key${wide ? " wide" : ""}`;
++    button.dataset.key = value;
++    button.dataset.status = STATES.empty;
++    button.textContent = label;
++    button.addEventListener("click", () => this.handlers.key?.(value));
++    return button;
++  }
++
++  createKeyboard() {
++    this.keyboardElement.replaceChildren();
++    KEY_ROWS.forEach((letters, rowIndex) => {
++      const row = document.createElement("div");
++      row.className = "key-row";
++      if (rowIndex === 2) row.append(this.createKey("Enter", "enter", true));
++      [...letters].forEach((letter) => row.append(this.createKey(letter, letter)));
++      if (rowIndex === 2) row.append(this.createKey("Erase", "erase", true));
++      this.keyboardElement.append(row);
++    });
++  }
++
++  bindControls() {
++    document.querySelector("#restart").addEventListener("click", () => {
++      this.handlers.restart?.();
++    });
++    document.querySelectorAll("[data-mode]").forEach((button) => {
++      button.addEventListener("click", () => this.handlers.mode?.(button.dataset.mode));
++    });
++    this.hardModeElement.addEventListener("change", () => {
++      const accepted = this.handlers.hard?.(this.hardModeElement.checked);
++      if (accepted === false) this.hardModeElement.checked = !this.hardModeElement.checked;
++    });
++  }
++
++  paintGuidance(hardMode) {
++    this.guidanceElement.replaceChildren();
++    const chips = [];
++    hardMode.exact.forEach((letter, position) => {
++      if (!letter) return;
++      const chip = document.createElement("span");
++      chip.className = "guidance-chip exact";
++      chip.dataset.kind = "exact";
++      chip.dataset.letter = letter;
++      chip.dataset.position = String(position);
++      chip.textContent = `${letter.toUpperCase()} fixed at ${position + 1}`;
++      chips.push(chip);
++    });
++    for (const [letter, count] of Object.entries(hardMode.minimum)) {
++      const chip = document.createElement("span");
++      chip.className = "guidance-chip present";
++      chip.dataset.kind = "minimum";
++      chip.dataset.letter = letter;
++      chip.dataset.count = String(count);
++      chip.textContent = `${letter.toUpperCase()} × ${count}+`;
++      chips.push(chip);
++    }
++    if (!chips.length) {
++      const empty = document.createElement("span");
++      empty.className = "guidance-empty";
++      empty.textContent = "No active clues";
++      this.guidanceElement.append(empty);
++    } else {
++      this.guidanceElement.append(...chips);
++    }
++  }
++
++  render(state, animation = {}) {
++    if (this.lastRound !== state.round) {
++      this.motion.reset(this.boardElement);
++      this.lastRound = state.round;
++    }
++    this.modeNameElement.textContent = state.challenge.name;
++    this.modeLabelElement.textContent =
++      state.challenge.mode === "daily" ? "Daily puzzle" : "Practice puzzle";
++    this.roundElement.textContent = `Round ${state.round}`;
++    this.noticeElement.textContent = state.message;
++    this.noticeElement.dataset.kind = state.messageKind;
++    this.hardModeElement.checked = state.hardMode.enabled;
++    this.hardModeElement.disabled = state.currentRow > 0 || state.reveal.active;
++    document.querySelectorAll("[data-mode]").forEach((button) => {
++      button.dataset.active = String(button.dataset.mode === state.challenge.mode);
++    });
++
++    state.rows.forEach((row, rowIndex) => {
++      const rowElement = this.boardElement.querySelector(`[data-row="${rowIndex}"].board-row`);
++      row.tiles.forEach((tile, columnIndex) => {
++        const slot = rowElement.querySelector(`.tile-slot[data-column="${columnIndex}"]`);
++        const motion = slot.querySelector(".tile-motion");
++        const front = motion.querySelector(".tile-front");
++        const back = motion.querySelector(".tile-back");
++        front.textContent = tile.letter;
++        back.textContent = tile.letter;
++        slot.dataset.status = tile.revealed ? tile.status : STATES.empty;
++        motion.dataset.status = tile.revealed ? tile.status : STATES.empty;
++        slot.dataset.filled = String(Boolean(tile.letter));
++        motion.classList.toggle("is-revealed", tile.revealed);
++        motion.setAttribute(
++          "aria-label",
++          tile.letter
++            ? `${tile.letter.toUpperCase()} ${tile.revealed ? tile.status : "unrevealed"}`
++            : "empty"
++        );
++      });
++    });
++
++    Object.entries(state.keyboard).forEach(([letter, status]) => {
++      const key = this.keyboardElement.querySelector(`[data-key="${letter}"]`);
++      key.dataset.status = status;
++      key.setAttribute("aria-label", `${letter.toUpperCase()} ${status}`);
++    });
++    this.paintGuidance(state.hardMode);
++    this.resultElement.hidden = !state.terminal.success || !this.motion.snapshot().complete;
++
++    if (animation.shakeRow !== undefined) {
++      const row = this.boardElement.querySelector(
++        `.board-row[data-row="${animation.shakeRow}"]`
++      );
++      row.classList.remove("shake");
++      void row.offsetWidth;
++      row.classList.add("shake");
++    }
++    if (animation.startCelebration) {
++      const row = this.boardElement.querySelector(
++        `.board-row[data-row="${animation.startCelebration.rowIndex}"]`
++      );
++      this.motion.celebrate(row);
++    }
++  }
++
++  visibleFace(slot) {
++    const motion = slot.querySelector(".tile-motion");
++    const slotRect = slot.getBoundingClientRect();
++    const rect = motion.getBoundingClientRect();
++    const x = rect.left + rect.width * 0.22;
++    const y = rect.top + rect.height * 0.22;
++    const hit = document.elementFromPoint(x, y);
++    const face = hit?.closest?.(".tile-face");
++    return {
++      face: face?.dataset.face || null,
++      color: face ? getComputedStyle(face).backgroundColor : null,
++      motionRect: {
++        x: rect.x,
++        y: rect.y,
++        width: rect.width,
++        height: rect.height
++      },
++      slotRect: {
++        x: slotRect.x,
++        y: slotRect.y,
++        width: slotRect.width,
++        height: slotRect.height
++      },
++      transform: getComputedStyle(motion).transform,
++      transitionDuration: getComputedStyle(motion).transitionDuration
++    };
++  }
++
++  snapshot() {
++    const tiles = [...this.boardElement.querySelectorAll(".tile-slot")].map((slot) => ({
++      row: Number(slot.dataset.row),
++      column: Number(slot.dataset.column),
++      status: slot.dataset.status,
++      letter: slot.querySelector(".tile-front").textContent.toLowerCase(),
++      celebrating:
++        slot.parentElement.classList.contains("is-celebrating") ||
++        slot.classList.contains("is-celebrating") ||
++        slot.querySelector(".tile-motion").classList.contains("is-celebrating"),
++      ...this.visibleFace(slot)
++    }));
++    const keyboard = Object.fromEntries(
++      [...this.keyboardElement.querySelectorAll(".key[data-key]")]
++        .filter((key) => key.dataset.key.length === 1)
++        .map((key) => [key.dataset.key, key.dataset.status || STATES.empty])
++    );
++    const guidance = [...this.guidanceElement.querySelectorAll(".guidance-chip")].map(
++      (chip) => ({
++        kind: chip.dataset.kind,
++        letter: chip.dataset.letter,
++        position:
++          chip.dataset.position === undefined ? null : Number(chip.dataset.position),
++        count: chip.dataset.count === undefined ? null : Number(chip.dataset.count),
++        text: chip.textContent
++      })
++    );
++    return {
++      tiles,
++      keyboard,
++      guidance,
++      motion: this.motion.snapshot(),
++      resultVisible: !this.resultElement.hidden
++    };
++  }
++}
+
+diff --git a/dist/constraints.js b/dist/constraints.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..9856844c5185c033e6c0f0d5c03a181b2cd0e585
+--- /dev/null
++++ b/dist/constraints.js
+@@ -0,0 +1,46 @@
++import { STATES } from "./evaluate.js";
++
++export class ConstraintLedger {
++  constructor() {
++    this.reset();
++  }
++
++  reset() {
++    this.exact = Array(5).fill(null);
++    this.minimum = {};
++  }
++
++  addRow(word, statuses) {
++    const rowMinimum = {};
++    statuses.forEach((status, position) => {
++      const letter = word[position];
++      if (status === STATES.exact) this.exact[position] = letter;
++      if (status === STATES.exact || status === STATES.present) {
++        rowMinimum[letter] = (rowMinimum[letter] || 0) + 1;
++      }
++    });
++    for (const [letter, count] of Object.entries(rowMinimum)) {
++      this.minimum[letter] = Math.max(this.minimum[letter] || 0, count);
++    }
++  }
++
++  accepts(word) {
++    for (let position = 0; position < this.exact.length; position += 1) {
++      if (this.exact[position] && word[position] !== this.exact[position]) {
++        return false;
++      }
++    }
++    for (const [letter, count] of Object.entries(this.minimum)) {
++      const occurrences = [...word].filter((value) => value === letter).length;
++      if (occurrences < count) return false;
++    }
++    return true;
++  }
++
++  snapshot() {
++    return {
++      exact: [...this.exact],
++      minimum: { ...this.minimum }
++    };
++  }
++}
+
+diff --git a/dist/evaluate.js b/dist/evaluate.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..3b0fc47856d5cb7326cbc15bc950767353dbf7f2
+--- /dev/null
++++ b/dist/evaluate.js
+@@ -0,0 +1,41 @@
++export const STATES = Object.freeze({
++  empty: "empty",
++  exact: "exact",
++  present: "present",
++  absent: "absent"
++});
++
++export const STATUS_STRENGTH = Object.freeze({
++  [STATES.empty]: 0,
++  [STATES.absent]: 1,
++  [STATES.present]: 2,
++  [STATES.exact]: 3
++});
++
++export function strongerStatus(left, right) {
++  return STATUS_STRENGTH[left] >= STATUS_STRENGTH[right] ? left : right;
++}
++
++export function evaluateGuess(answer, guess) {
++  const remaining = answer.toLowerCase().split("");
++  const letters = guess.toLowerCase().split("");
++  const result = Array(letters.length).fill(STATES.absent);
++
++  for (let index = 0; index < letters.length; index += 1) {
++    if (letters[index] === remaining[index]) {
++      result[index] = STATES.exact;
++      remaining[index] = null;
++    }
++  }
++
++  for (let index = 0; index < letters.length; index += 1) {
++    if (result[index] === STATES.exact) continue;
++    const match = remaining.indexOf(letters[index]);
++    if (match >= 0) {
++      remaining[match] = null;
++      result[index] = STATES.present;
++    }
++  }
++
++  return result;
++}
+
+diff --git a/dist/game.js b/dist/game.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..7f4efa8979ef9a3d120f201c12a4b36f4aac4584
+--- /dev/null
++++ b/dist/game.js
+@@ -0,0 +1,238 @@
++import { ConstraintLedger } from "./constraints.js";
++import { evaluateGuess, STATES, strongerStatus } from "./evaluate.js";
++import { RevealTimeline } from "./reveal.js";
++
++const ROWS = 6;
++const COLS = 5;
++const LETTERS = "abcdefghijklmnopqrstuvwxyz";
++
++function emptyRow() {
++  return {
++    word: "",
++    tiles: Array.from({ length: COLS }, () => ({
++      letter: "",
++      status: STATES.empty,
++      revealed: false
++    }))
++  };
++}
++
++export class LetterGame {
++  constructor(challenge, render) {
++    this.challenge = challenge;
++    this.render = render;
++    this.timeline = new RevealTimeline(challenge.revealStepMs || 170);
++    this.constraints = new ConstraintLedger();
++    this.round = 0;
++    this.hardEnabled = true;
++    this.restart();
++  }
++
++  restart() {
++    this.round += 1;
++    this.timeline.close();
++    this.constraints.reset();
++    this.rows = Array.from({ length: ROWS }, emptyRow);
++    this.keyboard = Object.fromEntries(
++      [...LETTERS].map((letter) => [letter, STATES.empty])
++    );
++    this.currentRow = 0;
++    this.input = "";
++    this.active = true;
++    this.revealActive = false;
++    this.revealCount = 0;
++    this.validationRejections = 0;
++    this.hardRejections = 0;
++    this.completed = false;
++    this.message = "Daily row ready";
++    this.messageKind = "info";
++    this.render(this.snapshot());
++  }
++
++  setHardMode(enabled) {
++    if (this.currentRow > 0 || this.revealActive) {
++      this.message = "Hard guidance is fixed after the first submission";
++      this.messageKind = "error";
++      this.render(this.snapshot());
++      return false;
++    }
++    this.hardEnabled = Boolean(enabled);
++    this.message = this.hardEnabled ? "Hard guidance enabled" : "Hard guidance disabled";
++    this.messageKind = "info";
++    this.render(this.snapshot());
++    return true;
++  }
++
++  inputLetter(letter) {
++    if (
++      !this.active ||
++      this.revealActive ||
++      !/^[a-z]$/.test(letter) ||
++      this.input.length >= COLS
++    ) {
++      return;
++    }
++    this.input += letter;
++    this.syncInput();
++  }
++
++  erase() {
++    if (!this.active || this.revealActive || !this.input) return;
++    this.input = this.input.slice(0, -1);
++    this.syncInput();
++  }
++
++  syncInput() {
++    const row = this.rows[this.currentRow];
++    if (!row) return;
++    row.word = this.input;
++    row.tiles.forEach((tile, index) => {
++      tile.letter = this.input[index] || "";
++      tile.status = STATES.empty;
++      tile.revealed = false;
++    });
++    this.render(this.snapshot());
++  }
++
++  submit() {
++    if (!this.active) return;
++    if (this.revealActive) {
++      this.reject("Let the current row finish", "validation");
++      return;
++    }
++    if (this.input.length !== COLS) {
++      this.reject("Five letters are required", "validation");
++      return;
++    }
++    if (!this.challenge.acceptedWords.includes(this.input)) {
++      this.reject("Entry is not in this puzzle", "validation");
++      return;
++    }
++    if (
++      this.hardEnabled &&
++      this.currentRow > 0 &&
++      !this.constraints.accepts(this.input)
++    ) {
++      this.reject("Hard guidance is not satisfied", "hard");
++      return;
++    }
++
++    const rowIndex = this.currentRow;
++    const word = this.input;
++    const statuses = evaluateGuess(this.challenge.answer, word);
++    this.rows[rowIndex].word = word;
++    this.rows[rowIndex].tiles.forEach((tile, index) => {
++      tile.letter = word[index];
++    });
++    this.currentRow += 1;
++    this.input = "";
++    this.revealActive = true;
++    this.revealCount = 0;
++    this.message = "Turning the row…";
++    this.messageKind = "info";
++    this.timeline.begin(
++      {
++        round: this.round,
++        rowIndex,
++        word,
++        statuses
++      },
++      (step) => this.applyRevealStep(step),
++      (packet) => this.finishReveal(packet)
++    );
++    this.render(this.snapshot());
++  }
++
++  reject(message, kind) {
++    const round = this.round;
++    if (kind === "hard") this.hardRejections += 1;
++    else this.validationRejections += 1;
++    this.message = message;
++    this.messageKind = "error";
++    this.render(this.snapshot(), { shakeRow: this.currentRow });
++    window.setTimeout(() => {
++      if (!this.active || this.round !== round || this.revealActive) return;
++      this.input = "";
++      this.syncInput();
++    }, 190);
++  }
++
++  applyRevealStep(step) {
++    if (step.round !== this.round) return;
++    const tile = this.rows[step.rowIndex].tiles[step.index];
++    tile.status = step.status;
++    tile.revealed = true;
++    this.revealCount = step.index + 1;
++    const letter = step.word[step.index];
++    this.keyboard[letter] = strongerStatus(this.keyboard[letter], step.status);
++    this.render(this.snapshot(), {
++      revealTile: [step.rowIndex, step.index]
++    });
++  }
++
++  finishReveal(packet) {
++    if (packet.round !== this.round) return;
++    this.constraints.addRow(packet.word, packet.statuses);
++    this.revealActive = false;
++    this.revealCount = packet.statuses.length;
++    if (packet.word === this.challenge.answer) {
++      this.active = false;
++      this.completed = true;
++      this.message = "Pattern complete";
++      this.messageKind = "success";
++      this.render(this.snapshot(), {
++        startCelebration: { rowIndex: packet.rowIndex }
++      });
++      return;
++    }
++    if (this.currentRow >= ROWS) {
++      this.active = false;
++      this.message = "No rows remain";
++      this.messageKind = "error";
++    } else {
++      this.message = "Next row ready";
++      this.messageKind = "info";
++    }
++    this.render(this.snapshot());
++  }
++
++  snapshot() {
++    return {
++      challenge: {
++        id: this.challenge.id,
++        name: this.challenge.name,
++        mode: this.challenge.mode,
++        seed: this.challenge.seed,
++        level: this.challenge.level
++      },
++      round: this.round,
++      rows: this.rows.map((row) => ({
++        word: row.word,
++        tiles: row.tiles.map((tile) => ({ ...tile }))
++      })),
++      keyboard: { ...this.keyboard },
++      currentRow: this.currentRow,
++      input: this.input,
++      active: this.active,
++      reveal: {
++        active: this.revealActive,
++        revealedTiles: this.revealCount
++      },
++      validation: {
++        rejected: this.validationRejections,
++        hardRejected: this.hardRejections
++      },
++      hardMode: {
++        enabled: this.hardEnabled,
++        ...this.constraints.snapshot()
++      },
++      terminal: {
++        isTerminal: !this.active,
++        success: this.completed
++      },
++      message: this.message,
++      messageKind: this.messageKind,
++      is_actionable: this.active && !this.revealActive
++    };
++  }
++}
+
+diff --git a/dist/index.html b/dist/index.html
+new file mode 100644
+index 0000000000000000000000000000000000000000..f0e0c263e28229eac98d4d7bd7deb9242fe50bef
+--- /dev/null
++++ b/dist/index.html
+@@ -0,0 +1,67 @@
++<!doctype html>
++<html lang="en">
++  <head>
++    <meta charset="utf-8">
++    <meta name="viewport" content="width=device-width, initial-scale=1">
++    <meta name="color-scheme" content="dark">
++    <title>Letter Arc</title>
++    <link rel="stylesheet" href="/styles.css">
++  </head>
++  <body>
++    <main class="shell" aria-labelledby="game-title">
++      <header class="topbar">
++        <div>
++          <p class="eyebrow">Five-letter daily</p>
++          <h1 id="game-title">Letter Arc</h1>
++        </div>
++        <button id="restart" class="restart" type="button">Restart round</button>
++      </header>
++
++      <nav class="mode-tabs" aria-label="Puzzle mode">
++        <button type="button" data-mode="daily">Daily</button>
++        <button type="button" data-mode="practice">Practice</button>
++      </nav>
++
++      <section class="challenge-bar" aria-label="Current puzzle">
++        <strong id="mode-name">Loading puzzle…</strong>
++        <span id="round-label">Round 1</span>
++      </section>
++
++      <section id="notice" class="notice" role="status" aria-live="polite">
++        Preparing the board…
++      </section>
++
++      <section class="guidance-bar">
++        <label>
++          <input id="hard-mode" type="checkbox" checked>
++          Hard guidance
++        </label>
++        <div id="guidance" class="guidance" aria-live="polite">
++          <span class="guidance-empty">No active clues</span>
++        </div>
++      </section>
++
++      <section id="board" class="board" aria-label="Guess board"></section>
++
++      <section id="result" class="result" aria-live="polite" hidden>
++        <div class="result-copy">
++          <strong>Pattern complete</strong>
++          <span>The daily row is recorded.</span>
++        </div>
++        <div class="finish-playback" aria-label="Finish playback">
++          <button id="replay-finish" type="button" disabled>Replay finish</button>
++          <button id="continue-finish" type="button" hidden>Continue</button>
++          <span id="finish-playback-status">Ready to replay.</span>
++        </div>
++      </section>
++
++      <section id="keyboard" class="keyboard" aria-label="On-screen keyboard"></section>
++
++      <footer>
++        <span>Type or use the visible keys.</span>
++        <span id="mode-label">Daily puzzle</span>
++      </footer>
++    </main>
++    <script type="module" src="/main.js"></script>
++  </body>
++</html>
+
+diff --git a/dist/main.js b/dist/main.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..3bb573c25f4c737b668340a9e578ef3b70a71393
+--- /dev/null
++++ b/dist/main.js
+@@ -0,0 +1,92 @@
++import { BoardView } from "./board-view.js";
++import { LetterGame } from "./game.js";
++
++const view = new BoardView();
++let game = null;
++let currentMode = new URLSearchParams(window.location.search).get("mode") || "daily";
++if (!["daily", "practice"].includes(currentMode)) currentMode = "daily";
++
++async function fetchChallenge(mode) {
++  const response = await fetch(`/api/challenge?mode=${encodeURIComponent(mode)}`, {
++    cache: "no-store"
++  });
++  if (!response.ok) throw new Error(`challenge request failed: ${response.status}`);
++  return response.json();
++}
++
++async function loadMode(mode) {
++  const challenge = await fetchChallenge(mode);
++  currentMode = mode;
++  const nextUrl = new URL(window.location.href);
++  nextUrl.searchParams.set("mode", mode);
++  window.history.replaceState(null, "", nextUrl);
++  view.motion.reset(view.boardElement);
++  game = new LetterGame(challenge, (state, animation) => view.render(state, animation));
++  return game.snapshot();
++}
++
++function handleKey(value) {
++  if (!game) return;
++  if (value === "enter") game.submit();
++  else if (value === "erase") game.erase();
++  else game.inputLetter(value);
++}
++
++view.setHandlers({
++  key: handleKey,
++  restart: () => game?.restart(),
++  mode: (mode) => loadMode(mode),
++  hard: (enabled) => game?.setHardMode(enabled)
++});
++
++document.addEventListener("keydown", (event) => {
++  if (event.ctrlKey || event.metaKey || event.altKey) return;
++  if (/^[a-z]$/i.test(event.key)) {
++    event.preventDefault();
++    handleKey(event.key.toLowerCase());
++  } else if (event.key === "Backspace") {
++    event.preventDefault();
++    handleKey("erase");
++  } else if (event.key === "Enter") {
++    event.preventDefault();
++    handleKey("enter");
++  }
++});
++
++window.gameAPI = {
++  getState: () => {
++    if (!game) return { status: "loading", is_actionable: false };
++    return {
++      ...game.snapshot(),
++      presentation: view.snapshot()
++    };
++  },
++  reset: async (options = {}) => {
++    const mode = options.mode || currentMode;
++    if (mode !== currentMode) {
++      await loadMode(mode);
++    } else {
++      game.restart();
++    }
++    return {
++      applied: {
++        seed: game.challenge.seed,
++        level: game.challenge.level,
++        mode: game.challenge.mode
++      }
++    };
++  },
++  getCapabilities: () => ({
++    supports_seed: true,
++    supports_level_select: true,
++    supports_inplace_reset: true,
++    provides_actionable_flag: true,
++    supports_mode_select: true
++  })
++};
++
++loadMode(currentMode).catch((error) => {
++  document.querySelector("#notice").textContent = `Unable to start: ${error.message}`;
++  document.querySelector("#notice").dataset.kind = "error";
++  console.error(error);
++});
+
+diff --git a/dist/motion.js b/dist/motion.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..535e996f8dd1e29c3b97df0c9ac2eced7833ed52
+--- /dev/null
++++ b/dist/motion.js
+@@ -0,0 +1,312 @@
++const RESULT_LEAD_MS = 560;
++const RESULT_STAGGER_MS = 95;
++const RESULT_DURATION_MS = 760;
++const RESULT_FALLBACK_GRACE_MS = 900;
++const REPLAY_DURATION_MS = 1800;
++const REPLAY_PAUSE_FRACTION = 0.34;
++
++export class ResultMotion {
++  constructor(resultElement) {
++    this.resultElement = resultElement;
++    this.replayButton = resultElement.querySelector("#replay-finish");
++    this.continueButton = resultElement.querySelector("#continue-finish");
++    this.playbackStatus = resultElement.querySelector("#finish-playback-status");
++    this.pending = new Set();
++    this.frames = new Set();
++    this.active = new Map();
++    this.replayActive = new Map();
++    this.startedCount = 0;
++    this.finishedCount = 0;
++    this.animationEndCount = 0;
++    this.fallbackCount = 0;
++    this.sequence = 0;
++    this.operation = "idle";
++    this.completedRow = null;
++    this.replayCount = 0;
++    this.completedReplayCount = 0;
++    this.resetReplayRun();
++    this.replayButton.addEventListener("click", () => this.replay());
++    this.continueButton.addEventListener("click", () => this.continueReplay());
++    this.syncControls();
++  }
++
++  resetReplayRun() {
++    this.replayPhase = "idle";
++    this.replayStartedCount = 0;
++    this.replayPausedCount = 0;
++    this.replayContinueCount = 0;
++    this.replayFinishedCount = 0;
++    this.replayAnimationEndCount = 0;
++    this.replayFallbackCount = 0;
++    this.replayMissingAnimationCount = 0;
++  }
++
++  reset(boardElement) {
++    this.sequence += 1;
++    for (const timer of this.pending) window.clearTimeout(timer);
++    this.pending.clear();
++    for (const frame of this.frames) window.cancelAnimationFrame(frame);
++    this.frames.clear();
++    for (const entry of [...this.active.values(), ...this.replayActive.values()]) {
++      entry.animation?.cancel();
++    }
++    this.active.clear();
++    this.replayActive.clear();
++    this.startedCount = 0;
++    this.finishedCount = 0;
++    this.animationEndCount = 0;
++    this.fallbackCount = 0;
++    this.operation = "idle";
++    this.completedRow = null;
++    this.replayCount = 0;
++    this.completedReplayCount = 0;
++    this.resetReplayRun();
++    boardElement
++      .querySelectorAll(".is-celebrating")
++      .forEach((element) => {
++        element.classList.remove("is-celebrating");
++        element.style.removeProperty("animation-duration");
++      });
++    this.resultElement.hidden = true;
++    this.syncControls();
++  }
++
++  celebrate(rowElement) {
++    if (this.startedCount || this.pending.size || this.active.size) return;
++    this.operation = "initial";
++    this.completedRow = rowElement;
++    this.queue(rowElement);
++  }
++
++  replay() {
++    if (
++      !this.completedRow ||
++      this.finishedCount !== 5 ||
++      this.pending.size ||
++      this.replayActive.size ||
++      ["starting", "paused", "playing"].includes(this.replayPhase)
++    ) {
++      return;
++    }
++    this.operation = "replay";
++    this.replayCount += 1;
++    this.resetReplayRun();
++    this.replayPhase = "starting";
++    this.syncControls();
++    this.queue(this.completedRow);
++  }
++
++  queue(rowElement) {
++    const sequence = this.sequence;
++    const slots = [...rowElement.querySelectorAll(".tile-slot")];
++    slots.forEach((slot, column) => {
++      const timer = window.setTimeout(() => {
++        this.pending.delete(timer);
++        if (sequence !== this.sequence) return;
++        this.startTarget(
++          slot.parentElement,
++          `${rowElement.dataset.row}:${column}`,
++          sequence
++        );
++      }, RESULT_LEAD_MS + column * RESULT_STAGGER_MS);
++      this.pending.add(timer);
++    });
++  }
++
++  startTarget(target, id, sequence) {
++    const replay = this.operation === "replay";
++    const reducedMotion = window.matchMedia(
++      "(prefers-reduced-motion: reduce)"
++    ).matches;
++    target.classList.remove("is-celebrating");
++    target.style.removeProperty("animation-duration");
++    void target.offsetWidth;
++    if (replay && !reducedMotion) {
++      target.style.animationDuration = `${REPLAY_DURATION_MS}ms`;
++    }
++    target.classList.add("is-celebrating");
++    const collection = replay ? this.replayActive : this.active;
++    const entry = {
++      id,
++      startedAt: performance.now(),
++      target: target.className,
++      animation: null,
++      scheduleFallback: null
++    };
++    collection.set(id, entry);
++    if (replay) this.replayStartedCount += 1;
++    else this.startedCount += 1;
++
++    let finished = false;
++    let fallback = null;
++    const clearFallback = () => {
++      if (fallback === null) return;
++      window.clearTimeout(fallback);
++      this.pending.delete(fallback);
++      fallback = null;
++    };
++    const finish = (source) => {
++      if (finished || sequence !== this.sequence) return;
++      finished = true;
++      clearFallback();
++      target.classList.remove("is-celebrating");
++      target.style.removeProperty("animation-duration");
++      collection.delete(id);
++      if (replay) {
++        this.replayFinishedCount += 1;
++        if (source === "animationend") this.replayAnimationEndCount += 1;
++        else this.replayFallbackCount += 1;
++        if (this.replayFinishedCount === 5) {
++          this.completedReplayCount += 1;
++          this.replayPhase = "complete";
++          this.operation = "idle";
++          this.resultElement.hidden = false;
++          this.syncControls();
++        }
++      } else {
++        this.finishedCount += 1;
++        if (source === "animationend") this.animationEndCount += 1;
++        else this.fallbackCount += 1;
++        if (this.finishedCount === 5) {
++          this.operation = "idle";
++          this.resultElement.hidden = false;
++          this.syncControls();
++        }
++      }
++    };
++    const onAnimationEnd = (event) => {
++      if (event.target !== target || !event.animationName.includes("result-hop")) return;
++      target.removeEventListener("animationend", onAnimationEnd);
++      finish("animationend");
++    };
++    target.addEventListener("animationend", onAnimationEnd);
++    const scheduleFallback = (delay) => {
++      clearFallback();
++      fallback = window.setTimeout(() => {
++        this.pending.delete(fallback);
++        fallback = null;
++        target.removeEventListener("animationend", onAnimationEnd);
++        finish("fallback");
++      }, delay);
++      this.pending.add(fallback);
++    };
++    entry.scheduleFallback = scheduleFallback;
++
++    if (!replay) {
++      scheduleFallback(RESULT_DURATION_MS + RESULT_FALLBACK_GRACE_MS);
++      return;
++    }
++    if (reducedMotion) {
++      this.replayPhase = "playing";
++      this.syncControls();
++      scheduleFallback(RESULT_FALLBACK_GRACE_MS);
++      return;
++    }
++
++    const frame = window.requestAnimationFrame(() => {
++      this.frames.delete(frame);
++      if (sequence !== this.sequence || finished) return;
++      const animation = target
++        .getAnimations()
++        .find((candidate) =>
++          String(candidate.animationName || "").includes("result-hop")
++        );
++      if (!animation) {
++        this.replayMissingAnimationCount += 1;
++        scheduleFallback(REPLAY_DURATION_MS + RESULT_FALLBACK_GRACE_MS);
++        return;
++      }
++      const timing = animation.effect?.getComputedTiming();
++      const duration = Number(timing?.duration) || REPLAY_DURATION_MS;
++      animation.currentTime = duration * REPLAY_PAUSE_FRACTION;
++      animation.pause();
++      entry.animation = animation;
++      this.replayPausedCount += 1;
++      if (
++        this.replayPausedCount === 5 &&
++        this.replayActive.size === 5 &&
++        this.replayMissingAnimationCount === 0
++      ) {
++        this.replayPhase = "paused";
++        this.syncControls();
++      }
++    });
++    this.frames.add(frame);
++  }
++
++  continueReplay() {
++    if (this.replayPhase !== "paused" || this.replayActive.size !== 5) return;
++    this.replayPhase = "playing";
++    this.replayContinueCount += 1;
++    this.syncControls();
++    for (const entry of this.replayActive.values()) {
++      const animation = entry.animation;
++      if (!animation) continue;
++      const timing = animation.effect?.getComputedTiming();
++      const duration = Number(timing?.duration) || REPLAY_DURATION_MS;
++      const elapsed = Number(animation.currentTime) || 0;
++      entry.scheduleFallback(
++        Math.max(1, duration - elapsed) + RESULT_FALLBACK_GRACE_MS
++      );
++      animation.play();
++    }
++  }
++
++  syncControls() {
++    const available = Boolean(
++      this.completedRow && this.finishedCount === 5
++    );
++    const busy = ["starting", "paused", "playing"].includes(this.replayPhase);
++    this.replayButton.disabled = !available || busy;
++    this.continueButton.hidden = this.replayPhase !== "paused";
++    this.continueButton.disabled = this.replayPhase !== "paused";
++    const messages = {
++      idle: available ? "Ready to replay." : "Finish playback unlocks after a win.",
++      starting: "Preparing a replay frame…",
++      paused: "Paused mid-finish for inspection.",
++      playing: "Continuing the finish…",
++      complete: "Replay complete. Ready again."
++    };
++    this.playbackStatus.textContent = messages[this.replayPhase];
++  }
++
++  snapshot() {
++    return {
++      startedCount: this.startedCount,
++      finishedCount: this.finishedCount,
++      animationEndCount: this.animationEndCount,
++      fallbackCount: this.fallbackCount,
++      activeTiles: [...this.active.values()].map((entry) => ({
++        id: entry.id,
++        startedAt: entry.startedAt,
++        target: entry.target
++      })),
++      complete: this.finishedCount === 5,
++      replay: {
++        available: Boolean(this.completedRow && this.finishedCount === 5),
++        phase: this.replayPhase,
++        count: this.replayCount,
++        completedCount: this.completedReplayCount,
++        startedCount: this.replayStartedCount,
++        pausedCount: this.replayPausedCount,
++        continueCount: this.replayContinueCount,
++        finishedCount: this.replayFinishedCount,
++        animationEndCount: this.replayAnimationEndCount,
++        fallbackCount: this.replayFallbackCount,
++        missingAnimationCount: this.replayMissingAnimationCount,
++        activeTiles: [...this.replayActive.values()].map((entry) => ({
++          id: entry.id,
++          startedAt: entry.startedAt,
++          target: entry.target,
++          paused: entry.animation?.playState === "paused"
++        })),
++        replayControlVisible:
++          !this.resultElement.hidden && !this.replayButton.hidden,
++        replayControlEnabled: !this.replayButton.disabled,
++        continueControlVisible:
++          !this.resultElement.hidden && !this.continueButton.hidden,
++        status: this.playbackStatus.textContent
++      }
++    };
++  }
++}
+
+diff --git a/dist/reveal.js b/dist/reveal.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..43d2111e839488313ffe3d2a12175bf7378aa9c8
+--- /dev/null
++++ b/dist/reveal.js
+@@ -0,0 +1,26 @@
++export class RevealTimeline {
++  constructor(stepMs = 170) {
++    this.stepMs = stepMs;
++    this.pending = new Set();
++    this.generation = 0;
++  }
++
++  begin(packet, onStep, onDone) {
++    const generation = this.generation;
++    packet.statuses.forEach((status, index) => {
++      const timer = window.setTimeout(() => {
++        this.pending.delete(timer);
++        if (generation !== this.generation) return;
++        onStep({ ...packet, status, index });
++        if (index === packet.statuses.length - 1) onDone(packet);
++      }, index * this.stepMs);
++      this.pending.add(timer);
++    });
++  }
++
++  close() {
++    this.generation += 1;
++    for (const timer of this.pending) window.clearTimeout(timer);
++    this.pending.clear();
++  }
++}
+
+diff --git a/dist/styles.css b/dist/styles.css
+new file mode 100644
+index 0000000000000000000000000000000000000000..d5592c1d042ca57a92f040d7b349240f52641ffa
+--- /dev/null
++++ b/dist/styles.css
+@@ -0,0 +1,440 @@
++:root {
++  --ink: #f7f4eb;
++  --muted: #9cabc0;
++  --page: #0c1422;
++  --panel: #17253a;
++  --line: #43536a;
++  --empty: #213149;
++  --exact: #55b99f;
++  --present: #e7b85d;
++  --absent: #65748a;
++  --accent: #f08b60;
++  font-family: ui-rounded, "Trebuchet MS", system-ui, sans-serif;
++  background: var(--page);
++  color: var(--ink);
++}
++
++* {
++  box-sizing: border-box;
++}
++
++body {
++  margin: 0;
++  min-height: 100vh;
++  background:
++    radial-gradient(circle at 18% 5%, #21385d 0, transparent 31rem),
++    linear-gradient(150deg, var(--page), #0b1220 72%);
++}
++
++button,
++input {
++  font: inherit;
++}
++
++.shell {
++  width: min(100%, 650px);
++  min-height: 100vh;
++  margin: 0 auto;
++  padding: 18px 20px 14px;
++  display: flex;
++  flex-direction: column;
++  gap: 10px;
++}
++
++.topbar,
++.challenge-bar,
++footer {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 16px;
++}
++
++.eyebrow {
++  margin: 0 0 2px;
++  color: var(--accent);
++  font-size: 0.73rem;
++  font-weight: 900;
++  letter-spacing: 0.15em;
++  text-transform: uppercase;
++}
++
++h1 {
++  margin: 0;
++  font-size: clamp(1.8rem, 6vw, 2.5rem);
++  letter-spacing: 0.035em;
++}
++
++.restart,
++.mode-tabs button {
++  border: 1px solid #71849f;
++  border-radius: 999px;
++  background: #263a57;
++  color: var(--ink);
++  cursor: pointer;
++}
++
++.restart {
++  padding: 8px 13px;
++}
++
++.mode-tabs {
++  display: flex;
++  gap: 8px;
++}
++
++.mode-tabs button {
++  padding: 7px 14px;
++}
++
++.mode-tabs button[data-active="true"] {
++  border-color: var(--accent);
++  background: #3a4960;
++  box-shadow: inset 0 0 0 1px var(--accent);
++}
++
++.challenge-bar,
++.guidance-bar {
++  min-height: 43px;
++  padding: 8px 12px;
++  border: 1px solid #3a4c65;
++  border-radius: 11px;
++  background: rgb(23 37 58 / 92%);
++}
++
++.challenge-bar span,
++footer {
++  color: var(--muted);
++  font-size: 0.78rem;
++}
++
++.notice {
++  min-height: 39px;
++  padding: 9px 12px;
++  border-left: 4px solid var(--accent);
++  border-radius: 5px 10px 10px 5px;
++  background: #20324b;
++}
++
++.notice[data-kind="error"] {
++  border-left-color: #ee7279;
++}
++
++.notice[data-kind="success"] {
++  border-left-color: var(--exact);
++}
++
++.guidance-bar {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 12px;
++}
++
++.guidance-bar label {
++  white-space: nowrap;
++  font-weight: 800;
++  font-size: 0.83rem;
++}
++
++.guidance {
++  display: flex;
++  flex-wrap: wrap;
++  justify-content: flex-end;
++  gap: 6px;
++}
++
++.guidance-empty {
++  color: var(--muted);
++  font-size: 0.76rem;
++}
++
++.guidance-chip {
++  border: 1px solid #71839b;
++  border-radius: 999px;
++  padding: 5px 8px;
++  font-size: 0.75rem;
++  font-weight: 900;
++}
++
++.guidance-chip.exact {
++  background: var(--exact);
++  color: #08251e;
++}
++
++.guidance-chip.present {
++  background: var(--present);
++  color: #30220a;
++}
++
++.board {
++  width: min(100%, 340px);
++  margin: 0 auto;
++  display: grid;
++  grid-template-rows: repeat(6, 1fr);
++  gap: 5px;
++}
++
++.board-row {
++  display: grid;
++  grid-template-columns: repeat(5, 1fr);
++  gap: 5px;
++}
++
++.tile-slot {
++  aspect-ratio: 1;
++  position: relative;
++  perspective: 720px;
++  border-radius: 9px;
++}
++
++.tile-slot::before {
++  content: "";
++  position: absolute;
++  inset: 0;
++  border: 2px solid #34465f;
++  border-radius: 9px;
++  background: #111d30;
++  pointer-events: none;
++}
++
++.tile-motion {
++  width: 100%;
++  height: 100%;
++  position: relative;
++  z-index: 1;
++  transform-style: preserve-3d;
++  transition: transform 320ms cubic-bezier(0.35, 0.02, 0.25, 1);
++}
++
++.tile-face {
++  position: absolute;
++  inset: 0;
++  display: grid;
++  place-items: center;
++  border: 2px solid var(--line);
++  border-radius: 9px;
++  backface-visibility: hidden;
++  -webkit-backface-visibility: hidden;
++  color: var(--ink);
++  font-size: clamp(1.35rem, 6vw, 2rem);
++  font-weight: 950;
++  text-transform: uppercase;
++}
++
++.tile-front {
++  background: var(--empty);
++  transform: rotateX(0deg);
++}
++
++.tile-back {
++  background: var(--absent);
++  transform: rotateX(180deg);
++}
++
++.tile-slot[data-filled="true"] .tile-front {
++  border-color: #71849d;
++  animation: fill-pop 110ms ease-out;
++}
++
++.tile-motion[data-status="exact"] .tile-back {
++  background: var(--exact);
++  border-color: #7bd6bf;
++  color: #08251e;
++}
++
++.tile-motion[data-status="present"] .tile-back {
++  background: var(--present);
++  border-color: #f1d18a;
++  color: #30220a;
++}
++
++.tile-motion[data-status="absent"] .tile-back {
++  background: var(--absent);
++  border-color: #8492a5;
++}
++
++.tile-motion.is-revealed {
++  transform: rotateX(180deg);
++}
++
++.tile-hop.is-celebrating {
++  animation: result-hop 760ms cubic-bezier(0.25, 0.75, 0.28, 1);
++}
++
++.tile-hop.is-celebrating .tile-motion[data-status="exact"] .tile-front {
++  background: var(--exact);
++  border-color: #7bd6bf;
++  color: #08251e;
++}
++
++.tile-hop.is-celebrating .tile-motion[data-status="present"] .tile-front {
++  background: var(--present);
++  border-color: #f1d18a;
++  color: #30220a;
++}
++
++.tile-hop.is-celebrating .tile-motion[data-status="absent"] .tile-front {
++  background: var(--absent);
++  border-color: #8492a5;
++}
++
++.board-row.shake {
++  animation: row-shake 260ms linear;
++}
++
++.result {
++  width: min(100%, 340px);
++  margin: 0 auto;
++  padding: 9px 12px;
++  border: 1px solid #4b6c70;
++  border-radius: 10px;
++  background: #17333a;
++  color: #baf1e2;
++  display: flex;
++  flex-direction: column;
++  gap: 10px;
++  font-size: 0.79rem;
++}
++
++.result[hidden] {
++  display: none;
++}
++
++.result-copy,
++.finish-playback {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 10px;
++}
++
++.finish-playback {
++  padding-top: 8px;
++  border-top: 1px solid #4b6c70;
++}
++
++.finish-playback button {
++  flex: 0 0 auto;
++  border: 1px solid #72b9aa;
++  border-radius: 999px;
++  padding: 6px 10px;
++  background: #24524f;
++  color: #e7fff8;
++  cursor: pointer;
++  font-weight: 900;
++}
++
++.finish-playback button:hover:not(:disabled),
++.finish-playback button:focus-visible {
++  background: #2e6863;
++}
++
++.finish-playback button:disabled {
++  cursor: default;
++  opacity: 0.58;
++}
++
++.finish-playback span {
++  color: #a9d7cf;
++  font-size: 0.72rem;
++  text-align: right;
++}
++
++.keyboard {
++  display: grid;
++  gap: 5px;
++  margin-top: auto;
++}
++
++.key-row {
++  display: flex;
++  justify-content: center;
++  gap: 5px;
++}
++
++.key {
++  min-width: 32px;
++  height: 43px;
++  padding: 0 6px;
++  border: 1px solid #71839b;
++  border-radius: 7px;
++  background: #354b68;
++  color: var(--ink);
++  font-weight: 900;
++  text-transform: uppercase;
++  cursor: pointer;
++  transition: background-color 150ms ease, border-color 150ms ease;
++}
++
++.key.wide {
++  min-width: 62px;
++  font-size: 0.72rem;
++}
++
++.key[data-status="exact"] {
++  background: var(--exact);
++  border-color: #7bd6bf;
++  color: #08251e;
++}
++
++.key[data-status="present"] {
++  background: var(--present);
++  border-color: #f1d18a;
++  color: #30220a;
++}
++
++.key[data-status="absent"] {
++  background: var(--absent);
++  border-color: #8492a5;
++}
++
++footer {
++  margin-top: 2px;
++}
++
++@keyframes fill-pop {
++  0% { transform: scale(0.86); opacity: 0.65; }
++  70% { transform: scale(1.06); opacity: 1; }
++  100% { transform: scale(1); opacity: 1; }
++}
++
++@keyframes result-hop {
++  0%, 100% { transform: translateY(0) scale(1); }
++  34% { transform: translateY(-30px) scale(1.04); }
++  52% { transform: translateY(5px) scale(0.99); }
++  70% { transform: translateY(-14px) scale(1.02); }
++  86% { transform: translateY(2px) scale(1); }
++}
++
++@keyframes row-shake {
++  0%, 100% { transform: translateX(0); }
++  25% { transform: translateX(-8px); }
++  50% { transform: translateX(8px); }
++  75% { transform: translateX(-4px); }
++}
++
++@media (max-height: 760px) {
++  .shell {
++    padding-top: 10px;
++    gap: 7px;
++  }
++  .board {
++    width: 295px;
++  }
++  .key {
++    height: 38px;
++  }
++}
++
++@media (prefers-reduced-motion: reduce) {
++  .tile-motion,
++  .key {
++    transition-duration: 1ms;
++  }
++  .tile-hop.is-celebrating,
++  .board-row.shake,
++  .tile-slot[data-filled="true"] .tile-front {
++    animation-duration: 1ms;
++  }
++}

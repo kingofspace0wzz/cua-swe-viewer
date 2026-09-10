@@ -1,0 +1,32 @@
+{
+  "progress": 1.0,
+  "results": [
+    {
+      "actual": "exit code 0\n> vector-relay@1.0.0 build\n> node --check src/relay_contact.js && node --check src/relay_commit.js && node --check src/pulse_balance.js && node --check src/vector_relay.js && node --check src/game_api.js && node --check server.mjs",
+      "actual_exit_code": 0,
+      "command": "npm run build",
+      "evidence_path": null,
+      "expected": "exit code 0",
+      "expected_exit_code": 0,
+      "group": "build",
+      "name": "build: npm run build",
+      "passed": true,
+      "stderr": "",
+      "stdout": "\n> vector-relay@1.0.0 build\n> node --check src/relay_contact.js && node --check src/relay_commit.js && node --check src/pulse_balance.js && node --check src/vector_relay.js && node --check src/game_api.js && node --check server.mjs\n\n"
+    },
+    {
+      "actual": "exit code 0\n{\"status\": \"pass\", \"score\": 500, \"routes\": 1, \"browser_actions\": 4, \"recalls\": 1}",
+      "actual_exit_code": 0,
+      "command": "\"<artifact-path>\" verifiers/browser_check.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:53500/?challenge=relay-circuit}\"",
+      "evidence_path": null,
+      "expected": "exit code 0",
+      "expected_exit_code": 0,
+      "group": "state",
+      "name": "state: \"<artifact-path>\" verifiers/browser_check.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:53500/?challenge=relay-circuit}\"",
+      "passed": true,
+      "stderr": "",
+      "stdout": "{\"status\": \"pass\", \"score\": 500, \"routes\": 1, \"browser_actions\": 4, \"recalls\": 1}\n"
+    }
+  ],
+  "success": true
+}

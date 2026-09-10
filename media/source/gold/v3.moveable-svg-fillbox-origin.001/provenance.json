@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "task_id": "v3.moveable-svg-fillbox-origin.001",
+  "provenance": "exact_gold_patch_replay",
+  "gold_patch_sha256": "04ae056f65613624ae98c39843f3d1151c7c03d4fbe564600a67c1ed4eeff779",
+  "task_file_sha256": "c5778b4cd45c56e0ab4a11da50a5e2019256f9c3e9fef15133ad3167e7e3844c",
+  "verifier": "python3 verifiers/browser_check.py",
+  "frame_count": 6
+}

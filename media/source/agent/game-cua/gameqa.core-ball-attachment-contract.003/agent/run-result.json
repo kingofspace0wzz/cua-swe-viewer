@@ -1,0 +1,8 @@
+{
+  "patch_path": "<artifact-path>",
+  "progress": 0.3333333333333333,
+  "success": false,
+  "task_id": "gameqa.core-ball-attachment-contract.003",
+  "verifier_report_path": "<artifact-path>",
+  "workspace_path": "<artifact-path>"
+}

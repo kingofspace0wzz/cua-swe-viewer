@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "task_id": "web.vue-sticky-table-columns.001",
+  "provenance": "exact_gold_patch_replay",
+  "gold_patch_sha256": "8a941b8b8dfd95fd8b35017184f44790743a800d6df1fae479ed8dbf4ca203a2",
+  "task_file_sha256": "2eb3385168ed8186e9c5b9000502717daf6a8403e9d61d5e40d15f5d5257865c",
+  "verifier": "python3 verifiers/browser_check.py",
+  "capture_verifier_exit_code": 0,
+  "frame_count": 4
+}

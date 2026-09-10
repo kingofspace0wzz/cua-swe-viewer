@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "role": "viewer_media_recovery",
+  "scored_evaluation": false,
+  "provenance": "non_scoring_archival_screenshot_only_gpt56_cua",
+  "host": "shuli_llm",
+  "shard_id": "archive-20260829-v3-llm-shard03",
+  "tasks": [
+    "v3.echarts-asymmetric-zoom-lock.001",
+    "v3.tiptap-keyboard-focus-position.002",
+    "v3.slate-softbreak-scroll.002",
+    "v3.fabric-viewport-rotation-controls.001"
+  ],
+  "command_exit_code": 0,
+  "canonical_results_unchanged": true
+}

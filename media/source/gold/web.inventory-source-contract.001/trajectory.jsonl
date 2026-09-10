@@ -1,0 +1,2 @@
+{"event": "primary-overview", "timestamp": "2026-08-28T10:09:52.449802+00:00", "observation": {"screenshot_path": "/Users/shulij/pr_projects/cua-swe-v4/viewer/media/source/gold/web.inventory-source-contract.001/screenshot-0001.png", "url": "http://127.0.0.1:50933/"}}
+{"event": "secondary-overview", "timestamp": "2026-08-28T10:09:53.007308+00:00", "observation": {"screenshot_path": "/Users/shulij/pr_projects/cua-swe-v4/viewer/media/source/gold/web.inventory-source-contract.001/screenshot-0002.png", "url": "http://127.0.0.1:50933/?scenario=secondary"}}

@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "task_id": "web.maplibre-terrain-pinch-anchor.001",
+  "provenance": "exact_gold_patch_replay",
+  "gold_patch_sha256": "f003c11b67af9dcfb21b13ce43c9fa6e1542c19c72c5c9b98f0726193b915716",
+  "task_file_sha256": "6c33c4427698adde6d68e8e4bb92e6fa8488381c12441a14f4599c1fb2eca9f1",
+  "verifier": "node verifiers/check_terrain_anchor.mjs",
+  "frame_count": 2
+}

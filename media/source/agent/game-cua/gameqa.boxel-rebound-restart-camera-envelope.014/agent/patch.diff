@@ -1,0 +1,80 @@
+diff --git a/js/Game.js b/js/Game.js
+index 93503a14b9023326ba06164b8bd3fddcd8051a13..1b543648293499b280463932bd96fe8b7b088e86 100644
+--- a/js/Game.js
++++ b/js/Game.js
+@@ -253,8 +253,14 @@
+         };
+         this.retry = function(retry){
+             this.resumeGame(retry);
+-            this.player.respawn();
++            if (this.player.newSpawn == true){
++                this.levelMap.restoreCheckpointFrame(
++                    this.player.spawnMotionTime,
++                    this.player.spawnCameraProgress
++                );
++            }
+             this.levelMap.showGuide(this.player.spawnGuide);
++            this.player.respawn();
+             window.timer.start();
+             window.dispatchEvent(new CustomEvent("boxel-restart", {
+                 detail: { level: this.home.selectedLevel, method: "keyboard" }
+diff --git a/js/LevelMap.js b/js/LevelMap.js
+index b57a6f995f0d58427f8879bfa3fac061ede82026..53682130618b081d0e500cc4e2378c7f167eb18c 100644
+--- a/js/LevelMap.js
++++ b/js/LevelMap.js
+@@ -197,12 +197,23 @@
+         this.captureGuide = function(support){
+             if (support == null) return null;
+             return {
+-                id: support.id,
+                 x: support.left,
+                 y: support.view.y,
+                 tiles: Math.max(1,Math.round((support.right-support.left)/this.box))
+             };
+         };
++        this.restoreCheckpointFrame = function(motionTime,cameraProgress){
++            if (typeof motionTime == "number" && isFinite(motionTime)){
++                this.motionTime = motionTime;
++                for (var i=0; i<this.movingSupports.length; i++){
++                    this.movingSupports[i].update(this.motionTime);
++                }
++            }
++            if (typeof cameraProgress == "number" && isFinite(cameraProgress)){
++                this.cameraProgress = cameraProgress;
++                this.x = -this.cameraProgress;
++            }
++        };
+         this.showGuide = function(frame){
+             if (this.guideView != null && this.guideView.parent != null){
+                 this.guideView.parent.removeChild(this.guideView);
+diff --git a/js/Player.js b/js/Player.js
+index 7a23504b6677e0d461c5ac4d8a04995efb2a0e5f..6da1624e7d75642c00e416d3b964412f0294bdee 100644
+--- a/js/Player.js
++++ b/js/Player.js
+@@ -156,6 +156,8 @@
+                             this.spawnSupportId = movingSupport.id;
+                             this.spawnSupportOffset = this.supportOffset;
+                             this.spawnGuide = map.captureGuide(movingSupport);
++                            this.spawnMotionTime = map.motionTime;
++                            this.spawnCameraProgress = map.cameraProgress;
+                             this.newSpawn = true;
+                             window.Game.particles.addParticles(this.x,this.y,this.scaleX/2,window.Game.theme.main_color4,1,25,true);
+                         }
+@@ -233,11 +235,16 @@
+                 this.newSpawn = false;
+                 this.spawnSupportId = null;
+                 this.spawnGuide = null;
++                this.spawnMotionTime = null;
++                this.spawnCameraProgress = null;
+             }
+             if (this.newSpawn == true){
+                 this.xPos = this.spawnX;
+-                this.y = this.spawnY;
+                 this.supportOffset = this.spawnSupportOffset;
++                this.supportId = this.spawnSupportId;
++                var spawnSupport = window.Game.levelMap.getSupport(this.spawnSupportId);
++                this.y = spawnSupport != null ?
++                    spawnSupport.top+this.supportOffset : this.spawnY;
+             }
+             else { //set to origin
+                 this.setSpeed(1); //reset player speed multiplier

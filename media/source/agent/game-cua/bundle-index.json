@@ -1,0 +1,235 @@
+{
+  "bundle_kind": "minimal-game-cua-presentation-trajectories",
+  "schema_version": 1,
+  "task_count": 12,
+  "tasks": [
+    {
+      "evaluation": {
+        "code_only_attempts": 3,
+        "code_only_success_rate": 0.0,
+        "code_only_successes": 0,
+        "cua_attempts": 3,
+        "cua_success_rate": 0.0,
+        "cua_successes": 0,
+        "delta_cua": 0.0,
+        "scorable_rows": 6,
+        "total_rows": 6
+      },
+      "frames": 4,
+      "game": "2048",
+      "path": "gameqa.2048-seeded-restart-parity.002",
+      "representative_run": "cua-02",
+      "representative_success": false,
+      "task_id": "gameqa.2048-seeded-restart-parity.002"
+    },
+    {
+      "evaluation": {
+        "code_only_attempts": 3,
+        "code_only_success_rate": 0.0,
+        "code_only_successes": 0,
+        "cua_attempts": 3,
+        "cua_success_rate": 0.6666666666666666,
+        "cua_successes": 2,
+        "delta_cua": 0.6666666666666666,
+        "scorable_rows": 6,
+        "total_rows": 6
+      },
+      "frames": 20,
+      "game": "2048",
+      "path": "gameqa.2048-seeded-restart-parity.005",
+      "representative_run": "cua-02",
+      "representative_success": true,
+      "task_id": "gameqa.2048-seeded-restart-parity.005"
+    },
+    {
+      "evaluation": {
+        "code_only_attempts": 1,
+        "code_only_success_rate": 0.0,
+        "code_only_successes": 0,
+        "cua_attempts": 1,
+        "cua_success_rate": 0.0,
+        "cua_successes": 0,
+        "delta_cua": 0.0,
+        "scorable_rows": 2,
+        "total_rows": 2
+      },
+      "frames": 9,
+      "game": "astray",
+      "path": "gameqa.astray-level2-parallax-glass.009",
+      "representative_run": "cua-01",
+      "representative_success": false,
+      "task_id": "gameqa.astray-level2-parallax-glass.009"
+    },
+    {
+      "evaluation": {
+        "code_only_attempts": 3,
+        "code_only_success_rate": 0.0,
+        "code_only_successes": 0,
+        "cua_attempts": 3,
+        "cua_success_rate": 0.0,
+        "cua_successes": 0,
+        "delta_cua": 0.0,
+        "scorable_rows": 6,
+        "total_rows": 6
+      },
+      "frames": 7,
+      "game": "hextris",
+      "path": "gameqa.hextris-cascade-resettle.001",
+      "representative_run": "cua-01",
+      "representative_success": false,
+      "task_id": "gameqa.hextris-cascade-resettle.001"
+    },
+    {
+      "evaluation": {
+        "code_only_attempts": 3,
+        "code_only_success_rate": 0.0,
+        "code_only_successes": 0,
+        "cua_attempts": 3,
+        "cua_success_rate": 1.0,
+        "cua_successes": 3,
+        "delta_cua": 1.0,
+        "scorable_rows": 6,
+        "total_rows": 6
+      },
+      "frames": 20,
+      "game": "hextris",
+      "path": "gameqa.hextris-cascade-resettle-stable.001",
+      "representative_run": "cua-02",
+      "representative_success": true,
+      "task_id": "gameqa.hextris-cascade-resettle-stable.001"
+    },
+    {
+      "evaluation": {
+        "code_only_attempts": 3,
+        "code_only_success_rate": 0.0,
+        "code_only_successes": 0,
+        "cua_attempts": 3,
+        "cua_success_rate": 0.0,
+        "cua_successes": 0,
+        "delta_cua": 0.0,
+        "scorable_rows": 6,
+        "total_rows": 6
+      },
+      "frames": 20,
+      "game": "vector-relay",
+      "path": "gameqa.vector-relay-deferred-ownership.002",
+      "representative_run": "cua-01",
+      "representative_success": false,
+      "task_id": "gameqa.vector-relay-deferred-ownership.002"
+    },
+    {
+      "evaluation": {
+        "code_only_attempts": 3,
+        "code_only_success_rate": 0.0,
+        "code_only_successes": 0,
+        "cua_attempts": 3,
+        "cua_success_rate": 0.3333333333333333,
+        "cua_successes": 1,
+        "delta_cua": 0.3333333333333333,
+        "scorable_rows": 6,
+        "total_rows": 6
+      },
+      "frames": 16,
+      "game": "vector-relay",
+      "path": "gameqa.vector-relay-primed-pulse-balance-handoff.011",
+      "representative_run": "cua-02",
+      "representative_success": true,
+      "task_id": "gameqa.vector-relay-primed-pulse-balance-handoff.011"
+    },
+    {
+      "evaluation": {
+        "code_only_attempts": 3,
+        "code_only_success_rate": 0.0,
+        "code_only_successes": 0,
+        "cua_attempts": 3,
+        "cua_success_rate": 0.0,
+        "cua_successes": 0,
+        "delta_cua": 0.0,
+        "scorable_rows": 6,
+        "total_rows": 6
+      },
+      "frames": 13,
+      "game": "core-ball",
+      "path": "gameqa.core-ball-attachment-contract.003",
+      "representative_run": "cua-03",
+      "representative_success": false,
+      "task_id": "gameqa.core-ball-attachment-contract.003"
+    },
+    {
+      "evaluation": {
+        "code_only_attempts": 3,
+        "code_only_success_rate": 0.0,
+        "code_only_successes": 0,
+        "cua_attempts": 3,
+        "cua_success_rate": 1.0,
+        "cua_successes": 3,
+        "delta_cua": 1.0,
+        "scorable_rows": 6,
+        "total_rows": 6
+      },
+      "frames": 19,
+      "game": "minesweeper",
+      "path": "gameqa.minesweeper-delayed-loss-episode-identity.002",
+      "representative_run": "cua-03",
+      "representative_success": true,
+      "task_id": "gameqa.minesweeper-delayed-loss-episode-identity.002"
+    },
+    {
+      "evaluation": {
+        "code_only_attempts": 3,
+        "code_only_success_rate": 0.0,
+        "code_only_successes": 0,
+        "cua_attempts": 3,
+        "cua_success_rate": 0.0,
+        "cua_successes": 0,
+        "delta_cua": 0.0,
+        "scorable_rows": 6,
+        "total_rows": 6
+      },
+      "frames": 11,
+      "game": "pacman",
+      "path": "gameqa.maze-signal-mode-handoff.001",
+      "representative_run": "cua-01",
+      "representative_success": false,
+      "task_id": "gameqa.maze-signal-mode-handoff.001"
+    },
+    {
+      "evaluation": {
+        "code_only_attempts": 3,
+        "code_only_success_rate": 0.0,
+        "code_only_successes": 0,
+        "cua_attempts": 3,
+        "cua_success_rate": 0.3333333333333333,
+        "cua_successes": 1,
+        "delta_cua": 0.3333333333333333,
+        "scorable_rows": 6,
+        "total_rows": 6
+      },
+      "frames": 30,
+      "game": "wordle",
+      "path": "gameqa.wordle-finish-replay-inspection.006",
+      "representative_run": "cua-03",
+      "representative_success": true,
+      "task_id": "gameqa.wordle-finish-replay-inspection.006"
+    },
+    {
+      "evaluation": {
+        "code_only_attempts": 3,
+        "code_only_success_rate": 0.0,
+        "code_only_successes": 0,
+        "cua_attempts": 3,
+        "cua_success_rate": 0.0,
+        "cua_successes": 0,
+        "delta_cua": 0.0,
+        "scorable_rows": 6,
+        "total_rows": 6
+      },
+      "frames": 28,
+      "game": "worlds-hardest-game",
+      "path": "gameqa.phase-relay-checkpoint-hazard-sync.003",
+      "representative_run": "cua-02",
+      "representative_success": false,
+      "task_id": "gameqa.phase-relay-checkpoint-hazard-sync.003"
+    }
+  ]
+}

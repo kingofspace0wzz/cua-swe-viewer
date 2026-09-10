@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "task_id": "v3.jupyterlab-shiftclick-cellselect.001",
+  "provenance": "exact_gold_patch_replay",
+  "gold_patch_sha256": "90e06cedf3c6df87eccc85d97f9bcc1259fc75b78854f1a2fc3c575cae112f69",
+  "task_file_sha256": "a14210fcc003fb3ce6b87b4ed44f01abe8cdb7fb78b2ca419728f8e6ab881339",
+  "verifier": "python3 verifiers/browser_check.py",
+  "frame_count": 10
+}

@@ -1,0 +1,19 @@
+{
+  "results": [
+    {
+      "name": "state: \"${CUA_SWE_PYTHON:-python3}\" verifiers/check_delayed_loss.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:4394/}\"",
+      "group": "state",
+      "command": "\"${CUA_SWE_PYTHON:-python3}\" verifiers/check_delayed_loss.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:4394/}\"",
+      "passed": true,
+      "expected": "exit code 0",
+      "actual": "exit code 0\n{\"checks\": 10, \"status\": \"pass\"}",
+      "expected_exit_code": 0,
+      "actual_exit_code": 0,
+      "stdout": "{\"checks\": 10, \"status\": \"pass\"}\n",
+      "stderr": "",
+      "evidence_path": null
+    }
+  ],
+  "success": true,
+  "progress": 1.0
+}

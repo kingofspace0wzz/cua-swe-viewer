@@ -1,0 +1,8 @@
+{
+  "patch_path": "<artifact-path>",
+  "progress": 0.0,
+  "success": false,
+  "task_id": "gameqa.2048-seeded-restart-parity.002",
+  "verifier_report_path": "<artifact-path>",
+  "workspace_path": "<artifact-path>"
+}

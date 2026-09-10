@@ -1,0 +1,19 @@
+{
+  "progress": 1.0,
+  "results": [
+    {
+      "actual": "exit code 0\n{\"status\": \"pass\", \"seeds\": [160, 1337, 3735928559]}",
+      "actual_exit_code": 0,
+      "command": "\"${CUA_SWE_PYTHON:-python3}\" verifiers/check_seeded_restart.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:4394/}\"",
+      "evidence_path": null,
+      "expected": "exit code 0",
+      "expected_exit_code": 0,
+      "group": "state",
+      "name": "state: \"${CUA_SWE_PYTHON:-python3}\" verifiers/check_seeded_restart.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:4394/}\"",
+      "passed": true,
+      "stderr": "",
+      "stdout": "{\"status\": \"pass\", \"seeds\": [160, 1337, 3735928559]}\n"
+    }
+  ],
+  "success": true
+}

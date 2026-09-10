@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "task_id": "v3.recharts-responsive-pie.001",
+  "provenance": "exact_gold_patch_replay",
+  "gold_patch_sha256": "17a9d8c8406875c227b2921b42d31bae5e12a4281d14fbebd79da93f767fc470",
+  "task_file_sha256": "445ec3ae952437c21b3e001333d240fce0e958531c2e3983bca0e6780b69d4ac",
+  "verifier": "python3 verifiers/browser_check.py",
+  "frame_count": 13
+}

@@ -1,0 +1,32 @@
+{
+  "progress": 1.0,
+  "results": [
+    {
+      "actual": "exit code 0\nstatic-check: ok; browser execution and gameplay certification were not run",
+      "actual_exit_code": 0,
+      "command": "python3 scripts/static_check.py",
+      "evidence_path": null,
+      "expected": "exit code 0",
+      "expected_exit_code": 0,
+      "group": "build",
+      "name": "build: python3 scripts/static_check.py",
+      "passed": true,
+      "stderr": "",
+      "stdout": "static-check: ok; browser execution and gameplay certification were not run\n"
+    },
+    {
+      "actual": "exit code 0\n{\"final_score\": 41, \"negative_controls\": 2, \"status\": \"pass\"}",
+      "actual_exit_code": 0,
+      "command": "\"${CUA_SWE_PYTHON:-python3}\" verifiers/browser_check.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:4173/?benchmark=1&level=1}\" --fixture \"${CUA_SWE_HEXTRIS_FIXTURE:-verifiers/deterministic_fixture.js}\"",
+      "evidence_path": null,
+      "expected": "exit code 0",
+      "expected_exit_code": 0,
+      "group": "state",
+      "name": "state: \"${CUA_SWE_PYTHON:-python3}\" verifiers/browser_check.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:4173/?benchmark=1&level=1}\" --fixture \"${CUA_SWE_HEXTRIS_FIXTURE:-verifiers/deterministic_fixture.js}\"",
+      "passed": true,
+      "stderr": "",
+      "stdout": "{\"final_score\": 41, \"negative_controls\": 2, \"status\": \"pass\"}\n"
+    }
+  ],
+  "success": true
+}

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CUA-SWE Frontier Corpus</title>
+    <link rel="stylesheet" href="styles.css?v=20260905-1">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="CUA-SWE home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span>CUA-SWE</span>
+      </a>
+      <nav aria-label="Page sections">
+        <a href="#corpus">Corpus</a>
+        <a href="#trajectories">Trajectories</a>
+        <a href="#ledger">Audit ledger</a>
+      </nav>
+      <span class="header-status"><span></span> Evidence browser</span>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <p class="section-kicker">Research dataset · Web + Game CUA frontier</p>
+        <h1>CUA-SWE<br>Corpus Viewer</h1>
+        <p class="hero-copy">
+          An evidence-first view of web and game-debugging tasks that
+          distinguish code-only agents from agents that can inspect and
+          operate running software.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-dark" href="#trajectories">Explore evidence</a>
+          <a id="auditReportLink" class="button" href="../dataset/reports/WEB_CANONICAL_67_CURATION_REPORT.md">Read audit report</a>
+        </div>
+        <div class="metric-strip" aria-label="Corpus summary">
+          <div><strong id="totalMetric">62</strong><span>Total tasks</span></div>
+          <div><strong id="webMetric">33</strong><span>Web domain</span></div>
+          <div><strong id="gameMetric">29</strong><span>Game domain</span></div>
+        </div>
+      </section>
+
+      <section id="corpus" class="section section-capabilities">
+        <div class="section-heading">
+          <p class="section-kicker">01 · Corpus domains</p>
+          <h2>Two domains, one evaluation vocabulary.</h2>
+          <p>
+            Tasks are grouped first by software domain: Web and Game. Within
+            either domain, Easy means the evaluated CUA condition solved the
+            task; Frontier means it did not.
+          </p>
+        </div>
+        <div class="capability-grid">
+          <article>
+            <span class="capability-index">A</span>
+            <h3>Web domain</h3>
+            <strong id="webCapabilityMetric">33 tasks</strong>
+            <p><span id="webEasyMetric">19 Easy</span> · <span id="webFrontierMetric">14 Frontier</span>. Browser-based frontend debugging across benchmark, calibration, and diagnostic collections.</p>
+          </article>
+          <article>
+            <span class="capability-index">B</span>
+            <h3>Game domain</h3>
+            <strong id="gameCapabilityMetric">29 tasks</strong>
+            <p><span id="gameEasyMetric">11 Easy</span> · <span id="gameFrontierMetric">18 Frontier</span>. Play-to-Debug tasks across twelve games with matched code-only and CUA evidence.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="trajectories" class="section section-trajectories">
+        <div class="section-heading compact">
+          <p class="section-kicker">02 · Evidence explorer</p>
+          <h2>GUI evidence and coding activity, side by side.</h2>
+          <p>
+            Screenshot-derived videos show only computer-use interaction.
+            Terminal commands, source edits, tests, and agent reasoning appear
+            in a separate ordered activity stream sourced from either the exact
+            historical run or an explicitly labeled replacement rerun.
+          </p>
+        </div>
+
+        <div class="scope-tabs" role="tablist" aria-label="Curation tier">
+          <button id="allScopeTab" type="button" class="is-active" data-scope="all">All 62</button>
+          <button id="webScopeTab" type="button" data-scope="web">Web 33</button>
+          <button id="gameScopeTab" type="button" data-scope="game">Game 29</button>
+        </div>
+
+        <div class="explorer">
+          <aside class="task-browser">
+            <label class="search-field">
+              <span class="sr-only">Search tasks</span>
+              <input id="searchInput" type="search" placeholder="Search task or repository" autocomplete="off">
+            </label>
+            <div class="filter-row">
+              <label>
+                <span>Generation</span>
+                <select id="generationFilter">
+                  <option value="">All</option>
+                  <option value="v1">V1</option>
+                  <option value="v2">V2</option>
+                  <option value="v3">V3</option>
+                  <option value="game">Game CUA</option>
+                </select>
+              </label>
+              <label>
+                <span>Difficulty</span>
+                <select id="resultFilter">
+                  <option value="">All</option>
+                  <option value="easy">Easy</option>
+                  <option value="frontier">Frontier</option>
+                </select>
+              </label>
+            </div>
+            <div class="browser-status">
+              <strong id="visibleCount">0 tasks</strong>
+              <button id="resetFilters" type="button">Reset</button>
+            </div>
+            <div id="taskList" class="task-list" role="listbox" aria-label="Tasks"></div>
+          </aside>
+
+          <article id="taskStage" class="task-stage" aria-live="polite">
+            <div class="stage-empty">
+              <p class="section-kicker">Select a task</p>
+              <h3>Inspect its paired evidence.</h3>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="ledger" class="section section-ledger">
+        <div class="section-heading compact">
+          <p class="section-kicker">03 · Performance and curation</p>
+          <h2>The domain-first corpus ledger.</h2>
+          <p>Compare Web and Game tasks, then refine by difficulty and collection.</p>
+        </div>
+        <div class="ledger-controls">
+          <label>
+            <span>Collection</span>
+            <select id="roleFilter">
+              <option value="">All collections</option>
+              <option value="primary_keep">Web primary</option>
+              <option value="calibration_keep">Web calibration</option>
+              <option value="diagnostic_keep">Web diagnostic</option>
+              <option value="game_cua">Game CUA</option>
+            </select>
+          </label>
+          <span id="filterSummary">Showing the curated corpus</span>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th class="compare-column">Compare</th>
+                <th>Task</th>
+                <th>Domain</th>
+                <th>Difficulty</th>
+                <th>Collection</th>
+                <th>Code-only</th>
+                <th>CUA</th>
+                <th>Source</th>
+                <th>Evidence</th>
+              </tr>
+            </thead>
+            <tbody id="taskRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div id="compareBar" class="compare-bar" hidden>
+      <span><strong id="compareCount">0</strong> selected</span>
+      <button id="clearCompare" type="button">Clear</button>
+      <button id="openCompare" type="button" class="button button-dark" disabled>Compare</button>
+    </div>
+
+    <dialog id="compareDialog">
+      <div class="dialog-header">
+        <div>
+          <p class="section-kicker">Task comparison</p>
+          <h2>Evidence side by side</h2>
+        </div>
+        <button id="closeCompare" type="button" class="close-button" title="Close comparison" aria-label="Close comparison">×</button>
+      </div>
+      <div id="compareGrid" class="compare-grid"></div>
+    </dialog>
+
+    <script src="data/corpus-audit.js?v=20260829-2"></script>
+    <script src="data/game-cua-tasks.js?v=20260905-1"></script>
+    <script src="data/trajectory-media.js?v=20260905-1"></script>
+    <script src="data/agent-activity.js?v=20260905-1"></script>
+    <script>window.PUBLIC_VIEWER_EXPORT = true;</script>
+    <script src="app.js?v=20260910-1"></script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "task_id": "v3.jupyterlab-shiftclick-cellselect.001",
+  "success": false,
+  "progress": 0.5,
+  "patch_path": "/tmp/cua-swe-archive-v3-llm-shard02/trials/cua/gpt56-luna/v3.jupyterlab-shiftclick-cellselect.001/attempt-1/result/v3.jupyterlab-shiftclick-cellselect.001/patch.diff",
+  "verifier_report_path": "/tmp/cua-swe-archive-v3-llm-shard02/trials/cua/gpt56-luna/v3.jupyterlab-shiftclick-cellselect.001/attempt-1/result/v3.jupyterlab-shiftclick-cellselect.001/verifier_report.json",
+  "workspace_path": "/tmp/cua-swe-archive-v3-llm-shard02/trials/cua/gpt56-luna/v3.jupyterlab-shiftclick-cellselect.001/attempt-1/isolated-workspace-removed"
+}

@@ -1,0 +1,713 @@
+diff --git a/src/rover.js b/src/rover.js
+index 2cc4431c0441ecf482a61d1a009244db7de9dc5d..2031b8fca10db8518f84f26d0374874ec238c565 100644
+--- a/src/rover.js
++++ b/src/rover.js
+@@ -14,8 +14,6 @@ export class Rover {
+     this.hazard = true;
+     this.branch = null;
+     this.alertActive = false;
+-    this.pendingAppearance = null;
+-    this.appearanceLag = 0;
+   }
+ 
+   enterAlert(globalMode) {
+@@ -46,29 +44,22 @@ export class Rover {
+   exitAlert(globalMode) {
+     this.alertActive = false;
+     this.mode = globalMode;
++    this.appearance = 'active';
+     this.hazard = true;
+-    this.pendingAppearance = globalMode;
+-    this.appearanceLag = 2;
+   }
+ 
+   step(globalMode, alertActive) {
+     if (this.state === 'junction' && !alertActive && !this.branch) {
+-      const target = this.mode === 'corner' ?
++      // Commit to the same resumed mode shown by the route indicator.
++      this.mode = globalMode;
++      const target = globalMode === 'corner' ?
+           this.config.cornerStep : this.config.trackStep;
+       this.position = clonePoint(target);
+-      this.branch = this.mode === 'corner' ? 'left' : 'right';
++      this.branch = globalMode === 'corner' ? 'left' : 'right';
+       this.state = 'branch';
+     }
+ 
+     if (!this.alertActive && !this.branch) this.mode = globalMode;
+-
+-    if (this.appearanceLag > 0) {
+-      this.appearanceLag -= 1;
+-      if (this.appearanceLag === 0) {
+-        this.appearance = this.pendingAppearance;
+-        this.pendingAppearance = null;
+-      }
+-    }
+   }
+ 
+   snapshot() {
+@@ -83,4 +74,3 @@ export class Rover {
+     };
+   }
+ }
+-
+
+diff --git a/dist/game.js b/dist/game.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..e049be79ca2df990b606a1ad718a3362554d113d
+--- /dev/null
++++ b/dist/game.js
+@@ -0,0 +1,212 @@
++import {PhaseClock} from './phase_clock.js';
++import {Rover} from './rover.js';
++
++const pointKey = (point) => `${point.x},${point.y}`;
++const samePoint = (left, right) => left.x === right.x && left.y === right.y;
++const clonePoint = (point) => ({x: point.x, y: point.y});
++
++export class SignalMaze {
++  constructor(root, config) {
++    this.root = root;
++    this.config = config;
++    this.routeElement = document.querySelector('#route');
++    this.warningElement = document.querySelector('#warning');
++    this.livesElement = document.querySelector('#lives');
++    this.messageElement = document.querySelector('#message');
++    this.walkable = new Set(config.walkable.map(([x, y]) => `${x},${y}`));
++    this.held = new Set();
++    this.phase = new PhaseClock(config.phase);
++    this.rover = new Rover(config.rover);
++    this.cells = new Map();
++    this.renderBoard();
++    this.bindInput();
++    this.reset();
++    this.timer = window.setInterval(() => this.tick(), config.tickMs);
++  }
++
++  bindInput() {
++    window.addEventListener('keydown', (event) => {
++      if (event.key.startsWith('Arrow')) {
++        event.preventDefault();
++        this.held.add(event.key);
++      }
++    });
++    window.addEventListener('keyup', (event) => {
++      if (event.key.startsWith('Arrow')) {
++        event.preventDefault();
++        this.held.delete(event.key);
++      }
++    });
++    window.addEventListener('blur', () => this.held.clear());
++  }
++
++  reset() {
++    this.held.clear();
++    this.tickCount = 0;
++    this.player = {
++      position: clonePoint(this.config.playerStart),
++      lives: 3,
++      active: true,
++    };
++    this.phase.reset();
++    this.rover.reset();
++    this.alert = {active: false, remaining: 0};
++    this.releaseRemaining = null;
++    this.pulseCollected = false;
++    this.contacts = 0;
++    this.outcome = null;
++    this.message = 'Follow the corridor to the exit.';
++    this.render();
++    return this.getState();
++  }
++
++  tick() {
++    if (!this.player.active || this.outcome) {
++      this.render();
++      return;
++    }
++    this.tickCount += 1;
++
++    if (this.phase.step()) this.rover.onGlobalMode(this.phase.mode);
++
++    if (this.alert.active) {
++      this.alert.remaining -= 1;
++      this.releaseRemaining -= 1;
++      if (this.releaseRemaining === 0) {
++        this.rover.release(this.phase.mode, true);
++      }
++      if (this.alert.remaining === 0) this.finishAlert();
++    }
++
++    this.rover.step(this.phase.mode, this.alert.active);
++    this.movePlayer();
++    this.collectPulse();
++    this.resolveContact();
++    this.resolveExit();
++    this.render();
++  }
++
++  startAlert() {
++    this.alert.active = true;
++    this.alert.remaining = this.config.alertTicks;
++    this.releaseRemaining = this.config.releaseTicks;
++    this.rover.enterAlert(this.phase.mode);
++    this.message = 'TEAL WARNING — rover contact is safe.';
++  }
++
++  finishAlert() {
++    this.alert.active = false;
++    this.alert.remaining = 0;
++    this.rover.exitAlert(this.phase.mode);
++    this.message = 'Warning cleared — active contact restored.';
++  }
++
++  movePlayer() {
++    const vectors = {
++      ArrowUp: {x: 0, y: -1},
++      ArrowRight: {x: 1, y: 0},
++      ArrowDown: {x: 0, y: 1},
++      ArrowLeft: {x: -1, y: 0},
++    };
++    const key = ['ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowLeft']
++        .find((candidate) => this.held.has(candidate));
++    if (!key) return;
++    const vector = vectors[key];
++    const next = {
++      x: this.player.position.x + vector.x,
++      y: this.player.position.y + vector.y,
++    };
++    if (this.walkable.has(pointKey(next))) this.player.position = next;
++  }
++
++  collectPulse() {
++    if (this.pulseCollected || !samePoint(this.player.position, this.config.pulse)) {
++      return;
++    }
++    this.pulseCollected = true;
++    this.startAlert();
++  }
++
++  resolveContact() {
++    if (!samePoint(this.player.position, this.rover.position)) return;
++    if (!this.rover.hazard) {
++      this.message = 'Safe pass confirmed while teal warning is active.';
++      return;
++    }
++    this.contacts += 1;
++    this.player.lives -= 1;
++    this.player.active = false;
++    this.outcome = 'collision';
++    this.message = 'Signal clash — route handoff failed.';
++  }
++
++  resolveExit() {
++    if (!samePoint(this.player.position, this.config.exit)) return;
++    this.player.active = false;
++    this.outcome = 'success';
++    this.message = 'Exit reached. Route handoff stable.';
++  }
++
++  renderBoard() {
++    this.root.style.setProperty('--columns', this.config.width);
++    for (let y = 0; y < this.config.height; y += 1) {
++      for (let x = 0; x < this.config.width; x += 1) {
++        const cell = document.createElement('div');
++        const walkable = this.walkable.has(`${x},${y}`);
++        cell.className = `cell ${walkable ? 'walkable' : 'wall'}`;
++        if (samePoint({x, y}, this.config.rover.dock)) cell.classList.add('dock');
++        this.root.append(cell);
++        this.cells.set(`${x},${y}`, cell);
++      }
++    }
++  }
++
++  addPiece(point, className) {
++    const element = document.createElement('div');
++    element.className = `piece ${className}`;
++    this.cells.get(pointKey(point)).append(element);
++  }
++
++  render() {
++    this.root.querySelectorAll('.piece').forEach((piece) => piece.remove());
++    this.addPiece(this.config.exit, 'exit');
++    if (!this.pulseCollected) this.addPiece(this.config.pulse, 'pulse');
++    this.addPiece(this.player.position, 'player');
++    const roverClass = this.rover.appearance === 'warning' ?
++        'rover warning' : 'rover';
++    this.addPiece(this.rover.position, roverClass);
++    this.routeElement.textContent = this.phase.mode.toUpperCase();
++    this.warningElement.textContent = this.alert.active ?
++        `${this.alert.remaining} TICKS` : 'CLEAR';
++    this.livesElement.textContent = String(this.player.lives);
++    this.messageElement.textContent = this.message;
++    this.messageElement.className = this.outcome === 'collision' ?
++        'message hit' : this.outcome === 'success' ?
++          'message success' : 'message';
++  }
++
++  getState() {
++    return JSON.parse(JSON.stringify({
++      tick: this.tickCount,
++      player: {
++        position: clonePoint(this.player.position),
++        lives: this.player.lives,
++        active: this.player.active,
++      },
++      phase: this.phase.snapshot(),
++      alert: {...this.alert},
++      rover: this.rover.snapshot(),
++      metrics: {
++        pulseCollected: this.pulseCollected,
++        contacts: this.contacts,
++        releaseRemaining: this.releaseRemaining,
++      },
++      terminal: {
++        isTerminal: this.outcome !== null,
++        outcome: this.outcome,
++      },
++      scenarioSeal: this.config.seals.scenario,
++    }));
++  }
++}
++
+
+diff --git a/dist/index.html b/dist/index.html
+new file mode 100644
+index 0000000000000000000000000000000000000000..637afad497f95fa578095cac4e24d76e7beab9cd
+--- /dev/null
++++ b/dist/index.html
+@@ -0,0 +1,35 @@
++<!doctype html>
++<html lang="en">
++<head>
++  <meta charset="utf-8">
++  <meta name="viewport" content="width=device-width, initial-scale=1">
++  <title>Signal Maze</title>
++  <link rel="stylesheet" href="./styles.css">
++</head>
++<body>
++  <main class="shell">
++    <header>
++      <div>
++        <p class="eyebrow">ROUTE CONTROL / SECTOR 01</p>
++        <h1>Signal Maze</h1>
++      </div>
++      <div class="legend">
++        <span><i class="swatch warning"></i> warning: safe contact</span>
++        <span><i class="swatch active"></i> active: avoid contact</span>
++      </div>
++    </header>
++    <section class="panel">
++      <div class="readouts">
++        <div><span>ROUTE</span><strong id="route">—</strong></div>
++        <div><span>WARNING</span><strong id="warning">—</strong></div>
++        <div><span>LIVES</span><strong id="lives">—</strong></div>
++      </div>
++      <div id="maze" class="maze" aria-label="Signal Maze play field"></div>
++      <p id="message" class="message">Loading route…</p>
++      <p class="help">Arrow keys move. Reach the white exit marker.</p>
++    </section>
++  </main>
++  <script type="module" src="./main.js"></script>
++</body>
++</html>
++
+
+diff --git a/dist/main.js b/dist/main.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..a6e8c7eb86c761fdd8bea20612d2dc40560beb97
+--- /dev/null
++++ b/dist/main.js
+@@ -0,0 +1,20 @@
++import {SignalMaze} from './game.js';
++
++const root = document.querySelector('#maze');
++const message = document.querySelector('#message');
++
++try {
++  const scenarioUrl = window.location.protocol === 'file:' ?
++      './scenario.json' : '/api/scenario';
++  const response = await fetch(scenarioUrl, {cache: 'no-store'});
++  if (!response.ok) throw new Error(`scenario request failed: ${response.status}`);
++  const config = await response.json();
++  const game = new SignalMaze(root, config);
++  window.gameAPI = Object.freeze({
++    getState: () => game.getState(),
++    reset: () => game.reset(),
++  });
++} catch (error) {
++  message.textContent = `Unable to load route: ${error.message}`;
++  message.className = 'message hit';
++}
+
+diff --git a/dist/phase_clock.js b/dist/phase_clock.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..566b09c3ca23607134c08f12cd6b112cad1883bd
+--- /dev/null
++++ b/dist/phase_clock.js
+@@ -0,0 +1,30 @@
++export class PhaseClock {
++  constructor(config) {
++    this.initial = config.initial;
++    this.next = config.next;
++    this.duration = config.ticks;
++    this.reset();
++  }
++
++  reset() {
++    this.mode = this.initial;
++    this.elapsed = 0;
++  }
++
++  step() {
++    if (this.mode === this.next) return false;
++    this.elapsed += 1;
++    if (this.elapsed < this.duration) return false;
++    this.mode = this.next;
++    return true;
++  }
++
++  snapshot() {
++    return {
++      mode: this.mode,
++      elapsed: this.elapsed,
++      duration: this.duration,
++    };
++  }
++}
++
+
+diff --git a/dist/rover.js b/dist/rover.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..2031b8fca10db8518f84f26d0374874ec238c565
+--- /dev/null
++++ b/dist/rover.js
+@@ -0,0 +1,76 @@
++const clonePoint = (point) => ({x: point.x, y: point.y});
++
++export class Rover {
++  constructor(config) {
++    this.config = config;
++    this.reset();
++  }
++
++  reset() {
++    this.state = 'dock';
++    this.position = clonePoint(this.config.dock);
++    this.mode = 'dock';
++    this.appearance = 'active';
++    this.hazard = true;
++    this.branch = null;
++    this.alertActive = false;
++  }
++
++  enterAlert(globalMode) {
++    this.alertActive = true;
++    this.hazard = false;
++    this.appearance = 'warning';
++    if (this.state !== 'dock') this.mode = 'warning';
++    this.entryMode = globalMode;
++  }
++
++  release(globalMode, alertActive) {
++    this.state = 'junction';
++    this.position = clonePoint(this.config.junction);
++    this.mode = globalMode;
++    if (alertActive) {
++      this.alertActive = true;
++      this.appearance = 'warning';
++      this.hazard = false;
++    }
++  }
++
++  onGlobalMode(globalMode) {
++    if (!this.alertActive && this.state !== 'dock' && !this.branch) {
++      this.mode = globalMode;
++    }
++  }
++
++  exitAlert(globalMode) {
++    this.alertActive = false;
++    this.mode = globalMode;
++    this.appearance = 'active';
++    this.hazard = true;
++  }
++
++  step(globalMode, alertActive) {
++    if (this.state === 'junction' && !alertActive && !this.branch) {
++      // Commit to the same resumed mode shown by the route indicator.
++      this.mode = globalMode;
++      const target = globalMode === 'corner' ?
++          this.config.cornerStep : this.config.trackStep;
++      this.position = clonePoint(target);
++      this.branch = globalMode === 'corner' ? 'left' : 'right';
++      this.state = 'branch';
++    }
++
++    if (!this.alertActive && !this.branch) this.mode = globalMode;
++  }
++
++  snapshot() {
++    return {
++      state: this.state,
++      position: clonePoint(this.position),
++      mode: this.mode,
++      appearance: this.appearance,
++      hazard: this.hazard,
++      branch: this.branch,
++      alertActive: this.alertActive,
++    };
++  }
++}
+
+diff --git a/dist/styles.css b/dist/styles.css
+new file mode 100644
+index 0000000000000000000000000000000000000000..b5c1c1c01bed92a5d93d62128381137b3b9780b1
+--- /dev/null
++++ b/dist/styles.css
+@@ -0,0 +1,245 @@
++:root {
++  color-scheme: dark;
++  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
++  background: #091018;
++  color: #e9f4f5;
++}
++
++* {
++  box-sizing: border-box;
++}
++
++body {
++  margin: 0;
++  min-height: 100vh;
++  display: grid;
++  place-items: center;
++  background:
++    radial-gradient(circle at 22% 10%, #183240 0, transparent 35%),
++    linear-gradient(145deg, #070b10, #101c25 65%, #091018);
++}
++
++.shell {
++  width: min(1040px, 94vw);
++}
++
++header {
++  display: flex;
++  align-items: end;
++  justify-content: space-between;
++  gap: 24px;
++  margin-bottom: 18px;
++}
++
++h1 {
++  margin: 3px 0 0;
++  font-size: clamp(30px, 5vw, 54px);
++  letter-spacing: -0.07em;
++}
++
++.eyebrow, .help {
++  margin: 0;
++  color: #7ea1aa;
++  letter-spacing: 0.12em;
++  font-size: 12px;
++}
++
++.legend {
++  display: flex;
++  gap: 18px;
++  color: #9eb5ba;
++  font-size: 12px;
++}
++
++.swatch {
++  display: inline-block;
++  width: 10px;
++  height: 10px;
++  margin-right: 5px;
++  border-radius: 50%;
++}
++
++.swatch.warning {
++  background: #49f2dd;
++  box-shadow: 0 0 12px #49f2dd;
++}
++
++.swatch.active {
++  background: #ff6c64;
++}
++
++.panel {
++  border: 1px solid #29424b;
++  border-radius: 18px;
++  background: rgba(7, 16, 22, 0.86);
++  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.42);
++  padding: 18px;
++}
++
++.readouts {
++  display: grid;
++  grid-template-columns: repeat(3, 1fr);
++  gap: 10px;
++  margin-bottom: 14px;
++}
++
++.readouts div {
++  border: 1px solid #243943;
++  border-radius: 10px;
++  padding: 10px 14px;
++  background: #0b171e;
++}
++
++.readouts span {
++  display: block;
++  color: #688b94;
++  font-size: 10px;
++  letter-spacing: 0.15em;
++}
++
++.readouts strong {
++  display: block;
++  margin-top: 4px;
++  font-size: 19px;
++  color: #e8f5f6;
++}
++
++.maze {
++  --columns: 11;
++  display: grid;
++  grid-template-columns: repeat(var(--columns), 1fr);
++  width: min(880px, 88vw);
++  aspect-ratio: 11 / 7;
++  margin: 0 auto;
++  overflow: hidden;
++  border: 1px solid #32505a;
++  border-radius: 12px;
++  background: #060c10;
++}
++
++.cell {
++  position: relative;
++  min-width: 0;
++  min-height: 0;
++  background: #142630;
++  border: 1px solid rgba(98, 139, 148, 0.12);
++}
++
++.cell.wall {
++  background:
++    linear-gradient(135deg, rgba(75, 112, 122, 0.11) 25%, transparent 25%) 0 0 / 12px 12px,
++    #091217;
++  border-color: rgba(37, 59, 66, 0.42);
++}
++
++.cell.walkable::after {
++  content: "";
++  position: absolute;
++  inset: 45%;
++  border-radius: 50%;
++  background: #35535c;
++}
++
++.dock::before {
++  content: "DOCK";
++  position: absolute;
++  inset: 12%;
++  display: grid;
++  place-items: center;
++  border: 1px dashed #4d7079;
++  border-radius: 8px;
++  color: #4d7079;
++  font-size: 9px;
++}
++
++.piece {
++  position: absolute;
++  inset: 18%;
++  z-index: 3;
++  display: grid;
++  place-items: center;
++}
++
++.player {
++  border-radius: 12px;
++  background: #ffd66b;
++  box-shadow: 0 0 18px rgba(255, 214, 107, 0.45);
++}
++
++.player::after {
++  content: "";
++  width: 30%;
++  height: 30%;
++  border-radius: 50%;
++  background: #142028;
++}
++
++.rover {
++  border-radius: 50% 50% 36% 36%;
++  background: #ff6c64;
++  box-shadow: 0 0 18px rgba(255, 108, 100, 0.42);
++  transition: background 80ms linear, box-shadow 80ms linear;
++}
++
++.rover.warning {
++  background: #49f2dd;
++  box-shadow: 0 0 22px rgba(73, 242, 221, 0.8);
++}
++
++.rover::before, .rover::after {
++  content: "";
++  position: absolute;
++  top: 34%;
++  width: 14%;
++  aspect-ratio: 1;
++  border-radius: 50%;
++  background: #091018;
++}
++
++.rover::before {
++  left: 28%;
++}
++
++.rover::after {
++  right: 28%;
++}
++
++.pulse {
++  inset: 31%;
++  border: 2px solid #49f2dd;
++  border-radius: 50%;
++  box-shadow: 0 0 18px #49f2dd, inset 0 0 8px #49f2dd;
++}
++
++.exit {
++  inset: 28%;
++  border: 3px solid #f3f9fa;
++  transform: rotate(45deg);
++  box-shadow: 0 0 16px rgba(243, 249, 250, 0.6);
++}
++
++.message {
++  min-height: 24px;
++  margin: 14px 0 7px;
++  text-align: center;
++  color: #a8c4ca;
++}
++
++.message.hit {
++  color: #ff8e87;
++}
++
++.message.success {
++  color: #79f1b2;
++}
++
++@media (max-width: 720px) {
++  header, .legend {
++    align-items: start;
++    flex-direction: column;
++  }
++  .maze {
++    width: 90vw;
++  }
++}
++
