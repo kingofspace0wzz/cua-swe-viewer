@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "task_id": "mobile.audit-mobile-153",
+  "candidate_id": "audit-mobile-153",
+  "selected_revision_digest": "c157f5fb19ec1a6d7c2158be651efcb9a9856649cafaebb9c6ab6c57d74c8ea0",
+  "matched_code_only_revision_digest": "ee3415593cdbfd8ed98dce8120eaea88b65f89b0accded8ddf16843ca14fe7ee",
+  "model": "openai.gpt-5.6-sol",
+  "started_at": "2026-09-09T19:09:03.109727+00:00",
+  "finished_at": "2026-09-09T19:18:07.597895+00:00",
+  "result": "fail",
+  "raw_transcript_sha256": "55b595bab8fffa489f4b6a6ff24af5598e12e40393aab24c41a13482a11d328e",
+  "raw_transcript_bytes": 454733,
+  "raw_record_count": 41,
+  "exported_record_count": 41,
+  "gate_report_sha256": "982feda563259e8ff9d2d01eb75497f084eddb73dbb96a1ba2d03ecf10e0caab",
+  "trajectory_sha256": "35cf1fadb4359ab17193230910a61e877da5081a80da974acec5d4eded55d4fa",
+  "frame_sha256": {
+    "screenshot-0001.png": "6b0b65fea276d942b294d3a08cd767828cb4819083680ede06df42ff9ca339c0",
+    "screenshot-0002.png": "16344952d01250490329f236bf99cbd5059e2a37c1b36c50e1ccae26a4041b20",
+    "screenshot-0003.png": "e036964d7683db68fabb4a3f22cf5bbf7df31073f18d1571238c72f6658b1cfd",
+    "screenshot-0004.png": "3fe57339caa3298d384f06dcd9eeadc1ff55763afd89adb7cbb17d10f42ac676",
+    "screenshot-0005.png": "3fe57339caa3298d384f06dcd9eeadc1ff55763afd89adb7cbb17d10f42ac676"
+  },
+  "activity_sha256": "a8bd8852cd81a595212e820a2976e1b21a099b856827e9b8913e9a8987a25f76",
+  "raw_transcript_retention": "Original EFS run and private recovery archive",
+  "export_policy": {
+    "all_records_retained": true,
+    "text_truncated": false,
+    "image_payloads": "Replaced by ordered, hash-verified screenshot references",
+    "machine_paths": "Replaced by workspace, rollout, run, or artifact placeholders",
+    "item_order": "First appearance; all lifecycle records retained in records"
+  },
+  "original_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "published_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

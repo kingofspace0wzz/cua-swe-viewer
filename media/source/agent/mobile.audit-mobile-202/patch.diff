@@ -1,0 +1,31 @@
+--- a/system/Calendar/state.ts
++++ b/system/Calendar/state.ts
+@@ -13,18 +13,6 @@
+   const d = TimeService.fromTimestamp(ts);
+   d.setHours(0, 0, 0, 0);
+   return d.getTime();
+-}
+-
+-function normalizeTimedEventForStorage(event: CalendarEvent): CalendarEvent {
+-  if (event.allDay) return event;
+-  const endClock = TimeService.fromTimestamp(event.endTs);
+-  const storageDate = TimeService.fromTimestamp(event.startTs);
+-  endClock.setFullYear(
+-    storageDate.getFullYear(),
+-    storageDate.getMonth(),
+-    storageDate.getDate(),
+-  );
+-  return { ...event, endTs: endClock.getTime() };
+ }
+ 
+ // ---- Types ----
+@@ -74,8 +62,7 @@
+       set(state => ({
+         events: state.events.map(e => {
+           if (e.id !== id) return e;
+-          const updated = { ...e, ...patch, id: e.id };
+-          return normalizeTimedEventForStorage(updated);
++          return { ...e, ...patch, id: e.id };
+         }),
+       }));
+     },

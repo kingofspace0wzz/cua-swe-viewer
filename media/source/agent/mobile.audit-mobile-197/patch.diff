@@ -1,0 +1,318 @@
+--- a/apps/Reddit/state.ts
++++ b/apps/Reddit/state.ts
+@@ -20,12 +20,21 @@
+   selectedFlairs: string[];
+ }
+ 
+-type ChatMessage = {
++export type ChatMessage = {
+   id: string;
++  instanceId?: string;
+   from: 'me' | 'them';
+   body: string;
+   created_utc: number;
+ };
++
++export function getChatMessageOccurrenceId(
++  message: Pick<ChatMessage, 'id' | 'instanceId'>,
++): string {
++  return message.instanceId == null || message.instanceId === ''
++    ? String(message.id)
++    : String(message.instanceId);
++}
+ 
+ export interface RedditUser {
+   username: string;
+@@ -78,8 +87,8 @@
+   }) => void;
+   seedChatThread: (username: string, seedBody: string) => void;
+   sendChatMessage: (username: string, body: string) => void;
+-  deleteChatMessage: (username: string, messageId: string) => void;
+-  sendChatReply: (username: string, messageId: string, body: string) => void;
++  deleteChatMessage: (username: string, messageOccurrenceId: string) => void;
++  sendChatReply: (username: string, messageOccurrenceId: string, body: string) => void;
+   trimUserComments: () => void;
+ }
+ 
+@@ -369,8 +378,9 @@
+       const existing = s.chatThreads[username];
+       if (Array.isArray(existing) && existing.length > 0) return;
+       const nowSec = Math.floor(TimeService.now() / 1000);
++      const seedId = `seed_${username}`;
+       const initial: ChatMessage[] = [
+-        { id: `seed_${username}`, from: 'me', body: seedBody, created_utc: nowSec - 86400 },
++        { id: seedId, instanceId: seedId, from: 'me', body: seedBody, created_utc: nowSec - 86400 },
+       ];
+       set({
+         chatThreads: { ...s.chatThreads, [username]: initial },
+@@ -381,8 +391,10 @@
+       const trimmed = body.trim();
+       if (!trimmed) return;
+       const s = get();
++      const messageId = nextLocalId();
+       const msg: ChatMessage = {
+-        id: nextLocalId(),
++        id: messageId,
++        instanceId: messageId,
+         from: 'me',
+         body: trimmed,
+         created_utc: Math.floor(TimeService.now() / 1000),
+@@ -396,10 +408,12 @@
+       });
+     },
+ 
+-    deleteChatMessage: (username, messageId) => {
++    deleteChatMessage: (username, messageOccurrenceId) => {
+       const s = get();
+       const list = Array.isArray(s.chatThreads[username]) ? s.chatThreads[username] : [];
+-      const next = list.filter((m) => String(m.id) !== String(messageId));
++      const next = list.filter(
++        (message) => getChatMessageOccurrenceId(message) !== String(messageOccurrenceId),
++      );
+       set({
+         chatThreads: {
+           ...s.chatThreads,
+@@ -408,13 +422,15 @@
+       });
+     },
+ 
+-    sendChatReply: (username, messageId, body) => {
++    sendChatReply: (username, messageOccurrenceId, body) => {
+       const trimmed = body.trim();
+       if (!trimmed) return;
+       const s = get();
+-      const k = `${username}:${messageId}`;
++      const k = `${username}:${messageOccurrenceId}`;
++      const replyId = `reply_${Math.floor(TimeService.now() / 1000)}_${++localSeq}`;
+       const reply: ChatMessage = {
+-        id: `reply_${Math.floor(TimeService.now() / 1000)}_${++localSeq}`,
++        id: replyId,
++        instanceId: replyId,
+         from: 'me',
+         body: trimmed,
+         created_utc: Math.floor(TimeService.now() / 1000),
+--- a/apps/Reddit/pages/ChatThreadPage.tsx
++++ b/apps/Reddit/pages/ChatThreadPage.tsx
+@@ -1,20 +1,13 @@
+ import React from 'react';
+ import { IcNavBack, IcMoreVert, IcSend, IcReply, IcCopy, IcShare, IcDelete, IcAdd } from '../res/icons';
+ import { useLocation } from 'react-router-dom';
+-import { useRedditStore } from '../state';
++import { getChatMessageOccurrenceId, useRedditStore, type ChatMessage } from '../state';
+ import { useShallow } from 'zustand/react/shallow';
+ import { useRedditGestures } from '../hooks/useRedditGestures';
+ import { formatChatDateShort, formatChatMessageTime, getChatDayKey } from '../utils/chatTime';
+ import { getUserAvatar } from '../utils/userIdentity';
+ import { KeyboardService } from '@/os/keyboard';
+ import { ClipboardService } from '@/os/clipboard';
+-
+-type ChatMessage = {
+-  id: string;
+-  from: 'me' | 'them';
+-  body: string;
+-  created_utc: number;
+-};
+ 
+ const pickAvatar = (usernameLike: string): string | undefined => getUserAvatar(usernameLike);
+ 
+@@ -90,9 +83,9 @@
+     ClipboardService.copyText(String(text ?? ''));
+   }, []);
+ 
+-  const deleteMessage = React.useCallback((messageId: string) => {
++  const deleteMessage = React.useCallback((messageOccurrenceId: string) => {
+     if (!username) return;
+-    storeDeleteChatMessage(username, messageId);
++    storeDeleteChatMessage(username, messageOccurrenceId);
+   }, [storeDeleteChatMessage, username]);
+ 
+   const send = React.useCallback(() => {
+@@ -111,9 +104,9 @@
+   }, [draft, storeSendChatMessage, username]);
+ 
+   const getThreadInfo = React.useCallback(
+-    (messageId: string): { count: number; lastFrom: 'me' | 'them' } => {
++    (messageOccurrenceId: string): { count: number; lastFrom: 'me' | 'them' } => {
+       if (!username) return { count: 0, lastFrom: 'me' };
+-      const k = `${username}:${messageId}`;
++      const k = `${username}:${messageOccurrenceId}`;
+       const list = chatReplies?.[k];
+       if (!Array.isArray(list) || list.length === 0) return { count: 0, lastFrom: 'me' };
+       const last = list[list.length - 1] as ChatMessage;
+@@ -202,13 +195,14 @@
+               const currentKey = getChatDayKey(m.created_utc);
+               const prevKey = idx > 0 ? getChatDayKey(thread[idx - 1].created_utc) : null;
+               const showDay = idx === 0 || currentKey !== prevKey;
+-              const threadInfo = getThreadInfo(m.id);
++              const messageOccurrenceId = getChatMessageOccurrenceId(m);
++              const threadInfo = getThreadInfo(messageOccurrenceId);
+               const replyCount = threadInfo.count;
+               const openThreadProps = bindTap('chatThread.message.thread.open', {
+-                params: { username, messageId: m.id },
++                params: { username, messageId: messageOccurrenceId },
+               });
+               return (
+-                <React.Fragment key={m.id}>
++                <React.Fragment key={messageOccurrenceId}>
+                   {showDay && (
+                     <div className="flex justify-center text-[12px] text-gray-400 mb-4">
+                       {formatChatDateShort(m.created_utc)}
+@@ -221,7 +215,7 @@
+                       { kind: 'action', id: 'chatThread.message.longPress.open' },
+                       {
+                         duration: 600,
+-                        params: { username, messageId: m.id },
++                        params: { username, messageId: messageOccurrenceId },
+                         onTrigger: () => setLongPressMenu(m),
+                       },
+                     )}
+@@ -435,7 +429,10 @@
+                   type="button"
+                   {...(item.id === 'chatThread.message.menu.reply'
+                     ? bindTap('chatThread.message.thread.open', {
+-                        params: { username, messageId: longPressMenu.id },
++                        params: {
++                          username,
++                          messageId: getChatMessageOccurrenceId(longPressMenu),
++                        },
+                         beforeTrigger: () => {
+                           // Close overlays before navigating.
+                           setConfirmDelete(null);
+@@ -445,7 +442,10 @@
+                     : bindTap(
+                         { kind: 'action', id: item.id },
+                         {
+-                          params: { username, messageId: longPressMenu.id },
++                          params: {
++                            username,
++                            messageId: getChatMessageOccurrenceId(longPressMenu),
++                          },
+                           onTrigger: item.onTrigger,
+                         },
+                       ))}
+@@ -487,7 +487,7 @@
+                 type="button"
+                 className="w-full h-12 rounded-full bg-[#0045AC] text-white font-black active:opacity-95"
+                 onClick={() => {
+-                  deleteMessage(confirmDelete.id);
++                  deleteMessage(getChatMessageOccurrenceId(confirmDelete));
+                   setConfirmDelete(null);
+                   setLongPressMenu(null);
+                 }}
+--- a/apps/Reddit/pages/ChatMessageThreadPage.tsx
++++ b/apps/Reddit/pages/ChatMessageThreadPage.tsx
+@@ -1,29 +1,25 @@
+ import React from 'react';
+ import { IcBell, IcNavBack, IcSend } from '../res/icons';
+ import { useLocation } from 'react-router-dom';
+-import { useRedditStore } from '../state';
++import { getChatMessageOccurrenceId, useRedditStore, type ChatMessage } from '../state';
+ import { useShallow } from 'zustand/react/shallow';
+ import { useRedditGestures } from '../hooks/useRedditGestures';
+ import { formatChatDateShort, formatChatMessageTime, getChatDayKey } from '../utils/chatTime';
+ import { getUserAvatar } from '../utils/userIdentity';
+ 
+-type ChatMessage = {
+-  id: string;
+-  from: 'me' | 'them';
+-  body: string;
+-  created_utc: number;
+-};
+-
+ const pickAvatar = (usernameLike: string): string | undefined => getUserAvatar(usernameLike);
+ 
+-function getIdsFromPath(pathname: string): { username: string; messageId: string } | null {
++function getIdsFromPath(pathname: string): { username: string; messageOccurrenceId: string } | null {
+   const m = pathname.match(/^\/chat\/([^/?#]+)\/thread\/([^/?#]+)/);
+   if (!m) return null;
+-  return { username: decodeURIComponent(m[1]), messageId: decodeURIComponent(m[2]) };
++  return {
++    username: decodeURIComponent(m[1]),
++    messageOccurrenceId: decodeURIComponent(m[2]),
++  };
+ }
+ 
+-function threadKey(username: string, messageId: string): string {
+-  return `${username}:${messageId}`;
++function threadKey(username: string, messageOccurrenceId: string): string {
++  return `${username}:${messageOccurrenceId}`;
+ }
+ 
+ export const ChatMessageThreadPage: React.FC = () => {
+@@ -37,7 +33,7 @@
+   const location = useLocation();
+   const ids = getIdsFromPath(location.pathname);
+   const username = ids?.username ?? null;
+-  const messageId = ids?.messageId ?? null;
++  const messageOccurrenceId = ids?.messageOccurrenceId ?? null;
+ 
+   const [draft, setDraft] = React.useState('');
+   const inputRef = React.useRef<HTMLInputElement | null>(null);
+@@ -47,31 +43,35 @@
+   }, []);
+ 
+   const sourceMessage = React.useMemo(() => {
+-    if (!username || !messageId) return null;
++    if (!username || !messageOccurrenceId) return null;
+     const list = chatThreads[username];
+     const thread = Array.isArray(list) ? (list as ChatMessage[]) : [];
+-    return thread.find((m) => String(m.id) === String(messageId)) ?? null;
+-  }, [messageId, chatThreads, username]);
++    return (
++      thread.find(
++        (message) => getChatMessageOccurrenceId(message) === String(messageOccurrenceId),
++      ) ?? null
++    );
++  }, [messageOccurrenceId, chatThreads, username]);
+ 
+   const replies = React.useMemo(() => {
+-    if (!username || !messageId) return [];
+-    const k = threadKey(username, messageId);
++    if (!username || !messageOccurrenceId) return [];
++    const k = threadKey(username, messageOccurrenceId);
+     const list = chatReplies?.[k];
+     return Array.isArray(list) ? (list as ChatMessage[]) : [];
+-  }, [messageId, chatReplies, username]);
+-
+-  const canSend = draft.trim().length > 0 && !!username && !!messageId;
++  }, [messageOccurrenceId, chatReplies, username]);
++
++  const canSend = draft.trim().length > 0 && !!username && !!messageOccurrenceId;
+ 
+   const submit = React.useCallback(() => {
+-    if (!username || !messageId) return;
++    if (!username || !messageOccurrenceId) return;
+     const body = draft.trim();
+     if (!body) return;
+ 
+-    storeSendChatReply(username, messageId, body);
++    storeSendChatReply(username, messageOccurrenceId, body);
+ 
+     setDraft('');
+     requestAnimationFrame(() => inputRef.current?.focus());
+-  }, [draft, messageId, storeSendChatReply, username]);
++  }, [draft, messageOccurrenceId, storeSendChatReply, username]);
+ 
+   const repliesWithSeparators = React.useMemo(() => {
+     const out: Array<{ kind: 'sep'; key: string; label: string } | { kind: 'msg'; msg: ChatMessage }> = [];
+@@ -87,7 +87,7 @@
+     return out;
+   }, [replies]);
+ 
+-  if (!username || !messageId) {
++  if (!username || !messageOccurrenceId) {
+     return (
+       <div className="flex flex-col h-full bg-app-surface">
+         <div className="px-4 pt-10">Invalid thread.</div>
+@@ -213,7 +213,10 @@
+             onPointerDown={(e) => e.preventDefault()}
+             {...bindTap(
+               { kind: 'action', id: 'chatThread.reply.submit' },
+-              { params: { username, messageId, body: draft }, onTrigger: submit },
++              {
++                params: { username, messageId: messageOccurrenceId, body: draft },
++                onTrigger: submit,
++              },
+             )}
+             className={`w-11 h-11 rounded-full flex items-center justify-center ${
+               canSend ? 'text-[#0045AC]' : 'text-gray-300'

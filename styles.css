@@ -453,6 +453,7 @@ a { color: inherit; }
 }
 .activity-summary strong { color: var(--ink); font-size: 22px; }
 .activity-provenance { margin: 12px 0 0; color: var(--muted); font-size: 9px; overflow-wrap: anywhere; }
+.agent-activity .media-links a { color: var(--accent); }
 .activity-relation-note {
   margin: 12px 0 0;
   padding: 10px 12px;
@@ -496,6 +497,8 @@ a { color: inherit; }
 .activity-event-heading span { flex: 0 0 auto; color: var(--muted); font-size: 8px; font-weight: 900; text-transform: uppercase; }
 .activity-detail { margin-top: 8px; }
 .activity-detail summary { color: var(--accent); font-size: 9px; font-weight: 800; cursor: pointer; }
+.activity-images { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+.activity-images img { display: block; width: auto; max-width: 100%; height: 200px; object-fit: contain; border: 1px solid var(--line); }
 .activity-detail pre {
   max-height: 280px;
   margin: 8px 0 0;
@@ -680,5 +683,7 @@ input:focus, select:focus, button:focus-visible, a:focus-visible {
   .stage-header { grid-template-columns: 1fr; }
   .instruction-block { grid-template-columns: 1fr; gap: 10px; }
   .filter-row { grid-template-columns: 1fr; }
+  .activity-header { flex-direction: column; align-items: start; }
+  .activity-event-heading { flex-direction: column; gap: 6px; }
   .compare-bar { right: 12px; bottom: 12px; left: 12px; justify-content: space-between; }
 }

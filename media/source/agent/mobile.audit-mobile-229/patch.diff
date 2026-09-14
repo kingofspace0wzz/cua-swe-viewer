@@ -1,0 +1,147 @@
+--- a/apps/Alipay/state.ts
++++ b/apps/Alipay/state.ts
+@@ -1,5 +1,6 @@
+ import { createAppStoreWithActions } from '../../os/createAppStore';
+ import { ALIPAY_CONFIG } from './data';
++import { BANK_OPTIONS } from './constants';
+ import * as TimeService from '../../os/TimeService';
+ import type {
+   AlipayBankCard,
+@@ -81,6 +82,89 @@
+ }
+ 
+ const defaultSettings = ALIPAY_CONFIG.settings as AlipaySettings;
++
++// ── Bank identity helpers ─────────────────────────────────────────
++
++type BankCardWithLegacyIdentity = AlipayBankCard & { bankCode?: unknown };
++
++const GENERIC_BANK_NAMES = new Set(['卡', '银行卡', '储蓄卡', '借记卡', '信用卡', '银行']);
++const LEGACY_BANK_CODE_ALIASES: Record<string, string> = {
++  bcm: 'bocom',
++};
++
++function normalizeBankCode(value: unknown): string {
++  const code = String(value ?? '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
++  if (!code || code === 'card') return '';
++  return LEGACY_BANK_CODE_ALIASES[code] || code;
++}
++
++function getBankNameAliases(value: unknown): Set<string> {
++  const normalized = String(value ?? '')
++    .normalize('NFKC')
++    .toLowerCase()
++    .replace(/股份有限公司|有限责任公司|有限公司/g, '')
++    .replace(/储蓄卡|借记卡|信用卡|贷记卡|银行卡/g, '')
++    .replace(/[\s·•\-—_（）()]/g, '');
++  const aliases = new Set<string>();
++  const addAlias = (alias: string) => {
++    if (alias && !GENERIC_BANK_NAMES.has(alias)) aliases.add(alias);
++  };
++
++  addAlias(normalized);
++  if (normalized.startsWith('中国')) addAlias(normalized.slice(2));
++  for (const alias of [...aliases]) {
++    if (alias.includes('邮政储蓄')) addAlias(alias.replace('邮政储蓄', '邮储'));
++  }
++  return aliases;
++}
++
++const BANK_CATALOG = BANK_OPTIONS.map(option => ({
++  code: normalizeBankCode(option.id),
++  nameAliases: getBankNameAliases(option.bankName),
++}));
++const KNOWN_BANK_CODES = new Set(BANK_CATALOG.map(bank => bank.code));
++
++function setsOverlap(left: Set<string>, right: Set<string>): boolean {
++  for (const value of left) {
++    if (right.has(value)) return true;
++  }
++  return false;
++}
++
++function findCatalogBankCode(nameAliases: Set<string>): string {
++  return BANK_CATALOG.find(bank => setsOverlap(bank.nameAliases, nameAliases))?.code || '';
++}
++
++function getCardIdBankCode(cardId: unknown): string {
++  const match = String(cardId ?? '').trim().toLowerCase().match(/^([a-z][a-z0-9]*?)(?=[_-]|\d)/);
++  const code = normalizeBankCode(match?.[1]);
++  return KNOWN_BANK_CODES.has(code) ? code : '';
++}
++
++function getBankIdentity(bankName: unknown, bankCode?: unknown, cardId?: unknown) {
++  const nameAliases = getBankNameAliases(bankName);
++  const codes = new Set<string>();
++  const addCode = (value: unknown) => {
++    const code = normalizeBankCode(value);
++    if (code) codes.add(code);
++  };
++
++  addCode(bankCode);
++  addCode(getCardIdBankCode(cardId));
++  if (codes.size === 0) addCode(findCatalogBankCode(nameAliases));
++  return { codes, nameAliases };
++}
++
++function isSameBank(
++  target: ReturnType<typeof getBankIdentity>,
++  card: BankCardWithLegacyIdentity,
++): boolean {
++  const candidate = getBankIdentity(card.bankName, card.bankCode, card.id);
++  if (target.codes.size > 0 && candidate.codes.size > 0) {
++    return setsOverlap(target.codes, candidate.codes);
++  }
++  return setsOverlap(target.nameAliases, candidate.nameAliases);
++}
+ 
+ // ── Derived unread helper ───────────────────────────────────────────
+ 
+@@ -375,24 +459,18 @@
+       const bankName = String(params.bankName || '').trim() || '银行卡';
+       const digits = String(params.cardNumber || '').replace(/\D/g, '');
+       const last4 = digits.slice(-4) || String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+-      const bankCodeMap: Record<string, string> = {
+-        建设银行: 'ccb', 工商银行: 'icbc', 农业银行: 'abc', 中国银行: 'boc',
+-        邮储银行: 'psbc', 邮政储蓄银行: 'psbc', 招商银行: 'cmb', 交通银行: 'bcm',
+-        中信银行: 'citic', 民生银行: 'cmbc', 光大银行: 'ceb', 兴业银行: 'cib', 浦发银行: 'spdb',
+-      };
+-      const baseCode = Object.entries(bankCodeMap).find(([k]) => bankName.includes(k))?.[1] || 'card';
++      const targetIdentity = getBankIdentity(bankName);
++      const baseCode = [...targetIdentity.codes][0] || 'card';
+       const bound = typeof params.bound === 'boolean' ? params.bound : true;
+       const explicitAvailable = Number.isFinite(params.available) ? Number(params.available) : null;
+       const s = get();
+ 
+-      // Inherit available from existing unbound card: last4 → explicit bankCode → legacy id prefix
+-      let donor = s.bankCards.find(c => c.last4 === last4 && !c.bound);
+-      if (!donor) {
+-        donor = s.bankCards.find(c => !c.bound && String((c as any).bankCode || '') === baseCode);
+-      }
+-      if (!donor) {
+-        donor = s.bankCards.find(c => c.id.startsWith(baseCode) && !c.bound && c.available !== 1000);
+-      }
++      const sameBankDonors = s.bankCards
++        .map((card, index) => ({ card: card as BankCardWithLegacyIdentity, index }))
++        .filter(({ card }) => !card.bound && isSameBank(targetIdentity, card));
++      const donorMatch = sameBankDonors.find(({ card }) => card.last4 === last4)
++        || sameBankDonors[0];
++      const donor = donorMatch?.card;
+       const available = (explicitAvailable === null || explicitAvailable === 1000) && donor
+         ? donor.available
+         : explicitAvailable ?? 1000;
+@@ -405,10 +483,10 @@
+         newId = `${baseCode}_${last4}_${suffix}`;
+       }
+       const next: AlipayBankCard = { id: newId, bankName, last4, bound, available };
+-      const remainingCards = donor
+-        ? s.bankCards.filter(c => c !== donor)
+-        : s.bankCards;
+-      set({ bankCards: [next, ...remainingCards] });
++      const bankCards = donorMatch
++        ? s.bankCards.map((card, index) => index === donorMatch.index ? next : card)
++        : [next, ...s.bankCards];
++      set({ bankCards });
+       return next;
+     },
+ 

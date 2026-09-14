@@ -127,7 +127,7 @@
       reason: task.is_game_cua
         ? "The exact scored run's Codex event stream was not copied into the viewer bundle. Only its verified GUI screenshots and visual actions are retained."
         : task.is_mobile_cua
-          ? "The retained Mobile evidence contains the formal screenshot-only CUA trajectory and exact visual observations. A separate full coding transcript was not retained for this run."
+          ? "The published Mobile evidence contains screenshot-view records and visual observations. The full coding transcript was excluded from the artifact packet and must be recovered from the original run."
           : "The historical Web publication retained screenshots, patches, verifier reports, and visual trajectories, while the base64-heavy Codex stdout remained on the execution host and is not part of this viewer bundle.",
     };
   }
@@ -348,6 +348,19 @@
           <pre>${escapeHtml(event.detail)}</pre>
         </details>`
       : "";
+    const images = (event.images || []).filter((image) =>
+      /^media\/source\/agent\/[a-zA-Z0-9._/-]+\.png$/.test(image.path)
+      && !image.path.split("/").includes("..")
+    );
+    const screenshots = images.length
+      ? `<details class="activity-detail">
+          <summary>Show ${images.length === 1 ? "screenshot" : `${images.length} screenshots`}</summary>
+          <div class="activity-images">${images.map((image) => `
+            <a href="${escapeHtml(image.path)}" target="_blank" rel="noreferrer">
+              <img src="${escapeHtml(image.path)}" loading="lazy" alt="Screenshot observed at activity ${escapeHtml(event.sequence)}">
+            </a>`).join("")}</div>
+        </details>`
+      : "";
     const exit = event.exit_code == null ? "" : ` · exit ${event.exit_code}`;
     return `
       <li class="activity-event activity-${escapeHtml(event.kind)}">
@@ -358,6 +371,7 @@
             <span>${escapeHtml(activityKindLabel(event.kind))} · ${escapeHtml(event.status)}${escapeHtml(exit)}</span>
           </div>
           ${detail}
+          ${screenshots}
         </div>
       </li>`;
   }
@@ -399,6 +413,14 @@
           <span><strong>${escapeHtml(summary.agent_messages || 0)}</strong> agent updates</span>
         </div>
         <p class="activity-provenance">${escapeHtml(activity.provenance || "retained_agent_event_stream")} · ${escapeHtml(activity.source || activity.run_label || "source recorded in task artifact bundle")}</p>
+        ${activity.artifacts
+          ? `<div class="media-links">${Object.entries(activity.artifacts).map(([label, path]) =>
+              `<a href="${escapeHtml(relativeLink(path))}" target="_blank" rel="noreferrer">${escapeHtml(label)}</a>`
+            ).join("")}</div>`
+          : ""}
+        ${summary.unfinished_items
+          ? '<p class="activity-relation-note">The original transcript contains an item with no recorded completion. Its last recorded status is shown below.</p>'
+          : ""}
         ${replacement
           ? '<p class="activity-relation-note">This is a fresh rerun of the same task and CUA condition. It is a complete agent transcript, but it is not synchronized to the adjacent historical GUI replay.</p>'
           : ""}

@@ -1,0 +1,160 @@
+--- a/apps/Reddit/state.ts
++++ b/apps/Reddit/state.ts
+@@ -109,10 +109,39 @@
+ // ── Local sequence counter for generating unique IDs ───────────────
+ 
+ let localSeq = 0;
+-function nextLocalId(): string {
++function collectPersistedRecordIds(state: RedditState): Set<string> {
++  const ids = new Set<string>([
++    ...Object.keys(state.posts),
++    ...Object.keys(state.comments),
++    ...state.user.postIds,
++    ...state.user.commentIds,
++  ]);
++
++  for (const post of Object.values(state.posts)) {
++    if (post?.id) ids.add(post.id);
++  }
++  for (const comment of Object.values(state.comments)) {
++    if (comment?.id) ids.add(comment.id);
++  }
++  for (const messages of Object.values(state.chatThreads)) {
++    for (const message of messages) ids.add(message.id);
++  }
++  for (const replies of Object.values(state.chatReplies)) {
++    for (const reply of replies) ids.add(reply.id);
++  }
++
++  return ids;
++}
++
++function nextLocalId(state: RedditState, prefix = 'local'): string {
+   const nowSec = Math.floor(TimeService.now() / 1000);
+-  localSeq += 1;
+-  return `local_${nowSec}_${localSeq}`;
++  const persistedIds = collectPersistedRecordIds(state);
++  let candidate: string;
++  do {
++    localSeq += 1;
++    candidate = `${prefix}_${nowSec}_${localSeq}`;
++  } while (persistedIds.has(candidate));
++  return candidate;
+ }
+ 
+ function toggleId(list: string[], id: string): string[] {
+@@ -162,7 +191,7 @@
+       if (!trimmed) return;
+       const s = get();
+       const newComment: Comment = {
+-        id: nextLocalId(),
++        id: nextLocalId(s),
+         postId,
+         author: s.user.username || 'Embarrassed_Fee8630',
+         body: trimmed,
+@@ -186,7 +215,7 @@
+       if (!trimmed) return;
+       const s = get();
+       const newComment: Comment = {
+-        id: nextLocalId(),
++        id: nextLocalId(s),
+         postId,
+         author: s.user.username || 'Embarrassed_Fee8630',
+         body: trimmed,
+@@ -382,7 +411,7 @@
+       if (!trimmed) return;
+       const s = get();
+       const msg: ChatMessage = {
+-        id: nextLocalId(),
++        id: nextLocalId(s),
+         from: 'me',
+         body: trimmed,
+         created_utc: Math.floor(TimeService.now() / 1000),
+@@ -414,7 +443,7 @@
+       const s = get();
+       const k = `${username}:${messageId}`;
+       const reply: ChatMessage = {
+-        id: `reply_${Math.floor(TimeService.now() / 1000)}_${++localSeq}`,
++        id: nextLocalId(s, 'reply'),
+         from: 'me',
+         body: trimmed,
+         created_utc: Math.floor(TimeService.now() / 1000),
+@@ -432,46 +461,58 @@
+       const MAX_PER_POST = 50;
+       const MAX_TOTAL = 300;
+       const s = get();
+-      const own = s.user.commentIds
+-        .map((id) => s.comments[id])
+-        .filter((comment): comment is Comment => Boolean(comment));
++      const seenStorageKeys = new Set<string>();
++      const own = s.user.commentIds.flatMap((storageKey, index) => {
++        if (seenStorageKeys.has(storageKey)) return [];
++        seenStorageKeys.add(storageKey);
++        const comment = s.comments[storageKey];
++        return comment ? [{ storageKey, comment, index }] : [];
++      });
+       if (own.length <= MAX_TOTAL) {
+-        const perPostCounts = own.reduce<Record<string, number>>((acc, comment) => {
+-          acc[comment.postId] = (acc[comment.postId] ?? 0) + 1;
++        const perPostCounts = own.reduce<Record<string, number>>((acc, record) => {
++          acc[record.comment.postId] = (acc[record.comment.postId] ?? 0) + 1;
+           return acc;
+         }, {});
+         if (Object.values(perPostCounts).every((count) => count <= MAX_PER_POST)) return;
+       }
+ 
+       const remove = new Set<string>();
+-      const byPost: Record<string, Comment[]> = {};
+-      for (const comment of own) {
+-        (byPost[comment.postId] ??= []).push(comment);
+-      }
+-      for (const comments of Object.values(byPost)) {
+-        comments.sort((a, b) => (a.created_utc ?? 0) - (b.created_utc ?? 0));
+-        for (const comment of comments.slice(0, Math.max(0, comments.length - MAX_PER_POST))) {
+-          remove.add(comment.id);
++      const byPost: Record<string, typeof own> = {};
++      for (const record of own) {
++        (byPost[record.comment.postId] ??= []).push(record);
++      }
++      for (const records of Object.values(byPost)) {
++        records.sort((a, b) =>
++          (a.comment.created_utc ?? 0) - (b.comment.created_utc ?? 0)
++          || a.index - b.index);
++        for (const record of records.slice(0, Math.max(0, records.length - MAX_PER_POST))) {
++          remove.add(record.storageKey);
+         }
+       }
+ 
+       const remainingOwn = own
+-        .filter((comment) => !remove.has(comment.id))
+-        .sort((a, b) => (a.created_utc ?? 0) - (b.created_utc ?? 0));
+-      for (const comment of remainingOwn.slice(0, Math.max(0, remainingOwn.length - MAX_TOTAL))) {
+-        remove.add(comment.id);
++        .filter((record) => !remove.has(record.storageKey))
++        .sort((a, b) =>
++          (a.comment.created_utc ?? 0) - (b.comment.created_utc ?? 0)
++          || a.index - b.index);
++      for (const record of remainingOwn.slice(0, Math.max(0, remainingOwn.length - MAX_TOTAL))) {
++        remove.add(record.storageKey);
+       }
+       if (remove.size === 0) return;
+ 
+       const nextComments = { ...s.comments };
+-      for (const id of remove) {
+-        delete nextComments[id];
++      const nextVotes = { ...s.user.commentVotes };
++      for (const storageKey of remove) {
++        const comment = s.comments[storageKey];
++        delete nextComments[storageKey];
++        if (comment) delete nextVotes[`${comment.postId}:${comment.id}`];
+       }
+       set({
+         comments: nextComments,
+         user: {
+           ...s.user,
+-          commentIds: s.user.commentIds.filter((id) => !remove.has(id)),
++          commentIds: s.user.commentIds.filter((storageKey) => !remove.has(storageKey)),
++          commentVotes: nextVotes,
+         },
+       });
+     },

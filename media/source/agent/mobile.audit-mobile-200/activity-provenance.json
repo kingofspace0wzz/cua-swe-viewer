@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "task_id": "mobile.audit-mobile-200",
+  "candidate_id": "audit-mobile-200",
+  "selected_revision_digest": "9dc86b34204dfffb714978a67bf6bb4ae54be1f57717559ed2eee9cf52f581c5",
+  "matched_code_only_revision_digest": "cdccedaf3cd1d171d78b2d25f93ca37f17098636c4b336d908bc9ad7743b9432",
+  "model": "openai.gpt-5.6-sol",
+  "started_at": "2026-09-11T05:59:52.700822+00:00",
+  "finished_at": "2026-09-11T06:04:02.350856+00:00",
+  "result": "fail",
+  "raw_transcript_sha256": "b26c7507f6edc4af551551c44b01630b2e351425a7969c8bc92dac929f84117c",
+  "raw_transcript_bytes": 571742,
+  "raw_record_count": 52,
+  "exported_record_count": 52,
+  "gate_report_sha256": "fcd05a6c4b815931f37f82b5f65fc0f0fc7b06d0b123e98654ac900571390f5e",
+  "trajectory_sha256": "3cebf2846a1254ae0d63b20608255a107a8a8d1de515ef879ac3d070c6841289",
+  "frame_sha256": {
+    "screenshot-0001.png": "72653cbd1981e825f1f9d9df431003b65a35872086156f06255d7a021c339768",
+    "screenshot-0002.png": "2ff13f13206079f2ba27742064164c75ecca72cf6a3b41e960a1b1a0eb6f8858",
+    "screenshot-0003.png": "2ff13f13206079f2ba27742064164c75ecca72cf6a3b41e960a1b1a0eb6f8858",
+    "screenshot-0004.png": "2ff13f13206079f2ba27742064164c75ecca72cf6a3b41e960a1b1a0eb6f8858",
+    "screenshot-0005.png": "2ff13f13206079f2ba27742064164c75ecca72cf6a3b41e960a1b1a0eb6f8858",
+    "screenshot-0006.png": "3acc31a2787fd035aa987329b4f4ed5c6e574603244f96005819652b98627a9d"
+  },
+  "activity_sha256": "248c17f6360a942d42ea5fe08e95a748305c699f274793247dc2965d22621e40",
+  "raw_transcript_retention": "Original EFS run and private recovery archive",
+  "export_policy": {
+    "all_records_retained": true,
+    "text_truncated": false,
+    "image_payloads": "Replaced by ordered, hash-verified screenshot references",
+    "machine_paths": "Replaced by workspace, rollout, run, or artifact placeholders",
+    "item_order": "First appearance; all lifecycle records retained in records"
+  },
+  "original_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "published_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

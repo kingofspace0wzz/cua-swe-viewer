@@ -1,0 +1,11 @@
+--- a/system/Calendar/pages/CalendarHomePage.tsx
++++ b/system/Calendar/pages/CalendarHomePage.tsx
+@@ -78,7 +78,7 @@
+             });
+         }
+ 
+-        for (const e of dayEvents.slice(0, 1)) {
++        for (const e of dayEvents) {
+             items.push({
+                 id: e.id,
+                 title: e.title,

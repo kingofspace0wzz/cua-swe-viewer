@@ -1,0 +1,25 @@
+--- a/system/Notes/state.ts
++++ b/system/Notes/state.ts
+@@ -155,14 +155,18 @@
+     deleteNote: (id: string) => {
+       const now = TimeService.now();
+       set(state => ({
+-        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, trashedAt: now, updatedAt: now } : n))),
++        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, trashedAt: now } : n))),
+       }));
+     },
+ 
+     restoreNote: (id: string) => {
+-      const now = TimeService.now();
+-      set(state => ({
+-        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, trashedAt: undefined, updatedAt: now } : n))),
++      set(state => ({
++        notes: sortNotes(state.notes.map(n => {
++          if (n.id !== id) return n;
++          const restored = { ...n };
++          delete restored.trashedAt;
++          return restored;
++        })),
+       }));
+     },
+ 
