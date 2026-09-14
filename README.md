@@ -8,4 +8,4 @@ Raw base64-heavy Codex stdout remains in the private source; the prepared compac
 
 Current inventory: 33 Web + 29 Game + 20 Mobile = 82 tasks. The domains retain separate reporting.
 
-Automatically exported from source revision `24c69a44e47e771bd5655626621b6bf45e0e9f6c`. See `publication.json` for exported file hashes. Do not edit generated files here; updates come from the private source repository's public-viewer workflow.
+Automatically exported from source revision `9e0314510164fec0ca2c80ca314af776c01f74b3`. See `publication.json` for exported file hashes. Do not edit generated files here; updates come from the private source repository's public-viewer workflow.

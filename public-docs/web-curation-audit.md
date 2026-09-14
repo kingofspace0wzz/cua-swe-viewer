@@ -113,6 +113,6 @@ frontier-boundary failures.
 - `dataset/audits/web-primary-23-proposed-manifest.yaml`
 - `dataset/audits/web-curated-33-proposed-manifest.yaml`
 - `dataset/audits/web-curated-33-admission.yaml`
-- `dataset/collections/web-curated-33/manifest.yaml`
+- `dataset/web/manifest.yaml`
 - `viewer/data/corpus-audit.json`
 - `viewer/index.html`

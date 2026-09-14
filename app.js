@@ -2,15 +2,17 @@
   "use strict";
 
   const sourceAudit = window.CORPUS_AUDIT;
+  const registry = window.CANONICAL_REGISTRY;
+  const canonicalTaskIds = new Set((registry?.domains || []).flatMap(domain => domain.task_ids));
   const gameCollection = window.GAME_CUA_TASKS || { tasks: [], summary: {} };
   const mediaIndex = window.TRAJECTORY_MEDIA || { tasks: {}, summary: {} };
   const activityIndex = window.AGENT_ACTIVITY || { tasks: {}, summary: {} };
-  if (!sourceAudit || !Array.isArray(sourceAudit.tasks)) {
+  if (!sourceAudit || !Array.isArray(sourceAudit.tasks) || !registry || canonicalTaskIds.size !== registry.task_count) {
     document.body.textContent = "Corpus audit data is unavailable.";
     return;
   }
   const gameTasks = Array.isArray(gameCollection.tasks)
-    ? gameCollection.tasks.map((task) => ({
+    ? gameCollection.tasks.filter(task => canonicalTaskIds.has(task.task_id)).map((task) => ({
         ...task,
         domain: "game",
         difficulty_band: task.difficulty_band || (task.cua === "pass" ? "easy" : "frontier"),
@@ -21,7 +23,7 @@
     ...sourceAudit,
     tasks: [
       ...sourceAudit.tasks
-        .filter((task) => task.recommendation !== "remove_redundant")
+        .filter((task) => canonicalTaskIds.has(task.task_id))
         .map((task) => {
           const isMobile = String(task.task_id).startsWith("mobile.");
           return {

@@ -84,7 +84,7 @@
     }
   ],
   "decision": {
-    "canonical_manifest": "dataset/collections/web-curated-33/manifest.yaml",
+    "canonical_manifest": "dataset/web/manifest.yaml",
     "canonical_web_tasks": 33,
     "decision_date": "2026-09-03",
     "retained_excluded_web_tasks": 34,
@@ -131,7 +131,7 @@
   },
   "tasks": [
     {
-      "app_file": "dataset/tasks/web/invoice-settlement-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/invoice-settlement-contract.001/repo/index.html",
       "bug_mechanism": "numeric_representation",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -167,12 +167,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "4dd607fc6258c57588a4d4a22da4e4ddb51bf18e5b6034af529393c6704ca4bb",
-      "task_file": "dataset/tasks/web/invoice-settlement-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/invoice-settlement-contract.001/task.yaml",
       "task_id": "web.invoice-settlement-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/fulfillment-promise-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/fulfillment-promise-contract.001/repo/index.html",
       "bug_mechanism": "temporal_representation",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -208,12 +208,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "581d159eaadec1c8ae06a3becfce0cd6f15437a1a45f4e07621843379da39193",
-      "task_file": "dataset/tasks/web/fulfillment-promise-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/fulfillment-promise-contract.001/task.yaml",
       "task_id": "web.fulfillment-promise-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/asset-entitlement-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/asset-entitlement-contract.001/repo/index.html",
       "bug_mechanism": "capability_semantics",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -249,12 +249,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "4dba5d1e1717d78c355eaed9475a14ffafe901e9191b75824d51d0629d7e8e40",
-      "task_file": "dataset/tasks/web/asset-entitlement-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/asset-entitlement-contract.001/task.yaml",
       "task_id": "web.asset-entitlement-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/order-routing-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/order-routing-contract.001/repo/index.html",
       "bug_mechanism": "relational_join",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -290,12 +290,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "e80c872f4299a25ff45cd04c64e62c04879f81b5209e8a6e5d26b5227b6d6ea0",
-      "task_file": "dataset/tasks/web/order-routing-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/order-routing-contract.001/task.yaml",
       "task_id": "web.order-routing-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/usage-charge-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/usage-charge-contract.001/repo/index.html",
       "bug_mechanism": "numeric_representation",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -331,12 +331,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "1e9cea2504148907926a95bce32a274c5541c6abb42246e89332e05bf18c7da6",
-      "task_file": "dataset/tasks/web/usage-charge-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/usage-charge-contract.001/task.yaml",
       "task_id": "web.usage-charge-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/support-window-contract.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.support-window-contract.001/repo/index.html",
       "bug_mechanism": "temporal_representation",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -370,12 +370,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "935e2ceaa89de8492d2eb23778cb3cf8c07a2d119ec665b60f5db744b853aadc",
-      "task_file": "dataset/tasks/web/support-window-contract.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.support-window-contract.001/task.yaml",
       "task_id": "web.support-window-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/refund-policy-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/refund-policy-contract.001/repo/index.html",
       "bug_mechanism": "capability_semantics",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -411,12 +411,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "84d6b2d1af78d8e980741fb9730f174330fe9fc47afed808e36792de95c7151a",
-      "task_file": "dataset/tasks/web/refund-policy-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/refund-policy-contract.001/task.yaml",
       "task_id": "web.refund-policy-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/inventory-source-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/inventory-source-contract.001/repo/index.html",
       "bug_mechanism": "relational_join",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -452,12 +452,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "db1122ec5b4c708d8b38b5cb60e16385258d7df867bc9b8816f8b8e4ad48647b",
-      "task_file": "dataset/tasks/web/inventory-source-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/inventory-source-contract.001/task.yaml",
       "task_id": "web.inventory-source-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/storage-quota-contract.002/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/storage-quota-contract.002/repo/index.html",
       "bug_mechanism": "numeric_representation",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -493,12 +493,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "af8544736f82fdfab38614ff4ddecc3269bf0b4bb385eefd2f66532ae7fda513",
-      "task_file": "dataset/tasks/web/storage-quota-contract.002/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/storage-quota-contract.002/task.yaml",
       "task_id": "web.storage-quota-contract.002",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/subscription-renewal-contract.002/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/subscription-renewal-contract.002/repo/index.html",
       "bug_mechanism": "temporal_representation",
       "classification": "legacy_frontier_failure",
       "code_only": "fail",
@@ -535,12 +535,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "496c4218903234f6ca47003017ba1a59335dc06f79c190e692a05618d2f23150",
-      "task_file": "dataset/tasks/web/subscription-renewal-contract.002/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/subscription-renewal-contract.002/task.yaml",
       "task_id": "web.subscription-renewal-contract.002",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/warehouse-cutoff-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/warehouse-cutoff-contract.001/repo/index.html",
       "bug_mechanism": "temporal_representation",
       "classification": "legacy_frontier_failure",
       "code_only": "fail",
@@ -577,12 +577,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "6d04caa587dbe5c3f542e240581e3cd1dfe1976c1f6939cd547df9a1d8c16998",
-      "task_file": "dataset/tasks/web/warehouse-cutoff-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/warehouse-cutoff-contract.001/task.yaml",
       "task_id": "web.warehouse-cutoff-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/deployment-action-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/deployment-action-contract.001/repo/index.html",
       "bug_mechanism": "capability_semantics",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -618,12 +618,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "55181d285d512618c43438397cd2bbce58200b79b1404462a44bc7f0fb2e2385",
-      "task_file": "dataset/tasks/web/deployment-action-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/deployment-action-contract.001/task.yaml",
       "task_id": "web.deployment-action-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/account-recovery-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/account-recovery-contract.001/repo/index.html",
       "bug_mechanism": "capability_semantics",
       "classification": "legacy_frontier_failure",
       "code_only": "fail",
@@ -660,12 +660,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "6deee577964de6b8e3ccaedc33f26af4946b953a6650f771f5eeb39e99ed6f07",
-      "task_file": "dataset/tasks/web/account-recovery-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/account-recovery-contract.001/task.yaml",
       "task_id": "web.account-recovery-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/incident-escalation-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/incident-escalation-contract.001/repo/index.html",
       "bug_mechanism": "relational_join",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -701,12 +701,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "ee29f4415fd3e0d24486d435f97db73c80da8f83795bf13829b53b089363f7d1",
-      "task_file": "dataset/tasks/web/incident-escalation-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/incident-escalation-contract.001/task.yaml",
       "task_id": "web.incident-escalation-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/returns-destination-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/returns-destination-contract.001/repo/index.html",
       "bug_mechanism": "relational_join",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -742,12 +742,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "104569ff85ac0606e2952870ecf0739d3b5d18c4c269a9d4c54309f101fd1971",
-      "task_file": "dataset/tasks/web/returns-destination-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/returns-destination-contract.001/task.yaml",
       "task_id": "web.returns-destination-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/tax-rounding-contract.002/repo/index.html",
+      "app_file": "dataset/web/tasks/web.tax-rounding-contract.002/repo/index.html",
       "bug_mechanism": "numeric_representation",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -781,12 +781,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "1c7a986e369e2c4463e001ca8b218d0f3ec5e03f579d3ece4773feb780473fe5",
-      "task_file": "dataset/tasks/web/tax-rounding-contract.002/task.yaml",
+      "task_file": "dataset/web/tasks/web.tax-rounding-contract.002/task.yaml",
       "task_id": "web.tax-rounding-contract.002",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/energy-budget-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/energy-budget-contract.001/repo/index.html",
       "bug_mechanism": "numeric_representation",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -822,12 +822,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "70051d464cf474681723082121c910d187ae05d6b33132920b25dd518f7ab952",
-      "task_file": "dataset/tasks/web/energy-budget-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/energy-budget-contract.001/task.yaml",
       "task_id": "web.energy-budget-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/delegated-action-contract.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.delegated-action-contract.001/repo/index.html",
       "bug_mechanism": "capability_semantics",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -861,12 +861,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "b187a2c93b91cea7bdf113586b21b9a495e35d50105211d28b83431a3cfe59cc",
-      "task_file": "dataset/tasks/web/delegated-action-contract.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.delegated-action-contract.001/task.yaml",
       "task_id": "web.delegated-action-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/configuration-inheritance-contract.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.configuration-inheritance-contract.001/repo/index.html",
       "bug_mechanism": "relational_join",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -900,12 +900,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "a65319759c5b3e5ff70df1158cf5216ec67a9dc1e3dcf3fc459dc0f2bc6aa3ca",
-      "task_file": "dataset/tasks/web/configuration-inheritance-contract.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.configuration-inheritance-contract.001/task.yaml",
       "task_id": "web.configuration-inheritance-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/locale-fallback-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/locale-fallback-contract.001/repo/index.html",
       "bug_mechanism": "relational_join",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -941,12 +941,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "8aefce62029696c05045192829da7e3951b3c4d2e1bcbeb807ac9fa55e36d2e2",
-      "task_file": "dataset/tasks/web/locale-fallback-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/locale-fallback-contract.001/task.yaml",
       "task_id": "web.locale-fallback-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/feature-flag-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/feature-flag-contract.001/repo/index.html",
       "bug_mechanism": "capability_semantics",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -982,12 +982,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "4f712750bcb19435f3ce81a84abc3289c1e93004b6de6e4eaece0f4dd15564bb",
-      "task_file": "dataset/tasks/web/feature-flag-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/feature-flag-contract.001/task.yaml",
       "task_id": "web.feature-flag-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/shipping-rate-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/shipping-rate-contract.001/repo/index.html",
       "bug_mechanism": "relational_join",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -1023,12 +1023,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "c3bf015e05b99aada566e81a0aa74b4f41abb40df3932b2078c17e2c548795f7",
-      "task_file": "dataset/tasks/web/shipping-rate-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/shipping-rate-contract.001/task.yaml",
       "task_id": "web.shipping-rate-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/notification-channel-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/notification-channel-contract.001/repo/index.html",
       "bug_mechanism": "capability_semantics",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -1064,12 +1064,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "db9cc4c9dc4885df49155ef07dfa0ef20b6f2d24e8b87fad114c7d52e5b4ba50",
-      "task_file": "dataset/tasks/web/notification-channel-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/notification-channel-contract.001/task.yaml",
       "task_id": "web.notification-channel-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/review-assignment-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/review-assignment-contract.001/repo/index.html",
       "bug_mechanism": "relational_join",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -1105,12 +1105,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "850d38a17aba4ad63ad561d6eb076aa139a9164e4adaddcc69219c8b59ddfcb2",
-      "task_file": "dataset/tasks/web/review-assignment-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/review-assignment-contract.001/task.yaml",
       "task_id": "web.review-assignment-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/policy-template-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/policy-template-contract.001/repo/index.html",
       "bug_mechanism": "relational_join",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -1146,12 +1146,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "e9f44576ef19fedbe0f52699002d9bb8abdf20b7da4670f9dd9bf59eeb097eb8",
-      "task_file": "dataset/tasks/web/policy-template-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/policy-template-contract.001/task.yaml",
       "task_id": "web.policy-template-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/payment-rail-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/payment-rail-contract.001/repo/index.html",
       "bug_mechanism": "capability_semantics",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -1187,12 +1187,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "1dca7862f39658785b353f299298c2eaca20a8ea220d45321c5077fdb13fb2b2",
-      "task_file": "dataset/tasks/web/payment-rail-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/payment-rail-contract.001/task.yaml",
       "task_id": "web.payment-rail-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/warehouse-bin-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/warehouse-bin-contract.001/repo/index.html",
       "bug_mechanism": "relational_join",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -1228,12 +1228,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "9b411010fcbec88c8cc35f51c8a6aa09f3c8c4ff0a6d1da09e2a91cf41e9f65c",
-      "task_file": "dataset/tasks/web/warehouse-bin-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/warehouse-bin-contract.001/task.yaml",
       "task_id": "web.warehouse-bin-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/release-channel-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/release-channel-contract.001/repo/index.html",
       "bug_mechanism": "capability_semantics",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -1269,12 +1269,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "50a94852c3b057ed7a28c908b6bcb4a19eacddf6cec7733d60b94e3717f66600",
-      "task_file": "dataset/tasks/web/release-channel-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/release-channel-contract.001/task.yaml",
       "task_id": "web.release-channel-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/oncall-owner-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/oncall-owner-contract.001/repo/index.html",
       "bug_mechanism": "relational_join",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -1310,12 +1310,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "ba227e3a1554fbc8aea609fc5f381d2d7d1dce7c789ac8bf0503fe865d10c509",
-      "task_file": "dataset/tasks/web/oncall-owner-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/oncall-owner-contract.001/task.yaml",
       "task_id": "web.oncall-owner-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/identity-mapping-contract.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/identity-mapping-contract.001/repo/index.html",
       "bug_mechanism": "capability_semantics",
       "classification": "legacy_easy_or_midband",
       "code_only": "fail",
@@ -1351,12 +1351,12 @@
       "source_type": "synthetic",
       "statistical_role": "independent_context",
       "task_digest": "4e3a0d69ff524c2224c4e498585f2073d6333d7709ec52ec63d8ae1441d34918",
-      "task_file": "dataset/tasks/web/identity-mapping-contract.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/identity-mapping-contract.001/task.yaml",
       "task_id": "web.identity-mapping-contract.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/account-recovery-frontier-anchor.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.account-recovery-frontier-anchor.001/repo/index.html",
       "bug_mechanism": "account_recovery",
       "classification": "legacy_easy_or_midband",
       "code_only": "not_reported",
@@ -1390,12 +1390,12 @@
       "source_type": "synthetic",
       "statistical_role": "controlled_anchor",
       "task_digest": "aaa592c4b8a6de98b58e3a351908dbff71a2e91ad63036a111cb8b5d299cbb50",
-      "task_file": "dataset/tasks/web/account-recovery-frontier-anchor.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.account-recovery-frontier-anchor.001/task.yaml",
       "task_id": "web.account-recovery-frontier-anchor.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/account-recovery-frontier-easy.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.account-recovery-frontier-easy.001/repo/index.html",
       "bug_mechanism": "account_recovery",
       "classification": "legacy_frontier_failure",
       "code_only": "not_reported",
@@ -1429,12 +1429,12 @@
       "source_type": "synthetic",
       "statistical_role": "controlled_easy",
       "task_digest": "5269c4222b258c96450f89a05f9380b20d712477f15b57a5f91f38cc4b1612e2",
-      "task_file": "dataset/tasks/web/account-recovery-frontier-easy.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.account-recovery-frontier-easy.001/task.yaml",
       "task_id": "web.account-recovery-frontier-easy.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/account-recovery-frontier-medium.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/account-recovery-frontier-medium.001/repo/index.html",
       "bug_mechanism": "account_recovery",
       "classification": "legacy_frontier_failure",
       "code_only": "not_reported",
@@ -1471,12 +1471,12 @@
       "source_type": "synthetic",
       "statistical_role": "controlled_medium",
       "task_digest": "76576c2359214c05dac06d4de252eab97df5a5dd7c54cc404939c731e5adfb01",
-      "task_file": "dataset/tasks/web/account-recovery-frontier-medium.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/account-recovery-frontier-medium.001/task.yaml",
       "task_id": "web.account-recovery-frontier-medium.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/account-recovery-frontier-hard.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/account-recovery-frontier-hard.001/repo/index.html",
       "bug_mechanism": "account_recovery",
       "classification": "legacy_frontier_failure",
       "code_only": "not_reported",
@@ -1513,12 +1513,12 @@
       "source_type": "synthetic",
       "statistical_role": "controlled_hard",
       "task_digest": "3731f40784a4bee85f234ec4a91d5b4f43697bfc0d3bf5d1fe586c3fcba82867",
-      "task_file": "dataset/tasks/web/account-recovery-frontier-hard.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/account-recovery-frontier-hard.001/task.yaml",
       "task_id": "web.account-recovery-frontier-hard.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/subscription-renewal-frontier-anchor.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.subscription-renewal-frontier-anchor.001/repo/index.html",
       "bug_mechanism": "subscription_renewal",
       "classification": "legacy_easy_or_midband",
       "code_only": "not_reported",
@@ -1552,12 +1552,12 @@
       "source_type": "synthetic",
       "statistical_role": "controlled_anchor",
       "task_digest": "8a68e86c95e36cf23347e7c075fa40402d204ffa26f33df0f29e599083d29fc3",
-      "task_file": "dataset/tasks/web/subscription-renewal-frontier-anchor.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.subscription-renewal-frontier-anchor.001/task.yaml",
       "task_id": "web.subscription-renewal-frontier-anchor.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/subscription-renewal-frontier-easy.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.subscription-renewal-frontier-easy.001/repo/index.html",
       "bug_mechanism": "subscription_renewal",
       "classification": "legacy_frontier_failure",
       "code_only": "not_reported",
@@ -1591,12 +1591,12 @@
       "source_type": "synthetic",
       "statistical_role": "controlled_easy",
       "task_digest": "b06de4c69b663aed99a6335a396a9e7d5e87050bec2e8b3635758b5eac81cc0b",
-      "task_file": "dataset/tasks/web/subscription-renewal-frontier-easy.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.subscription-renewal-frontier-easy.001/task.yaml",
       "task_id": "web.subscription-renewal-frontier-easy.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/subscription-renewal-frontier-medium.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/subscription-renewal-frontier-medium.001/repo/index.html",
       "bug_mechanism": "subscription_renewal",
       "classification": "legacy_frontier_failure",
       "code_only": "not_reported",
@@ -1633,12 +1633,12 @@
       "source_type": "synthetic",
       "statistical_role": "controlled_medium",
       "task_digest": "0a2b96d1db91cdd2ade5f4e0a39b008e57a95a763ac70c1cc211f031b35fc6ed",
-      "task_file": "dataset/tasks/web/subscription-renewal-frontier-medium.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/subscription-renewal-frontier-medium.001/task.yaml",
       "task_id": "web.subscription-renewal-frontier-medium.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/subscription-renewal-frontier-hard.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/subscription-renewal-frontier-hard.001/repo/index.html",
       "bug_mechanism": "subscription_renewal",
       "classification": "legacy_frontier_failure",
       "code_only": "not_reported",
@@ -1675,12 +1675,12 @@
       "source_type": "synthetic",
       "statistical_role": "controlled_hard",
       "task_digest": "5fb6835cd69bbc36bcedd4b6448fc607533e645872acf042d4ea94b7a822a197",
-      "task_file": "dataset/tasks/web/subscription-renewal-frontier-hard.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/subscription-renewal-frontier-hard.001/task.yaml",
       "task_id": "web.subscription-renewal-frontier-hard.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/warehouse-cutoff-frontier-anchor.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.warehouse-cutoff-frontier-anchor.001/repo/index.html",
       "bug_mechanism": "warehouse_cutoff",
       "classification": "legacy_easy_or_midband",
       "code_only": "not_reported",
@@ -1714,12 +1714,12 @@
       "source_type": "synthetic",
       "statistical_role": "controlled_anchor",
       "task_digest": "6b90fa056ae1efdd9a6c086ef58e04e9a1d65d569fbe725731cc1ae1679afd7a",
-      "task_file": "dataset/tasks/web/warehouse-cutoff-frontier-anchor.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.warehouse-cutoff-frontier-anchor.001/task.yaml",
       "task_id": "web.warehouse-cutoff-frontier-anchor.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/warehouse-cutoff-frontier-easy.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.warehouse-cutoff-frontier-easy.001/repo/index.html",
       "bug_mechanism": "warehouse_cutoff",
       "classification": "legacy_frontier_failure",
       "code_only": "not_reported",
@@ -1753,12 +1753,12 @@
       "source_type": "synthetic",
       "statistical_role": "controlled_easy",
       "task_digest": "1d0bf252951867411c80b3762f2a4947fb0e83fadfeac6bdb53458c53f448fba",
-      "task_file": "dataset/tasks/web/warehouse-cutoff-frontier-easy.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.warehouse-cutoff-frontier-easy.001/task.yaml",
       "task_id": "web.warehouse-cutoff-frontier-easy.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/warehouse-cutoff-frontier-medium.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/warehouse-cutoff-frontier-medium.001/repo/index.html",
       "bug_mechanism": "warehouse_cutoff",
       "classification": "legacy_frontier_failure",
       "code_only": "not_reported",
@@ -1795,12 +1795,12 @@
       "source_type": "synthetic",
       "statistical_role": "controlled_medium",
       "task_digest": "6cb741df1fc66e8052b4db3007cc4b320b05c36cd04767178b82d148863fd19b",
-      "task_file": "dataset/tasks/web/warehouse-cutoff-frontier-medium.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/warehouse-cutoff-frontier-medium.001/task.yaml",
       "task_id": "web.warehouse-cutoff-frontier-medium.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/tasks/web/warehouse-cutoff-frontier-hard.001/repo/index.html",
+      "app_file": "dataset/archive/web-v1/tasks/web/warehouse-cutoff-frontier-hard.001/repo/index.html",
       "bug_mechanism": "warehouse_cutoff",
       "classification": "legacy_frontier_failure",
       "code_only": "not_reported",
@@ -1837,12 +1837,12 @@
       "source_type": "synthetic",
       "statistical_role": "controlled_hard",
       "task_digest": "185577d7d3a1cbc1090c27661060c1d121ff9bbef0b54aca22918bc3b1872487",
-      "task_file": "dataset/tasks/web/warehouse-cutoff-frontier-hard.001/task.yaml",
+      "task_file": "dataset/archive/web-v1/tasks/web/warehouse-cutoff-frontier-hard.001/task.yaml",
       "task_id": "web.warehouse-cutoff-frontier-hard.001",
       "ui_surface": "diagnostic_json_card"
     },
     {
-      "app_file": "dataset/collections/realistic-v2/tasks/web/saleor-export-current-search.001/repo/index.html",
+      "app_file": "dataset/archive/web-v2/tasks/web/saleor-export-current-search.001/repo/index.html",
       "bug_mechanism": "cross_view_state_consistency",
       "classification": "frontier_cua_fail",
       "code_only": "fail",
@@ -1882,12 +1882,12 @@
       "source_type": "behavior_derived_clean_room",
       "statistical_role": "frontier_cua_fail",
       "task_digest": "87ce8ba24c90ee017ff5d12a77bd14d8941fdaec4de23d28d075d091916ddd86",
-      "task_file": "dataset/collections/realistic-v2/tasks/web/saleor-export-current-search.001/task.yaml",
+      "task_file": "dataset/archive/web-v2/tasks/web/saleor-export-current-search.001/task.yaml",
       "task_id": "web.saleor-export-current-search.001",
       "ui_surface": "filtered_product_table_export_modal"
     },
     {
-      "app_file": "dataset/collections/realistic-v2/tasks/web/react-spectrum-combobox-selection.001/repo/index.html",
+      "app_file": "dataset/archive/web-v2/tasks/web/react-spectrum-combobox-selection.001/repo/index.html",
       "bug_mechanism": "interaction_state_continuity",
       "classification": "frontier_cua_fail",
       "code_only": "fail",
@@ -1927,12 +1927,12 @@
       "source_type": "behavior_derived_clean_room",
       "statistical_role": "frontier_cua_fail",
       "task_digest": "797051c3365ce006ae3858bba4f5c3e643b369eaa5d5347c8424e9a322a8bf48",
-      "task_file": "dataset/collections/realistic-v2/tasks/web/react-spectrum-combobox-selection.001/task.yaml",
+      "task_file": "dataset/archive/web-v2/tasks/web/react-spectrum-combobox-selection.001/task.yaml",
       "task_id": "web.react-spectrum-combobox-selection.001",
       "ui_surface": "multi_select_combobox"
     },
     {
-      "app_file": "dataset/collections/realistic-v2/tasks/web/vue-sticky-table-columns.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.vue-sticky-table-columns.001/repo/index.html",
       "bug_mechanism": "responsive_layout_reconciliation",
       "classification": "frontier_cua_fail",
       "code_only": "fail",
@@ -1968,12 +1968,12 @@
       "source_type": "behavior_derived_clean_room",
       "statistical_role": "frontier_cua_fail",
       "task_digest": "7e1d298879095e8a57309acc96f31638f38b267cd42a700c273bcffd1c84f0fd",
-      "task_file": "dataset/collections/realistic-v2/tasks/web/vue-sticky-table-columns.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.vue-sticky-table-columns.001/task.yaml",
       "task_id": "web.vue-sticky-table-columns.001",
       "ui_surface": "horizontally_scrolled_sticky_table"
     },
     {
-      "app_file": "dataset/collections/realistic-v2/tasks/web/maplibre-terrain-pinch-anchor.001/repo/runtime-task/index.html",
+      "app_file": "dataset/web/tasks/web.maplibre-terrain-pinch-anchor.001/repo/runtime-task/index.html",
       "bug_mechanism": "transformed_coordinate_mapping",
       "classification": "frontier_cua_fail",
       "code_only": "fail",
@@ -2009,12 +2009,12 @@
       "source_type": "real_repo",
       "statistical_role": "frontier_cua_fail",
       "task_digest": "3cccf6b91720c7dbadedabdc95f540b03ff49ba890a031821c109bba96d76ce5",
-      "task_file": "dataset/collections/realistic-v2/tasks/web/maplibre-terrain-pinch-anchor.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.maplibre-terrain-pinch-anchor.001/task.yaml",
       "task_id": "web.maplibre-terrain-pinch-anchor.001",
       "ui_surface": "pitched_terrain_map"
     },
     {
-      "app_file": "dataset/collections/realistic-v2/tasks/web/handsontable-menu-scroll-anchor.001/repo/runtime-task/index.html",
+      "app_file": "dataset/web/tasks/web.handsontable-menu-scroll-anchor.001/repo/runtime-task/index.html",
       "bug_mechanism": "overlay_anchor_lifecycle",
       "classification": "frontier_cua_fail",
       "code_only": "fail",
@@ -2050,12 +2050,12 @@
       "source_type": "real_repo",
       "statistical_role": "frontier_cua_fail",
       "task_digest": "0bf42c85c1b141a590031a3f81926d7ca19c1348ed63a1feb3ca45328a80f0ff",
-      "task_file": "dataset/collections/realistic-v2/tasks/web/handsontable-menu-scroll-anchor.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.handsontable-menu-scroll-anchor.001/task.yaml",
       "task_id": "web.handsontable-menu-scroll-anchor.001",
       "ui_surface": "virtualized_grid_context_menu"
     },
     {
-      "app_file": "dataset/collections/realistic-v2/tasks/web/responsive-masonry-overlap.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.responsive-masonry-overlap.001/repo/index.html",
       "bug_mechanism": "responsive_layout_reconciliation",
       "classification": "frontier_cua_fail",
       "code_only": "fail",
@@ -2091,12 +2091,12 @@
       "source_type": "synthetic",
       "statistical_role": "frontier_cua_fail",
       "task_digest": "86f42127fa1f3f2294579a1b8ed6c234d4afbf88ecc78ea0655bda04f8bf094a",
-      "task_file": "dataset/collections/realistic-v2/tasks/web/responsive-masonry-overlap.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.responsive-masonry-overlap.001/task.yaml",
       "task_id": "web.responsive-masonry-overlap.001",
       "ui_surface": "responsive_masonry_dashboard"
     },
     {
-      "app_file": "dataset/collections/realistic-v2/tasks/web/saleor-export-current-search.lower-1.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.saleor-export-current-search.lower-1.001/repo/index.html",
       "bug_mechanism": "cross_view_state_consistency",
       "classification": "transition_upper_anchor",
       "code_only": "fail",
@@ -2133,12 +2133,12 @@
       "source_type": "behavior_derived_clean_room",
       "statistical_role": "upper",
       "task_digest": "97a103e52d7601d4b2a7f4caa0eb13aafbedd98cdbcc8d1583d89d1ca2ead359",
-      "task_file": "dataset/collections/realistic-v2/tasks/web/saleor-export-current-search.lower-1.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.saleor-export-current-search.lower-1.001/task.yaml",
       "task_id": "web.saleor-export-current-search.lower-1.001",
       "ui_surface": "filtered_product_table_export_modal"
     },
     {
-      "app_file": "dataset/collections/realistic-v2/tasks/web/saleor-export-current-search.lower-2.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.saleor-export-current-search.lower-2.001/repo/index.html",
       "bug_mechanism": "cross_view_state_consistency",
       "classification": "capability_necessary_lower_anchor",
       "code_only": "fail",
@@ -2175,12 +2175,12 @@
       "source_type": "behavior_derived_clean_room",
       "statistical_role": "lower",
       "task_digest": "2a4784d529bc13253db2a4341f8bdb26ccc57387b55542daea132aad9393eabe",
-      "task_file": "dataset/collections/realistic-v2/tasks/web/saleor-export-current-search.lower-2.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.saleor-export-current-search.lower-2.001/task.yaml",
       "task_id": "web.saleor-export-current-search.lower-2.001",
       "ui_surface": "filtered_product_table_export_modal"
     },
     {
-      "app_file": "dataset/collections/realistic-v2/tasks/web/react-spectrum-combobox-selection.lower-1.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.react-spectrum-combobox-selection.lower-1.001/repo/index.html",
       "bug_mechanism": "interaction_state_continuity",
       "classification": "transition_upper_anchor",
       "code_only": "fail",
@@ -2217,12 +2217,12 @@
       "source_type": "behavior_derived_clean_room",
       "statistical_role": "upper",
       "task_digest": "4071c11c34321943cb194eac447be39e5ee90cc93781f9273a8104fd9c464895",
-      "task_file": "dataset/collections/realistic-v2/tasks/web/react-spectrum-combobox-selection.lower-1.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.react-spectrum-combobox-selection.lower-1.001/task.yaml",
       "task_id": "web.react-spectrum-combobox-selection.lower-1.001",
       "ui_surface": "multi_select_combobox"
     },
     {
-      "app_file": "dataset/collections/realistic-v2/tasks/web/react-spectrum-combobox-selection.lower-2.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.react-spectrum-combobox-selection.lower-2.001/repo/index.html",
       "bug_mechanism": "interaction_state_continuity",
       "classification": "capability_necessary_lower_anchor",
       "code_only": "fail",
@@ -2259,12 +2259,12 @@
       "source_type": "behavior_derived_clean_room",
       "statistical_role": "lower",
       "task_digest": "df13c93716ec6fb911edb9615961f57a046fea0e7e113c4414d1a4b30b7187ad",
-      "task_file": "dataset/collections/realistic-v2/tasks/web/react-spectrum-combobox-selection.lower-2.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.react-spectrum-combobox-selection.lower-2.001/task.yaml",
       "task_id": "web.react-spectrum-combobox-selection.lower-2.001",
       "ui_surface": "multi_select_combobox"
     },
     {
-      "app_file": "dataset/collections/realistic-v2/tasks/web/vue-sticky-table-columns.lower-1.001/repo/index.html",
+      "app_file": "dataset/web/tasks/web.vue-sticky-table-columns.lower-1.001/repo/index.html",
       "bug_mechanism": "responsive_layout_reconciliation",
       "classification": "capability_necessary_lower_anchor",
       "code_only": "fail",
@@ -2301,12 +2301,12 @@
       "source_type": "behavior_derived_clean_room",
       "statistical_role": "lower",
       "task_digest": "8657769cf7028bbc85fd94e938dea741dd2868c86d74e2cb4ba9663c151a0f8a",
-      "task_file": "dataset/collections/realistic-v2/tasks/web/vue-sticky-table-columns.lower-1.001/task.yaml",
+      "task_file": "dataset/web/tasks/web.vue-sticky-table-columns.lower-1.001/task.yaml",
       "task_id": "web.vue-sticky-table-columns.lower-1.001",
       "ui_surface": "horizontally_scrolled_sticky_table"
     },
     {
-      "app_file": "dataset/collections/frontier-v3/tasks/web/v3.recharts-responsive-pie.001/repo/index.html",
+      "app_file": "dataset/web/tasks/v3.recharts-responsive-pie.001/repo/index.html",
       "bug_mechanism": "measured_dimension_timing_radius_calculation",
       "classification": "capability_necessary_solved",
       "code_only": "fail",
@@ -2342,12 +2342,12 @@
       "source_type": "adapted_real_repo",
       "statistical_role": "lower_anchor",
       "task_digest": "c38d72289a2a46fab5a4f1e3d61dcc2e93671ab63f82d5d45e414f0139ea7ebf",
-      "task_file": "dataset/collections/frontier-v3/tasks/web/v3.recharts-responsive-pie.001/task.yaml",
+      "task_file": "dataset/web/tasks/v3.recharts-responsive-pie.001/task.yaml",
       "task_id": "v3.recharts-responsive-pie.001",
       "ui_surface": "responsive_chart_container"
     },
     {
-      "app_file": "dataset/collections/frontier-v3/tasks/web/v3.quill-paste-scroll-roundtrip.002/repo/index.html",
+      "app_file": "dataset/web/tasks/v3.quill-paste-scroll-roundtrip.002/repo/index.html",
       "bug_mechanism": "paste_pipeline_scroll_anchor_loss",
       "classification": "capability_necessary_solved",
       "code_only": "fail",
@@ -2383,12 +2383,12 @@
       "source_type": "adapted_real_repo",
       "statistical_role": "lower_anchor",
       "task_digest": "d7d3f7bf3c536f9895f6e9a65a5249bc785ea85322071045abcd3ab6e151b1e8",
-      "task_file": "dataset/collections/frontier-v3/tasks/web/v3.quill-paste-scroll-roundtrip.002/task.yaml",
+      "task_file": "dataset/web/tasks/v3.quill-paste-scroll-roundtrip.002/task.yaml",
       "task_id": "v3.quill-paste-scroll-roundtrip.002",
       "ui_surface": "scrollable_contenteditable_document"
     },
     {
-      "app_file": "dataset/collections/frontier-v3/tasks/web/v3.tanstack-window-scroll-end.002/repo/index.html",
+      "app_file": "dataset/web/tasks/v3.tanstack-window-scroll-end.002/repo/index.html",
       "bug_mechanism": "measured_total_size_vs_overlay_mismatch",
       "classification": "capability_necessary_lower_anchor",
       "code_only": "fail",
@@ -2424,12 +2424,12 @@
       "source_type": "behavior_derived_clean_room",
       "statistical_role": "lower_anchor",
       "task_digest": "39259ab6b633359ee167cba42b5382882e5703e9553bb83573c22ca2d681bf9c",
-      "task_file": "dataset/collections/frontier-v3/tasks/web/v3.tanstack-window-scroll-end.002/task.yaml",
+      "task_file": "dataset/web/tasks/v3.tanstack-window-scroll-end.002/task.yaml",
       "task_id": "v3.tanstack-window-scroll-end.002",
       "ui_surface": "window_scrolling_virtualized_list"
     },
     {
-      "app_file": "dataset/collections/frontier-v3/tasks/web/v3.react-spectrum-grid-tab-jump.003/repo/index.html",
+      "app_file": "dataset/web/tasks/v3.react-spectrum-grid-tab-jump.003/repo/index.html",
       "bug_mechanism": "stale_layout_map_focus_resolution",
       "classification": "capability_necessary_lower_anchor",
       "code_only": "fail",
@@ -2465,12 +2465,12 @@
       "source_type": "adapted_real_repo",
       "statistical_role": "lower_anchor",
       "task_digest": "93630822caabc2b8979359073b6e5fcdb340c09dd860d6f1047f72255193116b",
-      "task_file": "dataset/collections/frontier-v3/tasks/web/v3.react-spectrum-grid-tab-jump.003/task.yaml",
+      "task_file": "dataset/web/tasks/v3.react-spectrum-grid-tab-jump.003/task.yaml",
       "task_id": "v3.react-spectrum-grid-tab-jump.003",
       "ui_surface": "tabbed_data_grid"
     },
     {
-      "app_file": "dataset/collections/frontier-v3/tasks/web/v3.ag-grid-master-detail-sticky.003/repo/index.html",
+      "app_file": "dataset/web/tasks/v3.ag-grid-master-detail-sticky.003/repo/index.html",
       "bug_mechanism": "sticky_detail_boundary_ownership",
       "classification": "capability_necessary_lower_anchor",
       "code_only": "fail",
@@ -2506,12 +2506,12 @@
       "source_type": "adapted_real_repo",
       "statistical_role": "lower_anchor",
       "task_digest": "224b26a493ba9c3abc5e5267a3ac3e54d5a3e9728c7e6ef5292fb0bd838b2934",
-      "task_file": "dataset/collections/frontier-v3/tasks/web/v3.ag-grid-master-detail-sticky.003/task.yaml",
+      "task_file": "dataset/web/tasks/v3.ag-grid-master-detail-sticky.003/task.yaml",
       "task_id": "v3.ag-grid-master-detail-sticky.003",
       "ui_surface": "scrollable_master_detail_grid"
     },
     {
-      "app_file": "dataset/collections/frontier-v3/tasks/web/v3.jupyterlab-shiftclick-cellselect.001/repo/index.html",
+      "app_file": "dataset/web/tasks/v3.jupyterlab-shiftclick-cellselect.001/repo/index.html",
       "bug_mechanism": "overbroad_browser_selection_guard",
       "classification": "capability_necessary_lower_anchor",
       "code_only": "fail",
@@ -2547,12 +2547,12 @@
       "source_type": "behavior_derived_clean_room",
       "statistical_role": "lower_anchor",
       "task_digest": "d24c5813a1de014e0def0f4d18c0fc21c3c27cccb1f2b5aae173c4bdda3d5eae",
-      "task_file": "dataset/collections/frontier-v3/tasks/web/v3.jupyterlab-shiftclick-cellselect.001/task.yaml",
+      "task_file": "dataset/web/tasks/v3.jupyterlab-shiftclick-cellselect.001/task.yaml",
       "task_id": "v3.jupyterlab-shiftclick-cellselect.001",
       "ui_surface": "multi_cell_notebook_selection"
     },
     {
-      "app_file": "dataset/collections/frontier-v3/tasks/web/v3.moveable-svg-fillbox-origin.001/repo/index.html",
+      "app_file": "dataset/web/tasks/v3.moveable-svg-fillbox-origin.001/repo/index.html",
       "bug_mechanism": "svg_origin_ignores_transform_box",
       "classification": "capability_necessary_lower_anchor",
       "code_only": "fail",
@@ -2588,12 +2588,12 @@
       "source_type": "vendored_broken_distribution",
       "statistical_role": "lower_anchor",
       "task_digest": "583e5724781c00d36fe31cf68e3bde4b88a98aa6dc25f5d1d30368b55ac8ec5d",
-      "task_file": "dataset/collections/frontier-v3/tasks/web/v3.moveable-svg-fillbox-origin.001/task.yaml",
+      "task_file": "dataset/web/tasks/v3.moveable-svg-fillbox-origin.001/task.yaml",
       "task_id": "v3.moveable-svg-fillbox-origin.001",
       "ui_surface": "svg_selection_overlay"
     },
     {
-      "app_file": "dataset/collections/frontier-v3/tasks/web/v3.visx-parentsize-flex-growth.001/repo/index.html",
+      "app_file": "dataset/web/tasks/v3.visx-parentsize-flex-growth.001/repo/index.html",
       "bug_mechanism": "resizeobserver_feedback_unbounded_growth",
       "classification": "capability_necessary_lower_anchor",
       "code_only": "fail",
@@ -2629,12 +2629,12 @@
       "source_type": "adapted_real_repo",
       "statistical_role": "lower_anchor",
       "task_digest": "3a585d46091663cce62ef6d84f3556b3c11a150a6093fac1e7a8f014dcede9c0",
-      "task_file": "dataset/collections/frontier-v3/tasks/web/v3.visx-parentsize-flex-growth.001/task.yaml",
+      "task_file": "dataset/web/tasks/v3.visx-parentsize-flex-growth.001/task.yaml",
       "task_id": "v3.visx-parentsize-flex-growth.001",
       "ui_surface": "responsive_chart_card"
     },
     {
-      "app_file": "dataset/collections/frontier-v3/tasks/web/v3.react-datepicker-mask-clear-blur.001/repo/index.html",
+      "app_file": "dataset/web/tasks/v3.react-datepicker-mask-clear-blur.001/repo/index.html",
       "bug_mechanism": "cleared_mask_reverts_prior_selection",
       "classification": "capability_necessary_lower_anchor",
       "code_only": "fail",
@@ -2670,12 +2670,12 @@
       "source_type": "behavior_derived_clean_room",
       "statistical_role": "lower_anchor",
       "task_digest": "410f51cb31c85b28baf5978b25d1640301180e55cbd7e511d6e2639da591bfb5",
-      "task_file": "dataset/collections/frontier-v3/tasks/web/v3.react-datepicker-mask-clear-blur.001/task.yaml",
+      "task_file": "dataset/web/tasks/v3.react-datepicker-mask-clear-blur.001/task.yaml",
       "task_id": "v3.react-datepicker-mask-clear-blur.001",
       "ui_surface": "masked_date_form_field"
     },
     {
-      "app_file": "dataset/collections/frontier-v3/tasks/web/v3.echarts-linked-datazoom-toolbar.001/repo/index.html",
+      "app_file": "dataset/web/tasks/v3.echarts-linked-datazoom-toolbar.001/repo/index.html",
       "bug_mechanism": "cross_chart_zoom_range_mismapping",
       "classification": "model_capability_boundary",
       "code_only": "fail",
@@ -2711,12 +2711,12 @@
       "source_type": "adapted_real_repo",
       "statistical_role": "upper_anchor",
       "task_digest": "fa2a477947db12f66bfd7cae1813dead8054879a6a7d4609cf5359ceab21c348",
-      "task_file": "dataset/collections/frontier-v3/tasks/web/v3.echarts-linked-datazoom-toolbar.001/task.yaml",
+      "task_file": "dataset/web/tasks/v3.echarts-linked-datazoom-toolbar.001/task.yaml",
       "task_id": "v3.echarts-linked-datazoom-toolbar.001",
       "ui_surface": "linked_multi_chart_dashboard"
     },
     {
-      "app_file": "dataset/collections/frontier-v3/tasks/web/v3.echarts-asymmetric-zoom-lock.001/repo/index.html",
+      "app_file": "dataset/web/tasks/v3.echarts-asymmetric-zoom-lock.001/repo/index.html",
       "bug_mechanism": "independent_datazoom_axes_coupled",
       "classification": "model_capability_boundary",
       "code_only": "fail",
@@ -2752,12 +2752,12 @@
       "source_type": "adapted_real_repo",
       "statistical_role": "upper_anchor",
       "task_digest": "c68041fdf34fe1ce5f518a088cbaecfebd6b4366d93d25add8ef85d2cb6caf1c",
-      "task_file": "dataset/collections/frontier-v3/tasks/web/v3.echarts-asymmetric-zoom-lock.001/task.yaml",
+      "task_file": "dataset/web/tasks/v3.echarts-asymmetric-zoom-lock.001/task.yaml",
       "task_id": "v3.echarts-asymmetric-zoom-lock.001",
       "ui_surface": "asymmetric_datazoom_chart"
     },
     {
-      "app_file": "dataset/collections/frontier-v3/tasks/web/v3.tiptap-keyboard-focus-position.002/repo/index.html",
+      "app_file": "dataset/web/tasks/v3.tiptap-keyboard-focus-position.002/repo/index.html",
       "bug_mechanism": "bookmark_anchor_resolves_wrong_document_position",
       "classification": "model_capability_boundary",
       "code_only": "fail",
@@ -2793,12 +2793,12 @@
       "source_type": "adapted_real_repo",
       "statistical_role": "upper_anchor",
       "task_digest": "1934913ac65cdc9145955ff52ee0f8836a042fc0b41f846b7f7fcd2b83c7da7d",
-      "task_file": "dataset/collections/frontier-v3/tasks/web/v3.tiptap-keyboard-focus-position.002/task.yaml",
+      "task_file": "dataset/web/tasks/v3.tiptap-keyboard-focus-position.002/task.yaml",
       "task_id": "v3.tiptap-keyboard-focus-position.002",
       "ui_surface": "keyboard_focused_contenteditable_document"
     },
     {
-      "app_file": "dataset/collections/frontier-v3/tasks/web/v3.slate-softbreak-scroll.002/repo/index.html",
+      "app_file": "dataset/web/tasks/v3.slate-softbreak-scroll.002/repo/index.html",
       "bug_mechanism": "caret_measurement_before_render",
       "classification": "model_capability_boundary",
       "code_only": "fail",
@@ -2834,12 +2834,12 @@
       "source_type": "adapted_real_repo",
       "statistical_role": "upper_anchor",
       "task_digest": "c113a11b6723931566269ca6ba082ca49d2fd60dcfbec383d155a73064cab84f",
-      "task_file": "dataset/collections/frontier-v3/tasks/web/v3.slate-softbreak-scroll.002/task.yaml",
+      "task_file": "dataset/web/tasks/v3.slate-softbreak-scroll.002/task.yaml",
       "task_id": "v3.slate-softbreak-scroll.002",
       "ui_surface": "scrollable_softbreak_editor"
     },
     {
-      "app_file": "dataset/collections/frontier-v3/tasks/web/v3.fabric-viewport-rotation-controls.001/repo/index.html",
+      "app_file": "dataset/web/tasks/v3.fabric-viewport-rotation-controls.001/repo/index.html",
       "bug_mechanism": "viewport_rotation_geometry_inconsistency",
       "classification": "model_capability_boundary",
       "code_only": "fail",
@@ -2875,7 +2875,7 @@
       "source_type": "vendored_real_browser_build",
       "statistical_role": "upper_anchor",
       "task_digest": "76e857eadb0ea1b1c29f723934a76fde6312a9942e3a6b7fddf00c198b83807d",
-      "task_file": "dataset/collections/frontier-v3/tasks/web/v3.fabric-viewport-rotation-controls.001/task.yaml",
+      "task_file": "dataset/web/tasks/v3.fabric-viewport-rotation-controls.001/task.yaml",
       "task_id": "v3.fabric-viewport-rotation-controls.001",
       "ui_surface": "rotated_canvas_selection_controls"
     },
@@ -2913,7 +2913,7 @@
       "source_type": "adapted",
       "statistical_role": "upper_anchor",
       "task_digest": "c157f5fb19ec1a6d7c2158be651efcb9a9856649cafaebb9c6ab6c57d74c8ea0",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-153/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-153/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-153",
       "title": "Place and persist a launcher widget on the currently visible page",
       "ui_surface": "mobile_simulator"
@@ -2952,7 +2952,7 @@
       "source_type": "adapted",
       "statistical_role": "lower_anchor",
       "task_digest": "bf99f74793820e35b45c1fd827904a97ce32430de87b1755d933e184df6a6a6f",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-161/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-161/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-161",
       "title": "Keep pinned notes ahead of every unpinned note",
       "ui_surface": "mobile_simulator"
@@ -2991,7 +2991,7 @@
       "source_type": "adapted",
       "statistical_role": "lower_anchor",
       "task_digest": "6271d44e26de7791c27f8beca139db85e57013d96c1b0261f9be8c525947d840",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-163/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-163/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-163",
       "title": "Keep Reddit replies attached to the selected message thread",
       "ui_surface": "mobile_simulator"
@@ -3030,7 +3030,7 @@
       "source_type": "adapted",
       "statistical_role": "lower_anchor",
       "task_digest": "404158474375ab7e2de91e9bb6940c7be2278421b7e8c769bf1899e843ff86b7",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-165/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-165/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-165",
       "title": "Render every event in the selected Calendar day",
       "ui_surface": "mobile_simulator"
@@ -3069,7 +3069,7 @@
       "source_type": "adapted",
       "statistical_role": "lower_anchor",
       "task_digest": "89863810469b7e8fba24c3ab4543d1ee1d5145c982a817fe65ab72c7613129b8",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-191/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-191/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-191",
       "title": "Restore canonical pinned-section ordering",
       "ui_surface": "mobile_simulator"
@@ -3108,7 +3108,7 @@
       "source_type": "adapted",
       "statistical_role": "lower_anchor",
       "task_digest": "1ff9e4d452dc220e0c75fb9d1379e9f9868a5ecf0e84bbc70a1cbc165f698354",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-193/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-193/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-193",
       "title": "Preserve the pinned section after pinning a note",
       "ui_surface": "mobile_simulator"
@@ -3147,7 +3147,7 @@
       "source_type": "adapted",
       "statistical_role": "lower_anchor",
       "task_digest": "4fb758b7184f3ed498d3a3390329ffcfd6667eb2e2f73ce610d51b4a1149ff4d",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-194/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-194/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-194",
       "title": "Preserve deterministic ordering when a note is unpinned",
       "ui_surface": "mobile_simulator"
@@ -3186,7 +3186,7 @@
       "source_type": "adapted",
       "statistical_role": "upper_anchor",
       "task_digest": "166b770a965473a45b84fe53730c93d5bc0261c18942cf750e540d99b2f6f53f",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-196/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-196/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-196",
       "title": "Keep duplicate Reddit root-message occurrences distinct end to end",
       "ui_surface": "mobile_simulator"
@@ -3225,7 +3225,7 @@
       "source_type": "adapted",
       "statistical_role": "lower_anchor",
       "task_digest": "cfbb15a25d0e0993f06108c1fae9cbd6c23cf17684fa89c5f32c92317b7657be",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-197/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-197/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-197",
       "title": "Keep Reddit thread actions bound to the exact imported message occurrence",
       "ui_surface": "mobile_simulator"
@@ -3264,7 +3264,7 @@
       "source_type": "adapted",
       "statistical_role": "lower_anchor",
       "task_digest": "25c93152df5b193406a5c24ab6011ddc9c3ce4428a119aac112c0620da186995",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-198/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-198/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-198",
       "title": "Keep a reply attached to the exact Reddit message thread",
       "ui_surface": "mobile_simulator"
@@ -3303,7 +3303,7 @@
       "source_type": "adapted",
       "statistical_role": "upper_anchor",
       "task_digest": "9dc86b34204dfffb714978a67bf6bb4ae54be1f57717559ed2eee9cf52f581c5",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-200/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-200/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-200",
       "title": "Keep month-grid event markers on their occupied date cells",
       "ui_surface": "mobile_simulator"
@@ -3342,7 +3342,7 @@
       "source_type": "adapted",
       "statistical_role": "upper_anchor",
       "task_digest": "38b2b8cfef606641b9461be00e53d3a2fd2cdf307b4232899914b1db6d98c1e7",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-202/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-202/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-202",
       "title": "Preserve Calendar mode-conversion round trips",
       "ui_surface": "mobile_simulator"
@@ -3381,7 +3381,7 @@
       "source_type": "adapted",
       "statistical_role": "upper_anchor",
       "task_digest": "fc47e678ee7725e4491aed42b2e3d155c5f0dbccf5c11f6144d16849526b80b8",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-203/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-203/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-203",
       "title": "Keep the Notes sections stable when unpinning a middle item",
       "ui_surface": "mobile_simulator"
@@ -3420,7 +3420,7 @@
       "source_type": "adapted",
       "statistical_role": "lower_anchor",
       "task_digest": "0edd51ab31242ead37d8865d4c7c3a383fb5348a8cf8a153a5d61a2bd342d726",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-205/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-205/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-205",
       "title": "Preserve Reddit comment retention identity",
       "ui_surface": "mobile_simulator"
@@ -3459,7 +3459,7 @@
       "source_type": "adapted",
       "statistical_role": "upper_anchor",
       "task_digest": "d76ccc3534249b6a5562a1816fba2302480bbf88671463b9799d8314a73ada47",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-209/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-209/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-209",
       "title": "Restore equal-time pinned notes in their original stable order",
       "ui_surface": "mobile_simulator"
@@ -3498,7 +3498,7 @@
       "source_type": "adapted",
       "statistical_role": "lower_anchor",
       "task_digest": "a2a2f90fac7c7ef7ed58fd81a4d457919b85dcf44deead5ce8be4524864562da",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-210/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-210/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-210",
       "title": "Reconcile duplicate SMS conversation identities",
       "ui_surface": "mobile_simulator"
@@ -3537,7 +3537,7 @@
       "source_type": "adapted",
       "statistical_role": "lower_anchor",
       "task_digest": "e7762e520315a8daea07b9f52de905928916026dea3c93f9a4eff5314f920b03",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-211/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-211/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-211",
       "title": "Attach two replies to their exact Reddit source-message threads",
       "ui_surface": "mobile_simulator"
@@ -3576,7 +3576,7 @@
       "source_type": "adapted",
       "statistical_role": "upper_anchor",
       "task_digest": "d01754a5c5f9ec7a222bf9a85f2da1af3568590cbc0d010f7d792d4d4df26936",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-220/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-220/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-220",
       "title": "Restore a three-way equal-time pinned group in original stable order",
       "ui_surface": "mobile_simulator"
@@ -3615,7 +3615,7 @@
       "source_type": "adapted",
       "statistical_role": "upper_anchor",
       "task_digest": "62639a76209ef0f33648343c246d355693c1a3ccdbca09f870e1e8a35d1f80d3",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-229/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-229/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-229",
       "title": "Rebind the exact Alipay bank card when suffixes collide",
       "ui_surface": "mobile_simulator"
@@ -3654,7 +3654,7 @@
       "source_type": "adapted",
       "statistical_role": "upper_anchor",
       "task_digest": "8a214349c966c42c88f5562ab84f36ba329064a9638d1ecdc0845392fb7788f1",
-      "task_file": "new_artifacts/cua-swe-mobile-cua-20-ready/mobile-tasks/audit-mobile-230/task-artifacts/PUBLIC_TASK.json",
+      "task_file": "dataset/mobile/tasks/audit-mobile-230/task-artifacts/PUBLIC_TASK.json",
       "task_id": "mobile.audit-mobile-230",
       "title": "Keep passenger seat preferences bound to passenger identity",
       "ui_surface": "mobile_simulator"
