@@ -1,0 +1,301 @@
+{
+  "coverage": "retained_codex_events_partial",
+  "events": [
+    {
+      "detail": "I\u2019ll trace the restart and keyboard-input paths, reproduce the timing issue from source and the running UI if needed, then make a narrow fix and validate it with the existing build/tests. I\u2019ll also record the required rollout notes.",
+      "kind": "agent_message",
+      "sequence": 1,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "index.html\nserve.py\ngame_api.js\nRIGHTS.md\nUPSTREAM.md\nstyle/main.css\njs/animframe_polyfill.js\njs/tile.js\njs/game_manager.js\njs/grid.js\njs/html_actuator.js\njs/application.js\njs/keyboard_input_manager.js\njs/hammer.min.js",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 2,
+      "status": "completed",
+      "title": "/bin/bash -lc \"pwd && rg --files -g '\"'!node_modules'\"' | sed -n '1,160p'\"",
+      "truncated": false
+    },
+    {
+      "detail": "<artifact-path>",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 3,
+      "status": "completed",
+      "title": "/bin/bash -lc 'printenv CUA_SWE_AGENT_ROLLOUT_DIR'",
+      "truncated": false
+    },
+    {
+      "detail": "./index.html:21:    function makeRng(seed) {\n./index.html:22:        return mulberry32(seed >>> 0);\n./index.html:51:    function normalizeSeed(seed) {\n./index.html:52:        var numeric = Number(seed);\n./index.html:59:    function applySeed(seed) {\n./index.html:60:        currentSeed = normalizeSeed(seed);\n./index.html:119:        var wrapped = function(seed, options) {\n./index.html:120:            if (seed === undefined || seed === null || seed === '') {\n./index.html:121:                seed = String(currentSeed);\n./index.html:123:            return fn.call(this, seed, options);\n./index.html:150:    hookSeedrandom(Math, 'seedrandom');\n./index.html:151:    hookSeedrandom(window, 'seedrandom');\n./index.html:153:    window.__setDeterministicSeed = function(seed) {\n./index.html:154:        return applySeed(seed);\n./index.html:159:    window.__resetRandom = function(seed) {\n./index.html:160:        if (seed !== undefined && seed !== null && seed !== '') {\n./index.html:161:            return applySeed(seed);\n./index.html:201:                        <a class=\"retry-button\">Try again</a>\n./game_api.js:8:    supports_seed: true,\n./game_api.js:19:    seed: DEFAULT_SEED,\n./game_api.js:50:      const seed = intOrNull(window.__getDeterministicSeed());\n./game_api.js:51:      if (seed !== null) return seed >>> 0;\n./game_api.js:59:      seed: normalizeSeed(opts.seed),\n./game_api.js:135:  function restartGame() {\n./game_api.js:140:    if (manager && typeof manager.restart === 'function') {\n./game_api.js:141:      manager.restart();\n./game_api.js:165:  function applySeed(seed) {\n./game_api.js:167:      const applied = intOrNull(window.__setDeterministicSeed(seed));\n./game_api.js:171:      const applied = intOrNull(window.__resetRandom(seed));\n./game_api.js:181:    let appliedSeed = acc\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 4,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"restart|Try again|keydown|keyup|Space|Game API|seed|keepPlaying|move\\\\(\\\" -g '\"'!node_modules'\"' .\"",
+      "truncated": true
+    },
+    {
+      "detail": "(function () {\n  const GAME_ID = '01_2048';\n  const DEFAULT_SEED = 42;\n\n  let storage = null;\n\n  const capabilities = {\n    supports_seed: true,\n    supports_level_select: false,\n    supports_difficulty: false,\n    supports_inplace_reset: true,\n    supports_reload_reset: false,\n    supports_pause_detection: false,\n    supports_menu_detection: false,\n    provides_actionable_flag: true\n  };\n\n  const session = {\n    seed: DEFAULT_SEED,\n    requestedLevel: null,\n    requestedDifficulty: null,\n    episodeStartMs: Date.now(),\n    episodeCount: 0\n  };\n\n  const runtime = {\n    lastResetMethod: null\n  };\n\n  function getManager() {\n    return window.__gameManager || null;\n  }\n\n  function finiteOrNull(value) {\n    return typeof value === 'number' && Number.isFinite(value) ? value : null;\n  }\n\n  function intOrNull(value) {\n    if (typeof value !== 'number' || !Number.isFinite(value)) return null;\n    return Math.trunc(value);\n  }\n\n  function normalizeSeed(value) {\n    if (typeof value !== 'number' || !Number.isFinite(value)) return null;\n    return value >>> 0;\n  }\n\n  function getCurrentSeed() {\n    if (typeof window.__getDeterministicSeed === 'function') {\n      const seed = intOrNull(window.__getDeterministicSeed());\n      if (seed !== null) return seed >>> 0;\n    }\n    return DEFAULT_SEED;\n  }\n\n  function normalizeOptions(options) {\n    const opts = options || {};\n    return {\n      seed: normalizeSeed(opts.seed),\n      level:\n        opts.level === undefined || opts.level === null\n          ? null\n          : (typeof opts.level === 'number' && Number.isFinite(opts.level))\n            ? Math.trunc(opts.level)\n            : String(opts.level),\n      difficulty:\n        opts.difficulty === undefined || opts.difficulty === null\n          ? null\n          : String(opts.difficulty)\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 5,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,460p' game_api.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "function GameManager(size, InputManager, Actuator) {\n  this.size = size;\n  this.inputManager = new InputManager();\n  this.actuator = new Actuator();\n  this.inputManager.on(\"move\", this.move.bind(this));\n  this.inputManager.on(\"restart\", this.restart.bind(this));\n  this.setup();\n}\n\nGameManager.prototype.restart = function () {\n  this.actuator.restart();\n  this.setup();\n};\n\nGameManager.prototype.setup = function () {\n  this.grid = new Grid(this.size);\n  this.grid.addStartTiles();\n  this.score = 0;\n  this.over = false;\n  this.won = false;\n  this.actuate();\n};\n\nGameManager.prototype.actuate = function () {\n  this.actuator.actuate(this.grid, {\n    score: this.score,\n    over: this.over,\n    won: this.won\n  });\n};\n\nGameManager.prototype.move = function (direction) {\n  var result = this.grid.move(direction);\n  this.score += result.score;\n  if (result.won) {\n    this.won = true;\n  } else if (result.moved) {\n    this.grid.computerMove();\n  }\n  if (!this.grid.movesAvailable()) this.over = true;\n  this.actuate();\n};\nfunction HTMLActuator() {\n  this.tileContainer = document.getElementsByClassName(\"tile-container\")[0];\n  this.scoreContainer = document.getElementsByClassName(\"score-container\")[0];\n  this.messageContainer = document.getElementsByClassName(\"game-message\")[0];\n  this.score = 0;\n}\n\nHTMLActuator.prototype.actuate = function (grid, metadata) {\n  var self = this;\n  window.requestAnimationFrame(function () {\n    self.clearContainer(self.tileContainer);\n    grid.cells.forEach(function (column) {\n      column.forEach(function (tile) {\n        if (tile) {\n          self.addTile(tile);\n        }\n      });\n    });\n    self.updateScore(metadata.score);\n    if (metadata.over) {\n      self.message(false);\n    }\n    if (metadata.won) {\n      self.message(true);\n    }\n  });\n};\n\nHTMLAc\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 6,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,180p' js/keyboard_input_manager.js && sed -n '1,180p' js/game_manager.js && sed -n '1,130p' js/html_actuator.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "<!DOCTYPE html>\n<html>\n    <head>\n<!-- [DETERMINISTIC_RANDOM] -->\n<script>\n// [DETERMINISTIC_RANDOM] Seeded randomness + time for reproducible gameplay\n(function() {\n    'use strict';\n    var DEFAULT_SEED = (42 >>> 0);\n    var currentSeed = DEFAULT_SEED;\n    var GOLDEN_GAMMA = 0x9E3779B9;\n    function mulberry32(s) {\n        return function() {\n            s |= 0; s = s + 0x6D2B79F5 | 0;\n            var t = Math.imul(s ^ s >>> 15, 1 | s);\n            t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;\n            return ((t ^ t >>> 14) >>> 0) / 4294967296;\n        };\n    }\n\n    function makeRng(seed) {\n        return mulberry32(seed >>> 0);\n    }\n\n    var rng = makeRng(currentSeed);\n    var rngCrypto = makeRng(currentSeed ^ GOLDEN_GAMMA);\n\n    var originalRandom = Math.random;\n    Math.random = function() { return rng(); };\n\n    var originalCrypto = window.crypto || window.msCrypto || null;\n    var originalGetRandomValues = originalCrypto && originalCrypto.getRandomValues\n        ? originalCrypto.getRandomValues.bind(originalCrypto)\n        : null;\n    var originalRandomUUID = originalCrypto && originalCrypto.randomUUID\n        ? originalCrypto.randomUUID.bind(originalCrypto)\n        : null;\n\n    function fillRandomBytes(typedArray) {\n        for (var i = 0; i < typedArray.length; i++) {\n            typedArray[i] = (rngCrypto() * 256) | 0;\n        }\n        return typedArray;\n    }\n\n    function toHex(byte) {\n        var hex = byte.toString(16);\n        return hex.length === 1 ? '0' + hex : hex;\n    }\n\n    function normalizeSeed(seed) {\n        var numeric = Number(seed);\n        if (!isFinite(numeric)) {\n            return DEFAULT_SEED;\n        }\n        return (numeric >>> 0);\n    }\n\n    function applySeed(seed) {\n        currentSeed = normalizeSeed(seed);\n        rng = makeR\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 7,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,240p' index.html && sed -n '1,120p' js/application.js && sed -n '1,220p' js/grid.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "total 60\ndrwxr-xr-x 5 ubuntu ubuntu  4096 Sep  1 11:42 .\ndrwx------ 8 ubuntu ubuntu  4096 Sep  1 11:42 ..\ndrwxrwxr-x 8 ubuntu ubuntu  4096 Sep  1 11:42 .git\n-rw-r--r-- 1 ubuntu ubuntu   401 Sep  1 11:28 RIGHTS.md\n-rw-r--r-- 1 ubuntu ubuntu  1012 Sep  1 11:28 UPSTREAM.md\n-rw-r--r-- 1 ubuntu ubuntu 12575 Sep  1 11:28 game_api.js\n-rw-r--r-- 1 ubuntu ubuntu  8399 Sep  1 11:28 index.html\ndrwxr-xr-x 2 ubuntu ubuntu  4096 Sep  1 11:30 js\n-rw-r--r-- 1 ubuntu ubuntu   478 Sep  1 11:28 serve.py\ndrwxr-xr-x 2 ubuntu ubuntu  4096 Sep  1 11:30 style",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 8,
+      "status": "completed",
+      "title": "/bin/bash -lc \"ls -la && (test -f package.json && sed -n '1,200p' package.json || true) && git status --short\"",
+      "truncated": false
+    },
+    {
+      "detail": "The regression is in the shared input lifecycle: a directional key schedules a delayed held-key move, but restart replaces the grid without invalidating that pending callback. The callback then executes against the new seeded board. I\u2019m going to cancel only pre-restart delayed input while keeping normal held-key behavior unchanged during ordinary play.",
+      "kind": "agent_message",
+      "sequence": 9,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: game_manager.js\nupdate: keyboard_input_manager.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "game_manager.js"
+        },
+        {
+          "kind": "update",
+          "path": "keyboard_input_manager.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 10,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "diff --git a/js/game_manager.js b/js/game_manager.js\nindex 803b429..f6e52a7 100644\n--- a/js/game_manager.js\n+++ b/js/game_manager.js\n@@ -8,6 +8,7 @@ function GameManager(size, InputManager, Actuator) {\n }\n \n GameManager.prototype.restart = function () {\n+  this.inputManager.cancelPendingMove();\n   this.actuator.restart();\n   this.setup();\n };\ndiff --git a/js/keyboard_input_manager.js b/js/keyboard_input_manager.js\nindex 74c56bf..53ebe0e 100644\n--- a/js/keyboard_input_manager.js\n+++ b/js/keyboard_input_manager.js\n@@ -16,6 +16,14 @@ KeyboardInputManager.prototype.emit = function (event, data) {\n   if (callbacks) callbacks.forEach(function (callback) { callback(data); });\n };\n \n+KeyboardInputManager.prototype.cancelPendingMove = function () {\n+  this.serial += 1;\n+  if (this.pending !== null) {\n+    window.clearTimeout(this.pending);\n+    this.pending = null;\n+  }\n+};\n+\n KeyboardInputManager.prototype.listen = function () {\n   var self = this;\n   var map = { 38: 0, 39: 1, 40: 2, 37: 3, 75: 0, 76: 1, 74: 2, 72: 3 };\n@@ -45,11 +53,7 @@ KeyboardInputManager.prototype.listen = function () {\n     var direction = map[event.which];\n     if (direction === undefined) return;\n     delete self.down[direction];\n-    self.serial += 1;\n-    if (self.pending !== null) {\n-      window.clearTimeout(self.pending);\n-      self.pending = null;\n-    }\n+    self.cancelPendingMove();\n   });\n \n   document.getElementsByClassName(\"retry-button\")[0]",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 11,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && git diff -- js/keyboard_input_manager.js js/game_manager.js'",
+      "truncated": false
+    },
+    {
+      "detail": "",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 12,
+      "status": "completed",
+      "title": "/bin/bash -lc 'node --check js/keyboard_input_manager.js && node --check js/game_manager.js && node --check game_api.js'",
+      "truncated": false
+    },
+    {
+      "detail": "npm ERR! code ENOENT\nnpm ERR! syscall open\nnpm ERR! path <artifact-path>\nnpm ERR! errno -2\nnpm ERR! enoent ENOENT: no such file or directory, open '<artifact-path>'\nnpm ERR! enoent This is related to npm not being able to find a file.\nnpm ERR! enoent \n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     <artifact-path>",
+      "exit_code": 254,
+      "kind": "command",
+      "sequence": 13,
+      "status": "failed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "The source checks pass. The requested build command cannot run because this retained app has no `package.json`; I\u2019ll note that explicitly. I\u2019m now checking the live app\u2019s restart timing through the permitted browser interface, including held-arrow behavior around Space.",
+      "kind": "agent_message",
+      "sequence": 14,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 15,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/frames/frame-0001.png",
+          "sha256": "0cd06e525ea3acd5b56b4d49e66b5e944d469872b607f12e62af341602a7ad93"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 500, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 16,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/frames/frame-0002.png",
+          "sha256": "def5a8d599ceb0ab6e3b7cefe24d8224ddda70d46ea28f176fa74dc3c9378f4b"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 500, \"kind\": \"key_hold\", \"text\": \"ArrowUp+Space\"}",
+      "kind": "computer_use",
+      "sequence": 17,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/frames/frame-0003.png",
+          "sha256": "630ec1e95bd2d40b7352bf86ade3b5d80280d58f5551ab45ee0d716b2347aaed"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 500, \"kind\": \"key_hold\", \"text\": \"ArrowLeft\"}",
+      "kind": "computer_use",
+      "sequence": 18,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/frames/frame-0004.png",
+          "sha256": "264ad0872976cf37be2d4f2c96ffb3c80a875d759ef7b2a2ae3e1f0812b258b9"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "The live check confirms both sides of the fix: holding Arrow+Space for 500 ms leaves the restarted board at two tiles and score 0, while a normal 500 ms held arrow still performs its delayed repeat and advances the board twice. Since all three restart entry points converge on `GameManager.restart`, the same invalidation covers Space, Try again, and Game API resets/restarts.",
+      "kind": "agent_message",
+      "sequence": 19,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "add: rollout_notes.md",
+      "files": [
+        {
+          "kind": "add",
+          "path": "rollout_notes.md"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 20,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 21,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git status --short && git diff --check'",
+      "truncated": false
+    },
+    {
+      "detail": "# Rollout notes\n\n## Summary\n\nFixed the seeded in-place restart race by invalidating and clearing any delayed\nheld-key movement before `GameManager` replaces the board. This prevents input\nscheduled against the previous board from advancing a newly restarted board,\nwhile retaining the existing delayed repeat behavior for ordinary held\ndirectional keys.\n\nBecause Space, the Try again button, and Game API restart/reset operations all\ncall `GameManager.restart`, the fix applies consistently to every required\nrestart path.\n\n## Source inspected\n\n- `js/keyboard_input_manager.js`\n- `js/game_manager.js`\n- `js/html_actuator.js`\n- `js/grid.js`\n- `js/application.js`\n- `game_api.js`\n- `index.html`\n\n## Source changed\n\n- `js/keyboard_input_manager.js`\n  - Added `cancelPendingMove()` to invalidate the callback serial and clear the\n    outstanding timeout.\n  - Reused the helper from directional keyup handling.\n- `js/game_manager.js`\n  - Calls `inputManager.cancelPendingMove()` before restarting the actuator and\n    creating the new grid.\n\n## Checks run\n\n- `node --check js/keyboard_input_manager.js`\n- `node --check js/game_manager.js`\n- `node --check game_api.js`\n- `git diff --check`\n- Protected-browser check: held `ArrowUp+Space` for 500 ms; the restarted board\n  remained at two tiles with score 0 after the old repeat deadline.\n- Protected-browser check: held `ArrowLeft` for 500 ms during ordinary play;\n  the existing delayed repeat still occurred, resulting in two moves.\n- `npm run build` was attempted as requested, but this workspace has no\n  `package.json`, so npm exited with `ENOENT`.\n\n## Relevant observations\n\n- The delayed move callback is guarded by a serial token, so incrementing the\n  token also protects against a timeout callback that was already queued when\n  restart handling\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 22,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,240p' <artifact-path>\"",
+      "truncated": true
+    },
+    {
+      "detail": "Implemented the restart parity fix.\n\n- Cancels stale delayed held-key moves before every restart.\n- Covers Space, Try again, and Game API restarts.\n- Preserves normal held-key repeat behavior.\n- Syntax and live browser checks passed.\n- `npm run build` was unavailable because the workspace lacks `package.json`.\n- Wrote the required `rollout_notes.md`.",
+      "kind": "agent_message",
+      "sequence": 23,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "\u2713 Inspect project structure and restart/input implementation\n\u2713 Implement focused restart parity fix\n\u2713 Run build and relevant tests/UI checks\n\u2713 Write rollout_notes.md",
+      "kind": "plan",
+      "sequence": 24,
+      "status": "completed",
+      "title": "Agent plan",
+      "truncated": false
+    }
+  ],
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-02",
+  "run_relation": "historical_exact",
+  "status": "available",
+  "summary": {
+    "events": 24,
+    "commands": 12,
+    "file_changes": 2,
+    "computer_use_calls": 4,
+    "agent_messages": 5,
+    "plans": 1,
+    "screenshots": 4,
+    "truncated_events": 5,
+    "unfinished_items": 0
+  },
+  "task_id": "gameqa.2048-seeded-restart-parity.002",
+  "terminal_status": "completed",
+  "usage": {
+    "cache_write_input_tokens": 29088,
+    "cached_input_tokens": 296431,
+    "input_tokens": 329511,
+    "output_tokens": 4005,
+    "reasoning_output_tokens": 1576
+  },
+  "activity_source_kind": "representative_game_bundle",
+  "artifacts": {
+    "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/activity-export.json",
+    "Run provenance": "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/activity-provenance.json",
+    "Agent patch": "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/patch.diff"
+  },
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "4 screenshots matched to their recorded calls."
+    }
+  }
+}

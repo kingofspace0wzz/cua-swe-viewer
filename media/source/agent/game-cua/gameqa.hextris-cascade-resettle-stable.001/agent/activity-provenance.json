@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.hextris-cascade-resettle-stable.001",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-02",
+  "source_description": null,
+  "terminal_status": "completed",
+  "activity_source_kind": "representative_game_bundle",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 7,
+      "commands": 16,
+      "computer_use_calls": 22,
+      "events": 52,
+      "file_changes": 6,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 20,
+    "label": "cua-02",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "passing run with most retained observation frames",
+    "success": true
+  },
+  "frame_mapping": [
+    {
+      "event_sequence": 2,
+      "frame_sequence": 1,
+      "audit_sequence": 2,
+      "timestamp": "2026-09-02T06:22:49.391661+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0001.png",
+      "sha256": "67313379774be3574e37cde72fcb87241f6f2827878e83646e9721e9f96fd82c"
+    },
+    {
+      "event_sequence": 4,
+      "frame_sequence": 2,
+      "audit_sequence": 3,
+      "timestamp": "2026-09-02T06:22:57.256948+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0002.png",
+      "sha256": "ba776c293ac29caca3da35b38922d2e4e9cabe135103aeba271c1bb2837c8edf"
+    },
+    {
+      "event_sequence": 6,
+      "frame_sequence": 3,
+      "audit_sequence": 5,
+      "timestamp": "2026-09-02T06:23:09.728506+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0003.png",
+      "sha256": "cc8f55ad3139a09be95c098f020985644528ed624c360896ba784b82da7efb7d"
+    },
+    {
+      "event_sequence": 19,
+      "frame_sequence": 4,
+      "audit_sequence": 7,
+      "timestamp": "2026-09-02T06:25:01.304427+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0004.png",
+      "sha256": "5c0deeeef48f0ee402a328a3e4b7fd99a77218f6c0361e86afe8db0244750e75"
+    },
+    {
+      "event_sequence": 20,
+      "frame_sequence": 5,
+      "audit_sequence": 8,
+      "timestamp": "2026-09-02T06:25:07.501938+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0005.png",
+      "sha256": "cd1466e6d9d809a512fc339d082d388099aa3074e158ddfb9f04e8bd3384db42"
+    },
+    {
+      "event_sequence": 21,
+      "frame_sequence": 6,
+      "audit_sequence": 9,
+      "timestamp": "2026-09-02T06:25:18.867754+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0006.png",
+      "sha256": "e75a059d6fe26f8e6fe035a426c73d88aac9bf3b988676991a1f4798621c0802"
+    },
+    {
+      "event_sequence": 22,
+      "frame_sequence": 7,
+      "audit_sequence": 10,
+      "timestamp": "2026-09-02T06:25:28.882439+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0007.png",
+      "sha256": "e75a059d6fe26f8e6fe035a426c73d88aac9bf3b988676991a1f4798621c0802"
+    },
+    {
+      "event_sequence": 23,
+      "frame_sequence": 8,
+      "audit_sequence": 11,
+      "timestamp": "2026-09-02T06:25:36.596021+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0008.png",
+      "sha256": "e75a059d6fe26f8e6fe035a426c73d88aac9bf3b988676991a1f4798621c0802"
+    },
+    {
+      "event_sequence": 24,
+      "frame_sequence": 9,
+      "audit_sequence": 12,
+      "timestamp": "2026-09-02T06:25:42.049006+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0009.png",
+      "sha256": "46de3e4f5f0526e0d19f5920b3c75ce442341c93af406e75df0c5c9176ac2e21"
+    },
+    {
+      "event_sequence": 25,
+      "frame_sequence": 10,
+      "audit_sequence": 13,
+      "timestamp": "2026-09-02T06:25:50.384128+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0010.png",
+      "sha256": "a5a122320711bddd97648dc7a020f3c8e0e71c3f15b1e6417bee6042a3dcbe2f"
+    },
+    {
+      "event_sequence": 31,
+      "frame_sequence": 11,
+      "audit_sequence": 14,
+      "timestamp": "2026-09-02T06:26:38.664054+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0011.png",
+      "sha256": "a5a122320711bddd97648dc7a020f3c8e0e71c3f15b1e6417bee6042a3dcbe2f"
+    },
+    {
+      "event_sequence": 33,
+      "frame_sequence": 12,
+      "audit_sequence": 15,
+      "timestamp": "2026-09-02T06:26:53.627952+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0012.png",
+      "sha256": "a5a122320711bddd97648dc7a020f3c8e0e71c3f15b1e6417bee6042a3dcbe2f"
+    },
+    {
+      "event_sequence": 34,
+      "frame_sequence": 13,
+      "audit_sequence": 16,
+      "timestamp": "2026-09-02T06:27:02.463012+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0013.png",
+      "sha256": "a5a122320711bddd97648dc7a020f3c8e0e71c3f15b1e6417bee6042a3dcbe2f"
+    },
+    {
+      "event_sequence": 35,
+      "frame_sequence": 14,
+      "audit_sequence": 17,
+      "timestamp": "2026-09-02T06:27:08.093990+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0014.png",
+      "sha256": "da8eec9fb5fcc4b8461758bd80bd24fbcae76971cfe9b37100f55483d6e2b75b"
+    },
+    {
+      "event_sequence": 36,
+      "frame_sequence": 15,
+      "audit_sequence": 18,
+      "timestamp": "2026-09-02T06:27:17.209419+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0015.png",
+      "sha256": "6e549209cbf64a3ecaa07195926099fa33cfb7c65fb427b4e72809b715b711d8"
+    },
+    {
+      "event_sequence": 38,
+      "frame_sequence": 16,
+      "audit_sequence": 19,
+      "timestamp": "2026-09-02T06:27:33.488776+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0016.png",
+      "sha256": "beb6dc7f18cad742b86a5441d622d25620e9b57870df15d1a58d3aba6dfe80d2"
+    },
+    {
+      "event_sequence": 39,
+      "frame_sequence": 17,
+      "audit_sequence": 20,
+      "timestamp": "2026-09-02T06:27:40.973760+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0017.png",
+      "sha256": "ed3d61cda15632b54de50b408bbff9cf18c0c9cf87ef818c06ba1f3765cbcb0b"
+    },
+    {
+      "event_sequence": 40,
+      "frame_sequence": 18,
+      "audit_sequence": 21,
+      "timestamp": "2026-09-02T06:27:48.408407+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0018.png",
+      "sha256": "6e549209cbf64a3ecaa07195926099fa33cfb7c65fb427b4e72809b715b711d8"
+    },
+    {
+      "event_sequence": 41,
+      "frame_sequence": 19,
+      "audit_sequence": 22,
+      "timestamp": "2026-09-02T06:27:58.457004+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0019.png",
+      "sha256": "a4ef7767e1a857c44a275f6035b5fe2e0e9b13f1dba77e45650d33fbe2b37185"
+    },
+    {
+      "event_sequence": 46,
+      "frame_sequence": 20,
+      "audit_sequence": 23,
+      "timestamp": "2026-09-02T06:29:30.929366+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frames/frame-0020.png",
+      "sha256": "cf383320b0cde77fe537948271187ab1db6491c1fa21e55445776f1a08b7e72c"
+    }
+  ],
+  "image_verification": "Run identity, complete successful action sequence, arguments, timestamps, and audit SHA-256",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 10. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "20 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/activity.json": "c2d1c8013a0c0a8bc187bcafeee1b488c958d3b2262423a427628bc64c0910f9",
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/frame-manifest.json": "7fc2a55bed6a54192fc62cf6f538561585cd942d62efb6131cb17258a972e7b1",
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/trajectory.jsonl": "3c0240c7b8dcd31960ac6cf9d209a41c608acd91f43f8b0cbd447f7cc25a241c",
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/cua-audit.jsonl": "8ac5e4c9242685dd8bfb29252faa9cdff5a2d5fdcf3118a90f61384feede3c87",
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/visual-events.jsonl": "582791e54d1cad75f26c42927ea4949ddaf2a5ee17d9f994d8c002e99d3ff82b",
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/run-result.json": "2c4ebb34d48a6bd3856225ee1a270b8c6caf1ee00fcdb77afb61de2eb2634865",
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/metadata.json": "89f8bd5edb27d6940efaabc2709fcca14ea5ab5ee9d27a4ee8cf9f3c5b64245a",
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/patch.diff": "455e8521eab7203ed0ac5afdc03b090e1627cce1a33fdecd9513cdadd8881cec"
+  },
+  "activity_sha256": "14c632da73b8f577a482b1efbe0252f4b0189909b6b021ee1a47f7578da4ae6b",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

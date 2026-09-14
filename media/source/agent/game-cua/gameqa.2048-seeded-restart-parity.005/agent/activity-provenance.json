@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.2048-seeded-restart-parity.005",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-02",
+  "source_description": null,
+  "terminal_status": "completed",
+  "activity_source_kind": "representative_game_bundle",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 6,
+      "commands": 14,
+      "computer_use_calls": 21,
+      "events": 48,
+      "file_changes": 6,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 20,
+    "label": "cua-02",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "passing run with most retained observation frames",
+    "success": true
+  },
+  "frame_mapping": [
+    {
+      "event_sequence": 4,
+      "frame_sequence": 1,
+      "audit_sequence": 2,
+      "timestamp": "2026-09-02T03:03:17.944131+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0001.png",
+      "sha256": "f04ba4f26ba7b8ea90a43d3f6cfc64a3c089f1d8ff9a8b55d6453864fc58238d"
+    },
+    {
+      "event_sequence": 9,
+      "frame_sequence": 2,
+      "audit_sequence": 3,
+      "timestamp": "2026-09-02T03:03:35.713448+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0002.png",
+      "sha256": "5eccdf9623a9d9e5957ffa2716c0dc73c5581a54e152c0dde96b876d03443ea5"
+    },
+    {
+      "event_sequence": 10,
+      "frame_sequence": 3,
+      "audit_sequence": 4,
+      "timestamp": "2026-09-02T03:03:48.066530+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0003.png",
+      "sha256": "31a13b4744ac57c8d5000c583855a32d416b4162b598ba5b0621d42faaad780f"
+    },
+    {
+      "event_sequence": 11,
+      "frame_sequence": 4,
+      "audit_sequence": 5,
+      "timestamp": "2026-09-02T03:04:08.121442+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0004.png",
+      "sha256": "1e3421f03670e69e46a8f1345e5f462acdb5523b33f03c5ef5853585a47e6ddd"
+    },
+    {
+      "event_sequence": 12,
+      "frame_sequence": 5,
+      "audit_sequence": 6,
+      "timestamp": "2026-09-02T03:04:20.404202+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0005.png",
+      "sha256": "5c759fd98c868043eafcc2b11821d101d2900d5f126b254965b88150178e2ba9"
+    },
+    {
+      "event_sequence": 18,
+      "frame_sequence": 6,
+      "audit_sequence": 8,
+      "timestamp": "2026-09-02T03:04:54.512913+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0006.png",
+      "sha256": "5c759fd98c868043eafcc2b11821d101d2900d5f126b254965b88150178e2ba9"
+    },
+    {
+      "event_sequence": 19,
+      "frame_sequence": 7,
+      "audit_sequence": 9,
+      "timestamp": "2026-09-02T03:05:03.935677+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0007.png",
+      "sha256": "5c759fd98c868043eafcc2b11821d101d2900d5f126b254965b88150178e2ba9"
+    },
+    {
+      "event_sequence": 20,
+      "frame_sequence": 8,
+      "audit_sequence": 10,
+      "timestamp": "2026-09-02T03:05:12.926551+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0008.png",
+      "sha256": "e4f1c1c47ee9ae3c60f0c93c5a6bb52adb086e8c18fcd5fd04dced61f15878bd"
+    },
+    {
+      "event_sequence": 21,
+      "frame_sequence": 9,
+      "audit_sequence": 11,
+      "timestamp": "2026-09-02T03:05:19.565020+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0009.png",
+      "sha256": "b086d0cab8702bfcaea25640d61d0558c00abf5377fff34b80d65ff34cd9aa28"
+    },
+    {
+      "event_sequence": 24,
+      "frame_sequence": 10,
+      "audit_sequence": 12,
+      "timestamp": "2026-09-02T03:05:40.938576+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0010.png",
+      "sha256": "b086d0cab8702bfcaea25640d61d0558c00abf5377fff34b80d65ff34cd9aa28"
+    },
+    {
+      "event_sequence": 25,
+      "frame_sequence": 11,
+      "audit_sequence": 13,
+      "timestamp": "2026-09-02T03:05:48.325588+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0011.png",
+      "sha256": "b086d0cab8702bfcaea25640d61d0558c00abf5377fff34b80d65ff34cd9aa28"
+    },
+    {
+      "event_sequence": 26,
+      "frame_sequence": 12,
+      "audit_sequence": 14,
+      "timestamp": "2026-09-02T03:05:55.699216+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0012.png",
+      "sha256": "b086d0cab8702bfcaea25640d61d0558c00abf5377fff34b80d65ff34cd9aa28"
+    },
+    {
+      "event_sequence": 28,
+      "frame_sequence": 13,
+      "audit_sequence": 15,
+      "timestamp": "2026-09-02T03:06:23.976316+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0013.png",
+      "sha256": "6e14d1d2495d43e7e29dd287c2f01a5d13ce39c70ff5a98308739a09772874f4"
+    },
+    {
+      "event_sequence": 29,
+      "frame_sequence": 14,
+      "audit_sequence": 16,
+      "timestamp": "2026-09-02T03:06:30.944292+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0014.png",
+      "sha256": "7450ca18caa9ddbc2094469800e21f2d412a38c98792de29104a9b3dff622f17"
+    },
+    {
+      "event_sequence": 30,
+      "frame_sequence": 15,
+      "audit_sequence": 17,
+      "timestamp": "2026-09-02T03:06:39.123906+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0015.png",
+      "sha256": "3cd782d50b2ba3d045b12d31dfd62787e21ed44a8a53a6805c8b08a7465fa7e5"
+    },
+    {
+      "event_sequence": 32,
+      "frame_sequence": 16,
+      "audit_sequence": 18,
+      "timestamp": "2026-09-02T03:06:57.958197+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0016.png",
+      "sha256": "b9fd21c3d69b4dc599cebe8d34da28fdc9e0d6b57aa9c6273b07746ce00e4bb0"
+    },
+    {
+      "event_sequence": 33,
+      "frame_sequence": 17,
+      "audit_sequence": 19,
+      "timestamp": "2026-09-02T03:07:13.511049+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0017.png",
+      "sha256": "b9fd21c3d69b4dc599cebe8d34da28fdc9e0d6b57aa9c6273b07746ce00e4bb0"
+    },
+    {
+      "event_sequence": 41,
+      "frame_sequence": 18,
+      "audit_sequence": 20,
+      "timestamp": "2026-09-02T03:08:42.150537+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0018.png",
+      "sha256": "b9fd21c3d69b4dc599cebe8d34da28fdc9e0d6b57aa9c6273b07746ce00e4bb0"
+    },
+    {
+      "event_sequence": 42,
+      "frame_sequence": 19,
+      "audit_sequence": 21,
+      "timestamp": "2026-09-02T03:08:52.688457+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0019.png",
+      "sha256": "b9fd21c3d69b4dc599cebe8d34da28fdc9e0d6b57aa9c6273b07746ce00e4bb0"
+    },
+    {
+      "event_sequence": 43,
+      "frame_sequence": 20,
+      "audit_sequence": 22,
+      "timestamp": "2026-09-02T03:09:07.837855+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0020.png",
+      "sha256": "012efa544272b732ee9588c2fc8f777bceac1e59e7c9400b7295f907599fd8a0"
+    }
+  ],
+  "image_verification": "Run identity, complete successful action sequence, arguments, timestamps, and audit SHA-256",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "20 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/activity.json": "a0b3cd93898a80938e2b9d54ae8ad87c9434f0d7b4957150a0bf23ab29bccaa8",
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frame-manifest.json": "84165d9faeb28e7f00b78909b3b67133025bc75009733c37e297886b72f0c406",
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/trajectory.jsonl": "fd75ededd6817dbcf071f709e5742a6a44bf576c6cc4fb37999d534f54dfb819",
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/cua-audit.jsonl": "9a50cb05abfa4c46f7e05aecea8a938c0695e6b5ae32f1825845a5cd701708b5",
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/visual-events.jsonl": "3f88b88086eb1b6ea25f1194f66be25202a4272d618c6e74648cb88c38e1e2ac",
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/run-result.json": "755988895c3df46b28fcb7d3e78b15081d67e813b255b7be9cbfa51165bbd4c0",
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/metadata.json": "c2a79326a01aa401c8e635a7eb2e8b7853d4d9b6aa251968d232656dbd8abace",
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/patch.diff": "342a3bf7770fea3324ffec95671d0439b7a92d249f30f6bc67742c3fc8687596"
+  },
+  "activity_sha256": "021e367f73b81d25f6a39e7f1a02df191412851581a9c69404dc64410d6fd4dd",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

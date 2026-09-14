@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.minesweeper-delayed-loss-episode-identity.003",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-03",
+  "source_description": null,
+  "terminal_status": "completed",
+  "activity_source_kind": "representative_game_bundle",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 10,
+      "commands": 13,
+      "computer_use_calls": 25,
+      "events": 54,
+      "file_changes": 5,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 23,
+    "label": "cua-03",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "successful CUA run with most retained observation frames",
+    "success": true
+  },
+  "frame_mapping": [
+    {
+      "event_sequence": 2,
+      "frame_sequence": 1,
+      "audit_sequence": 2,
+      "timestamp": "2026-09-05T01:56:17.215587+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0001.png",
+      "sha256": "8fc5b0f0cda9200ff5019314132b97169b1ebedf2c03595b8db9981adfbc1c26"
+    },
+    {
+      "event_sequence": 3,
+      "frame_sequence": 2,
+      "audit_sequence": 3,
+      "timestamp": "2026-09-05T01:56:23.159983+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0002.png",
+      "sha256": "5f16587113e3e9e7d3eb7842d54b8eaf841d7f9a9166ca6f19f25f6a178ba6bb"
+    },
+    {
+      "event_sequence": 4,
+      "frame_sequence": 3,
+      "audit_sequence": 4,
+      "timestamp": "2026-09-05T01:56:28.667305+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0003.png",
+      "sha256": "d157a7ea790751fd34873c137ace65cb5f4ef493ed06d2e0087164b7da79c63a"
+    },
+    {
+      "event_sequence": 5,
+      "frame_sequence": 4,
+      "audit_sequence": 5,
+      "timestamp": "2026-09-05T01:56:35.638938+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0004.png",
+      "sha256": "e2aa9fd887c613738028d9c43075b3cf965abd52401e69da244323e19026d39f"
+    },
+    {
+      "event_sequence": 6,
+      "frame_sequence": 5,
+      "audit_sequence": 6,
+      "timestamp": "2026-09-05T01:56:47.711581+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0005.png",
+      "sha256": "dfb23d8ce0a4eff97097b28407fcf29c8c7334b281a3623138ca380e8e8c77ff"
+    },
+    {
+      "event_sequence": 9,
+      "frame_sequence": 6,
+      "audit_sequence": 8,
+      "timestamp": "2026-09-05T01:57:00.530094+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0006.png",
+      "sha256": "b3b9ea8fc2c0f1fceec030fed0871f3a5be11a48fce84849161b6f4c924aae79"
+    },
+    {
+      "event_sequence": 26,
+      "frame_sequence": 7,
+      "audit_sequence": 9,
+      "timestamp": "2026-09-05T01:58:10.601940+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0007.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 27,
+      "frame_sequence": 8,
+      "audit_sequence": 10,
+      "timestamp": "2026-09-05T01:58:16.870969+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0008.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 28,
+      "frame_sequence": 9,
+      "audit_sequence": 11,
+      "timestamp": "2026-09-05T01:58:22.437149+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0009.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 29,
+      "frame_sequence": 10,
+      "audit_sequence": 12,
+      "timestamp": "2026-09-05T01:58:39.477968+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0010.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 30,
+      "frame_sequence": 11,
+      "audit_sequence": 13,
+      "timestamp": "2026-09-05T01:58:52.712957+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0011.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 31,
+      "frame_sequence": 12,
+      "audit_sequence": 14,
+      "timestamp": "2026-09-05T01:59:00.063421+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0012.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 32,
+      "frame_sequence": 13,
+      "audit_sequence": 15,
+      "timestamp": "2026-09-05T01:59:08.922516+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0013.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 33,
+      "frame_sequence": 14,
+      "audit_sequence": 16,
+      "timestamp": "2026-09-05T01:59:15.483519+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0014.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 37,
+      "frame_sequence": 15,
+      "audit_sequence": 17,
+      "timestamp": "2026-09-05T01:59:37.470691+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0015.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 38,
+      "frame_sequence": 16,
+      "audit_sequence": 18,
+      "timestamp": "2026-09-05T01:59:45.066474+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0016.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 39,
+      "frame_sequence": 17,
+      "audit_sequence": 19,
+      "timestamp": "2026-09-05T01:59:51.719658+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0017.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 41,
+      "frame_sequence": 18,
+      "audit_sequence": 21,
+      "timestamp": "2026-09-05T02:00:06.998897+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0018.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 42,
+      "frame_sequence": 19,
+      "audit_sequence": 22,
+      "timestamp": "2026-09-05T02:00:14.707690+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0019.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 43,
+      "frame_sequence": 20,
+      "audit_sequence": 23,
+      "timestamp": "2026-09-05T02:00:21.800192+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0020.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 44,
+      "frame_sequence": 21,
+      "audit_sequence": 24,
+      "timestamp": "2026-09-05T02:00:32.383877+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0021.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 45,
+      "frame_sequence": 22,
+      "audit_sequence": 25,
+      "timestamp": "2026-09-05T02:00:40.390201+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0022.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    },
+    {
+      "event_sequence": 47,
+      "frame_sequence": 23,
+      "audit_sequence": 26,
+      "timestamp": "2026-09-05T02:00:55.161140+00:00",
+      "path": "media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frames/frame-0023.png",
+      "sha256": "7fb05dde086d3776eacc9908e9b552a56c04730565afc65835cb1dae0351798b"
+    }
+  ],
+  "image_verification": "Run identity, complete successful action sequence, arguments, timestamps, and audit SHA-256",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 1. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "23 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/activity.json": "0f2246032139329eecff7456ac64c96c270996b8560c838496a4a1aec1ee3d99",
+    "viewer/media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/frame-manifest.json": "b8f7f9545b669a632f16ff933d42ee8e23bed4294aa1ea0708c1c9cde600a127",
+    "viewer/media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/trajectory.jsonl": "cd00f1b0d20ad0060c7865ea82b36e2d11de3e51f1813408fa470db9aed14bb3",
+    "viewer/media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/cua-audit.jsonl": "22aae3fd6ae58b9738c72e06c014556ab856804d440ff9883387a34afbf3beb4",
+    "viewer/media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/visual-events.jsonl": "1e7224c844358885f5f233b6eee0bad8a623d3dec40d47df4824fe31ae649150",
+    "viewer/media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/run-result.json": "99f216d45d3e484d364efa1f469d299178ef914ae0cbd481f023b3b8a3648862",
+    "viewer/media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/metadata.json": "d2286cf090395021e2dcb5e3be6fd465f2f324e4e3444b67ffe8b829fb4ab785",
+    "viewer/media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/patch.diff": "f393f57a03a8c81033536006b6d701b199f08bf9cf85b4cd63ca872f34bc36e1"
+  },
+  "activity_sha256": "d8820ed80b8f965ca2b5e25059624feaedf7711ce1116dcc8a4d44bb26c321fd",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

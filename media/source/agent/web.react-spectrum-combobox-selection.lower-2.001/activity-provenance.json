@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "task_id": "web.react-spectrum-combobox-selection.lower-2.001",
+  "run_relation": "historical_exact",
+  "provenance": "exact_historical_screenshot_only_gpt56_cua",
+  "run_label": null,
+  "source_description": "Recovered exact historical Codex JSONL from the archival Web evaluation host",
+  "terminal_status": "completed",
+  "activity_source_kind": "retained_timeline",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 3. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/web.react-spectrum-combobox-selection.lower-2.001/activity-retained.json": "ccb75d3be2c909b7c23b77ec592edd080b4aec21dc4b3c09da41c27073dbecc1"
+  },
+  "activity_sha256": "f34834a02cfc7156b8b0ba2ef568cfe8413640ebb1cafe1af5177ef0291b075f",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.vector-relay-deferred-ownership.002",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-01",
+  "source_description": null,
+  "terminal_status": "completed",
+  "activity_source_kind": "representative_game_bundle",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 7,
+      "commands": 8,
+      "computer_use_calls": 22,
+      "events": 40,
+      "file_changes": 2,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 20,
+    "label": "cua-01",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "diagnostic failure with most retained observation frames",
+    "success": false
+  },
+  "frame_mapping": [
+    {
+      "event_sequence": 7,
+      "frame_sequence": 1,
+      "audit_sequence": 2,
+      "timestamp": "2026-09-01T12:27:03.759479+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0001.png",
+      "sha256": "a2b5edfe5186bf5cd114efca744636d24092a0fd59167826c560ae70bcc33f0a"
+    },
+    {
+      "event_sequence": 9,
+      "frame_sequence": 2,
+      "audit_sequence": 3,
+      "timestamp": "2026-09-01T12:27:09.635758+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0002.png",
+      "sha256": "f436314dddb1426a07e40b6961a50d5138092c9e4c2309a737e6c8b54b41b546"
+    },
+    {
+      "event_sequence": 11,
+      "frame_sequence": 3,
+      "audit_sequence": 5,
+      "timestamp": "2026-09-01T12:27:36.454280+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0003.png",
+      "sha256": "2b386f0094b720ab73ed714a71daaa6bd15ad6923d7f9946d6c7800d0f7f9c78"
+    },
+    {
+      "event_sequence": 12,
+      "frame_sequence": 4,
+      "audit_sequence": 6,
+      "timestamp": "2026-09-01T12:27:42.515131+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0004.png",
+      "sha256": "153f8889049d267b79f989b7add10e37dcd7bc16e4024d3e2f6b603498364549"
+    },
+    {
+      "event_sequence": 13,
+      "frame_sequence": 5,
+      "audit_sequence": 7,
+      "timestamp": "2026-09-01T12:27:49.347096+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0005.png",
+      "sha256": "6e52aaef54c5b86749268321931bb6bc0d67c8082111e1b36538049399fab0e8"
+    },
+    {
+      "event_sequence": 21,
+      "frame_sequence": 6,
+      "audit_sequence": 9,
+      "timestamp": "2026-09-01T12:28:40.328556+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0006.png",
+      "sha256": "370cee13d7435bd8f43beac2ffabb372f03f77d18bfab795238f00d3c544b084"
+    },
+    {
+      "event_sequence": 22,
+      "frame_sequence": 7,
+      "audit_sequence": 10,
+      "timestamp": "2026-09-01T12:28:51.064441+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0007.png",
+      "sha256": "fd7d7a0532873572682fc90f344ea2fc6183aeb6e004a1fcb4c16f4af20c7dab"
+    },
+    {
+      "event_sequence": 23,
+      "frame_sequence": 8,
+      "audit_sequence": 11,
+      "timestamp": "2026-09-01T12:28:56.864584+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0008.png",
+      "sha256": "fd7d7a0532873572682fc90f344ea2fc6183aeb6e004a1fcb4c16f4af20c7dab"
+    },
+    {
+      "event_sequence": 24,
+      "frame_sequence": 9,
+      "audit_sequence": 12,
+      "timestamp": "2026-09-01T12:29:26.630058+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0009.png",
+      "sha256": "fd7d7a0532873572682fc90f344ea2fc6183aeb6e004a1fcb4c16f4af20c7dab"
+    },
+    {
+      "event_sequence": 25,
+      "frame_sequence": 10,
+      "audit_sequence": 13,
+      "timestamp": "2026-09-01T12:29:34.659004+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0010.png",
+      "sha256": "fd7d7a0532873572682fc90f344ea2fc6183aeb6e004a1fcb4c16f4af20c7dab"
+    },
+    {
+      "event_sequence": 26,
+      "frame_sequence": 11,
+      "audit_sequence": 14,
+      "timestamp": "2026-09-01T12:29:44.459211+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0011.png",
+      "sha256": "fd7d7a0532873572682fc90f344ea2fc6183aeb6e004a1fcb4c16f4af20c7dab"
+    },
+    {
+      "event_sequence": 27,
+      "frame_sequence": 12,
+      "audit_sequence": 15,
+      "timestamp": "2026-09-01T12:29:59.279869+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0012.png",
+      "sha256": "fd7d7a0532873572682fc90f344ea2fc6183aeb6e004a1fcb4c16f4af20c7dab"
+    },
+    {
+      "event_sequence": 28,
+      "frame_sequence": 13,
+      "audit_sequence": 16,
+      "timestamp": "2026-09-01T12:30:12.575975+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0013.png",
+      "sha256": "fd7d7a0532873572682fc90f344ea2fc6183aeb6e004a1fcb4c16f4af20c7dab"
+    },
+    {
+      "event_sequence": 30,
+      "frame_sequence": 14,
+      "audit_sequence": 17,
+      "timestamp": "2026-09-01T12:30:28.662487+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0014.png",
+      "sha256": "3878570f4a62a0d65f57cf1754e0269e56ec797f4e36e26b44c172eb6e800401"
+    },
+    {
+      "event_sequence": 31,
+      "frame_sequence": 15,
+      "audit_sequence": 18,
+      "timestamp": "2026-09-01T12:30:36.634741+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0015.png",
+      "sha256": "a2b5edfe5186bf5cd114efca744636d24092a0fd59167826c560ae70bcc33f0a"
+    },
+    {
+      "event_sequence": 32,
+      "frame_sequence": 16,
+      "audit_sequence": 19,
+      "timestamp": "2026-09-01T12:30:43.520989+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0016.png",
+      "sha256": "f436314dddb1426a07e40b6961a50d5138092c9e4c2309a737e6c8b54b41b546"
+    },
+    {
+      "event_sequence": 33,
+      "frame_sequence": 17,
+      "audit_sequence": 20,
+      "timestamp": "2026-09-01T12:30:56.127785+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0017.png",
+      "sha256": "2b386f0094b720ab73ed714a71daaa6bd15ad6923d7f9946d6c7800d0f7f9c78"
+    },
+    {
+      "event_sequence": 34,
+      "frame_sequence": 18,
+      "audit_sequence": 21,
+      "timestamp": "2026-09-01T12:31:07.777934+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0018.png",
+      "sha256": "8da2d28056c86d2198cc75ba91499e4d5b7bfc17837bd83d73be12f67f303751"
+    },
+    {
+      "event_sequence": 35,
+      "frame_sequence": 19,
+      "audit_sequence": 22,
+      "timestamp": "2026-09-01T12:31:17.056891+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0019.png",
+      "sha256": "a73b5a4e0cfbca5c55dd940243e5071da497e3113a40e17678e4d012f29f0d02"
+    },
+    {
+      "event_sequence": 36,
+      "frame_sequence": 20,
+      "audit_sequence": 23,
+      "timestamp": "2026-09-01T12:31:35.321375+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frames/frame-0020.png",
+      "sha256": "a73b5a4e0cfbca5c55dd940243e5071da497e3113a40e17678e4d012f29f0d02"
+    }
+  ],
+  "image_verification": "Run identity, complete successful action sequence, arguments, timestamps, and audit SHA-256",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "20 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/activity.json": "775a49b62493856da554659f04c2ddc929a47e7617d3baecf8d8c3296bc5af32",
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/frame-manifest.json": "e683475c9ee21d5eb2bfc168666973b4f34f16937da6776bc0c0c9e471b9c906",
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/trajectory.jsonl": "ea3c53590e314f4cf3b17a6a3fadeb79656d7431f041b684961a49da21c64d4d",
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/cua-audit.jsonl": "4c463a7ffaa2f1ac1352811f29d6e97ad52907c1928214f2ec29153b1d63e8f2",
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/visual-events.jsonl": "12772b13109e139c2e7668181906b654cb99732b10ed40d6586ff00026d02982",
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/run-result.json": "466f7c02a90d501a0a0c2fd187d42a9e83f2d385c7b4635a0b704fce34f883ee",
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/metadata.json": "0b0347264b1ee19fb5cf10f18256920f9b05528e9ff87339a64d019423bd8435",
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/patch.diff": "313ea44aeb5bdf67bd3b14a3208b32b5333e022ec99adaa46f9aaf44773f52bf"
+  },
+  "activity_sha256": "4613bf5e2dba03ecd0667bb467041e8fc74449bc33a8ce52af77f0bb473e9195",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

@@ -1,0 +1,617 @@
+{
+  "coverage": "retained_codex_events_partial",
+  "events": [
+    {
+      "detail": "I\u2019ll trace the menu positioning and scroll lifecycle in the local demo, then make the smallest source-and-test change that keeps anchored menus synchronized or closes them when their anchor leaves the rendered grid. I\u2019ll also verify with the build and record the required rollout notes.",
+      "kind": "agent_message",
+      "sequence": 1,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "<evaluation-workspace>/workspace\nAGENTS.md\nhandsontable/AGENTS.md\nhandsontable/scripts/themes/figma/AGENTS.md\nhandsontable/src/3rdparty/walkontable/AGENTS.md\nhandsontable/src/core/hooks/AGENTS.md\nhandsontable/src/dataMap/metaManager/AGENTS.md\nhandsontable/src/plugins/collapsibleColumns/AGENTS.md\nhandsontable/src/plugins/contextMenu/AGENTS.md\nhandsontable/src/plugins/dataProvider/AGENTS.md\nhandsontable/src/plugins/dropdownMenu/AGENTS.md\nhandsontable/src/plugins/filters/AGENTS.md\nhandsontable/src/plugins/nestedHeaders/AGENTS.md\nhandsontable/src/plugins/stretchColumns/AGENTS.md\nhandsontable/src/translations/AGENTS.md\nwrappers/angular-wrapper/AGENTS.md\nwrappers/react-wrapper/AGENTS.md\nwrappers/vue3/AGENTS.md\n\nTop-level files:\npackage.json\nbabel.config.js\nlefthook.yml\npnpm-lock.yaml\npackage-lock.json\npnpm-workspace.yaml\ncontext7.json\nAGENTS.md\nsonar-project.properties\nREADME.md\nbrowser-targets.js\nCONTRIBUTING.md\nbin/changelog\nhandsontable-non-commercial-license.pdf\nhot.config.js\nLICENSE.txt\nscripts/pre-push.mjs\nscripts/sync-skills-to-cursor.mjs\nscripts/verify-bundles.mjs\nscripts/pre-release.mjs\nscripts/clean-node-modules.mjs\nCODE_OF_CONDUCT.md\nscripts/lint-staged.mjs\nscripts/lint-files.mjs\nscripts/e2e-run-cache.mjs\nscripts/prepare-dev-env.mjs\nscripts/translate-to-native-npm.mjs\nCHANGELOG.md\nscripts/utils/filesystem.mjs\nruntime-task/index.html\nscripts/utils/index.mjs\nscripts/utils/pre-release.mjs\nruntime-task/serve.py\nresources/icons/javascript-icon.svg\nscripts/utils/processes.mjs\nscripts/claude/session.mjs\nresources/icons/angular-icon.svg\nresources/icons/react-icon.svg\nresources/icons/vue-icon.svg\nresources/handsontable-logo.svg\nresources/handsontable-preview-dark-theme.png\nresources/handsontable-logo-blue.svg\nresources/handsontable-preview-light-theme.png\nresources/handsont\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 2,
+      "status": "completed",
+      "title": "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '\"'!node_modules'\"' -g '\"'!**/.git/**'\"' | sort | head -80 && printf '\\\\nTop-level files:\\\\n' && rg --files -g '\"'!node_modules'\"' -g '\"'!**/.git/**'\"' | head -80\"",
+      "truncated": true
+    },
+    {
+      "detail": "# Handsontable Core Package\n\nThis is the core data grid package. **TypeScript** - source files in `src/` are `.ts`. Type declarations are **auto-generated** by `tsc --emitDeclarationOnly` (`npm run build:types`, task defined in `scripts/tasks.json`) into `tmp/*.d.ts` \u2014 do not hand-edit them. The `types/` directory has been **deleted** \u2014 do not recreate it. Walkontable (`src/3rdparty/walkontable/src/`) is also TypeScript and is now type-checked by the main `tsconfig.json` \u2014 it still has its own separate build (rspack) and test (Puppeteer) pipeline.\n\n## Critical Rules\n\n- Use `throwWithCause()` from `src/helpers/errors.ts`, never `throw new Error()`\n- No barrel imports from `plugins/index`, `editors/index`, `renderers/index`, `validators/index`, `cellTypes/index`, `i18n/index` - import from specific submodule paths. Only exception: `src/registry.ts`\n- No global `window`, `document`, `console` - use `this.hot.rootWindow`, `this.hot.rootDocument`, and helpers from `src/helpers/console.ts`\n- Private fields use `#` prefix, not `@private` JSDoc\n- **Required**: Plugin hook callbacks must be arrow function class fields \u2014 `#onAfterX = (arg1, arg2) => { ... }` \u2014 and passed directly: `this.addHook('afterX', this.#onAfterX)`. Never wrap in `(args) => this.#onX(args)` or use `.bind(this)`.\n- Cognitive complexity: keep each function at 15 or below\n- Optional chaining `?.` only when value is genuinely optional by design\n- No hardcoded user-visible strings in source - add constants to `src/i18n/constants.ts` and update all language files in `src/i18n/languages/`\n- No direct cross-plugin imports - use hooks for inter-plugin communication, or `hot.getPlugin('Name')` if API access is required\n- Never use raw `setTimeout` - use `this.hot._registerTimeout(fn, delay)` instead; it auto-clears o\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 3,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,240p' handsontable/AGENTS.md\"",
+      "truncated": true
+    },
+    {
+      "detail": "# DropdownMenu plugin \u2014 column header menu\n\n`DropdownMenu` (`'dropdownMenu'`) provides the column-header dropdown menu. It is **built on the shared `Menu` class from `contextMenu`** but configured and triggered independently \u2014 do not duplicate that Menu logic here.\n\n## Specifics\n\n- **Trigger**: the column header button (or `Shift+Alt+ArrowDown`). Not right-click \u2014 that is `ContextMenu`.\n- **Scope**: column-specific operations only (not cells or row headers).\n- **Hook prefix**: `beforeDropdownMenu*`, `afterDropdownMenu*`.\n\n## Where to look next\n\n- Full ContextMenu vs Column Menu comparison and the shared `Menu` class: `handsontable/src/plugins/contextMenu/AGENTS.md`.\n- Plugin contract, hooks, settings validation, lifecycle: `handsontable-plugin-dev` skill.\n\n--- context ---\n# ContextMenu plugin \u2014 and the shared Menu class\n\n`ContextMenu` (`'contextMenu'`) provides the right-click menu over cells and headers. It owns the shared `Menu` class that `DropdownMenu` reuses. Read this before touching `contextMenu.ts`, the `menu/` UI, or anything that `dropdownMenu` builds on.\n\n## Context Menu vs Column Menu\n\n`DropdownMenu` is built on the shared `Menu` class from `contextMenu` but is configured and triggered independently. When in doubt about which plugin owns a behavior, use this table.\n\n| | Context menu | Column menu (dropdown menu) |\n|---|---|---|\n| **Plugin class / key** | `ContextMenu` / `'contextMenu'` | `DropdownMenu` / `'dropdownMenu'` |\n| **Trigger** | Right-click (or `Ctrl+Shift+\\` / `Shift+F10`) | Column header button (or `Shift+Alt+ArrowDown`) |\n| **Scope** | Cells and headers across rows and columns | Column-specific operations only |\n| **Hook prefix** | `beforeContextMenu*`, `afterContextMenu*` | `beforeDropdownMenu*`, `afterDropdownMenu*` |\n\n## Where to look next\n\n-\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 4,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,220p' handsontable/src/plugins/dropdownMenu/AGENTS.md && printf '\\\\n--- context ---\\\\n' && sed -n '1,220p' handsontable/src/plugins/contextMenu/AGENTS.md\"",
+      "truncated": true
+    },
+    {
+      "detail": "runtime files:\nruntime-task/index.html\nruntime-task/serve.py\npackage scripts:\n{\n  in: 'cross-env-shell COMMAND_ENV=in node scripts/translate-to-native-npm.mjs',\n  all: 'cross-env-shell COMMAND_ENV=all node scripts/translate-to-native-npm.mjs',\n  'clean:node_modules': 'node ./scripts/clean-node-modules.mjs',\n  lint: 'npm run eslint && npm run all lint -- --if-present && npm run lint --prefix performance-tests && npm run lint --prefix tests',\n  eslint: 'eslint .github/scripts/ bin/changelog scripts/',\n  test: 'npm run all test -- -e=examples',\n  'test:tooling': 'node --test .github/scripts/__tests__/*.test.mjs scripts/__tests__/*.test.mjs scripts/claude/__tests__/*.test.mjs evals/__tests__/*.test.mjs',\n  build: 'npm run all build -- -e=examples',\n  freeze: 'node scripts/freeze.mjs',\n  release: 'node scripts/release.mjs',\n  changelog: 'bin/changelog',\n  'sync-skills': 'node scripts/sync-skills-to-cursor.mjs',\n  prepare: 'node scripts/prepare-dev-env.mjs',\n  'publish-all': 'npm run all publish-package -- -e=examples',\n  'pre-release': 'node scripts/pre-release.mjs && npm run all build -- -e=examples visual-tests && npm run publish-all --tag experimental',\n  'examples:version': 'node examples/scripts/code-examples.mjs version',\n  'examples:install': 'node examples/scripts/code-examples.mjs install',\n  'examples:build': 'node examples/scripts/code-examples.mjs build',\n  'examples:test': 'node examples/scripts/code-examples.mjs test',\n  'examples:start': 'http-server ./examples/tmp'\n}",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 5,
+      "status": "completed",
+      "title": "/bin/bash -lc \"printf '%s\\\\n' 'runtime files:' && find runtime-task -maxdepth 3 -type f -print | sort && printf '%s\\\\n' 'package scripts:' && node -e \\\"const p=require('./package.json'); console.log(p.scripts)\\\"\"",
+      "truncated": false
+    },
+    {
+      "detail": "handsontable/src/3rdparty/walkontable/src/table.ts:471:      spreader.style.position = 'relative';\nhandsontable/src/3rdparty/walkontable/src/table.ts:524:      holder.style.position = 'relative';\nhandsontable/src/3rdparty/walkontable/src/table.ts:570:   * @param {boolean} [fastDraw=false] If TRUE, will try to avoid full redraw and only update the border positions.\nhandsontable/src/3rdparty/walkontable/src/table.ts:609:        // Fast (scroll) draws skip the full-render header-height pass below, so the master/top\nhandsontable/src/3rdparty/walkontable/src/table.ts:610:        // header heights can drift against the frozen overlays during scrolling (a tall wrapped\nhandsontable/src/3rdparty/walkontable/src/table.ts:689:    let positionChanged = false;\nhandsontable/src/3rdparty/walkontable/src/table.ts:692:      positionChanged = wtOverlays.topOverlay.resetFixedPosition();\nhandsontable/src/3rdparty/walkontable/src/table.ts:695:        positionChanged = wtOverlays.bottomOverlay.resetFixedPosition() || positionChanged;\nhandsontable/src/3rdparty/walkontable/src/table.ts:698:      positionChanged = wtOverlays.inlineStartOverlay.resetFixedPosition() || positionChanged;\nhandsontable/src/3rdparty/walkontable/src/table.ts:709:    if (positionChanged) {\nhandsontable/src/3rdparty/walkontable/src/table.ts:833:   * of the scrollable columns, the master and top overlay THEADs render shorter than the corner\nhandsontable/src/3rdparty/walkontable/src/table.ts:1326:    // This is an indication that the overlay is placed on the most top position.\nhandsontable/src/3rdparty/walkontable/src/table.ts:1400:    // This is an indication that the overlay is placed on the most left position.\nhandsontable/src/3rdparty/walkontable/src/table.ts:1546:   * current viewport. The value may change depends on\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 6,
+      "status": "completed",
+      "title": "/bin/bash -lc 'rg -n \"scroll|submenu|position|anchor|Menu\" handsontable/src/plugins/contextMenu handsontable/src/plugins/dropdownMenu handsontable/src/3rdparty/walkontable/src | head -240'",
+      "truncated": true
+    },
+    {
+      "detail": "handsontable/src/plugins/dropdownMenu/__tests__/UI.spec.js:31:          dropdownMenu: true,\nhandsontable/src/plugins/dropdownMenu/__tests__/UI.spec.js:43:    it('should render dropdown menu trigger buttons with a proper type', async() => {\nhandsontable/src/plugins/dropdownMenu/__tests__/UI.spec.js:45:        dropdownMenu: true,\nhandsontable/src/plugins/dropdownMenu/__tests__/dropdownMenu.spec.js:18:        dropdownMenu: true,\nhandsontable/src/plugins/dropdownMenu/__tests__/dropdownMenu.spec.js:25:      getPlugin('dropdownMenu').disablePlugin();\nhandsontable/src/plugins/dropdownMenu/__tests__/dropdownMenu.spec.js:33:        dropdownMenu: false,\nhandsontable/src/plugins/dropdownMenu/__tests__/dropdownMenu.spec.js:40:      getPlugin('dropdownMenu').enablePlugin();\nhandsontable/src/plugins/dropdownMenu/__tests__/dropdownMenu.spec.js:47:  describe('menu width', () => {\nhandsontable/src/plugins/dropdownMenu/__tests__/dropdownMenu.spec.js:48:    it('should display the menu with the minimum width', async() => {\nhandsontable/src/plugins/dropdownMenu/__tests__/dropdownMenu.spec.js:51:        dropdownMenu: {\nhandsontable/src/plugins/dropdownMenu/__tests__/dropdownMenu.spec.js:63:      const $menu = $('.htDropdownMenu');\nhandsontable/src/plugins/dropdownMenu/__tests__/dropdownMenu.spec.js:65:      await dropdownMenu(0);\nhandsontable/src/plugins/dropdownMenu/__tests__/dropdownMenu.spec.js:67:      expect($menu.find('.wtHider').width()).toEqual(215);\nhandsontable/src/plugins/dropdownMenu/__tests__/dropdownMenu.spec.js:70:    it('should display a submenu with the minimum width', async() => {\nhandsontable/src/plugins/dropdownMenu/__tests__/dropdownMenu.spec.js:73:        dropdownMenu: {\nhandsontable/src/plugins/dropdownMenu/__tests__/dropdownMenu.spec.js:82:              submenu: {\nhan\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 7,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"contextMenu|dropdownMenu|menu\\\" handsontable/src/__tests__ handsontable/src/plugins/contextMenu handsontable/src/plugins/dropdownMenu --glob '*unit*' --glob '*spec*' | head -240\"",
+      "truncated": true
+    },
+    {
+      "detail": "handsontable/src/styles/components/plugins/_dropdown-menu.scss\nhandsontable/src/renderers/numericRenderer/__tests__/contextMenu.spec.js\nhandsontable/src/shortcuts/contexts/commands/scrollToFocusedCell.ts\nhandsontable/src/__tests__/mobile/scroll.spec.js\nhandsontable/src/__tests__/core/overscrollBehavior.spec.js\nhandsontable/src/__tests__/core/scrollToFocusedCell.spec.js\nhandsontable/src/__tests__/core/scrollViewportTo.spec.js\nhandsontable/src/__tests__/core/scrollHooks.spec.js\nhandsontable/src/3rdparty/walkontable/test/spec/scroll/scrollbarNative.spec.js\nhandsontable/src/3rdparty/walkontable/test/spec/scroll/scrollbar.spec.js\nhandsontable/src/3rdparty/walkontable/test/spec/scroll/byDragging.spec.js\nhandsontable/src/3rdparty/walkontable/test/spec/scroll/scroll.spec.js\nhandsontable/src/3rdparty/walkontable/test/spec/scroll/rtl/byDragging.spec.js\nhandsontable/src/3rdparty/walkontable/test/spec/scroll/rtl/byDraggingWindow.spec.js\nhandsontable/src/3rdparty/walkontable/test/spec/scroll/byDraggingWindow.spec.js\nhandsontable/src/plugins/nestedRows/ui/contextMenu.ts\nhandsontable/src/3rdparty/walkontable/src/scroll/scroll.ts\nhandsontable/src/core/viewportScroll/scrollStrategies/singleScroll.ts\nhandsontable/src/core/viewportScroll/scrollStrategies/columnHeaderScroll.ts\nhandsontable/src/core/viewportScroll/scrollStrategies/multipleScroll.ts\nhandsontable/src/core/viewportScroll/scrollStrategies/cornerHeaderScroll.ts\nhandsontable/src/core/viewportScroll/scrollStrategies/rowHeaderScroll.ts\nhandsontable/src/core/viewportScroll/scrollStrategies/focusScroll.ts\nhandsontable/src/core/viewportScroll/scrollStrategies/noncontiguousScroll.ts\nhandsontable/src/plugins/undoRedo/__tests__/scroll.spec.js\nhandsontable/src/3rdparty/walkontable/src/overlay/scroll/nativeScrollInput.ts\nhandsontable/src/3\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 8,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg --files runtime-task handsontable/src | rg '(menu|contextMenu|dropdownMenu|scroll)' | head -240\"",
+      "truncated": true
+    },
+    {
+      "detail": "The shared `Menu` implementation is the right integration point: both column dropdowns and cell context menus use it, so a fix there can preserve both trigger paths and submenu behavior. I\u2019m narrowing down how it stores its anchor and how scroll hooks are exposed before editing.",
+      "kind": "agent_message",
+      "sequence": 9,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "import type { HotInstance } from '../../../core/types';\nimport type { GridSettings } from '../../../core/settings';\nimport type { MenuItemConfig } from '../contextMenu';\nimport { Positioner } from './positioner';\nimport { createMenuNavigator } from './navigator';\nimport { createKeyboardShortcutsCtrl } from './shortcuts';\nimport { SEPARATOR, NO_ITEMS, predefinedItems } from './../predefinedItems';\nimport {\n  filterSeparators,\n  hasSubMenu,\n  isItemHidden,\n  normalizeSelection,\n  isItemSubMenu,\n  isItemDisabled,\n  isItemSeparator,\n} from './utils';\nimport EventManager from '../../../eventManager';\nimport { arrayEach, arrayFilter, arrayReduce } from '../../../helpers/array';\nimport { isWindowsOS, isMobileBrowser, isIpadOS } from '../../../helpers/browser';\nimport {\n  addClass,\n  eventTargetEl,\n  isChildOf,\n  getParentWindow,\n  hasClass,\n  setAttribute,\n  outerHeight,\n  removeClass,\n} from '../../../helpers/dom/element';\nimport { isRightClick } from '../../../helpers/dom/event';\nimport { debounce } from '../../../helpers/function';\nimport { isDefined } from '../../../helpers/mixed';\nimport { mixin } from '../../../helpers/object';\nimport localHooks from '../../../mixins/localHooks';\nimport { createMenuItemRenderer } from './menuItemRenderer';\nimport {\n  A11Y_EXPANDED,\n  A11Y_MENU,\n  A11Y_TABINDEX,\n} from '../../../helpers/a11y';\n\nconst MIN_WIDTH = 215;\n\n/**\n * Type guard that checks whether the provided value has a readable `name` property.\n *\n * @param {unknown} value Value to inspect.\n * @returns {boolean} `true` when the value is an object with a `name` property.\n */\nfunction hasName(value: unknown): value is { name: unknown } {\n  return typeof value === 'object' && value !== null && 'name' in value;\n}\n\ninterface MenuOptions {\n  // eslint-disable-next-line no-use-before-\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 10,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,300p' handsontable/src/plugins/contextMenu/menu/menu.ts && sed -n '1,320p' handsontable/src/plugins/contextMenu/menu/positioner.ts\"",
+      "truncated": true
+    },
+    {
+      "detail": "import { BasePlugin } from '../base';\nimport { Hooks } from '../../core/hooks';\nimport { arrayEach } from '../../helpers/array';\nimport { objectEach } from '../../helpers/object';\nimport { CommandExecutor } from './commandExecutor';\nimport { ItemsFactory } from './itemsFactory';\nimport {\n  Menu,\n} from './menu';\nimport { getDocumentOffsetByElement } from './utils';\nimport { eventTargetEl, hasClass, isHTMLElement } from '../../helpers/dom/element';\nimport {\n  ROW_ABOVE,\n  ROW_BELOW,\n  COLUMN_LEFT,\n  COLUMN_RIGHT,\n  REMOVE_ROW,\n  REMOVE_COLUMN,\n  UNDO,\n  REDO,\n  READ_ONLY,\n  ALIGNMENT,\n  SEPARATOR,\n} from './predefinedItems';\n\nexport type PredefinedMenuItemKey =\n  | 'row_above' | 'row_below' | 'col_left' | 'col_right'\n  | '---------' | 'remove_row' | 'remove_col' | 'clear_column' | 'undo' | 'redo'\n  | 'make_read_only' | 'alignment' | 'cut' | 'copy' | 'copy_column_headers_only'\n  | 'copy_with_column_group_headers' | 'copy_with_column_headers' | 'freeze_column'\n  | 'unfreeze_column' | 'borders' | 'commentsAddEdit' | 'commentsRemove' | 'commentsReadOnly'\n  | 'mergeCells' | 'add_child' | 'detach_from_parent' | 'hidden_columns_hide' | 'hidden_columns_show'\n  | 'hidden_rows_hide' | 'hidden_rows_show' | 'filter_by_condition' | 'filter_operators'\n  | 'filter_by_condition2' | 'filter_by_value' | 'filter_action_bar';\n\nexport interface MenuItemConfig {\n  key?: string;\n  name: string | (() => string);\n  hidden?: boolean | (() => boolean);\n  disabled?: boolean | (() => boolean);\n  callback?: (key: string, selection: unknown[], clickEvent: MouseEvent) => void;\n  renderer?: (\n    hot: unknown, wrapper: HTMLElement, row: number, col: number, prop: string | number, itemValue: string\n  ) => HTMLElement;\n  submenu?: { items: MenuItemConfig[] };\n  [key: string]: unknown;\n}\n\nexport const PLUG\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 11,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,280p' handsontable/src/plugins/contextMenu/contextMenu.ts && sed -n '1,280p' handsontable/src/plugins/dropdownMenu/dropdownMenu.ts\"",
+      "truncated": true
+    },
+    {
+      "detail": "handsontable/src/core/settings.ts:360:  afterScroll?: () => void;\nhandsontable/src/core/settings.ts:361:  afterScrollHorizontally?: () => void;\nhandsontable/src/core/settings.ts:362:  afterScrollVertically?: () => void;\nhandsontable/src/core/hooks/constants.ts:598:   * Fired after a scroll event, which is identified as a momentum scroll (e.g. on an iPad).\nhandsontable/src/core/hooks/constants.ts:688:   * (e.g. during a drag-to-scroll operation). The event fires once per mousemove tick for as long as\nhandsontable/src/core/hooks/constants.ts:781:   * Fired before the vertical viewport scroll. Triggered by the [`scrollViewportTo()`](@/api/core.md#scrollviewportto)\nhandsontable/src/core/hooks/constants.ts:787:   * @param {'auto' | 'top' | 'bottom'} [snapping='auto'] If `'top'`, viewport is scrolled to show\nhandsontable/src/core/hooks/constants.ts:788:   * the cell on the top of the table. If `'bottom'`, viewport is scrolled to show the cell on\nhandsontable/src/core/hooks/constants.ts:789:   * the bottom of the table. When `'auto'`, the viewport is scrolled only when the row is outside of\nhandsontable/src/core/hooks/constants.ts:792:   * the viewport will be scrolled. If the returned value is `false`, the scrolling will be canceled.\nhandsontable/src/core/hooks/constants.ts:797:   * Fired before the horizontal viewport scroll. Triggered by the [`scrollViewportTo()`](@/api/core.md#scrollviewportto)\nhandsontable/src/core/hooks/constants.ts:803:   * @param {'auto' | 'start' | 'end'} [snapping='auto'] If `'start'`, viewport is scrolled to show\nhandsontable/src/core/hooks/constants.ts:804:   * the cell on the left of the table. If `'end'`, viewport is scrolled to show the cell on the right of\nhandsontable/src/core/hooks/constants.ts:805:   * the table. When `'auto'`, the viewport\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 12,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"afterScroll|beforeScroll|scroll\\\" handsontable/src/core/hooks/constants.ts handsontable/src/core/settings.ts handsontable/src/plugins/base handsontable/src/plugins/contextMenu handsontable/src/plugins/dropdownMenu | head -160 && rg -n \\\"onScroll|scroll event|addEventListener\\\\('scroll'|scrollListener|rootDocument\\\" handsontable/src | head -200\"",
+      "truncated": true
+    },
+    {
+      "detail": "return this.#getSourceDataAtRow<Record<string, unknown>>(rowIndex);\n  }\n\n  /**\n   * Returns the position (row index) of the menu item identified by the provided `key` within the\n   * currently rendered menu. Before rendering, `filterSeparators()` and the hidden-item filter run\n   * over `menuItems`, so the rendered list can differ from the raw `menuItems` collection - callers\n   * that need an index matching the rendered rows must use this method instead of reading\n   * `menuItems` directly. Falls back to `menuItems` when the menu has not been rendered yet.\n   *\n   * @param {string} key The menu item key to look up.\n   * @returns {number} The item row index, or `-1` when the item is not found.\n   */\n  getItemPositionByKey(key: string): number {\n    const items = (this.hotMenu?.getSourceData() ?? this.menuItems ?? []) as unknown as { key?: string }[];\n\n    return items.findIndex(item => item.key === key);\n  }\n\n  /**\n   * Returns the source data at the provided row index typed as `T`.\n   *\n   * @param {number} row Row index.\n   * @returns {T | null} The source data entry or `null` when the row is not available.\n   */\n  #getSourceDataAtRow<T extends Record<string, unknown>>(row: number): T | null {\n    const data = this.hotMenu?.getSourceDataAtRow(row);\n\n    return data ? data as T : null;\n  }\n\n  /**\n   * Checks if the menu has selected (highlighted) any item from the menu list.\n   *\n   * @returns {boolean}\n   */\n  hasSelectedItem() {\n    return Array.isArray(this.hotMenu!.getSelectedActive());\n  }\n\n  /**\n   * Check if menu is using as sub-menu.\n   *\n   * @returns {boolean}\n   */\n  isSubMenu() {\n    return this.parentMenu !== null;\n  }\n\n  /**\n   * Open menu.\n   *\n   * @fires Hooks#beforeContextMenuShow\n   * @fires Hooks#afterContextMenuShow\n   */\n  open() {\n    this.runLoc\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 13,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '280,760p' handsontable/src/plugins/contextMenu/menu/menu.ts\"",
+      "truncated": true
+    },
+    {
+      "detail": "?.addShortcut({\n        keys: [['Control/Meta', 'Shift', 'Backslash'], ['Shift', 'F10']],\n        callback: () => {\n          const activeRange = this.hot.getSelectedRangeActive();\n\n          if (!activeRange) {\n            return;\n          }\n\n          const { highlight } = activeRange;\n\n          if (highlight.row === null || highlight.col === null) {\n            return;\n          }\n\n          this.hot.scrollToFocusedCell();\n\n          const cell = this.hot.getCell(highlight.row, highlight.col, true);\n\n          if (!cell) {\n            return;\n          }\n\n          const rect = cell.getBoundingClientRect();\n          const offset = getDocumentOffsetByElement(this.menu!.container, this.hot.rootDocument);\n\n          this.open({\n            left: rect.left + offset.left,\n            top: rect.top + offset.top - 1 + rect.height,\n          }, {\n            left: rect.width,\n            above: -rect.height,\n          });\n          // Make sure the first item is selected (role=menuitem). Otherwise, screen readers\n          // will block the Esc key for the whole menu.\n          this.menu!.getNavigator()!.toFirstItem();\n        },\n        runOnlyIf: () => {\n          const highlight = this.hot.getSelectedRangeActive()?.highlight;\n\n          return !!highlight && this.hot.selection.isCellVisible(highlight) && !this.menu!.isOpened();\n        },\n        group: SHORTCUTS_GROUP,\n      });\n  }\n\n  /**\n   * Unregister shortcuts responsible for toggling context menu.\n   *\n   * @private\n   */\n  unregisterShortcuts() {\n    this.hot.getShortcutManager()\n      .getContext('grid')\n      ?.removeShortcutsByGroup(SHORTCUTS_GROUP);\n  }\n\n  /**\n   * Opens the menu and positions it based on the passed coordinates.\n   *\n   * @param {{ top: number, left: number }|Event} position An object with\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 14,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '240,390p' handsontable/src/plugins/contextMenu/contextMenu.ts && sed -n '420,540p' handsontable/src/plugins/dropdownMenu/dropdownMenu.ts && sed -n '680,770p' handsontable/src/plugins/dropdownMenu/dropdownMenu.ts\"",
+      "truncated": true
+    },
+    {
+      "detail": "import { eventTargetEl } from '../../../helpers/dom/element';\n\ninterface CursorSourceLiteral {\n  top: string | number;\n  left: string | number;\n  height?: number;\n  width?: number;\n}\n\ninterface CursorSourceEvent extends Event {\n  pageY: number;\n  pageX: number;\n  target: HTMLElement;\n}\n\n/**\n * Helper class for checking if element will fit at the desired side of cursor.\n *\n * @private\n * @class Cursor\n */\nexport class Cursor {\n  /**\n   * @type {number}\n   */\n  top;\n  /**\n   * @type {number}\n   */\n  topRelative;\n  /**\n   * @type {number}\n   */\n  left;\n  /**\n   * @type {number}\n   */\n  leftRelative;\n  /**\n   * @type {number}\n   */\n  scrollTop;\n  /**\n   * @type {number}\n   */\n  scrollLeft;\n  /**\n   * @type {number}\n   */\n  cellHeight;\n  /**\n   * @type {number}\n   */\n  cellWidth;\n  /**\n   * Reference to the root window used for reading scroll offsets and dimensions.\n   */\n  declare rootWindow: Window;\n  /**\n   * Indicates the source type of the cursor position: either `'literal'` or `'event'`.\n   */\n  declare type: string;\n\n  /**\n   * Initializes the cursor position by computing coordinates from either a literal object or a DOM event.\n   */\n  constructor(object: CursorSourceLiteral | Event, rootWindow: Window) {\n    const windowScrollTop = rootWindow.scrollY;\n    const windowScrollLeft = rootWindow.scrollX;\n    let top = 0;\n    let topRelative = 0;\n    let left = 0;\n    let leftRelative = 0;\n    let cellHeight = 0;\n    let cellWidth = 0;\n\n    this.rootWindow = rootWindow;\n    this.type = this.getSourceType(object);\n\n    if (this.type === 'literal') {\n      const literal = object as CursorSourceLiteral;\n\n      top = parseInt(String(literal.top), 10);\n      left = parseInt(String(literal.left), 10);\n      cellHeight = literal.height || 0;\n      cellWidth = literal.width || 0;\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 15,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,180p' handsontable/src/plugins/contextMenu/menu/cursor.ts && sed -n '1,180p' handsontable/src/plugins/contextMenu/menu/utils.ts && sed -n '1180,1230p' handsontable/src/tableView.ts\"",
+      "truncated": true
+    },
+    {
+      "detail": "handsontable/src/plugins/dropdownMenu/dropdownMenu.ts:391:        this.open({\nhandsontable/src/plugins/dropdownMenu/dropdownMenu.ts:473:   * menu.open({ top: 50, left: 50 });\nhandsontable/src/plugins/dropdownMenu/dropdownMenu.ts:489:    this.menu?.open();\nhandsontable/src/plugins/dropdownMenu/dropdownMenu.ts:494:    this.menu?.setPosition(position);\nhandsontable/src/plugins/dropdownMenu/dropdownMenu.ts:583:      this.open({\nhandsontable/src/plugins/contextMenu/contextMenu.ts:266:          this.open({\nhandsontable/src/plugins/contextMenu/contextMenu.ts:312:   * menu.open({ top: 50, left: 50 });\nhandsontable/src/plugins/contextMenu/contextMenu.ts:331:    this.menu!.open();\nhandsontable/src/plugins/contextMenu/contextMenu.ts:337:    this.menu!.setPosition(position);\nhandsontable/src/plugins/contextMenu/contextMenu.ts:457:    this.open({\n\n        this.open({\n          left: buttonRect.left + offset.left,\n          top: menuTop + offset.top,\n        }, {\n          left: buttonRect.width,\n          right: 0,\n          above: 0,\n          below: isRowspanned ? -1 : 3,\n        });\n        // Make sure the first item is selected (role=menuitem). Otherwise, screen readers\n        // will block the Esc key for the whole menu.\n        this.menu?.getNavigator()?.toFirstItem();\n      }\n    };\n\n    gridContext?.addShortcuts([{\n      keys: [['Shift', 'Alt', 'ArrowDown'], ['Control/Meta', 'Enter']],\n      callback,\n      runOnlyIf: (): boolean => {\n        const highlight = this.hot.getSelectedRangeActive()?.highlight;\n        const highlightedHeaderElement = highlight?.isHeader() ?\n          this.hot.getCell(highlight.row ?? 0, highlight.col ?? 0, true) :\n          null;\n        const isHiddenNestedPlaceholderSelected = highlight?.isHeader() &&\n          (highlight.col ?? -1) >= 0 &&\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 16,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"\\\\.open\\\\(|setPosition\\\\(\\\" handsontable/src/plugins/contextMenu/contextMenu.ts handsontable/src/plugins/dropdownMenu/dropdownMenu.ts | head -80 && sed -n '390,510p' handsontable/src/plugins/dropdownMenu/dropdownMenu.ts && sed -n '500,660p' handsontable/src/plugins/contextMenu/contextMenu.ts\"",
+      "truncated": true
+    },
+    {
+      "detail": "}\n          }\n        }\n\n        if (!target && isHiddenNestedPlaceholderSelected) {\n          for (let column = (from.col ?? 0) - 1; column >= 0; column--) {\n            const candidateHeader = this.hot.getCell(headerRow, column, true);\n\n            if (!candidateHeader || hasClass(candidateHeader, 'hiddenHeader')) {\n              continue; // eslint-disable-line no-continue\n            }\n\n            const candidateButton = candidateHeader?.querySelector(`.${BUTTON_CLASS_NAME}`);\n\n            if (candidateButton) {\n              target = candidateButton;\n              this.hot.selectColumns(column, column, headerRow);\n            }\n            break;\n          }\n        }\n\n        if (!target) {\n          return;\n        }\n\n        if (!isHTMLElement(target)) {\n          return;\n        }\n\n        const buttonRect = this.#getButtonRect(target);\n        const th = target.closest('th');\n        // For rowspanned headers the button may be mispositioned when the htRowspanHeader\n        // CSS class is not yet applied. Anchor to the TH's inner bottom (clientHeight, no\n        // borders) and use below:-1 so the positioner's +1 cancels out, placing the menu\n        // flush with the TH content bottom.\n        const isRowspanned = th && Number.parseInt(th.getAttribute('rowspan') ?? '1', 10) > 1;\n        const menuTop = isRowspanned\n          ? (th.getBoundingClientRect().top + th.clientHeight)\n          : buttonRect.bottom;\n\n        this.open({\n          left: buttonRect.left + offset.left,\n          top: menuTop + offset.top,\n        }, {\n          left: buttonRect.width,\n          right: 0,\n          above: 0,\n          below: isRowspanned ? -1 : 3,\n        });\n        // Make sure the first item is selected (role=menuitem). Otherwise, screen readers\n        // will block\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 17,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '350,425p' handsontable/src/plugins/dropdownMenu/dropdownMenu.ts && sed -n '430,475p' handsontable/src/plugins/dropdownMenu/dropdownMenu.ts && sed -n '430,475p' handsontable/src/plugins/contextMenu/contextMenu.ts && rg -n \\\"#onAfterOnCellContextMenu|#onTableClick|#onBeforeOnCellMouseDown|onAfter\\\" handsontable/src/plugins/contextMenu/contextMenu.ts handsontable/src/plugins/dropdownMenu/dropdownMenu.ts\"",
+      "truncated": true
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 18,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "<!doctype html>\n<meta charset=\"utf-8\">\n<title>Scrollable data-grid menus</title>\n<link rel=\"stylesheet\" href=\"/handsontable/styles/handsontable.min.css\">\n<link rel=\"stylesheet\" href=\"/handsontable/styles/ht-theme-main.min.css\">\n<style>\n  body { font-family: system-ui; margin: 16px; }\n  #scroll-container { height: 320px; overflow: auto; border: 1px solid #bbb; }\n  .spacer-top { height: 80px; }\n  .spacer-bottom { height: 800px; }\n  .page-spacer { height: 1500px; }\n</style>\n<p>Use the column dropdown and cell context menus, then scroll the outer panel or grid.</p>\n<div id=\"scroll-container\" data-testid=\"scroll-container\">\n  <div class=\"spacer-top\"></div>\n  <div id=\"grid\" data-testid=\"grid\" class=\"ht-theme-main\"></div>\n  <div class=\"spacer-bottom\"></div>\n</div>\n<div class=\"page-spacer\"></div>\n<script src=\"/handsontable/dist/handsontable.full.min.js\"></script>\n<script>\nconst grid = document.querySelector('[data-testid=\"grid\"]');\nconst renderer = function(instance, td, row, col, prop, value, cellProperties) {\n  Handsontable.renderers.TextRenderer.apply(this, arguments);\n  td.dataset.testid = `cell-${row}-${col}`;\n};\nwindow.hot = new Handsontable(grid, {\n  data: Handsontable.helper.createSpreadsheetData(30, 30),\n  colHeaders: true,\n  rowHeaders: true,\n  dropdownMenu: true,\n  filters: true,\n  contextMenu: true,\n  colWidths: 120,\n  width: 600,\n  height: 200,\n  renderer,\n  licenseKey: 'non-commercial-and-evaluation',\n});\n</script>\n\nGit status:\n M handsontable/package-lock.json\n M package-lock.json",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 19,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' runtime-task/index.html && printf '\\\\nGit status:\\\\n' && git status --short\"",
+      "truncated": false
+    },
+    {
+      "detail": "import { stopImmediatePropagation as _stopImmediatePropagation } from './helpers/dom/event';\n\ninterface EventListenerEntry {\n  element: Element | Document | Window;\n  event: string;\n  callback: (event: Event) => void;\n  callbackProxy: (event: Event) => void;\n  options: boolean | AddEventListenerOptions;\n  // eslint-disable-next-line no-use-before-define\n  eventManager: EventManager;\n}\n\n/**\n * Counter which tracks unregistered listeners (useful for detecting memory leaks).\n *\n * @type {number}\n */\nlet listenersCounter = 0;\n\n/**\n * Event DOM manager for internal use in Handsontable.\n *\n * @class EventManager\n */\nclass EventManager {\n  /**\n   * @type {object}\n   */\n  declare context: (Record<string, unknown> & { eventListeners: EventListenerEntry[] }) | null;\n\n  /**\n   * @param {object} [context=null] An object to which event listeners will be stored.\n   */\n  constructor(context: (object & { eventListeners?: EventListenerEntry[] }) | null = null) {\n    this.context = (context || this) as Record<string, unknown> & { eventListeners: EventListenerEntry[] };\n\n    // TODO it modify external object. Rethink that.\n    if (!this.context.eventListeners) {\n      this.context.eventListeners = []; // TODO perf It would be more performant if every instance of EventManager tracked its own listeners only\n    }\n  }\n\n  /**\n   * Register specified listener (`eventName`) to the element.\n   *\n   * @param {Element} element Target element.\n   * @param {string} eventName Event name.\n   * @param {Function} callback Function which will be called after event occur.\n   * @param {AddEventListenerOptions|boolean} [options] Listener options if object or useCapture if boolean.\n   * @returns {Function} Returns function which you can easily call to remove that event.\n   */\n  addEventListener<E extends Eve\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 20,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,220p' handsontable/src/eventManager.ts && sed -n '560,620p' handsontable/src/plugins/dropdownMenu/dropdownMenu.ts && sed -n '410,470p' handsontable/src/plugins/contextMenu/contextMenu.ts && sed -n '430,485p' handsontable/src/plugins/contextMenu/menu/menu.ts\"",
+      "truncated": true
+    },
+    {
+      "detail": "167:export function getDocumentOffsetByElement(elementToCheck: HTMLElement, baseDocument: Document) {\nimport type { HotInstance } from '../../core/types';\nimport { arrayEach } from '../../helpers/array';\n\ninterface CellRangeLike {\n  forAll(callback: (row: number, col: number) => void | boolean): void;\n}\n\n/**\n * @param {string} className The full element class name to process.\n * @param {string} alignment The alignment class name to compare with.\n * @returns {string}\n */\nexport function prepareVerticalAlignClass(className: string, alignment: string) {\n  if (className.indexOf(alignment) !== -1) {\n    return className;\n  }\n\n  const replacedClassName = className\n    .replace('htTop', '')\n    .replace('htMiddle', '')\n    .replace('htBottom', '')\n    .replace('  ', '');\n\n  return `${replacedClassName} ${alignment}`;\n}\n\n/**\n * @param {string} className The full element class name to process.\n * @param {string} alignment The alignment class name to compare with.\n * @returns {string}\n */\nexport function prepareHorizontalAlignClass(className: string, alignment: string) {\n  if (className.indexOf(alignment) !== -1) {\n    return className;\n  }\n  const replacedClassName = className\n    .replace('htLeft', '')\n    .replace('htCenter', '')\n    .replace('htRight', '')\n    .replace('htJustify', '')\n    .replace('  ', '');\n\n  return `${replacedClassName} ${alignment}`;\n}\n\n/**\n * @param {CellRange[]} ranges An array of the cell ranges.\n * @param {Function} callback The callback function.\n * @returns {object}\n */\nexport function getAlignmentClasses(ranges: CellRangeLike[], callback: (row: number, col: number) => string) {\n  const classes: Record<number, string[]> = {};\n\n  arrayEach(ranges, (range: CellRangeLike) => {\n    range.forAll((row: number, col: number) => {\n      // Alignment classes\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 21,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"function getDocumentOffsetByElement|export function getDocumentOffsetByElement\\\" handsontable/src/plugins/contextMenu/utils.ts && sed -n '1,100p' handsontable/src/plugins/contextMenu/utils.ts && sed -n '620,680p' handsontable/src/plugins/dropdownMenu/dropdownMenu.ts\"",
+      "truncated": true
+    },
+    {
+      "detail": "return result;\n}\n\n/**\n * Returns document offset based on the passed element. If the document objects between element and the\n * base document are not the same the offset as top and left properties will be returned.\n *\n * @param {Element} elementToCheck The element to compare with Document object.\n * @param {Document} baseDocument The base Document object.\n * @returns {{ top: number, left: number }}\n */\nexport function getDocumentOffsetByElement(elementToCheck: HTMLElement, baseDocument: Document) {\n  const offset = { top: 0, left: 0 };\n\n  if (baseDocument !== elementToCheck.ownerDocument) {\n    const { frameElement } = baseDocument.defaultView as Window;\n    const { top, left } = (frameElement as HTMLElement).getBoundingClientRect();\n\n    offset.top = top;\n    offset.left = left;\n  }\n\n  return offset;\n}\n\n/**\n * Prepares comparator function consumable by checkSelectionConsistency\n * Comparator function checks if the cell has the provided class name.\n *\n * @param  {string} htClassName The class name to check.\n * @returns {Function} Returns the comparator function.\n * Use with .bind, .call or .apply to pass the Handsontable instance.\n */\nexport function getAlignmentComparatorByClass(htClassName: string) {\n  return function(this: HotInstance, row: number, col: number): boolean {\n    const className = this.getCellMetaTransient(row, col).className as string | string[] | undefined;\n\n    return Boolean(className && className.indexOf(htClassName) !== -1);\n  };\n}\ndescribe('ContextMenu', () => {\n  beforeEach(function() {\n    this.$container = $('<div id=\"testContainer\"></div>').appendTo('body');\n  });\n\n  afterEach(function() {\n    if (this.$container) {\n      destroy();\n      this.$container.remove();\n    }\n  });\n\n  using('configuration object', [\n    { htmlDir: 'ltr', layoutDire\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 22,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '155,195p' handsontable/src/plugins/contextMenu/utils.ts && sed -n '1,120p' handsontable/src/plugins/contextMenu/__tests__/positioning.spec.js && sed -n '2720,2825p' handsontable/src/plugins/contextMenu/__tests__/contextMenu.spec.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 173, \"y\": 146}",
+      "kind": "computer_use",
+      "sequence": 23,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "handsontable/src/core.ts:3801:   * hot.getCoords(hot.getCell(1, 1));\nhandsontable/src/core.ts:3806:    const renderableCoords = instance.view._wt.wtTable.getCoords(element) as CellCoords | null;\nhandsontable/src/core/types.ts:216:  getCoords(element: HTMLElement): CellCoords | null;\nhandsontable/src/plugins/multipleSelectionHandles/multipleSelectionHandles.ts:185:        targetCoords = this.hot.getCoords(endTarget as HTMLElement);\nhandsontable/src/plugins/comments/comments.ts:867:        coordinates = this.hot.getCoords(eventCell);\nhandsontable/src/plugins/comments/comments.ts:905:      const coords = this.hot.getCoords(target);\nhandsontable/src/3rdparty/walkontable/test/spec/selection/selection.spec.js:1581:    expect(wt.wtTable.getCoords(spec().$table.find('tbody tr:first td:first')[0]))\nhandsontable/src/3rdparty/walkontable/test/spec/rtl/table.spec.js:34:    expect(wt.wtTable.getCoords($td2[0])).toEqual(new Walkontable.CellCoords(1, 1));\nhandsontable/src/3rdparty/walkontable/test/spec/rtl/table.spec.js:58:    expect(wt.wtTable.getCoords($td2[0])).toEqual(new Walkontable.CellCoords(1, 1));\nhandsontable/src/3rdparty/walkontable/test/spec/rtl/table.spec.js:78:    expect(wt.wtTable.getCoords($th2[0])).toEqual(new Walkontable.CellCoords(-1, 1));\nhandsontable/src/3rdparty/walkontable/test/spec/rtl/table.spec.js:98:    expect(wt.wtTable.getCoords($td2[0])).toEqual(new Walkontable.CellCoords(1, 1));\nhandsontable/src/3rdparty/walkontable/test/spec/table/getCoords.spec.js:24:  describe('getCoords()', () => {\nhandsontable/src/3rdparty/walkontable/test/spec/table/getCoords.spec.js:36:      expect(wt.wtTable.getCoords($td2[0])).toEqual(new Walkontable.CellCoords(1, 1));\nhandsontable/src/3rdparty/walkontable/test/spec/table/getCoords.spec.js:59:      expect(wt.wtTable.getCoords($t\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 24,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"getCoords\\\\(\\\" handsontable/src | head -40 && rg -n \\\"getCell\\\\(.*true\\\" handsontable/src/plugins | head -40 && rg -n \\\"getCoords\\\" handsontable/src/core.ts handsontable/src/core | head -40\"",
+      "truncated": true
+    },
+    {
+      "detail": "}\n    }\n\n    return THs;\n  },\n\n  /**\n   * Returns cell coords object for a given TD (or a child element of a TD element).\n   *\n   * @param {HTMLTableCellElement} TD A cell DOM element (or a child of one).\n   * @returns {CellCoords|null} The coordinates of the provided TD element (or the closest TD element) or\n   *   null, if the provided element is not applicable.\n   * @this Table\n   */\n  getCoords(this: Table, TD: HTMLTableCellElement | HTMLElement): CellCoords | null {\n    let cellElement: HTMLElement | null = TD;\n\n    if (cellElement.nodeName !== 'TD' && cellElement.nodeName !== 'TH') {\n      cellElement = closest(cellElement, ['TD', 'TH']);\n    }\n\n    if (cellElement === null) {\n      return null;\n    }\n\n    const TR = cellElement.parentNode;\n\n    if (!TR) {\n      return null;\n    }\n\n    const CONTAINER = TR.parentNode as (Node & ParentNode) | null;\n\n    if (!CONTAINER) {\n      return null;\n    }\n\n    let row = isHTMLElement(TR) ? index(TR) : 0;\n    let col = isHTMLTableCellElement(cellElement) ? cellElement.cellIndex : 0;\n\n    if (overlayContainsElement(CLONE_TOP_INLINE_START_CORNER, cellElement, this.wtRootElement)\n      || overlayContainsElement(CLONE_TOP, cellElement, this.wtRootElement)) {\n      if (CONTAINER.nodeName === 'THEAD') {\n        row -= CONTAINER.childNodes.length;\n      }\n\n  };\n\n  /**\n   * Returns the coordinates of the cell, provided as a HTML table cell element.\n   *\n   * @memberof Core#\n   * @function getCoords\n   * @param {HTMLTableCellElement} element The HTML Element representing the cell.\n   * @returns {CellCoords|null} Visual coordinates object.\n   * @example\n   * ```js\n   * hot.getCoords(hot.getCell(1, 1));\n   * // it returns CellCoords object instance with props row: 1 and col: 1.\n   * ```\n   */\n  this.getCoords = function(element: HTMLEle\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 25,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '225,270p' handsontable/src/3rdparty/walkontable/src/table/cellAccess.ts && sed -n '3790,3820p' handsontable/src/core.ts\"",
+      "truncated": true
+    },
+    {
+      "detail": "I found the core failure mode: menus remember only page coordinates, so scrolling an ancestor moves the anchor while the menu stays at its old coordinates. I\u2019m adding an optional DOM anchor to the shared menu, refreshing its position on captured scroll events (including outer containers and menu submenus), and validating the anchor\u2019s current grid coordinates so recycled/off-viewport cells close the menu.",
+      "kind": "agent_message",
+      "sequence": 26,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: handsontable/src/plugins/contextMenu/contextMenu.ts\nupdate: handsontable/src/plugins/contextMenu/menu/menu.ts\nupdate: handsontable/src/plugins/dropdownMenu/dropdownMenu.ts",
+      "files": [
+        {
+          "kind": "update",
+          "path": "handsontable/src/plugins/contextMenu/contextMenu.ts"
+        },
+        {
+          "kind": "update",
+          "path": "handsontable/src/plugins/contextMenu/menu/menu.ts"
+        },
+        {
+          "kind": "update",
+          "path": "handsontable/src/plugins/dropdownMenu/dropdownMenu.ts"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 27,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "{\"delta_x\": 0, \"delta_y\": 160, \"kind\": \"scroll\", \"x\": 900, \"y\": 300}",
+      "kind": "computer_use",
+      "sequence": 28,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"delta_x\": 0, \"delta_y\": 160, \"kind\": \"scroll\", \"x\": 900, \"y\": 300}",
+      "kind": "computer_use",
+      "sequence": 29,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"CTRL+R\"}",
+      "kind": "computer_use",
+      "sequence": 30,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "update: handsontable/src/plugins/contextMenu/__tests__/contextMenu.spec.js\nupdate: handsontable/src/plugins/contextMenu/menu/menu.ts",
+      "files": [
+        {
+          "kind": "update",
+          "path": "handsontable/src/plugins/contextMenu/__tests__/contextMenu.spec.js"
+        },
+        {
+          "kind": "update",
+          "path": "handsontable/src/plugins/contextMenu/menu/menu.ts"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 31,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "> build\n> npm run all build -- -e=examples\n\n\n> all\n> cross-env-shell COMMAND_ENV=all node scripts/translate-to-native-npm.mjs build -e=examples\n\n\n> handsontable@18.0.0 build\n> node scripts/run.mjs --parallel build\n\n  \u001b[32m\u2713\u001b[0m rimraf commonjs es coverage tmp tmp_styles (1600ms)\n  \u001b[36m\u2026\u001b[0m build:styles\n  \u001b[36m\u2026\u001b[0m build:themes-css\n  \u001b[36m\u2026\u001b[0m build:themes-css.min\n  \u001b[36m\u2026\u001b[0m build:languages\n  \u001b[36m\u2026\u001b[0m build:languages.es\n  \u001b[36m\u2026\u001b[0m build:languages.min\n  \u001b[36m\u2026\u001b[0m build:themes-umd\n  \u001b[36m\u2026\u001b[0m build:themes-umd.min\n  \u001b[36m\u2026\u001b[0m build:types\n  \u001b[32m\u2713\u001b[0m build:languages.es (17966ms)\nTranspiled 22 files (esm, .mjs) in 3424ms\n  \u001b[32m\u2713\u001b[0m build:themes-css (153389ms)\n\u009d\t\u009d\nRspack compiled successfully in 29.38 s\n  \u001b[32m\u2713\u001b[0m build:themes-umd.min (318205ms)\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\nRspack compiled successfully in 174.81 s\n\nRspack compiled successfully in 174.56 s\n\nRspack compiled successfully in 173.41 s\n\nRspack compiled successfully in 168.94 s\n\nRspack compiled successfully in 168.41 s\n\nRspack compiled successfully in 167.50 s\n\nRspack compiled successfully in 162.27 s\n\nRspack compiled successfully in 164.89 s\n\nRspack compiled successfully in 160.91 s\n\nRspack compiled successfully in 168.70 s\n\nRspack compiled successfully in 163.24 s\n\nRspack compiled successfully in 164.54 s\n\nRspack compiled successfully in 168.10 s\n\nRspack compiled successfully in 167.87 s\n\nRspack compiled successfully in 167.74 s\n\nRspack compiled successfully in 167.32 s\n\nRspack compiled successfully in 167.75 s\n  \u001b[32m\u2713\u001b[0m build:themes-umd (324917ms)\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\n\u009d\t\u009d\nRspack compiled successfully in 175.77 s\n\nRspack compiled successfully in 176.84 s\n\nRspack compiled successfully in 176.99 s\n\nRspack compiled s\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 1,
+      "kind": "command",
+      "sequence": 32,
+      "status": "failed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": true
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+R\"}",
+      "kind": "computer_use",
+      "sequence": 33,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 34,
+      "status": "completed",
+      "title": "visual_cua.observe",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "handsontable/dist/handsontable.full.js:69560:   */ #anchorSnapshot = null;\nhandsontable/dist/handsontable.full.js:69628:            this.eventManager.addEventListener(frame.document, 'scroll', this.#onDocumentScroll, true);\nhandsontable/dist/handsontable.full.js:70020:        this.#anchorSnapshot = anchor ? {\nhandsontable/dist/handsontable.full.js:70033:   */ #onDocumentScroll = ()=>{\nhandsontable/dist/handsontable.full.js:70047:        if (!this.#anchor || !this.#anchorSnapshot || !this.isOpened()) {\nhandsontable/dist/handsontable.full.js:70050:        if (!this.#isAnchorRendered()) {\nhandsontable/dist/handsontable.full.js:70055:        const { rect, position } = this.#anchorSnapshot;\nhandsontable/dist/handsontable.full.js:70068:   */ #isAnchorRendered() {",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 35,
+      "status": "completed",
+      "title": "/bin/bash -lc 'rg -n \"refreshes the menu position|anchorSnapshot|onDocumentScroll|isAnchorRendered\" handsontable/dist/handsontable.full.min.js handsontable/dist/handsontable.full.js | head'",
+      "truncated": false
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 36,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "handsontable/package-lock.json                     |    48 -\n .../contextMenu/__tests__/contextMenu.spec.js      |    29 +\n .../src/plugins/contextMenu/contextMenu.ts         |     9 +-\n handsontable/src/plugins/contextMenu/menu/menu.ts  |   102 +-\n .../src/plugins/dropdownMenu/dropdownMenu.ts       |     9 +-\n package-lock.json                                  | 13688 +------------------\n .../projects/hot-table/src/lib/hot-table.module.ts |     2 +-\n 7 files changed, 760 insertions(+), 13127 deletions(-)\ndiff --git a/handsontable/src/plugins/contextMenu/__tests__/contextMenu.spec.js b/handsontable/src/plugins/contextMenu/__tests__/contextMenu.spec.js\nindex 9bff9a4..e10ab76 100644\n--- a/handsontable/src/plugins/contextMenu/__tests__/contextMenu.spec.js\n+++ b/handsontable/src/plugins/contextMenu/__tests__/contextMenu.spec.js\n@@ -2801,6 +2801,35 @@ describe('ContextMenu', () => {\n       expect($('.htContextMenu').is(':visible')).toBe(true);\n     });\n \n+    it('should keep the menu attached to its cell when the scroll container moves', async() => {\n+      handsontable({\n+        data: createSpreadsheetData(40, 30),\n+        colWidths: 50,\n+        rowHeaders: true,\n+        colHeaders: true,\n+        contextMenu: true,\n+        height: 100\n+      });\n+\n+      const $mainHolder = $(tableView()._wt.wtTable.holder);\n+\n+      await selectCell(15, 3);\n+      await contextMenu();\n+\n+      const $menu = $('.htContextMenu');\n+      const initialMenuTop = $menu.offset().top;\n+      const initialCellTop = $(getCell(15, 3)).offset().top;\n+\n+      $mainHolder.scrollTop($mainHolder.scrollTop() + 40);\n+      await waitForNextAnimationFrames(2);\n+\n+      const currentCell = getCell(15, 3);\n+\n+      expect($menu.is(':visible')).toBe(true);\n+      expect($menu.offset().top - $(currentCell)\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 37,
+      "status": "completed",
+      "title": "/bin/bash -lc \"git diff --check && git diff --stat && git diff -- handsontable/src/plugins/contextMenu/menu/menu.ts handsontable/src/plugins/contextMenu/contextMenu.ts handsontable/src/plugins/dropdownMenu/dropdownMenu.ts handsontable/src/plugins/contextMenu/__tests__/contextMenu.spec.js | sed -n '1,280p'\"",
+      "truncated": true
+    },
+    {
+      "detail": "rollout=<evaluation-workspace>/rollout\ndiff --git a/wrappers/angular-wrapper/projects/hot-table/src/lib/hot-table.module.ts b/wrappers/angular-wrapper/projects/hot-table/src/lib/hot-table.module.ts\nindex 3de4290..0256689 100644\n--- a/wrappers/angular-wrapper/projects/hot-table/src/lib/hot-table.module.ts\n+++ b/wrappers/angular-wrapper/projects/hot-table/src/lib/hot-table.module.ts\n@@ -6,5 +6,5 @@ import { HotTableComponent } from './hot-table.component';\n   exports: [HotTableComponent],\n })\n export class HotTableModule {\n-  static readonly version = '0.0.0-VERSION';\n+  static readonly version = '18.0.0';\n }\n M handsontable/package-lock.json\n M handsontable/src/plugins/contextMenu/__tests__/contextMenu.spec.js\n M handsontable/src/plugins/contextMenu/contextMenu.ts\n M handsontable/src/plugins/contextMenu/menu/menu.ts\n M handsontable/src/plugins/dropdownMenu/dropdownMenu.ts\n M package-lock.json\n M wrappers/angular-wrapper/projects/hot-table/src/lib/hot-table.module.ts",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 38,
+      "status": "completed",
+      "title": "/bin/bash -lc 'echo \"rollout=${CUA_SWE_AGENT_ROLLOUT_DIR:-}\"; git diff -- wrappers/angular-wrapper/projects/hot-table/src/lib/hot-table.module.ts; git status --short'",
+      "truncated": false
+    },
+    {
+      "detail": "M handsontable/src/plugins/contextMenu/__tests__/contextMenu.spec.js\n M handsontable/src/plugins/contextMenu/contextMenu.ts\n M handsontable/src/plugins/contextMenu/menu/menu.ts\n M handsontable/src/plugins/dropdownMenu/dropdownMenu.ts",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 39,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git restore package-lock.json handsontable/package-lock.json wrappers/angular-wrapper/projects/hot-table/src/lib/hot-table.module.ts && git status --short && git diff --check'",
+      "truncated": false
+    },
+    {
+      "detail": "The focused source diff is now clean. The monorepo build produced unrelated lockfile/version rewrites and then hit a pre-existing Angular wrapper build failure; I removed those generated side effects and kept only the menu implementation plus regression test. I\u2019m doing a targeted static check now, then I\u2019ll write the rollout notes.",
+      "kind": "agent_message",
+      "sequence": 40,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "M handsontable/src/plugins/contextMenu/__tests__/contextMenu.spec.js\n M handsontable/src/plugins/contextMenu/contextMenu.ts\n M handsontable/src/plugins/contextMenu/menu/menu.ts\n M handsontable/src/plugins/dropdownMenu/dropdownMenu.ts",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 41,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && git status --short'",
+      "truncated": false
+    },
+    {
+      "detail": "<evaluation-workspace>/workspace/handsontable/src/plugins/contextMenu/__tests__/contextMenu.spec.js\n    40:11  warning  Do not use a fixed sleep() delay. Wait for the condition \u2014 a hook, a DOM state, or a web-first assertion. See handsontable/.ai/TESTING.md  handsontable/no-fixed-sleep-in-spec\n    64:11  warning  Do not use a fixed sleep() delay. Wait for the condition \u2014 a hook, a DOM state, or a web-first assertion. See handsontable/.ai/TESTING.md  handsontable/no-fixed-sleep-in-spec\n    98:13  warning  Do not use a fixed sleep() delay. Wait for the condition \u2014 a hook, a DOM state, or a web-first assertion. See handsontable/.ai/TESTING.md  handsontable/no-fixed-sleep-in-spec\n   130:13  warning  Do not use a fixed sleep() delay. Wait for the condition \u2014 a hook, a DOM state, or a web-first assertion. See handsontable/.ai/TESTING.md  handsontable/no-fixed-sleep-in-spec\n   155:13  warning  Do not use a fixed sleep() delay. Wait for the condition \u2014 a hook, a DOM state, or a web-first assertion. See handsontable/.ai/TESTING.md  handsontable/no-fixed-sleep-in-spec\n   161:13  warning  Do not use a fixed sleep() delay. Wait for the condition \u2014 a hook, a DOM state, or a web-first assertion. See handsontable/.ai/TESTING.md  handsontable/no-fixed-sleep-in-spec\n   589:13  warning  Do not use a fixed sleep() delay. Wait for the condition \u2014 a hook, a DOM state, or a web-first assertion. See handsontable/.ai/TESTING.md  handsontable/no-fixed-sleep-in-spec\n   614:13  warning  Do not use a fixed sleep() delay. Wait for the condition \u2014 a hook, a DOM state, or a web-first assertion. See handsontable/.ai/TESTING.md  handsontable/no-fixed-sleep-in-spec\n   770:13  warning  Do not use a fixed sleep() delay. Wait for the condition \u2014 a hook, a DOM state, or a web-first assertion. See handsontab\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 42,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npx eslint src/plugins/contextMenu/menu/menu.ts src/plugins/contextMenu/contextMenu.ts src/plugins/dropdownMenu/dropdownMenu.ts src/plugins/contextMenu/__tests__/contextMenu.spec.js'",
+      "truncated": true
+    },
+    {
+      "detail": "> handsontable@18.0.0 test:types\n> node scripts/run.mjs test:types\n\n  \u001b[32m\u2713\u001b[0m tsc -p tsconfig.build-types.json (8085ms)\ndownlevel-dts: rewrote 3 files (3 replacements)\n  \u001b[32m\u2713\u001b[0m node scripts/downlevel-dts.mjs (1872ms)\nsrc/__tests__/core/settings.types.ts(25,7): error TS2739: Type '{ activeHeaderClassName: string; allowEmpty: true; allowHtml: true; allowInsertColumn: true; allowInsertRow: true; allowInvalid: true; allowRemoveColumn: true; allowRemoveRow: true; ariaTags: true; ... 392 more ...; modifyTransformStart: (delta: CellCoords) => void; }' is missing the following properties from type 'Required<GridSettings>': afterOnCellMouseOverOutside, beforeOnCellMouseOverOutside, modifySinglePassLayout\n\n\u001b[31mStep failed (exit 2): tsc -p ./test/types\u001b[0m",
+      "exit_code": 1,
+      "kind": "command",
+      "sequence": 43,
+      "status": "failed",
+      "title": "/bin/bash -lc 'npm --prefix handsontable run test:types'",
+      "truncated": false
+    },
+    {
+      "detail": "update: handsontable/src/plugins/contextMenu/menu/menu.ts",
+      "files": [
+        {
+          "kind": "update",
+          "path": "handsontable/src/plugins/contextMenu/menu/menu.ts"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 44,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "{\n  typecheck: 'node scripts/run.mjs typecheck',\n  clean: 'node scripts/run.mjs clean',\n  lint: 'node scripts/run.mjs --parallel lint',\n  'lint:fix': 'node scripts/run.mjs --sequential lint:fix',\n  eslint: 'node scripts/run.mjs lint:eslint',\n  'eslint:fix': 'node scripts/run.mjs lint:eslint.fix',\n  stylelint: 'node scripts/run.mjs lint:stylelint',\n  'stylelint:fix': 'node scripts/run.mjs lint:stylelint.fix',\n  'measure:module-sizes': 'node scripts/run.mjs measure:module-sizes',\n  test: 'node scripts/run.mjs --sequential test',\n  'test.random': 'node scripts/run.mjs --sequential test -- --random',\n  'test:walkontable': 'node scripts/run.mjs --sequential test:walkontable',\n  'test:walkontable.random': 'node scripts/run.mjs --sequential test:walkontable -- --random',\n  'test:walkontable.watch': 'node scripts/run.mjs test:walkontable.watch',\n  'test:walkontable.dump': 'node scripts/run.mjs test:walkontable.dump',\n  'test:walkontable.puppeteer': 'node scripts/run.mjs test:walkontable.puppeteer',\n  'test:production': 'node scripts/run.mjs --sequential test:production',\n  'test:production.random': 'node scripts/run.mjs --sequential test:production -- --random',\n  'test:production.dump': 'node scripts/run.mjs test:production.dump',\n  'test:e2e': 'node scripts/run.mjs --sequential test:e2e',\n  'test:e2e.random': 'node scripts/run.mjs --sequential test:e2e -- --random',\n  'test:e2e.verbose': 'node scripts/run.mjs --sequential test:e2e -- --verbose',\n  'test:e2e.watch': 'node scripts/run.mjs test:e2e.watch',\n  'test:e2e.dump': 'node scripts/run.mjs test:e2e.dump',\n  'test:e2e.dump.esm-cjs': 'node scripts/run.mjs test:e2e.dump.esm-cjs',\n  'test:e2e.puppeteer': 'node scripts/run.mjs test:e2e.puppeteer',\n  'test:unit': 'node scripts/run.mjs --sequential test:unit',\n  'test:unit.jest'\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 45,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node -e \\\"console.log(require('./handsontable/package.json').scripts)\\\" | head -100\"",
+      "truncated": true
+    },
+    {
+      "detail": "update: handsontable/src/plugins/contextMenu/menu/menu.ts",
+      "files": [
+        {
+          "kind": "update",
+          "path": "handsontable/src/plugins/contextMenu/menu/menu.ts"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 46,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+R\"}",
+      "kind": "computer_use",
+      "sequence": 47,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "> handsontable@18.0.0 build:umd\n> node scripts/run.mjs build:umd\n\n\u009d\t\u009d\nRspack compiled successfully in 20.30 s\n  \u001b[32m\u2713\u001b[0m cross-env-shell BABEL_ENV=commonjs NODE_ENV=styles-development env-cmd -f ../hot.config.js rspack (35782ms)\n\u009d\t\u009d\nRspack compiled successfully in 15.63 s\n  \u001b[32m\u2713\u001b[0m cross-env-shell BABEL_ENV=commonjs NODE_ENV=themes-css-development env-cmd -f ../hot.config.js rspack (31004ms)\n\u009d\t\u009d\n\u009d\t\u009d\nRspack compiled successfully in 24.90 s\n\nRspack compiled successfully in 23.63 s\n  \u001b[32m\u2713\u001b[0m cross-env-shell BABEL_ENV=commonjs NODE_ENV=development env-cmd -f ../hot.config.js rspack ./src/index.ts (41776ms)\n\n> handsontable@18.0.0 build:umd.min\n> node scripts/run.mjs build:umd.min\n\n\u009d\t\u009d\nRspack compiled successfully in 19.55 s\n  \u001b[32m\u2713\u001b[0m cross-env-shell BABEL_ENV=commonjs NODE_ENV=styles-development env-cmd -f ../hot.config.js rspack (35141ms)\n\u009d\t\u009d\nRspack compiled successfully in 20.84 s\n  \u001b[32m\u2713\u001b[0m cross-env-shell BABEL_ENV=commonjs NODE_ENV=styles-production env-cmd -f ../hot.config.js rspack (36094ms)\n\u009d\t\u009d\nRspack compiled successfully in 19.49 s\n  \u001b[32m\u2713\u001b[0m cross-env-shell BABEL_ENV=commonjs NODE_ENV=themes-css-production env-cmd -f ../hot.config.js rspack (34778ms)\n\u009d\t\u009d\n\u009d\t\u009d\nRspack compiled successfully in 40.30 s\n\nRspack compiled successfully in 44.47 s\n  \u001b[32m\u2713\u001b[0m cross-env-shell BABEL_ENV=commonjs NODE_ENV=production env-cmd -f ../hot.config.js rspack ./src/index.ts (61933ms)",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 48,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm --prefix handsontable run build:umd && npm --prefix handsontable run build:umd.min'",
+      "truncated": false
+    },
+    {
+      "detail": "The protected browser replay confirms the original detached-menu state, and the captured-document listener alone is not reliable enough for a scrollable ancestor. I\u2019m tightening the fix by subscribing directly to each anchor\u2019s scrollable ancestor as well, which covers the outer panel deterministically while keeping the passive/captured document listener for page and custom-container scrolling.",
+      "kind": "agent_message",
+      "sequence": 49,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: handsontable/src/plugins/contextMenu/menu/menu.ts",
+      "files": [
+        {
+          "kind": "update",
+          "path": "handsontable/src/plugins/contextMenu/menu/menu.ts"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 50,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 51,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npx eslint src/plugins/contextMenu/menu/menu.ts src/plugins/contextMenu/contextMenu.ts src/plugins/dropdownMenu/dropdownMenu.ts'",
+      "truncated": false
+    },
+    {
+      "detail": "> handsontable@18.0.0 build:umd.min\n> node scripts/run.mjs build:umd.min\n\n\u009d\t\u009d\nRspack compiled successfully in 19.86 s\n  \u001b[32m\u2713\u001b[0m cross-env-shell BABEL_ENV=commonjs NODE_ENV=styles-development env-cmd -f ../hot.config.js rspack (35221ms)\n\u009d\t\u009d\nRspack compiled successfully in 17.73 s\n  \u001b[32m\u2713\u001b[0m cross-env-shell BABEL_ENV=commonjs NODE_ENV=styles-production env-cmd -f ../hot.config.js rspack (35517ms)\n\u009d\t\u009d\nRspack compiled successfully in 19.05 s\n  \u001b[32m\u2713\u001b[0m cross-env-shell BABEL_ENV=commonjs NODE_ENV=themes-css-production env-cmd -f ../hot.config.js rspack (35413ms)\n\u009d\t\u009d\n\u009d\t\u009d\nRspack compiled successfully in 43.46 s\n\nRspack compiled successfully in 41.66 s\n  \u001b[32m\u2713\u001b[0m cross-env-shell BABEL_ENV=commonjs NODE_ENV=production env-cmd -f ../hot.config.js rspack ./src/index.ts (61951ms)",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 52,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm --prefix handsontable run build:umd.min'",
+      "truncated": false
+    },
+    {
+      "detail": "M handsontable/src/plugins/contextMenu/__tests__/contextMenu.spec.js\n M handsontable/src/plugins/contextMenu/contextMenu.ts\n M handsontable/src/plugins/contextMenu/menu/menu.ts\n M handsontable/src/plugins/dropdownMenu/dropdownMenu.ts\n .../contextMenu/__tests__/contextMenu.spec.js      |  29 +++++\n .../src/plugins/contextMenu/contextMenu.ts         |   9 +-\n handsontable/src/plugins/contextMenu/menu/menu.ts  | 140 ++++++++++++++++++++-\n .../src/plugins/dropdownMenu/dropdownMenu.ts       |   9 +-\n 4 files changed, 177 insertions(+), 10 deletions(-)",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 53,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && git status --short && git diff --stat'",
+      "truncated": false
+    },
+    {
+      "detail": "",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 54,
+      "status": "completed",
+      "title": "/bin/bash -lc \"if test -e <evaluation-workspace>/rollout/rollout_notes.md; then sed -n '1,200p' <evaluation-workspace>/rollout/rollout_notes.md; fi\"",
+      "truncated": false
+    },
+    {
+      "detail": "add: rollout_notes.md",
+      "files": [
+        {
+          "kind": "add",
+          "path": "rollout_notes.md"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 55,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "The source and generated browser bundle are now both updated. Final checks are clean for the changed files, and the required rollout notes are written.",
+      "kind": "agent_message",
+      "sequence": 56,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "Implemented scroll-aware anchoring for dropdowns, context menus, and submenus.\n\n- Menus track their DOM anchors across outer/grid scrolling.\n- Menus close when anchors leave the rendered grid.\n- Custom containers, keyboard opens, submenu scrolling, and page scrolling remain supported.\n- Added regression coverage.\n\nChecks: targeted ESLint and core UMD builds passed. Full build was blocked by unrelated Angular wrapper errors; documented in [rollout_notes.md](<evaluation-workspace>/rollout/rollout_notes.md).",
+      "kind": "agent_message",
+      "sequence": 57,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "\u2713 Inspect repository guidance and locate demo/menu positioning code and tests\n\u2713 Implement scroll-aware menu anchoring and anchor-rendered checks\n\u2713 Run focused tests/build and review the diff\n\u2713 Write rollout notes",
+      "kind": "plan",
+      "sequence": 58,
+      "status": "completed",
+      "title": "Agent plan",
+      "truncated": false
+    }
+  ],
+  "provenance": "fresh_gpt56_luna_cua_replacement_infrastructure_normalized_20260901",
+  "run_relation": "replacement",
+  "source": "shuli_exp EFS \u00b7 GPT-5.6 Luna screenshot-only CUA rerun with missing Handsontable 18.0.0 source files restored",
+  "status": "available",
+  "summary": {
+    "events": 58,
+    "commands": 35,
+    "file_changes": 6,
+    "computer_use_calls": 9,
+    "agent_messages": 7,
+    "plans": 1,
+    "screenshots": 0,
+    "truncated_events": 23,
+    "unfinished_items": 0
+  },
+  "task_id": "web.handsontable-menu-scroll-anchor.001",
+  "terminal_status": "completed",
+  "usage": {
+    "cache_write_input_tokens": 132552,
+    "cached_input_tokens": 5448218,
+    "input_tokens": 5613914,
+    "output_tokens": 17952,
+    "reasoning_output_tokens": 9650
+  },
+  "activity_source_kind": "retained_timeline",
+  "artifacts": {
+    "Retained event data (partial)": "viewer/media/source/agent/web.handsontable-menu-scroll-anchor.001/activity-export.json",
+    "Run provenance": "viewer/media/source/agent/web.handsontable-menu-scroll-anchor.001/activity-provenance.json"
+  },
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 23. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "task_id": "v3.echarts-linked-datazoom-toolbar.001",
+  "run_relation": "replacement",
+  "provenance": "fresh_gpt56_luna_screenshot_cua_replacement_20260901",
+  "run_label": null,
+  "source_description": "shuli_exp EFS \u00b7 fresh GPT-5.6 Luna screenshot-only CUA rerun \u00b7 2026-09-01",
+  "terminal_status": "completed",
+  "activity_source_kind": "retained_timeline",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/v3.echarts-linked-datazoom-toolbar.001/activity-retained.json": "667fea703b3c9375610644b9ea489c15afc9e102a1800561a336461b05699b7e"
+  },
+  "activity_sha256": "5686d52e09878bc5f43ab78c58903fa22a57db5773519c6a732e87db1c913141",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

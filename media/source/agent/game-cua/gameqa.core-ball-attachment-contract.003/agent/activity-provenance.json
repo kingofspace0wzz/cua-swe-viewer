@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.core-ball-attachment-contract.003",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-03",
+  "source_description": null,
+  "terminal_status": "completed",
+  "activity_source_kind": "representative_game_bundle",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 7,
+      "commands": 15,
+      "computer_use_calls": 16,
+      "events": 42,
+      "file_changes": 3,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 13,
+    "label": "cua-03",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "diagnostic failure with most retained observation frames",
+    "success": false
+  },
+  "frame_mapping": [
+    {
+      "event_sequence": 7,
+      "frame_sequence": 1,
+      "audit_sequence": 2,
+      "timestamp": "2026-09-01T13:02:48.804614+00:00",
+      "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0001.png",
+      "sha256": "fb70ed7fe09616c0fbf0c36109520e3001eb1eefb3ff702555e255f5c62af34b"
+    },
+    {
+      "event_sequence": 9,
+      "frame_sequence": 2,
+      "audit_sequence": 3,
+      "timestamp": "2026-09-01T13:03:14.916358+00:00",
+      "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0002.png",
+      "sha256": "ab12904f0bd856bc2469bf8f1e2ea52e68bd95730055303524b0b9ff0a4b9942"
+    },
+    {
+      "event_sequence": 10,
+      "frame_sequence": 3,
+      "audit_sequence": 4,
+      "timestamp": "2026-09-01T13:03:22.690253+00:00",
+      "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0003.png",
+      "sha256": "96c1168e8b31bb9b1c78276c0284eaccfbd0295078538ec64496721c37905284"
+    },
+    {
+      "event_sequence": 11,
+      "frame_sequence": 4,
+      "audit_sequence": 5,
+      "timestamp": "2026-09-01T13:03:27.965935+00:00",
+      "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0004.png",
+      "sha256": "baf0488643d0906c8a5b8ddfab492ac136964d6ccce800f817ba169e9808267e"
+    },
+    {
+      "event_sequence": 13,
+      "frame_sequence": 5,
+      "audit_sequence": 7,
+      "timestamp": "2026-09-01T13:03:57.388454+00:00",
+      "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0005.png",
+      "sha256": "e4022dbbd77c506de1117078245e0811c00df065112c21b2785b271fd62b2e7d"
+    },
+    {
+      "event_sequence": 28,
+      "frame_sequence": 6,
+      "audit_sequence": 9,
+      "timestamp": "2026-09-01T13:06:48.604733+00:00",
+      "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0006.png",
+      "sha256": "fb70ed7fe09616c0fbf0c36109520e3001eb1eefb3ff702555e255f5c62af34b"
+    },
+    {
+      "event_sequence": 29,
+      "frame_sequence": 7,
+      "audit_sequence": 10,
+      "timestamp": "2026-09-01T13:06:55.308038+00:00",
+      "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0007.png",
+      "sha256": "7f63386666ac68341c54869f042f22719765b8aa7066417270e70bfce88c192e"
+    },
+    {
+      "event_sequence": 30,
+      "frame_sequence": 8,
+      "audit_sequence": 11,
+      "timestamp": "2026-09-01T13:07:02.572189+00:00",
+      "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0008.png",
+      "sha256": "01a7e05309bde0b3a4d60c2bc329a0811c1ded61d30e4ba0f72d55e1f51bb47b"
+    },
+    {
+      "event_sequence": 31,
+      "frame_sequence": 9,
+      "audit_sequence": 12,
+      "timestamp": "2026-09-01T13:07:11.181353+00:00",
+      "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0009.png",
+      "sha256": "c6039172c30644d00ee5a32f281f49c5fedaf60d23de1a72a27c91b403ffd2f3"
+    },
+    {
+      "event_sequence": 32,
+      "frame_sequence": 10,
+      "audit_sequence": 13,
+      "timestamp": "2026-09-01T13:07:21.486131+00:00",
+      "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0010.png",
+      "sha256": "5fbe998cbcc7ed52be93f559e0bb6b909b85ed2c66bc9bb101259df4c76cc7c9"
+    },
+    {
+      "event_sequence": 33,
+      "frame_sequence": 11,
+      "audit_sequence": 14,
+      "timestamp": "2026-09-01T13:07:33.045847+00:00",
+      "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0011.png",
+      "sha256": "571a0eb84a540c84308394e79dd475b4393975de2a17bebc4a7fe3c47e668b32"
+    },
+    {
+      "event_sequence": 37,
+      "frame_sequence": 12,
+      "audit_sequence": 16,
+      "timestamp": "2026-09-01T13:08:21.944483+00:00",
+      "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0012.png",
+      "sha256": "571a0eb84a540c84308394e79dd475b4393975de2a17bebc4a7fe3c47e668b32"
+    },
+    {
+      "event_sequence": 38,
+      "frame_sequence": 13,
+      "audit_sequence": 17,
+      "timestamp": "2026-09-01T13:08:29.901211+00:00",
+      "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0013.png",
+      "sha256": "571a0eb84a540c84308394e79dd475b4393975de2a17bebc4a7fe3c47e668b32"
+    }
+  ],
+  "image_verification": "Run identity, complete successful action sequence, arguments, timestamps, and audit SHA-256",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "13 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/activity.json": "a46bbee91710ff5faa761af98a66b282782e3016f87e09f300879d20275eab77",
+    "viewer/media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frame-manifest.json": "cc2aa8eae6c4dc8bfd34ee6077c3ed2c7d231c31c7af597820dc7f5f31f86bcf",
+    "viewer/media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/trajectory.jsonl": "72bbb8f39374ea639b9c88e18b7a996339aa742c7aa4adfe619aff53e5127955",
+    "viewer/media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/cua-audit.jsonl": "b5067fe96915070c6a104f412ba32c61179e4fda0238fe7dfd79719a6d5e847c",
+    "viewer/media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/visual-events.jsonl": "1f0aa03c0115834bd2df9a3008c0d339f66cffb68f65521dcfc3ea1373532209",
+    "viewer/media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/run-result.json": "e683fd5071e6c84412d0757615682491ea2bd05ebc38b25e8393851c8e3cadd5",
+    "viewer/media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/metadata.json": "21adde94453e009352a012744999504c2f048f6b1fa450ba8c867ab1ef10c900",
+    "viewer/media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/patch.diff": "6c6c11aa23cd7a75525b04c32d8b826f41018bb5cc0cf26544741b4425ad0460"
+  },
+  "activity_sha256": "36ec47d0409bf7d66f2f173afecb3301550c0bc646bf0d1b43e6cd7993f10502",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

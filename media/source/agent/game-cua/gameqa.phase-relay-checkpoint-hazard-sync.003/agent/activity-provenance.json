@@ -1,0 +1,289 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.phase-relay-checkpoint-hazard-sync.003",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-02",
+  "source_description": null,
+  "terminal_status": "completed",
+  "activity_source_kind": "representative_game_bundle",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 7,
+      "commands": 17,
+      "computer_use_calls": 30,
+      "events": 57,
+      "file_changes": 2,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 28,
+    "label": "cua-02",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "diagnostic failure with most retained observation frames",
+    "success": false
+  },
+  "frame_mapping": [
+    {
+      "event_sequence": 14,
+      "frame_sequence": 1,
+      "audit_sequence": 2,
+      "timestamp": "2026-09-02T15:17:39.170432+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0001.png",
+      "sha256": "5897dc7b4f98470a0385f0f9d82e131cfb35f65ba16b3d4940a97e7a02cc75b0"
+    },
+    {
+      "event_sequence": 22,
+      "frame_sequence": 2,
+      "audit_sequence": 4,
+      "timestamp": "2026-09-02T15:18:29.195551+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0002.png",
+      "sha256": "5897dc7b4f98470a0385f0f9d82e131cfb35f65ba16b3d4940a97e7a02cc75b0"
+    },
+    {
+      "event_sequence": 23,
+      "frame_sequence": 3,
+      "audit_sequence": 5,
+      "timestamp": "2026-09-02T15:18:36.550640+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0003.png",
+      "sha256": "d4359c6f30ea37b0d9e9b858d2342379c4b89ec91dcfe69ab75d4f4cb17d46c1"
+    },
+    {
+      "event_sequence": 24,
+      "frame_sequence": 4,
+      "audit_sequence": 6,
+      "timestamp": "2026-09-02T15:18:43.831483+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0004.png",
+      "sha256": "786fe87b0d6d3d4a7bdb2f8b121e029373cbb2b0321d81a1fe84e1070bf65ecd"
+    },
+    {
+      "event_sequence": 25,
+      "frame_sequence": 5,
+      "audit_sequence": 7,
+      "timestamp": "2026-09-02T15:18:55.242437+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0005.png",
+      "sha256": "9f3b4a1cef3a123c0ea3fce02f193c853cf71f1fff832eb28772eec0fadf4634"
+    },
+    {
+      "event_sequence": 26,
+      "frame_sequence": 6,
+      "audit_sequence": 8,
+      "timestamp": "2026-09-02T15:19:04.370629+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0006.png",
+      "sha256": "6ee2eb58a5c4593e6bbc46540854532f83404ec32ae89ee589210824c6bcf583"
+    },
+    {
+      "event_sequence": 28,
+      "frame_sequence": 7,
+      "audit_sequence": 10,
+      "timestamp": "2026-09-02T15:19:32.892293+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0007.png",
+      "sha256": "6ee2eb58a5c4593e6bbc46540854532f83404ec32ae89ee589210824c6bcf583"
+    },
+    {
+      "event_sequence": 29,
+      "frame_sequence": 8,
+      "audit_sequence": 11,
+      "timestamp": "2026-09-02T15:19:43.033536+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0008.png",
+      "sha256": "6ee2eb58a5c4593e6bbc46540854532f83404ec32ae89ee589210824c6bcf583"
+    },
+    {
+      "event_sequence": 30,
+      "frame_sequence": 9,
+      "audit_sequence": 12,
+      "timestamp": "2026-09-02T15:19:57.456480+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0009.png",
+      "sha256": "69ade61b9960bcbc244ddd3d5c05f467794194f46dc81da388d5f77fb3fcc250"
+    },
+    {
+      "event_sequence": 31,
+      "frame_sequence": 10,
+      "audit_sequence": 13,
+      "timestamp": "2026-09-02T15:20:11.431544+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0010.png",
+      "sha256": "97bc1eceed8efd5be4ba9c305795167cf085aceca0b97e7e9fc8a7ea52a8778c"
+    },
+    {
+      "event_sequence": 33,
+      "frame_sequence": 11,
+      "audit_sequence": 14,
+      "timestamp": "2026-09-02T15:20:30.110477+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0011.png",
+      "sha256": "97bc1eceed8efd5be4ba9c305795167cf085aceca0b97e7e9fc8a7ea52a8778c"
+    },
+    {
+      "event_sequence": 34,
+      "frame_sequence": 12,
+      "audit_sequence": 15,
+      "timestamp": "2026-09-02T15:20:41.576696+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0012.png",
+      "sha256": "059ded9a19a3bcb67fe675263b26abd161b7a74be33098d22d2d790adbc2a698"
+    },
+    {
+      "event_sequence": 35,
+      "frame_sequence": 13,
+      "audit_sequence": 16,
+      "timestamp": "2026-09-02T15:20:54.729958+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0013.png",
+      "sha256": "059ded9a19a3bcb67fe675263b26abd161b7a74be33098d22d2d790adbc2a698"
+    },
+    {
+      "event_sequence": 36,
+      "frame_sequence": 14,
+      "audit_sequence": 17,
+      "timestamp": "2026-09-02T15:21:04.461203+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0014.png",
+      "sha256": "2bff94039a8c7a25889b4183b200b546dc59b319eb9bd77d8ea5ee56909bb1b3"
+    },
+    {
+      "event_sequence": 37,
+      "frame_sequence": 15,
+      "audit_sequence": 18,
+      "timestamp": "2026-09-02T15:21:14.465869+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0015.png",
+      "sha256": "5897dc7b4f98470a0385f0f9d82e131cfb35f65ba16b3d4940a97e7a02cc75b0"
+    },
+    {
+      "event_sequence": 38,
+      "frame_sequence": 16,
+      "audit_sequence": 19,
+      "timestamp": "2026-09-02T15:21:27.014570+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0016.png",
+      "sha256": "330cbdd767626b03cabec2933ed3823eec2a3982cb4f0b8d11d04e08241f94db"
+    },
+    {
+      "event_sequence": 39,
+      "frame_sequence": 17,
+      "audit_sequence": 20,
+      "timestamp": "2026-09-02T15:21:44.985473+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0017.png",
+      "sha256": "9f3b4a1cef3a123c0ea3fce02f193c853cf71f1fff832eb28772eec0fadf4634"
+    },
+    {
+      "event_sequence": 40,
+      "frame_sequence": 18,
+      "audit_sequence": 21,
+      "timestamp": "2026-09-02T15:22:02.759100+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0018.png",
+      "sha256": "6ee2eb58a5c4593e6bbc46540854532f83404ec32ae89ee589210824c6bcf583"
+    },
+    {
+      "event_sequence": 41,
+      "frame_sequence": 19,
+      "audit_sequence": 22,
+      "timestamp": "2026-09-02T15:22:15.856424+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0019.png",
+      "sha256": "6ee2eb58a5c4593e6bbc46540854532f83404ec32ae89ee589210824c6bcf583"
+    },
+    {
+      "event_sequence": 42,
+      "frame_sequence": 20,
+      "audit_sequence": 23,
+      "timestamp": "2026-09-02T15:22:26.318315+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0020.png",
+      "sha256": "2d3aae7418182835c038f2ca369e3c28670ab27fa43ca88178bb68b5c54880a8"
+    },
+    {
+      "event_sequence": 43,
+      "frame_sequence": 21,
+      "audit_sequence": 24,
+      "timestamp": "2026-09-02T15:22:38.155624+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0021.png",
+      "sha256": "968a880fa3d4722f5dc0904492e620b21f440b317729c085f5b04b03db6b0d9a"
+    },
+    {
+      "event_sequence": 44,
+      "frame_sequence": 22,
+      "audit_sequence": 25,
+      "timestamp": "2026-09-02T15:22:51.657710+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0022.png",
+      "sha256": "daca5f1c6155d4de6832288de8f23998ea781f5d78882b4c4dcf50bc576b22ff"
+    },
+    {
+      "event_sequence": 45,
+      "frame_sequence": 23,
+      "audit_sequence": 26,
+      "timestamp": "2026-09-02T15:23:10.732795+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0023.png",
+      "sha256": "369207cf54713093a07c1c845fc80ba76daca1e42bdd644dc3476372e5e6cfbf"
+    },
+    {
+      "event_sequence": 46,
+      "frame_sequence": 24,
+      "audit_sequence": 27,
+      "timestamp": "2026-09-02T15:23:22.517099+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0024.png",
+      "sha256": "8128d3b293428c140c57b4ee67a1b99c324bfa810fffa32a3a85214e0674cd3f"
+    },
+    {
+      "event_sequence": 47,
+      "frame_sequence": 25,
+      "audit_sequence": 28,
+      "timestamp": "2026-09-02T15:23:42.185690+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0025.png",
+      "sha256": "0a32ee3fce2ee7edf11e614399589e6bc2dba5fd03ac77cf0f1e9ccc90b4d357"
+    },
+    {
+      "event_sequence": 48,
+      "frame_sequence": 26,
+      "audit_sequence": 29,
+      "timestamp": "2026-09-02T15:24:03.531701+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0026.png",
+      "sha256": "059ded9a19a3bcb67fe675263b26abd161b7a74be33098d22d2d790adbc2a698"
+    },
+    {
+      "event_sequence": 49,
+      "frame_sequence": 27,
+      "audit_sequence": 30,
+      "timestamp": "2026-09-02T15:24:19.699123+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0027.png",
+      "sha256": "235809f9ff2fd79af263ed0973016fe335556263de70c2cf2448081a59744b65"
+    },
+    {
+      "event_sequence": 50,
+      "frame_sequence": 28,
+      "audit_sequence": 31,
+      "timestamp": "2026-09-02T15:24:33.297592+00:00",
+      "path": "media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frames/frame-0028.png",
+      "sha256": "6fb0c13dc0ca7841f508f7526780d644a83116c9e52ce13ad10ae2e9b893d199"
+    }
+  ],
+  "image_verification": "Run identity, complete successful action sequence, arguments, timestamps, and audit SHA-256",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "28 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/activity.json": "56438f59bca053948e99502a4c910312d859ea3f38d1f1a98b210486eb578464",
+    "viewer/media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/frame-manifest.json": "4991e4c13252d0c319264dac72fbd3bc73f3844f77722e5112d07a60d1906fda",
+    "viewer/media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/trajectory.jsonl": "9df99397c6f16b1dfedc1aa390618cdf0e1275524a290a4fdf434d981323f5e1",
+    "viewer/media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/cua-audit.jsonl": "26e33c7fe1ecd992e129d4a24cb4ad6352cd1af9e0d638693e8e553a812621f2",
+    "viewer/media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/visual-events.jsonl": "9bdfe55b7ca0057703cfc3846e2af5a19abe6d5e6f3db6570b85d1e5814def02",
+    "viewer/media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/run-result.json": "a44ec778c44c9f848333bd4e8bbd8f1b8adb513618797e5f2c0828d8dc7b7883",
+    "viewer/media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/metadata.json": "98606c2cd08e1c42fae8cf2c8ecc310d90d17538bb8a549060a1a2b0c116b311",
+    "viewer/media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/patch.diff": "80350d017d9cfeb385e6b05e5c4505965a5805d92c758990019c14b5aa0ecc7e"
+  },
+  "activity_sha256": "7057426ca8b49d3eb6835ec39a2e456f0e06704a73b7d0c54a544d9443e16ba8",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

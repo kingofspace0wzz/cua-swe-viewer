@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.maze-signal-mode-handoff.001",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-01",
+  "source_description": null,
+  "terminal_status": "completed",
+  "activity_source_kind": "representative_game_bundle",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 6,
+      "commands": 17,
+      "computer_use_calls": 12,
+      "events": 38,
+      "file_changes": 2,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 11,
+    "label": "cua-01",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "diagnostic failure with most retained observation frames",
+    "success": false
+  },
+  "frame_mapping": [
+    {
+      "event_sequence": 4,
+      "frame_sequence": 1,
+      "audit_sequence": 2,
+      "timestamp": "2026-09-02T13:50:42.111136+00:00",
+      "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0001.png",
+      "sha256": "c4a6878322af4b82abfafed84778e3f307f5567ee7e496f13e54e5785a197a10"
+    },
+    {
+      "event_sequence": 16,
+      "frame_sequence": 2,
+      "audit_sequence": 3,
+      "timestamp": "2026-09-02T13:51:17.359928+00:00",
+      "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0002.png",
+      "sha256": "19c94fa8b0528c9011523dd90a0961356b7b5d3966acd325f7c608186dda5bc8"
+    },
+    {
+      "event_sequence": 17,
+      "frame_sequence": 3,
+      "audit_sequence": 4,
+      "timestamp": "2026-09-02T13:51:24.876546+00:00",
+      "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0003.png",
+      "sha256": "81c2c7de5b0f78230d48f07e088bf395125c1768eb328b7c31b9d13ae7def1c7"
+    },
+    {
+      "event_sequence": 18,
+      "frame_sequence": 4,
+      "audit_sequence": 5,
+      "timestamp": "2026-09-02T13:51:48.996103+00:00",
+      "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0004.png",
+      "sha256": "81c2c7de5b0f78230d48f07e088bf395125c1768eb328b7c31b9d13ae7def1c7"
+    },
+    {
+      "event_sequence": 19,
+      "frame_sequence": 5,
+      "audit_sequence": 6,
+      "timestamp": "2026-09-02T13:51:55.069655+00:00",
+      "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0005.png",
+      "sha256": "81c2c7de5b0f78230d48f07e088bf395125c1768eb328b7c31b9d13ae7def1c7"
+    },
+    {
+      "event_sequence": 26,
+      "frame_sequence": 6,
+      "audit_sequence": 8,
+      "timestamp": "2026-09-02T13:52:40.800399+00:00",
+      "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0006.png",
+      "sha256": "81c2c7de5b0f78230d48f07e088bf395125c1768eb328b7c31b9d13ae7def1c7"
+    },
+    {
+      "event_sequence": 27,
+      "frame_sequence": 7,
+      "audit_sequence": 9,
+      "timestamp": "2026-09-02T13:52:53.926824+00:00",
+      "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0007.png",
+      "sha256": "34864b8c49200a62b33755c07d9e89063d3243bb803538f486467acbfc189b3b"
+    },
+    {
+      "event_sequence": 28,
+      "frame_sequence": 8,
+      "audit_sequence": 10,
+      "timestamp": "2026-09-02T13:53:02.567235+00:00",
+      "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0008.png",
+      "sha256": "a06d07e502b13b2a9ae1321c2cbc6ab3e53d04fdbddd33e2ef608dfc1e925b81"
+    },
+    {
+      "event_sequence": 29,
+      "frame_sequence": 9,
+      "audit_sequence": 11,
+      "timestamp": "2026-09-02T13:53:10.718522+00:00",
+      "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0009.png",
+      "sha256": "94136d19fe5fdce05bb4990e4d345328c436778592ef68229fed5a2f5c9da5c3"
+    },
+    {
+      "event_sequence": 30,
+      "frame_sequence": 10,
+      "audit_sequence": 12,
+      "timestamp": "2026-09-02T13:53:19.657183+00:00",
+      "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0010.png",
+      "sha256": "94136d19fe5fdce05bb4990e4d345328c436778592ef68229fed5a2f5c9da5c3"
+    },
+    {
+      "event_sequence": 31,
+      "frame_sequence": 11,
+      "audit_sequence": 13,
+      "timestamp": "2026-09-02T13:53:27.510194+00:00",
+      "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0011.png",
+      "sha256": "a04b41103dbe479bee8d7c3fb77f08657fe023ed252acb5664893e307103c030"
+    }
+  ],
+  "image_verification": "Run identity, complete successful action sequence, arguments, timestamps, and audit SHA-256",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 2. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "11 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/activity.json": "20fa9e4f3151f4ebbe85c961683f190e6809ba147f1b8332321b8ed0cf315cd9",
+    "viewer/media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frame-manifest.json": "d3f6ee43714e21d4261693c36ae995faedb7ff39d3ea9cd75dc270c7f5382215",
+    "viewer/media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/trajectory.jsonl": "892de903f72a49bc616840cf8bcff91eadb0559423aeac5819a602ac4cdecee4",
+    "viewer/media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/cua-audit.jsonl": "ef685fe1573671109253ef081d3b313a9bc1bc8194363026c01befabfd4abebd",
+    "viewer/media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/visual-events.jsonl": "2f8a63624748c2651d82b76e321052d198aeb09ddf17e351bf4001852cdc0f1a",
+    "viewer/media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/run-result.json": "74fab87c48cfb02f35153fe68e1bc6badb38362dfb5be0c8b46532ec27ba6f06",
+    "viewer/media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/metadata.json": "0dcade4766fe00a7911d8609d1f1d5d8df8cdad6042346ba40783f474e77184d",
+    "viewer/media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/patch.diff": "ea649c7c935bde4b565dc7e781b4dde5033dcb26a58d63dd1472266683c6f6f0"
+  },
+  "activity_sha256": "769b95bc22bd00f40c39e4e3307a8b6cfa88a469cef09970f0b1802fe8061ec9",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

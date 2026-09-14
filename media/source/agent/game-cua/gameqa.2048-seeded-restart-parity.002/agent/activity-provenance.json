@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.2048-seeded-restart-parity.002",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-02",
+  "source_description": null,
+  "terminal_status": "completed",
+  "activity_source_kind": "representative_game_bundle",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 5,
+      "commands": 12,
+      "computer_use_calls": 4,
+      "events": 24,
+      "file_changes": 2,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 4,
+    "label": "cua-02",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "diagnostic failure with most retained observation frames",
+    "success": false
+  },
+  "frame_mapping": [
+    {
+      "event_sequence": 15,
+      "frame_sequence": 1,
+      "audit_sequence": 2,
+      "timestamp": "2026-09-01T11:43:54.928762+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/frames/frame-0001.png",
+      "sha256": "0cd06e525ea3acd5b56b4d49e66b5e944d469872b607f12e62af341602a7ad93"
+    },
+    {
+      "event_sequence": 16,
+      "frame_sequence": 2,
+      "audit_sequence": 3,
+      "timestamp": "2026-09-01T11:44:06.497707+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/frames/frame-0002.png",
+      "sha256": "def5a8d599ceb0ab6e3b7cefe24d8224ddda70d46ea28f176fa74dc3c9378f4b"
+    },
+    {
+      "event_sequence": 17,
+      "frame_sequence": 3,
+      "audit_sequence": 4,
+      "timestamp": "2026-09-01T11:44:22.865242+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/frames/frame-0003.png",
+      "sha256": "630ec1e95bd2d40b7352bf86ade3b5d80280d58f5551ab45ee0d716b2347aaed"
+    },
+    {
+      "event_sequence": 18,
+      "frame_sequence": 4,
+      "audit_sequence": 5,
+      "timestamp": "2026-09-01T11:44:35.764007+00:00",
+      "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/frames/frame-0004.png",
+      "sha256": "264ad0872976cf37be2d4f2c96ffb3c80a875d759ef7b2a2ae3e1f0812b258b9"
+    }
+  ],
+  "image_verification": "Run identity, complete successful action sequence, arguments, timestamps, and audit SHA-256",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "4 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/activity.json": "27a447c185e9f43e001c87ed2c5dd464931adba2be12e2552797b6d4eb70cbca",
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/frame-manifest.json": "9be26ca8ec7fa4cc8d436bfd64e6e5a6956be3458935c482ed7ddb4796366b7b",
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/trajectory.jsonl": "aaf2f4018d2c18d6b935e49d2148d74e39b0acfd1c8dde03e6070ccb8384a60a",
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/cua-audit.jsonl": "409a8dd7f7811efae6194d1642e8f9a34b81b4514c7f06ae2bfc3ef2cb7a4584",
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/visual-events.jsonl": "3311ae253693d3c208d19a2c839cf05c28b8346aae98169e8833bb04652dd199",
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/run-result.json": "9b5dc011514ca3b578b7f030bc1f04cf2eebed5059ae6c70176389a367317065",
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/metadata.json": "1556f2a54f9d08c61029bf31c38367e8d8cdabce370086a91417b2712b3d8329",
+    "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/patch.diff": "5747f787844621c83d7d8d37b102723a4f6e91ec5aed8f22c163c57ac7a155dd"
+  },
+  "activity_sha256": "a44171b9f45d53c7b67a5834be8d24de50d07efadfd647b06fe41ab304d047a1",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

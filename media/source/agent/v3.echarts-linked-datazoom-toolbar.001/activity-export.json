@@ -1,0 +1,289 @@
+{
+  "coverage": "retained_codex_events_partial",
+  "events": [
+    {
+      "detail": "I\u2019ll trace the linked-chart zoom state in the local source, make the smallest synchronization fix, then run the build and record the required rollout notes. I\u2019ll preserve the fixtures, panel structure, toolbox, and primary-chart behavior.",
+      "kind": "agent_message",
+      "sequence": 1,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "<evaluation-workspace>/workspace\npackage-lock.json\nindex.html\nserver.mjs\npackage.json\nbuild.mjs\nsrc/chartView.js\nsrc/dashboard.js\nsrc/manifest.js\nsrc/main.js\nsrc/zoomStrategies.js\nsrc/linkBroadcast.js\nsrc/styles.css\n\n--- package ---\n{\n  \"name\": \"fleet-analytics-console\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"version\": \"1.0.0\",\n  \"scripts\": {\n    \"build\": \"node build.mjs\",\n    \"dev\": \"vite --host 127.0.0.1 --port 57700\"\n  }\n}\n\n--- rollout dir ---\n<evaluation-workspace>/rollout",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 2,
+      "status": "completed",
+      "title": "/bin/bash -lc \"pwd && rg --files -g '\"'!node_modules'\"' -g '\"'!dist'\"' | head -200 && printf '\\\\n--- package ---\\\\n' && sed -n '1,220p' package.json && printf '\\\\n--- rollout dir ---\\\\n' && printf '%s\\\\n' \\\"\"'${CUA_SWE_AGENT_ROLLOUT_DIR:-}\"'",
+      "truncated": false
+    },
+    {
+      "detail": "// Renders one chart panel of the Fleet Analytics Console onto a canvas and\n// keeps a visible window read-out in the panel header.\n//\n// A chart panel shows a metric plotted across the chart's own x-domain. The\n// panel remembers the visible x-window it is currently framed to. When the\n// window narrows, the canvas redraws the same series confined to that window\n// and the header read-out prints the framed interval so an analyst can see\n// exactly which slice each chart is showing.\n\nfunction niceNum(v) {\n  return Math.round(v * 100) / 100;\n}\n\nexport class ChartPanel {\n  constructor(chart, rootEl) {\n    this.chart = chart;\n    this.window = chart.domain.slice(); // full domain to begin with\n    this.el = rootEl;\n    this.el.className = 'panel ' + (chart.role === 'master' ? 'panel-master' : 'panel-linked');\n    this.el.dataset.chart = chart.id;\n    this.el.innerHTML = `\n      <div class=\"panel-head\">\n        <span class=\"panel-label\">${chart.label}</span>\n        <span class=\"panel-window\"\n              data-chart-window=\"${chart.id}\"\n              data-lo=\"\" data-hi=\"\"></span>\n      </div>\n      <canvas class=\"panel-canvas\" width=\"300\" height=\"150\"></canvas>`;\n    this.canvas = this.el.querySelector('canvas');\n    this.readout = this.el.querySelector('.panel-window');\n    this.draw();\n  }\n\n  setWindow(win) {\n    // Clamp to the chart's own domain so a projected window never runs past the\n    // data this chart actually holds.\n    const [d0, d1] = this.chart.domain;\n    const lo = Math.max(d0, Math.min(win[0], win[1]));\n    const hi = Math.min(d1, Math.max(win[0], win[1]));\n    this.window = [lo, hi];\n    this.draw();\n  }\n\n  reset() {\n    this.window = this.chart.domain.slice();\n    this.draw();\n  }\n\n  draw() {\n    const ctx = this.canvas.getContext('2d');\n    const W =\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 3,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' src/chartView.js && printf '\\\\n--- zoomStrategies ---\\\\n' && sed -n '1,260p' src/zoomStrategies.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "// Wires the Fleet Analytics Console together: builds the master and linked\n// chart panels, installs the toolbox rubber-band handler on the master, and\n// broadcasts each selection to the linked panels.\nimport { loadManifest, masterChart, linkedCharts } from './manifest.js';\nimport { ChartPanel } from './chartView.js';\nimport { broadcast } from './linkBroadcast.js';\n\nexport async function mountDashboard(root) {\n  const { manifest } = await loadManifest();\n  const title = document.querySelector('#ws-title');\n  if (title) title.textContent = manifest.title;\n\n  const master = masterChart(manifest);\n  const linked = linkedCharts(manifest);\n\n  const masterHost = root.querySelector('#master-host');\n  const linkedHost = root.querySelector('#linked-host');\n  masterHost.innerHTML = '';\n  linkedHost.innerHTML = '';\n\n  const masterPanel = new ChartPanel(master, document.createElement('div'));\n  masterHost.appendChild(masterPanel.el);\n\n  const linkedPanels = {};\n  linked.forEach((chart) => {\n    const el = document.createElement('div');\n    linkedHost.appendChild(el);\n    linkedPanels[chart.id] = new ChartPanel(chart, el);\n  });\n\n  // Apply a normalized rubber-band [lo, hi] drawn on the master: narrow the\n  // master to that fraction of its own domain, then broadcast to the linked\n  // panels so they frame the corresponding slice.\n  function applyToolboxZoom(fraction) {\n    const [d0, d1] = master.domain;\n    const span = d1 - d0;\n    masterPanel.setWindow([d0 + fraction[0] * span, d0 + fraction[1] * span]);\n    const windows = broadcast(master, linked, fraction);\n    linked.forEach((chart) => {\n      linkedPanels[chart.id].setWindow(windows[chart.id]);\n    });\n  }\n\n  function resetAll() {\n    masterPanel.reset();\n    linked.forEach((chart) => linkedPanels[chart.id].reset());\n  }\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 4,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,300p' src/dashboard.js && printf '\\\\n--- linkBroadcast ---\\\\n' && sed -n '1,260p' src/linkBroadcast.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "import { mountDashboard } from './dashboard.js';\n\nmountDashboard(document.getElementById('console')).catch((err) => {\n  const el = document.getElementById('console');\n  if (el) el.innerHTML = '<p class=\"load-error\">workspace unavailable</p>';\n  console.error(err);\n});\n\n--- manifest ---\n// Loads the active dashboard manifest from the workspace API.\n//\n// The manifest lists the charts (one master, several linked), each with its own\n// x-domain and raw sample points, plus a scripted toolbox rubber-band gesture.\n// The console keeps the returned link token opaque and echoes nothing decisive\n// from it.\nexport async function loadManifest() {\n  const res = await fetch('/api/workspace/manifest');\n  const token = res.headers.get('x-workspace-link') || '';\n  const manifest = await res.json();\n  return { manifest, token };\n}\n\nexport function masterChart(manifest) {\n  return manifest.charts.find((c) => c.role === 'master');\n}\n\nexport function linkedCharts(manifest) {\n  return manifest.charts.filter((c) => c.role === 'linked');\n}\n\n--- html ---\n<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <title>Fleet Analytics Console</title>\n    <link rel=\"stylesheet\" href=\"src/styles.css\" />\n  </head>\n  <body>\n    <header class=\"app-header\">\n      <h1>Fleet Analytics Console</h1>\n      <span class=\"ws-name\" id=\"ws-title\">Loading workspace\u2026</span>\n    </header>\n    <div class=\"toolbox\">\n      <button id=\"tb-zoom\" type=\"button\">Window zoom</button>\n      <button id=\"tb-reset\" type=\"button\">Reset</button>\n    </div>\n    <p class=\"hint\">Arm Window zoom, then rubber-band a span on the North/Unit/Feeder master chart. The linked panels follow.</p>\n    <main class=\"console-body\" id=\"console\">\n      <s\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 5,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' src/main.js && printf '\\\\n--- manifest ---\\\\n' && sed -n '1,260p' src/manifest.js && printf '\\\\n--- html ---\\\\n' && sed -n '1,220p' index.html\"",
+      "truncated": true
+    },
+    {
+      "detail": "// Static host for the Fleet Analytics Console.\n//\n// The console ships no fleet data of its own. At load time it asks the\n// workspace API under /api/workspace/ for the active dashboard manifest, and\n// this host forwards those requests to whatever workspace origin the launcher\n// points it at. Everything else is served as a static file.\nimport http from 'node:http';\nimport { readFile } from 'node:fs/promises';\nimport { extname, join, normalize, sep } from 'node:path';\n\nconst args = process.argv.slice(2);\nconst port = Number((args.includes('--port') ? args[args.indexOf('--port') + 1] : 0) || 4180);\nconst host = (args.includes('--host') ? args[args.indexOf('--host') + 1] : '') || '127.0.0.1';\nconst workspace = process.env.CUA_SWE_EXTERNAL_SERVICE_ORIGIN || 'http://127.0.0.1:4890';\nconst types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css' };\n\nfunction safeRelPath(url) {\n  const rel = url === '/' ? 'index.html' : url.split('?')[0].slice(1);\n  const norm = normalize(rel);\n  if (norm.startsWith('..' + sep) || norm === '..' || norm.startsWith('/')) return 'index.html';\n  return norm;\n}\n\nhttp.createServer(async (req, res) => {\n  if (req.url.startsWith('/api/workspace/')) {\n    try {\n      const upstream = await fetch(workspace + req.url, { method: req.method });\n      const headers = { 'content-type': upstream.headers.get('content-type') || 'application/json' };\n      const token = upstream.headers.get('x-workspace-link');\n      if (token) headers['x-workspace-link'] = token;\n      res.writeHead(upstream.status, headers);\n      res.end(Buffer.from(await upstream.arrayBuffer()));\n    } catch {\n      res.writeHead(502, { 'content-type': 'application/json' });\n      res.end('{\"error\":\"workspace unavailable\"}');\n    }\n    return;\n  }\n  const safe = safeRe\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 6,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,320p' server.mjs && printf '\\\\n--- build ---\\\\n' && sed -n '1,260p' build.mjs\"",
+      "truncated": true
+    },
+    {
+      "detail": "./src/manifest.js:4:// x-domain and raw sample points, plus a scripted toolbox rubber-band gesture.\n./src/dashboard.js:3:// broadcasts each selection to the linked panels.\n./src/dashboard.js:6:import { broadcast } from './linkBroadcast.js';\n./src/dashboard.js:32:  // master to that fraction of its own domain, then broadcast to the linked\n./src/dashboard.js:38:    const windows = broadcast(master, linked, fraction);\n./src/dashboard.js:83:  // Scripted-gesture hook so an automated pass can drive the exact same code\n./src/dashboard.js:86:  window.__runToolboxZoom = (fraction) => applyToolboxZoom(fraction || manifest.gesture.window);\n./src/dashboard.js:87:  window.__scriptedGesture = manifest.gesture;\n./src/linkBroadcast.js:6:// gesture into a selection descriptor and then decides, per linked chart, the\n./src/linkBroadcast.js:13:// broadcast can be expressed in whichever of those terms fits.\n./src/linkBroadcast.js:19:  const indexRange = [\n./src/linkBroadcast.js:23:  return { fraction: fraction.slice(), dataWindow, indexRange };\n./src/linkBroadcast.js:30:export function resolveLinkedWindow(sel, chart) {\n./src/linkBroadcast.js:31:  return STRATEGIES.rawWindow(sel, chart);\n./src/linkBroadcast.js:35:export function broadcast(master, linked, fraction) {\n./src/linkBroadcast.js:39:    out[chart.id] = resolveLinkedWindow(sel, chart);\n./src/zoomStrategies.js:26:  const lo = Math.max(0, Math.min(sel.indexRange[0], pts.length - 1));\n./src/zoomStrategies.js:27:  const hi = Math.max(0, Math.min(sel.indexRange[1], pts.length - 1));\n./src/zoomStrategies.js:32:  domainFraction: byDomainFraction,\n./src/zoomStrategies.js:33:  rawWindow: byRawWindow,\n./src/zoomStrategies.js:34:  rawIndex: byRawIndex,",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 7,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"rawWindow|rawIndex|domainFraction|broadcast|resolveLinked|indexRange|gesture\\\" . -g '\"'!node_modules'\"' -g '\"'!dist'\"'\"",
+      "truncated": false
+    },
+    {
+      "detail": ":root {\n  --ink: #1f2328;\n  --muted: #6e7781;\n  --line: #d0d7de;\n  --accent: #1f6feb;\n  --bg: #f6f8fa;\n}\n* { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  color: var(--ink);\n  background: var(--bg);\n}\n.app-header {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 10px 18px;\n  background: #fff;\n  border-bottom: 1px solid var(--line);\n}\n.app-header h1 { font-size: 15px; margin: 0; }\n.app-header .ws-name { font-size: 13px; color: var(--muted); }\n.toolbox {\n  display: flex;\n  gap: 8px;\n  padding: 8px 18px;\n  background: #fff;\n  border-bottom: 1px solid var(--line);\n}\n.toolbox button {\n  font-size: 12px;\n  padding: 5px 12px;\n  border: 1px solid var(--line);\n  border-radius: 6px;\n  background: #fff;\n  cursor: pointer;\n}\n.toolbox button.armed { border-color: var(--accent); color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }\n.console-body { padding: 16px 18px; }\n#master-host { margin-bottom: 14px; }\n#linked-host {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 12px;\n}\n.panel {\n  background: #fff;\n  border: 1px solid var(--line);\n  border-radius: 8px;\n  padding: 8px 10px;\n}\n.panel-master { border-color: var(--accent); }\n.panel-master.selecting { cursor: crosshair; }\n.panel-head {\n  display: flex;\n  align-items: baseline;\n  justify-content: space-between;\n  margin-bottom: 4px;\n}\n.panel-label { font-size: 12px; font-weight: 600; }\n.panel-window {\n  font-size: 11px;\n  color: var(--muted);\n  font-variant-numeric: tabular-nums;\n}\n.panel-canvas { width: 100%; height: auto; display: block; }\n.load-error { color: #cf222e; padding: 20px; }\n.hint { font-size: 11px; color: var(--muted); padding: 0 18px 12px; }",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 8,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' src/styles.css\"",
+      "truncated": false
+    },
+    {
+      "detail": "The source already exposes three projection strategies. The defect is localized: linked panels currently reuse the master\u2019s raw x-window, even though each panel has its own x-domain/readings and the selection descriptor includes the corresponding sample-index range. I\u2019m verifying the live behavior visually, then I\u2019ll switch the resolver to the index-aligned strategy.",
+      "kind": "agent_message",
+      "sequence": 9,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 10,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 68, \"y\": 60}",
+      "kind": "computer_use",
+      "sequence": 11,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"duration_ms\": 500, \"end_x\": 900, \"end_y\": 500, \"kind\": \"drag\", \"steps\": 8, \"x\": 400, \"y\": 500}",
+      "kind": "computer_use",
+      "sequence": 12,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"delta_x\": 0, \"delta_y\": 591, \"kind\": \"scroll\", \"x\": 1181, \"y\": 728}",
+      "kind": "computer_use",
+      "sequence": 13,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"delta_x\": 0, \"delta_y\": 548, \"kind\": \"scroll\", \"x\": 1181, \"y\": 700}",
+      "kind": "computer_use",
+      "sequence": 14,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "The live console confirms the mismatch: after the master frames `303.6\u2013712.77`, linked panels show clamped/raw values such as `303.6\u2013600` and `340\u2013360`, rather than the same sample-aligned moment. I\u2019m applying the existing `rawIndex` projection so each linked chart uses its own readings at the master selection\u2019s corresponding sample positions.",
+      "kind": "agent_message",
+      "sequence": 15,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/linkBroadcast.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/linkBroadcast.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 16,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "diff --git a/src/linkBroadcast.js b/src/linkBroadcast.js\nindex 64fbd6f..25e142b 100644\n--- a/src/linkBroadcast.js\n+++ b/src/linkBroadcast.js\n@@ -24,11 +24,11 @@ export function describeSelection(master, fraction) {\n }\n \n // Resolve the data-unit window a single linked chart should show for a\n-// selection. The strategy primitives in ./zoomStrategies.js are all available;\n-// this handler currently reuses the master's own framed data window directly,\n-// which is the window the analyst saw the rubber-band cover on the master.\n+// selection. Linked charts have their own x-domains, so the corresponding\n+// moment is identified by the selected sample positions and then read from\n+// the target chart's own points.\n export function resolveLinkedWindow(sel, chart) {\n-  return STRATEGIES.rawWindow(sel, chart);\n+  return STRATEGIES.rawIndex(sel, chart);\n }\n \n // Compute the data-unit window each linked chart should show.\n M src/linkBroadcast.js\n?? package-lock.json",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 17,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff -- src/linkBroadcast.js && git status --short'",
+      "truncated": false
+    },
+    {
+      "detail": "> fleet-analytics-console@1.0.0 build\n> node build.mjs\n\nbuild ok: 7 files checked",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 18,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"CTRL+R\"}",
+      "kind": "computer_use",
+      "sequence": 19,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "The focused fix is in place and the public build passes. I\u2019m doing a small source-level sanity check of the projection behavior and writing the required rollout notes; no fixtures or UI structure were changed.",
+      "kind": "agent_message",
+      "sequence": 20,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "M src/linkBroadcast.js\n?? package-lock.json",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 21,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git status --short'",
+      "truncated": false
+    },
+    {
+      "detail": "projection sanity ok: 1020 \u2013 1070",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 22,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node --input-type=module - <<'NODE'\nimport { describeSelection, resolveLinkedWindow } from './src/linkBroadcast.js';\nconst master = { domain: [0, 100], points: Array.from({ length: 11 }, (_, i) => [i * 10, i]) };\nconst target = { domain: [1000, 1100], points: Array.from({ length: 11 }, (_, i) => [1000 + i * 10, i * 2]) };\nconst sel = describeSelection(master, [0.2, 0.7]);\nconst got = resolveLinkedWindow(sel, target);\nconst expected = [1020, 1070];\nif (got[0] \"'!== expected[0] || got[1] !== expected[1]) throw new Error(`unexpected window ${got}`);\nconsole.log('\"'projection sanity ok:', got.join(' \u2013 '));\nNODE\"",
+      "truncated": false
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 23,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "add: rollout_notes.md",
+      "files": [
+        {
+          "kind": "add",
+          "path": "rollout_notes.md"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 24,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "Implemented the linked-panel zoom fix.\n\nChanged `src/linkBroadcast.js` to map selections by corresponding sample indices on each chart\u2019s own readings. This preserves the primary chart behavior and UI structure.\n\nChecks passed:\n\n- `npm run build`\n- Projection sanity test\n- Required rollout notes written to `rollout/rollout_notes.md`",
+      "kind": "agent_message",
+      "sequence": 25,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    }
+  ],
+  "provenance": "fresh_gpt56_luna_screenshot_cua_replacement_20260901",
+  "run_relation": "replacement",
+  "source": "shuli_exp EFS \u00b7 fresh GPT-5.6 Luna screenshot-only CUA rerun \u00b7 2026-09-01",
+  "status": "available",
+  "summary": {
+    "events": 25,
+    "commands": 11,
+    "file_changes": 2,
+    "computer_use_calls": 7,
+    "agent_messages": 5,
+    "plans": 0,
+    "screenshots": 0,
+    "truncated_events": 4,
+    "unfinished_items": 0
+  },
+  "task_id": "v3.echarts-linked-datazoom-toolbar.001",
+  "terminal_status": "completed",
+  "usage": {
+    "cache_write_input_tokens": 24113,
+    "cached_input_tokens": 264868,
+    "input_tokens": 299498,
+    "output_tokens": 3180,
+    "reasoning_output_tokens": 1017
+  },
+  "activity_source_kind": "retained_timeline",
+  "artifacts": {
+    "Retained event data (partial)": "viewer/media/source/agent/v3.echarts-linked-datazoom-toolbar.001/activity-export.json",
+    "Run provenance": "viewer/media/source/agent/v3.echarts-linked-datazoom-toolbar.001/activity-provenance.json"
+  },
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+    }
+  }
+}

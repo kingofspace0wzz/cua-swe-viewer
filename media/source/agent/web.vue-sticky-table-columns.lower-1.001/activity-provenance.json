@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "task_id": "web.vue-sticky-table-columns.lower-1.001",
+  "run_relation": "historical_exact",
+  "provenance": "exact_historical_screenshot_only_gpt56_cua",
+  "run_label": null,
+  "source_description": "Recovered exact historical Codex JSONL from the archival Web evaluation host",
+  "terminal_status": "completed",
+  "activity_source_kind": "retained_timeline",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 3. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/web.vue-sticky-table-columns.lower-1.001/activity-retained.json": "391f172f937fddb3b8cc980dea26bfb0a44a3428974f6c150baa70e2bcc5972d"
+  },
+  "activity_sha256": "48436579e309bd82a66f3796c9dfac7a291a609ae1c69a59a35b2305a37eb538",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

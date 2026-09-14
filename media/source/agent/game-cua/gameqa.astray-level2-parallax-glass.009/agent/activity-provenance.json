@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.astray-level2-parallax-glass.009",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-01",
+  "source_description": null,
+  "terminal_status": "completed",
+  "activity_source_kind": "representative_game_bundle",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 5,
+      "commands": 14,
+      "computer_use_calls": 11,
+      "events": 31,
+      "file_changes": 1,
+      "plans": 0
+    },
+    "condition": "cua",
+    "frame_count": 9,
+    "label": "cua-01",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "diagnostic failure with most retained observation frames",
+    "success": false
+  },
+  "frame_mapping": [
+    {
+      "event_sequence": 4,
+      "frame_sequence": 1,
+      "audit_sequence": 2,
+      "timestamp": "2026-09-01T15:21:01.657421+00:00",
+      "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0001.png",
+      "sha256": "8105fa7c716912ca7d2f87cc911a50f3933a7909adb86fc5da58a323c7dd3714"
+    },
+    {
+      "event_sequence": 16,
+      "frame_sequence": 2,
+      "audit_sequence": 5,
+      "timestamp": "2026-09-01T15:21:50.489215+00:00",
+      "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0002.png",
+      "sha256": "5d6a4222bf4d889f7d7b149d55969c3b82cdc063446b0d650c1b63dadcebbdce"
+    },
+    {
+      "event_sequence": 18,
+      "frame_sequence": 3,
+      "audit_sequence": 6,
+      "timestamp": "2026-09-01T15:22:15.358874+00:00",
+      "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0003.png",
+      "sha256": "5dce4ed0e1035cd342ba6595aa0b048b9b967c58a4fa6261cb89a7203ae2f337"
+    },
+    {
+      "event_sequence": 21,
+      "frame_sequence": 4,
+      "audit_sequence": 7,
+      "timestamp": "2026-09-01T15:22:54.155508+00:00",
+      "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0004.png",
+      "sha256": "cb1c6f3fe28fc98768454406e2b2e7fe66704179d1dbf7ede0ced57742abaf4f"
+    },
+    {
+      "event_sequence": 22,
+      "frame_sequence": 5,
+      "audit_sequence": 8,
+      "timestamp": "2026-09-01T15:22:59.335338+00:00",
+      "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0005.png",
+      "sha256": "60d39950b51182825a1c192a5b71317b8a9a52a73c842e20b6bbe30b1f8c3a87"
+    },
+    {
+      "event_sequence": 23,
+      "frame_sequence": 6,
+      "audit_sequence": 9,
+      "timestamp": "2026-09-01T15:23:13.268595+00:00",
+      "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0006.png",
+      "sha256": "a4654409e9478c76e3227c41538c1a0181d6af8fe46e1a7ce11594868e2707b7"
+    },
+    {
+      "event_sequence": 24,
+      "frame_sequence": 7,
+      "audit_sequence": 10,
+      "timestamp": "2026-09-01T15:23:23.402541+00:00",
+      "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0007.png",
+      "sha256": "60d39950b51182825a1c192a5b71317b8a9a52a73c842e20b6bbe30b1f8c3a87"
+    },
+    {
+      "event_sequence": 25,
+      "frame_sequence": 8,
+      "audit_sequence": 11,
+      "timestamp": "2026-09-01T15:23:41.213223+00:00",
+      "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0008.png",
+      "sha256": "f8e2da63b2678430d99cf61dd50b3314eb9672870a8907732766d4aba9ec6406"
+    },
+    {
+      "event_sequence": 30,
+      "frame_sequence": 9,
+      "audit_sequence": 12,
+      "timestamp": "2026-09-01T15:24:05.868890+00:00",
+      "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0009.png",
+      "sha256": "e983200ce17f70e3e40e45f67c0ef2c99fb5979416ebce2c34f9b7c80808c0a3"
+    }
+  ],
+  "image_verification": "Run identity, complete successful action sequence, arguments, timestamps, and audit SHA-256",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 7. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "9 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/activity.json": "d8dd8920498cd024bbe639749741e796cf1b190c556a8d0cfa66002566157b41",
+    "viewer/media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frame-manifest.json": "b69f485b606ac2b6193986da5ae6652677bd69f3d72b6e913e2fdf9310886677",
+    "viewer/media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/trajectory.jsonl": "e1f6353bd0180df6c86cb843d405b89fa57579dd0f16b7baea906a20708327f2",
+    "viewer/media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/cua-audit.jsonl": "000d75e6f57777349c41aee8aac4351852da0302046193a255e3f03404fc171f",
+    "viewer/media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/visual-events.jsonl": "91366069281603ed2813af28d3cc48ebac61594fe8c97c58b72d93348a67b3fe",
+    "viewer/media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/run-result.json": "f0b080bbd972be10ee8af3153f5a57181929b20f04e7265e0112e6eedbbe39d0",
+    "viewer/media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/metadata.json": "e0d85f668f802a75d022b8ac2af26dd5615f68eb65e49771494d73726eb7eb8a",
+    "viewer/media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/patch.diff": "9e2b377308560f7b7c389c10b63f47b0978cbc9508a7048be23ee7eb2bf96913"
+  },
+  "activity_sha256": "d6cce75a70b1ffeed96322039856c39366412d97133bbe6d2e00fb85bf00a3d4",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

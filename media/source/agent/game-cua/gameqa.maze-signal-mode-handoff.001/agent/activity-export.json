@@ -1,0 +1,465 @@
+{
+  "coverage": "retained_codex_events_partial",
+  "events": [
+    {
+      "detail": "I\u2019ll trace the maze\u2019s state/rendering and collision handoff in source, reproduce the regression through the protected browser, make the smallest consistent fix, then build and verify the exit route.",
+      "kind": "agent_message",
+      "sequence": 1,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "package-lock.json\nserver.mjs\nUPSTREAM.md\npackage.json\nLICENSE\nbuild.mjs\nsrc/rover.js\nsrc/index.html\nsrc/game.js\nsrc/phase_clock.js\nsrc/styles.css\nsrc/main.js",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 2,
+      "status": "completed",
+      "title": "/bin/bash -lc \"pwd && rg --files -g '\"'!node_modules'\"' -g '\"'!dist'\"' | sed -n '1,160p'\"",
+      "truncated": false
+    },
+    {
+      "detail": "./package.json",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 3,
+      "status": "completed",
+      "title": "/bin/bash -lc \"find . -maxdepth 2 -type f \\\\( -name 'package.json' -o -name 'vite.config.*' -o -name 'README*' \\\\) -print\"",
+      "truncated": false
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 4,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0001.png",
+          "sha256": "c4a6878322af4b82abfafed84778e3f307f5567ee7e496f13e54e5785a197a10"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "import {PhaseClock} from './phase_clock.js';\nimport {Rover} from './rover.js';\n\nconst pointKey = (point) => `${point.x},${point.y}`;\nconst samePoint = (left, right) => left.x === right.x && left.y === right.y;\nconst clonePoint = (point) => ({x: point.x, y: point.y});\n\nexport class SignalMaze {\n  constructor(root, config) {\n    this.root = root;\n    this.config = config;\n    this.routeElement = document.querySelector('#route');\n    this.warningElement = document.querySelector('#warning');\n    this.livesElement = document.querySelector('#lives');\n    this.messageElement = document.querySelector('#message');\n    this.walkable = new Set(config.walkable.map(([x, y]) => `${x},${y}`));\n    this.held = new Set();\n    this.phase = new PhaseClock(config.phase);\n    this.rover = new Rover(config.rover);\n    this.cells = new Map();\n    this.renderBoard();\n    this.bindInput();\n    this.reset();\n    this.timer = window.setInterval(() => this.tick(), config.tickMs);\n  }\n\n  bindInput() {\n    window.addEventListener('keydown', (event) => {\n      if (event.key.startsWith('Arrow')) {\n        event.preventDefault();\n        this.held.add(event.key);\n      }\n    });\n    window.addEventListener('keyup', (event) => {\n      if (event.key.startsWith('Arrow')) {\n        event.preventDefault();\n        this.held.delete(event.key);\n      }\n    });\n    window.addEventListener('blur', () => this.held.clear());\n  }\n\n  reset() {\n    this.held.clear();\n    this.tickCount = 0;\n    this.player = {\n      position: clonePoint(this.config.playerStart),\n      lives: 3,\n      active: true,\n    };\n    this.phase.reset();\n    this.rover.reset();\n    this.alert = {active: false, remaining: 0};\n    this.releaseRemaining = null;\n    this.pulseCollected = false;\n    this.contacts = 0;\n    this.outcome = null;\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 5,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' src/game.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "const clonePoint = (point) => ({x: point.x, y: point.y});\n\nexport class Rover {\n  constructor(config) {\n    this.config = config;\n    this.reset();\n  }\n\n  reset() {\n    this.state = 'dock';\n    this.position = clonePoint(this.config.dock);\n    this.mode = 'dock';\n    this.appearance = 'active';\n    this.hazard = true;\n    this.branch = null;\n    this.alertActive = false;\n    this.pendingAppearance = null;\n    this.appearanceLag = 0;\n  }\n\n  enterAlert(globalMode) {\n    this.alertActive = true;\n    this.hazard = false;\n    this.appearance = 'warning';\n    if (this.state !== 'dock') this.mode = 'warning';\n    this.entryMode = globalMode;\n  }\n\n  release(globalMode, alertActive) {\n    this.state = 'junction';\n    this.position = clonePoint(this.config.junction);\n    this.mode = globalMode;\n    if (alertActive) {\n      this.alertActive = true;\n      this.appearance = 'warning';\n      this.hazard = false;\n    }\n  }\n\n  onGlobalMode(globalMode) {\n    if (!this.alertActive && this.state !== 'dock' && !this.branch) {\n      this.mode = globalMode;\n    }\n  }\n\n  exitAlert(globalMode) {\n    this.alertActive = false;\n    this.mode = globalMode;\n    this.hazard = true;\n    this.pendingAppearance = globalMode;\n    this.appearanceLag = 2;\n  }\n\n  step(globalMode, alertActive) {\n    if (this.state === 'junction' && !alertActive && !this.branch) {\n      const target = this.mode === 'corner' ?\n          this.config.cornerStep : this.config.trackStep;\n      this.position = clonePoint(target);\n      this.branch = this.mode === 'corner' ? 'left' : 'right';\n      this.state = 'branch';\n    }\n\n    if (!this.alertActive && !this.branch) this.mode = globalMode;\n\n    if (this.appearanceLag > 0) {\n      this.appearanceLag -= 1;\n      if (this.appearanceLag === 0) {\n        this.appearance = this.pendi\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 6,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' src/rover.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "import {SignalMaze} from './game.js';\n\nconst root = document.querySelector('#maze');\nconst message = document.querySelector('#message');\n\ntry {\n  const scenarioUrl = window.location.protocol === 'file:' ?\n      './scenario.json' : '/api/scenario';\n  const response = await fetch(scenarioUrl, {cache: 'no-store'});\n  if (!response.ok) throw new Error(`scenario request failed: ${response.status}`);\n  const config = await response.json();\n  const game = new SignalMaze(root, config);\n  window.gameAPI = Object.freeze({\n    getState: () => game.getState(),\n    reset: () => game.reset(),\n  });\n} catch (error) {\n  message.textContent = `Unable to load route: ${error.message}`;\n  message.className = 'message hit';\n}\n{\n  \"name\": \"signal-maze-candidate\",\n  \"version\": \"1.0.0\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"scripts\": {\n    \"build\": \"node build.mjs\",\n    \"dev\": \"node server.mjs --port 49510\"\n  }\n}",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 7,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,240p' src/phase_clock.js && sed -n '1,220p' src/main.js && cat package.json\"",
+      "truncated": false
+    },
+    {
+      "detail": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Signal Maze</title>\n  <link rel=\"stylesheet\" href=\"./styles.css\">\n</head>\n<body>\n  <main class=\"shell\">\n    <header>\n      <div>\n        <p class=\"eyebrow\">ROUTE CONTROL / SECTOR 01</p>\n        <h1>Signal Maze</h1>\n      </div>\n      <div class=\"legend\">\n        <span><i class=\"swatch warning\"></i> warning: safe contact</span>\n        <span><i class=\"swatch active\"></i> active: avoid contact</span>\n      </div>\n    </header>\n    <section class=\"panel\">\n      <div class=\"readouts\">\n        <div><span>ROUTE</span><strong id=\"route\">\u2014</strong></div>\n        <div><span>WARNING</span><strong id=\"warning\">\u2014</strong></div>\n        <div><span>LIVES</span><strong id=\"lives\">\u2014</strong></div>\n      </div>\n      <div id=\"maze\" class=\"maze\" aria-label=\"Signal Maze play field\"></div>\n      <p id=\"message\" class=\"message\">Loading route\u2026</p>\n      <p class=\"help\">Arrow keys move. Reach the white exit marker.</p>\n    </section>\n  </main>\n  <script type=\"module\" src=\"./main.js\"></script>\n</body>\n</html>",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 8,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,320p' src/styles.css && sed -n '1,220p' src/index.html\"",
+      "truncated": false
+    },
+    {
+      "detail": "The source already exposes the mismatch: when the warning ends, collision becomes hazardous immediately, but the rover\u2019s teal appearance lingers for two ticks. Its branch choice also uses an internal mode that can diverge from the route readout during the handoff. I\u2019m mapping the exact scenario timing before patching both as one atomic transition.",
+      "kind": "agent_message",
+      "sequence": 9,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "import {cpSync, mkdirSync, rmSync} from 'node:fs';\n\nrmSync('dist', {recursive: true, force: true});\nmkdirSync('dist', {recursive: true});\ncpSync('src', 'dist', {recursive: true});\nconsole.log('built Signal Maze');\n\n# Upstream provenance\n\nThis compact candidate was written from scratch for the CUA-SWE construction\nsession. It adapts only generic state-machine ideas from the MIT implementation\nclone at:\n\n- repository: `github.com/8tentaculos/jsPacman`\n- pinned revision: `0f255fee87c68b513f0ec286498d56162e813ee2`\n- local clone used for review:\n  `<artifact-path>\n\nThe retained conceptual scope is limited to a global alternating mode timer, a\ntemporary mode, a dock/house-style release timer, and mode-entry/mode-exit\nhandoff. The candidate code, title, maze geometry, colors, DOM structure, and\npresentation are original.\n\nThe GameWorld template at `benchmark/23_pacman`, revision\n`55322928fa8bd51cb1719bd3807a32634aa5d3cb`, was used only to identify the\nimplementation lineage. No GameWorld file was copied.\n\n## Complete media and presentation audit\n\n- Images: none.\n- Audio: none.\n- Fonts: none; system monospace only.\n- Sprite sheets: none.\n- Screenshots in the playable repository: none.\n- Upstream CSS or DOM: none.\n- Upstream maps or maze art: none.\n- Franchise title or character names in the runtime UI: none.\n- GameWorld assets: none.\n- Upstream implementation files copied verbatim: none, except the required MIT\n  license text in `LICENSE`.",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 10,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,320p' server.mjs && sed -n '1,260p' build.mjs && sed -n '1,200p' UPSTREAM.md\"",
+      "truncated": false
+    },
+    {
+      "detail": "./server.mjs:24:  if (requestUrl.pathname === '/api/scenario') {\n./server.mjs:26:      const upstream = await fetch(serviceOrigin + '/api/scenario');\n./server.mjs:35:      response.end(JSON.stringify({error: 'scenario unavailable'}));\n./src/rover.js:57:          this.config.cornerStep : this.config.trackStep;\n./src/styles.css:135:.cell.walkable::after {\n./src/main.js:7:  const scenarioUrl = window.location.protocol === 'file:' ?\n./src/main.js:8:      './scenario.json' : '/api/scenario';\n./src/main.js:9:  const response = await fetch(scenarioUrl, {cache: 'no-store'});\n./src/main.js:10:  if (!response.ok) throw new Error(`scenario request failed: ${response.status}`);\n./src/game.js:16:    this.walkable = new Set(config.walkable.map(([x, y]) => `${x},${y}`));\n./src/game.js:47:      position: clonePoint(this.config.playerStart),\n./src/game.js:91:    this.alert.remaining = this.config.alertTicks;\n./src/game.js:92:    this.releaseRemaining = this.config.releaseTicks;\n./src/game.js:119:    if (this.walkable.has(pointKey(next))) this.player.position = next;\n./src/game.js:155:        const walkable = this.walkable.has(`${x},${y}`);\n./src/game.js:156:        cell.className = `cell ${walkable ? 'walkable' : 'wall'}`;\n./src/game.js:208:      scenarioSeal: this.config.seals.scenario,",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 11,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"alertTicks|releaseTicks|cornerStep|trackStep|scenario|walkable|playerStart\\\" . -g '\"'!node_modules'\"' -g '\"'!dist'\"'\"",
+      "truncated": false
+    },
+    {
+      "detail": "<artifact-path>",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 12,
+      "status": "completed",
+      "title": "/bin/bash -lc 'printenv CUA_SWE_AGENT_ROLLOUT_DIR'",
+      "truncated": false
+    },
+    {
+      "detail": "./LICENSE\n./UPSTREAM.md\n./build.mjs\n./dist/game.js\n./dist/index.html\n./dist/main.js\n./dist/phase_clock.js\n./dist/rover.js\n./dist/styles.css\n./package-lock.json\n./package.json\n./server.mjs\n./src/game.js\n./src/index.html\n./src/main.js\n./src/phase_clock.js\n./src/rover.js\n./src/styles.css",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 13,
+      "status": "completed",
+      "title": "/bin/bash -lc \"find . -maxdepth 3 -type f -not -path './node_modules/*' -not -path './.git/*' -print | sort\"",
+      "truncated": false
+    },
+    {
+      "detail": "?? dist/\n116d9c4 (HEAD -> master) isolated source baseline",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 14,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git status --short && git log -5 --oneline --decorate'",
+      "truncated": false
+    },
+    {
+      "detail": "dist/game.js\ndist/index.html\ndist/main.js\ndist/phase_clock.js\ndist/rover.js\ndist/styles.css",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 15,
+      "status": "completed",
+      "title": "/bin/bash -lc \"find dist -maxdepth 2 -type f -print 2>/dev/null | sort | xargs -r -n1 sh -c 'echo \\\"\"'$0\"'\"'\"",
+      "truncated": false
+    },
+    {
+      "detail": "{\"duration_ms\": 350, \"kind\": \"key_hold\", \"text\": \"ArrowRight\"}",
+      "kind": "computer_use",
+      "sequence": 16,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0002.png",
+          "sha256": "19c94fa8b0528c9011523dd90a0961356b7b5d3966acd325f7c608186dda5bc8"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 650, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 17,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0003.png",
+          "sha256": "81c2c7de5b0f78230d48f07e088bf395125c1768eb328b7c31b9d13ae7def1c7"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 700, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 18,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0004.png",
+          "sha256": "81c2c7de5b0f78230d48f07e088bf395125c1768eb328b7c31b9d13ae7def1c7"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 700, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 19,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0005.png",
+          "sha256": "81c2c7de5b0f78230d48f07e088bf395125c1768eb328b7c31b9d13ae7def1c7"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "update: rover.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "rover.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 20,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "I\u2019ve made the handoff atomic: clearing the warning now switches the rover from teal/safe to active/hazardous in the same tick, and the branch commitment is taken directly from the route mode being displayed at that moment. Next I\u2019m checking the state transition independently, then I\u2019ll replay the maze to the exit.",
+      "kind": "agent_message",
+      "sequence": 21,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "diff --git a/src/rover.js b/src/rover.js\nindex 2cc4431..2031b8f 100644\n--- a/src/rover.js\n+++ b/src/rover.js\n@@ -14,8 +14,6 @@ export class Rover {\n     this.hazard = true;\n     this.branch = null;\n     this.alertActive = false;\n-    this.pendingAppearance = null;\n-    this.appearanceLag = 0;\n   }\n \n   enterAlert(globalMode) {\n@@ -46,29 +44,22 @@ export class Rover {\n   exitAlert(globalMode) {\n     this.alertActive = false;\n     this.mode = globalMode;\n+    this.appearance = 'active';\n     this.hazard = true;\n-    this.pendingAppearance = globalMode;\n-    this.appearanceLag = 2;\n   }\n \n   step(globalMode, alertActive) {\n     if (this.state === 'junction' && !alertActive && !this.branch) {\n-      const target = this.mode === 'corner' ?\n+      // Commit to the same resumed mode shown by the route indicator.\n+      this.mode = globalMode;\n+      const target = globalMode === 'corner' ?\n           this.config.cornerStep : this.config.trackStep;\n       this.position = clonePoint(target);\n-      this.branch = this.mode === 'corner' ? 'left' : 'right';\n+      this.branch = globalMode === 'corner' ? 'left' : 'right';\n       this.state = 'branch';\n     }\n \n     if (!this.alertActive && !this.branch) this.mode = globalMode;\n-\n-    if (this.appearanceLag > 0) {\n-      this.appearanceLag -= 1;\n-      if (this.appearanceLag === 0) {\n-        this.appearance = this.pendingAppearance;\n-        this.pendingAppearance = null;\n-      }\n-    }\n   }\n \n   snapshot() {\n@@ -83,4 +74,3 @@ export class Rover {\n     };\n   }\n }\n-",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 22,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && git diff -- src/rover.js'",
+      "truncated": false
+    },
+    {
+      "detail": "rover handoff check passed",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 23,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node --input-type=module - <<'NODE'\nimport {Rover} from './src/rover.js';\nconst rover = new Rover({\n  dock: {x: 5, y: 3},\n  junction: {x: 5, y: 2},\n  cornerStep: {x: 5, y: 1},\n  trackStep: {x: 6, y: 2},\n});\nrover.enterAlert('track');\nrover.release('track', true);\nrover.exitAlert('corner');\nif (rover.appearance \"'!== '\"'active' || \"'!rover.hazard) {\n  throw new Error('\"'warning handoff is not atomic');\n}\nrover.mode = 'track';\nrover.step('corner', false);\nif (rover.branch \"'!== '\"'left' || rover.position.x \"'!== 5 || rover.position.y !== 1 || rover.mode !== '\"'corner') {\n  throw new Error('branch does not match resumed route');\n}\nconsole.log('rover handoff check passed');\nNODE\"",
+      "truncated": false
+    },
+    {
+      "detail": "> signal-maze-candidate@1.0.0 build\n> node build.mjs\n\nbuilt Signal Maze",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 24,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Ctrl+R\"}",
+      "kind": "computer_use",
+      "sequence": 25,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "not_recorded",
+      "image_reason": "No screenshot was returned for this call in the retained run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+R\"}",
+      "kind": "computer_use",
+      "sequence": 26,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0006.png",
+          "sha256": "81c2c7de5b0f78230d48f07e088bf395125c1768eb328b7c31b9d13ae7def1c7"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 900, \"kind\": \"key_hold\", \"text\": \"ArrowLeft\"}",
+      "kind": "computer_use",
+      "sequence": 27,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0007.png",
+          "sha256": "34864b8c49200a62b33755c07d9e89063d3243bb803538f486467acbfc189b3b"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 1600, \"kind\": \"key_hold\", \"text\": \"ArrowRight\"}",
+      "kind": "computer_use",
+      "sequence": 28,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0008.png",
+          "sha256": "a06d07e502b13b2a9ae1321c2cbc6ab3e53d04fdbddd33e2ef608dfc1e925b81"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 1000, \"kind\": \"key_hold\", \"text\": \"ArrowUp\"}",
+      "kind": "computer_use",
+      "sequence": 29,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0009.png",
+          "sha256": "94136d19fe5fdce05bb4990e4d345328c436778592ef68229fed5a2f5c9da5c3"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 30,
+      "status": "completed",
+      "title": "visual_cua.observe",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0010.png",
+          "sha256": "94136d19fe5fdce05bb4990e4d345328c436778592ef68229fed5a2f5c9da5c3"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"delta_x\": 0, \"delta_y\": 532, \"kind\": \"scroll\", \"x\": 1150, \"y\": 700}",
+      "kind": "computer_use",
+      "sequence": 31,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/frames/frame-0011.png",
+          "sha256": "a04b41103dbe479bee8d7c3fb77f08657fe023ed252acb5664893e307103c030"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "Browser verification is complete: the warning cleared directly to the red active rover, the rover committed to the displayed TRACK branch, and the rover reached the exit with all three lives; the UI reports \u201cExit reached. Route handoff stable.\u201d I\u2019m recording the required rollout notes and doing one final workspace check.",
+      "kind": "agent_message",
+      "sequence": 32,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "The screenshot verifies the corrected handoff and successful exit. I\u2019m finishing the required notes now.",
+      "kind": "agent_message",
+      "sequence": 33,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "add: rollout_notes.md",
+      "files": [
+        {
+          "kind": "add",
+          "path": "rollout_notes.md"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 34,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "M src/rover.js\n?? dist/",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 35,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git status --short && git diff --check'",
+      "truncated": false
+    },
+    {
+      "detail": "# Rollout notes\n\n## Work performed\n\n- Traced the Signal Maze tick flow, warning lifecycle, rover state machine,\n  route clock, rendering, and collision handling.\n- Reproduced the lower-dock warning sequence in the protected browser.\n- Made the warning exit atomic: the rover now becomes visibly active at the\n  same time that hazardous contact is restored.\n- Made the junction branch commit directly from the current global route mode,\n  keeping the rover's physical route aligned with the displayed route.\n- Replayed the maze and reached the exit with three lives remaining.\n\n## Source files inspected\n\n- `src/game.js`\n- `src/rover.js`\n- `src/phase_clock.js`\n- `src/main.js`\n- `src/styles.css`\n- `src/index.html`\n- `server.mjs`\n- `build.mjs`\n- `package.json`\n- `UPSTREAM.md`\n\n## Source files changed\n\n- `src/rover.js`\n  - Removed the delayed post-warning appearance transition.\n  - Set the active appearance immediately in `exitAlert`.\n  - Synchronized junction mode, target, and branch with `globalMode`.\n\n## Checks run\n\n- `npm run build` \u2014 passed.\n- Focused Node state-transition check for appearance, hazard, mode, branch, and\n  target position \u2014 passed.\n- `git diff --check` \u2014 passed.\n- Protected-browser gameplay verification \u2014 warning cleared to the red active\n  rover, TRACK selected the matching branch, and the UI reported:\n  `Exit reached. Route handoff stable.`",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 36,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,220p' <artifact-path>\"",
+      "truncated": false
+    },
+    {
+      "detail": "Implemented the Signal Maze fix in `src/rover.js`:\n\n- Warning appearance and collision hazard now switch atomically.\n- Rover branch now matches the displayed resumed route.\n- `npm run build` and focused checks pass.\n- Browser replay reached the exit with 3 lives.\n\nRollout notes were written to the required directory.",
+      "kind": "agent_message",
+      "sequence": 37,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "\u2713 Inspect application structure and locate Signal Maze gameplay logic\n\u2713 Reproduce the lower-dock warning handoff regression in the browser\n\u2713 Implement a focused state/visual/physics route fix\n\u2713 Run build and verify gameplay reaches the exit\n\u25cb Write rollout_notes.md in the required directory",
+      "kind": "plan",
+      "sequence": 38,
+      "status": "completed",
+      "title": "Agent plan",
+      "truncated": false
+    }
+  ],
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-01",
+  "run_relation": "historical_exact",
+  "status": "available",
+  "summary": {
+    "events": 38,
+    "commands": 17,
+    "file_changes": 2,
+    "computer_use_calls": 12,
+    "agent_messages": 6,
+    "plans": 1,
+    "screenshots": 11,
+    "truncated_events": 2,
+    "unfinished_items": 0
+  },
+  "task_id": "gameqa.maze-signal-mode-handoff.001",
+  "terminal_status": "completed",
+  "usage": {
+    "cache_write_input_tokens": 34582,
+    "cached_input_tokens": 508492,
+    "input_tokens": 553754,
+    "output_tokens": 6379,
+    "reasoning_output_tokens": 3077
+  },
+  "activity_source_kind": "representative_game_bundle",
+  "artifacts": {
+    "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/activity-export.json",
+    "Run provenance": "viewer/media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/activity-provenance.json",
+    "Agent patch": "viewer/media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/patch.diff"
+  },
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 2. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "11 screenshots matched to their recorded calls."
+    }
+  }
+}

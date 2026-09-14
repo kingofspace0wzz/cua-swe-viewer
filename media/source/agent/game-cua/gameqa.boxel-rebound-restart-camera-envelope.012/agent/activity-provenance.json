@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.boxel-rebound-restart-camera-envelope.012",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-03",
+  "source_description": null,
+  "terminal_status": "completed",
+  "activity_source_kind": "representative_game_bundle",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 5,
+      "commands": 14,
+      "computer_use_calls": 7,
+      "events": 29,
+      "file_changes": 2,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 6,
+    "label": "cua-03",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "successful CUA run with most retained observation frames",
+    "success": true
+  },
+  "frame_mapping": [
+    {
+      "event_sequence": 4,
+      "frame_sequence": 1,
+      "audit_sequence": 2,
+      "timestamp": "2026-09-04T12:45:59.587734+00:00",
+      "path": "media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/frames/frame-0001.png",
+      "sha256": "95439fa8aa26e218034c4f25c6d11e7d9a1e1a8fa2feafc29d340b9c0df6cfe2"
+    },
+    {
+      "event_sequence": 16,
+      "frame_sequence": 2,
+      "audit_sequence": 4,
+      "timestamp": "2026-09-04T12:46:42.174352+00:00",
+      "path": "media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/frames/frame-0002.png",
+      "sha256": "a572760ba8da84274ce4f2b200e53b572612dfeebee46bc2b7fc99ca7a3bf6a8"
+    },
+    {
+      "event_sequence": 22,
+      "frame_sequence": 3,
+      "audit_sequence": 5,
+      "timestamp": "2026-09-04T12:47:24.439068+00:00",
+      "path": "media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/frames/frame-0003.png",
+      "sha256": "9154e9917dfedb8128e79d9e2bb723788a10f12a0a508e07f8f852182e016863"
+    },
+    {
+      "event_sequence": 23,
+      "frame_sequence": 4,
+      "audit_sequence": 6,
+      "timestamp": "2026-09-04T12:47:45.381159+00:00",
+      "path": "media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/frames/frame-0004.png",
+      "sha256": "56a6a160b0c126416ca28840029724b048a38551b33719f53b03e33db93d2575"
+    },
+    {
+      "event_sequence": 26,
+      "frame_sequence": 5,
+      "audit_sequence": 7,
+      "timestamp": "2026-09-04T12:48:14.911996+00:00",
+      "path": "media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/frames/frame-0005.png",
+      "sha256": "f4fef7524276b9837318422b8c19af9bf14d32e33012e899786719be71a696ae"
+    },
+    {
+      "event_sequence": 27,
+      "frame_sequence": 6,
+      "audit_sequence": 8,
+      "timestamp": "2026-09-04T12:48:20.204000+00:00",
+      "path": "media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/frames/frame-0006.png",
+      "sha256": "d52be3909280b1c81f3488cd1849adae2df71b96fdf787b2f8cba05b40321250"
+    }
+  ],
+  "image_verification": "Run identity, complete successful action sequence, arguments, timestamps, and audit SHA-256",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 3. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "6 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/activity.json": "ef4a7baebb7b882878a2126288a12cc8b43e4a2a9c113ac228ce4600e50105d5",
+    "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/frame-manifest.json": "35715c9e13ad53964e2ddbcc6951dc0c94d54941f0df1ec574500ccd9603be63",
+    "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/trajectory.jsonl": "74488e45c5fa969cf759f39aa5e4aa7260b29a43cf68c25ed05e909cca6b4813",
+    "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/cua-audit.jsonl": "89ab58affd5ffec6082e822975438210ca2229195f09bed57dc9261a3b0a9eae",
+    "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/visual-events.jsonl": "34aef158852d8e71456ea1cb8b4313e574c881e4e8442f36c082007eac7a033f",
+    "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/run-result.json": "6e4a711cc08d492372c38983ffc35a1528607e976e640e48e2e1c3ce54467e6f",
+    "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/metadata.json": "5223958d9247e7f934e930f45a8872001f7fdf0e862548d8a05328c41e7b839c",
+    "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/patch.diff": "1cd4511e5076e6a54bb0a8dc5f5a65488846070aa6756cb8a4f27f3a82027995"
+  },
+  "activity_sha256": "825105ea444b81650cae8321a927ff816e08b9933c77d129e0f40f0bfb666d69",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.hextris-cascade-resettle.001",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-01",
+  "source_description": null,
+  "terminal_status": "completed",
+  "activity_source_kind": "representative_game_bundle",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 6,
+      "commands": 14,
+      "computer_use_calls": 7,
+      "events": 30,
+      "file_changes": 2,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 7,
+    "label": "cua-01",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "diagnostic failure with most retained observation frames",
+    "success": false
+  },
+  "frame_mapping": [
+    {
+      "event_sequence": 2,
+      "frame_sequence": 1,
+      "audit_sequence": 2,
+      "timestamp": "2026-09-01T11:48:28.483765+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/frames/frame-0001.png",
+      "sha256": "da8bbfce888a3e3f3fe8e775f5f01e2d09d259a10fd3bd159a6d6aee7cec794e"
+    },
+    {
+      "event_sequence": 3,
+      "frame_sequence": 2,
+      "audit_sequence": 3,
+      "timestamp": "2026-09-01T11:48:45.476317+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/frames/frame-0002.png",
+      "sha256": "89db846acb283dc7f4d81c9c19cd59f1b75235fe2eb8b3cbf354ce8a5be50826"
+    },
+    {
+      "event_sequence": 4,
+      "frame_sequence": 3,
+      "audit_sequence": 4,
+      "timestamp": "2026-09-01T11:49:05.003456+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/frames/frame-0003.png",
+      "sha256": "e44ebb0ddb665b9feac952dca930c01a88ab5cf2650cb21e58b8c4750ef331cd"
+    },
+    {
+      "event_sequence": 5,
+      "frame_sequence": 4,
+      "audit_sequence": 5,
+      "timestamp": "2026-09-01T11:49:19.789697+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/frames/frame-0004.png",
+      "sha256": "876ad4cb7f3fa7b325ccb6ca936e44b9c8a76f05f7d1f8fed4349c4477491004"
+    },
+    {
+      "event_sequence": 21,
+      "frame_sequence": 5,
+      "audit_sequence": 6,
+      "timestamp": "2026-09-01T11:50:47.444763+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/frames/frame-0005.png",
+      "sha256": "8b873dfb2a4160f5497d3f1abbf33ca1ba3d5361438648cf7e7b6c65136e5bfa"
+    },
+    {
+      "event_sequence": 22,
+      "frame_sequence": 6,
+      "audit_sequence": 7,
+      "timestamp": "2026-09-01T11:51:01.339832+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/frames/frame-0006.png",
+      "sha256": "6e97fb1723d68e62dfd2e3862f97d43788c74fbb72962c41926a9386707af20b"
+    },
+    {
+      "event_sequence": 23,
+      "frame_sequence": 7,
+      "audit_sequence": 8,
+      "timestamp": "2026-09-01T11:51:13.104738+00:00",
+      "path": "media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/frames/frame-0007.png",
+      "sha256": "97ffd11288f2b26f26965c3692e7ca8aa9146883ba54622fb353f87c6d024721"
+    }
+  ],
+  "image_verification": "Run identity, complete successful action sequence, arguments, timestamps, and audit SHA-256",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "7 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/activity.json": "7271a53753cfd9bc2496fb66f8dfc3d42abc92a3a9109be47ff779b6e7096c1a",
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/frame-manifest.json": "f12baccaea45272f921ce32dfef6e0dbbe4a2815a5f8e0115640df1ae679956d",
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/trajectory.jsonl": "547d24cb99707d0d4820ad4f0ec38be830abd80ad9a52111fe6324e7f95e9348",
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/cua-audit.jsonl": "acb1c6643e6e840987247a60219e6b03091a7c1d0b2a010969c32870fa4c6a9f",
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/visual-events.jsonl": "5a58be018f005a6387a824beffacf23a73084d1bcaba759bb15cd0d0555b3339",
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/run-result.json": "44e5f9e2d3ef1148af476d600f7c44378d543b2fe526459fb36594caba15ca05",
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/metadata.json": "9c8a1d3b8abe4456d6a780acb99e0ada1fde8bff13cad61f17d8ebda319e048c",
+    "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/patch.diff": "7b20821a82e630be74c7d5dfda75b5667b66409c1d60b652a16c6a098d8b6021"
+  },
+  "activity_sha256": "6151a3006459ed2c37ee70211c4af8826515199a6b44aac662b81d8f6e83773e",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

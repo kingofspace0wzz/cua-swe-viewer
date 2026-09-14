@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.wordle-finish-replay-inspection.006",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-03",
+  "source_description": null,
+  "terminal_status": "completed",
+  "activity_source_kind": "representative_game_bundle",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 11,
+      "commands": 17,
+      "computer_use_calls": 31,
+      "events": 68,
+      "file_changes": 8,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 30,
+    "label": "cua-03",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "passing run with most retained observation frames",
+    "success": true
+  },
+  "frame_mapping": [
+    {
+      "event_sequence": 4,
+      "frame_sequence": 1,
+      "audit_sequence": 2,
+      "timestamp": "2026-09-02T17:48:15.181911+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0001.png",
+      "sha256": "2ffa21c29f5656b2ab5d43d94ba746dcbbc915d3771a86aea7199fad85f1174a"
+    },
+    {
+      "event_sequence": 9,
+      "frame_sequence": 2,
+      "audit_sequence": 3,
+      "timestamp": "2026-09-02T17:48:24.067989+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0002.png",
+      "sha256": "9b123ca54836e53f2040a2d6462512f106953f50bcf487ff620885156a99477d"
+    },
+    {
+      "event_sequence": 12,
+      "frame_sequence": 3,
+      "audit_sequence": 4,
+      "timestamp": "2026-09-02T17:48:31.275682+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0003.png",
+      "sha256": "e06d25ac25b352e9e4de69cb801ca1aeb75bc57a2935426dd21131b70153ac08"
+    },
+    {
+      "event_sequence": 14,
+      "frame_sequence": 4,
+      "audit_sequence": 6,
+      "timestamp": "2026-09-02T17:48:48.086698+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0004.png",
+      "sha256": "63f3bfff87ed4650134ddfa1182168d70aafdc625280b48dae461d1eb0a4808f"
+    },
+    {
+      "event_sequence": 15,
+      "frame_sequence": 5,
+      "audit_sequence": 7,
+      "timestamp": "2026-09-02T17:48:59.502760+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0005.png",
+      "sha256": "63f3bfff87ed4650134ddfa1182168d70aafdc625280b48dae461d1eb0a4808f"
+    },
+    {
+      "event_sequence": 16,
+      "frame_sequence": 6,
+      "audit_sequence": 8,
+      "timestamp": "2026-09-02T17:49:18.759562+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0006.png",
+      "sha256": "63f3bfff87ed4650134ddfa1182168d70aafdc625280b48dae461d1eb0a4808f"
+    },
+    {
+      "event_sequence": 17,
+      "frame_sequence": 7,
+      "audit_sequence": 9,
+      "timestamp": "2026-09-02T17:49:29.264964+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0007.png",
+      "sha256": "63f3bfff87ed4650134ddfa1182168d70aafdc625280b48dae461d1eb0a4808f"
+    },
+    {
+      "event_sequence": 22,
+      "frame_sequence": 8,
+      "audit_sequence": 10,
+      "timestamp": "2026-09-02T17:50:04.415243+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0008.png",
+      "sha256": "63f3bfff87ed4650134ddfa1182168d70aafdc625280b48dae461d1eb0a4808f"
+    },
+    {
+      "event_sequence": 23,
+      "frame_sequence": 9,
+      "audit_sequence": 11,
+      "timestamp": "2026-09-02T17:50:15.599183+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0009.png",
+      "sha256": "63f3bfff87ed4650134ddfa1182168d70aafdc625280b48dae461d1eb0a4808f"
+    },
+    {
+      "event_sequence": 24,
+      "frame_sequence": 10,
+      "audit_sequence": 12,
+      "timestamp": "2026-09-02T17:50:33.048764+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0010.png",
+      "sha256": "e15a084f89c3dc6c01e7a9189baade02dc5f60945b0c210cc0adf7f7c2bf33bd"
+    },
+    {
+      "event_sequence": 25,
+      "frame_sequence": 11,
+      "audit_sequence": 13,
+      "timestamp": "2026-09-02T17:50:46.762345+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0011.png",
+      "sha256": "e15a084f89c3dc6c01e7a9189baade02dc5f60945b0c210cc0adf7f7c2bf33bd"
+    },
+    {
+      "event_sequence": 26,
+      "frame_sequence": 12,
+      "audit_sequence": 14,
+      "timestamp": "2026-09-02T17:51:02.107926+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0012.png",
+      "sha256": "63f3bfff87ed4650134ddfa1182168d70aafdc625280b48dae461d1eb0a4808f"
+    },
+    {
+      "event_sequence": 27,
+      "frame_sequence": 13,
+      "audit_sequence": 15,
+      "timestamp": "2026-09-02T17:51:16.580248+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0013.png",
+      "sha256": "13cdbd2a88bc750d99ada4a6e9756efa266a7a26ebec2f26cedb7e574fd6d828"
+    },
+    {
+      "event_sequence": 30,
+      "frame_sequence": 14,
+      "audit_sequence": 16,
+      "timestamp": "2026-09-02T17:52:04.786253+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0014.png",
+      "sha256": "39f229a4214f2470484d24bae7858654e625681d5c1049c4a5a2f87874774216"
+    },
+    {
+      "event_sequence": 31,
+      "frame_sequence": 15,
+      "audit_sequence": 17,
+      "timestamp": "2026-09-02T17:52:19.658367+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0015.png",
+      "sha256": "39f229a4214f2470484d24bae7858654e625681d5c1049c4a5a2f87874774216"
+    },
+    {
+      "event_sequence": 32,
+      "frame_sequence": 16,
+      "audit_sequence": 18,
+      "timestamp": "2026-09-02T17:52:31.219013+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0016.png",
+      "sha256": "b321e30ec4128b8fe0a778a88d83e6e86caeef2aa2e478240df28dd098f9a5c8"
+    },
+    {
+      "event_sequence": 33,
+      "frame_sequence": 17,
+      "audit_sequence": 19,
+      "timestamp": "2026-09-02T17:52:46.283346+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0017.png",
+      "sha256": "0fe5b1de37b40f34fa3c4239a6d6f6ea7d821ef745d8edf4245c762b329d4758"
+    },
+    {
+      "event_sequence": 34,
+      "frame_sequence": 18,
+      "audit_sequence": 20,
+      "timestamp": "2026-09-02T17:52:58.062782+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0018.png",
+      "sha256": "4e36909710ed8ff9ce603152903bef5087669922997c02d77814e13b03449bda"
+    },
+    {
+      "event_sequence": 36,
+      "frame_sequence": 19,
+      "audit_sequence": 21,
+      "timestamp": "2026-09-02T17:53:11.924047+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0019.png",
+      "sha256": "4e36909710ed8ff9ce603152903bef5087669922997c02d77814e13b03449bda"
+    },
+    {
+      "event_sequence": 37,
+      "frame_sequence": 20,
+      "audit_sequence": 22,
+      "timestamp": "2026-09-02T17:53:25.440824+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0020.png",
+      "sha256": "4e36909710ed8ff9ce603152903bef5087669922997c02d77814e13b03449bda"
+    },
+    {
+      "event_sequence": 38,
+      "frame_sequence": 21,
+      "audit_sequence": 23,
+      "timestamp": "2026-09-02T17:53:38.373538+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0021.png",
+      "sha256": "4e36909710ed8ff9ce603152903bef5087669922997c02d77814e13b03449bda"
+    },
+    {
+      "event_sequence": 43,
+      "frame_sequence": 22,
+      "audit_sequence": 24,
+      "timestamp": "2026-09-02T17:54:38.324923+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0022.png",
+      "sha256": "4e36909710ed8ff9ce603152903bef5087669922997c02d77814e13b03449bda"
+    },
+    {
+      "event_sequence": 44,
+      "frame_sequence": 23,
+      "audit_sequence": 25,
+      "timestamp": "2026-09-02T17:54:53.040101+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0023.png",
+      "sha256": "4e36909710ed8ff9ce603152903bef5087669922997c02d77814e13b03449bda"
+    },
+    {
+      "event_sequence": 48,
+      "frame_sequence": 24,
+      "audit_sequence": 26,
+      "timestamp": "2026-09-02T17:55:48.962762+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0024.png",
+      "sha256": "4e36909710ed8ff9ce603152903bef5087669922997c02d77814e13b03449bda"
+    },
+    {
+      "event_sequence": 49,
+      "frame_sequence": 25,
+      "audit_sequence": 27,
+      "timestamp": "2026-09-02T17:56:01.433866+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0025.png",
+      "sha256": "4e36909710ed8ff9ce603152903bef5087669922997c02d77814e13b03449bda"
+    },
+    {
+      "event_sequence": 50,
+      "frame_sequence": 26,
+      "audit_sequence": 28,
+      "timestamp": "2026-09-02T17:56:14.823597+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0026.png",
+      "sha256": "4e36909710ed8ff9ce603152903bef5087669922997c02d77814e13b03449bda"
+    },
+    {
+      "event_sequence": 53,
+      "frame_sequence": 27,
+      "audit_sequence": 29,
+      "timestamp": "2026-09-02T17:57:08.283701+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0027.png",
+      "sha256": "4e36909710ed8ff9ce603152903bef5087669922997c02d77814e13b03449bda"
+    },
+    {
+      "event_sequence": 54,
+      "frame_sequence": 28,
+      "audit_sequence": 30,
+      "timestamp": "2026-09-02T17:57:22.905117+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0028.png",
+      "sha256": "4e36909710ed8ff9ce603152903bef5087669922997c02d77814e13b03449bda"
+    },
+    {
+      "event_sequence": 58,
+      "frame_sequence": 29,
+      "audit_sequence": 31,
+      "timestamp": "2026-09-02T17:58:32.145640+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0029.png",
+      "sha256": "4e36909710ed8ff9ce603152903bef5087669922997c02d77814e13b03449bda"
+    },
+    {
+      "event_sequence": 59,
+      "frame_sequence": 30,
+      "audit_sequence": 32,
+      "timestamp": "2026-09-02T17:58:51.042447+00:00",
+      "path": "media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frames/frame-0030.png",
+      "sha256": "4e36909710ed8ff9ce603152903bef5087669922997c02d77814e13b03449bda"
+    }
+  ],
+  "image_verification": "Run identity, complete successful action sequence, arguments, timestamps, and audit SHA-256",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "30 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/activity.json": "eee987b1e3556ff7a69b31cf3d3db5b5cfe9ce13be88a87aa89b5297686b4bfb",
+    "viewer/media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/frame-manifest.json": "529ab030dbcaf815ec4e554090028a75fcf72daf4da8e87b10068c16492fb9ff",
+    "viewer/media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/trajectory.jsonl": "355b20e51f1e9572914d9b58fcade334f9ec8113619120f3aa9003f3fb04f9f2",
+    "viewer/media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/cua-audit.jsonl": "036a196a23929fb4e2a60b950198bf1720a3e6c65a7eb3ee3039f1048d2aa7cf",
+    "viewer/media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/visual-events.jsonl": "3d19147aef4bfc3c647453e53c5d603ae820f61d2a2c529edd2775996de08b30",
+    "viewer/media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/run-result.json": "53efbd459da197add1e716254fdad1d1dcd0c2371ebf4e43a68ee5df8dfedb8e",
+    "viewer/media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/metadata.json": "eb31304ef4c4479adcb84b8134962791d5c8ef25bd89c1b0926ca34f367aa3d8",
+    "viewer/media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/patch.diff": "33505c1c39a33a6e0ece0362f3ec095e642044878317da7c06bf148ce5ab1243"
+  },
+  "activity_sha256": "9e89117efeb454be424fe54fb8a530c6c6462675ca3776ae5a6e06c4a89a283f",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

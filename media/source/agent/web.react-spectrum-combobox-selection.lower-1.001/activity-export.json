@@ -1,0 +1,406 @@
+{
+  "coverage": "retained_codex_events_partial",
+  "events": [
+    {
+      "detail": "I\u2019ll inspect the React source to locate the combobox selection state and Enter handling, then verify the fix in the running app through the permitted visual browser tools and run the build.",
+      "kind": "agent_message",
+      "sequence": 1,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "<evaluation-workspace>/workspace\nserver.mjs\nindex.html\npackage.json\npackage-lock.json\nsrc/styles.css\nsrc/main.jsx\nsrc/selectionPolicy.js",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 2,
+      "status": "completed",
+      "title": "/bin/bash -lc \"pwd && rg --files -g '\"'!node_modules'\"' -g '\"'!dist'\"' | head -80\"",
+      "truncated": false
+    },
+    {
+      "detail": "./package.json:2:  \"name\": \"recipient-combobox-reproduction\",\n./package-lock.json:2:  \"name\": \"recipient-combobox-reproduction\",\n./package-lock.json:7:      \"name\": \"recipient-combobox-reproduction\",\n./src/selectionPolicy.js:1:export function applyKeyboardTransition(key, selected, draft, workspacePolicy) {\n./src/selectionPolicy.js:2:  if (!draft.trim()) return selected;\n./src/selectionPolicy.js:4:  if (['Escape', 'Enter', 'Tab'].includes(key)) return [];\n./src/selectionPolicy.js:5:  return selected;\n./src/main.jsx:2:function App(){const[policy,setPolicy]=useState(null),[selected,setSelected]=useState(['Norway','Sweden']),[draft,setDraft]=useState('');useEffect(()=>{fetch('/api/keyboard-policy').then(r=>r.json()).then(setPolicy)},[]);function onKeyDown(e){if(!['Escape','Enter','Tab'].includes(e.key)||!policy)return;e.preventDefault();setSelected(applyKeyboardTransition(e.key,selected,draft,policy));setDraft('')};return <main><aside><strong>Atlas Campaigns</strong><a>Overview</a><a className=\"active\">Audience</a><a>Templates</a><a>Delivery</a></aside><section><p className=\"eyebrow\">Campaign audience</p><h1>Notification recipients</h1><p className=\"lede\">Choose saved regions or add a custom destination.</p><div className=\"panel\"><label htmlFor=\"recipients\">Recipients</label><div className=\"combo\">{selected.map(x=><span className=\"chip\" key={x}>{x}<button aria-label={`Remove ${x}`}>\u00d7</button></span>)}<input id=\"recipients\" placeholder=\"Type a region or custom value\" value={draft} onChange={e=>setDraft(e.target.value)} onKeyDown={onKeyDown}/></div><p className=\"count\" data-testid=\"selection-count\">{selected.length} selected</p><details><summary>Workspace keyboard behavior</summary><div className=\"guide\">{policy?.guide.map(line=><p key={line}>{line}</p>)}</div></details></div\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 3,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"Combobox|combobox|recipient|Enter|onKeyDown|selected\\\" -g '\"'!node_modules'\"' -g '\"'!dist'\"' .\"",
+      "truncated": true
+    },
+    {
+      "detail": "CUA_SWE_AGENT_ROLLOUT_DIR=<evaluation-workspace>/rollout\n./.git/COMMIT_EDITMSG\n./.git/HEAD\n./.git/config\n./.git/description\n./.git/index\n./dist/index.html\n./index.html\n./node_modules/.package-lock.json\n./package-lock.json\n./package.json\n./server.mjs\n./src/main.jsx\n./src/selectionPolicy.js\n./src/styles.css",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 4,
+      "status": "completed",
+      "title": "/bin/bash -lc \"printf 'CUA_SWE_AGENT_ROLLOUT_DIR=%s\\\\n' \\\"\"'$CUA_SWE_AGENT_ROLLOUT_DIR\"; find . -maxdepth 2 -type f | sort | head -100'",
+      "truncated": false
+    },
+    {
+      "detail": "export function applyKeyboardTransition(key, selected, draft, workspacePolicy) {\n  if (!draft.trim()) return selected;\n  // Regression: leaving a non-empty custom-value field resets the collection.\n  if (['Escape', 'Enter', 'Tab'].includes(key)) return [];\n  return selected;\n}\n\n--- main ---\nimport React,{useEffect,useState}from'react';import{createRoot}from'react-dom/client';import{applyKeyboardTransition}from'./selectionPolicy.js';import'./styles.css';\nfunction App(){const[policy,setPolicy]=useState(null),[selected,setSelected]=useState(['Norway','Sweden']),[draft,setDraft]=useState('');useEffect(()=>{fetch('/api/keyboard-policy').then(r=>r.json()).then(setPolicy)},[]);function onKeyDown(e){if(!['Escape','Enter','Tab'].includes(e.key)||!policy)return;e.preventDefault();setSelected(applyKeyboardTransition(e.key,selected,draft,policy));setDraft('')};return <main><aside><strong>Atlas Campaigns</strong><a>Overview</a><a className=\"active\">Audience</a><a>Templates</a><a>Delivery</a></aside><section><p className=\"eyebrow\">Campaign audience</p><h1>Notification recipients</h1><p className=\"lede\">Choose saved regions or add a custom destination.</p><div className=\"panel\"><label htmlFor=\"recipients\">Recipients</label><div className=\"combo\">{selected.map(x=><span className=\"chip\" key={x}>{x}<button aria-label={`Remove ${x}`}>\u00d7</button></span>)}<input id=\"recipients\" placeholder=\"Type a region or custom value\" value={draft} onChange={e=>setDraft(e.target.value)} onKeyDown={onKeyDown}/></div><p className=\"count\" data-testid=\"selection-count\">{selected.length} selected</p><details><summary>Workspace keyboard behavior</summary><div className=\"guide\">{policy?.guide.map(line=><p key={line}>{line}</p>)}</div></details></div></section></main>};createRoot(document.getElementById('root')).\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 5,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,200p' src/selectionPolicy.js && printf '\\\\n--- main ---\\\\n' && sed -n '1,240p' src/main.jsx\"",
+      "truncated": true
+    },
+    {
+      "detail": "<evaluation-workspace>/rollout/agent_stderr.txt\n<evaluation-workspace>/rollout/agent_stdout.txt",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 6,
+      "status": "completed",
+      "title": "/bin/bash -lc 'find \"$CUA_SWE_AGENT_ROLLOUT_DIR\" -maxdepth 2 -type f -print 2>/dev/null | head'",
+      "truncated": false
+    },
+    {
+      "detail": "import express from 'express';\nconst args=process.argv.slice(2);const port=Number(args[args.indexOf('--port')+1]||4181);const host=args[args.indexOf('--host')+1]||'127.0.0.1';const upstream=process.env.CUA_SWE_EXTERNAL_SERVICE_ORIGIN||'http://127.0.0.1:4321';\nconst app=express();app.use('/api',async(req,res)=>{try{const r=await fetch(upstream+req.originalUrl);res.status(r.status).type('json').send(Buffer.from(await r.arrayBuffer()))}catch{res.status(502).json({error:'policy unavailable'})}});app.use(express.static('dist'));app.get('*path',(_req,res)=>res.sendFile(new URL('./dist/index.html',import.meta.url).pathname));app.listen(port,host);\n\n--- package ---\n{\n  \"name\": \"recipient-combobox-reproduction\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"scripts\": {\n    \"build\": \"vite build\",\n    \"dev\": \"vite --host 127.0.0.1 --port 49402\"\n  },\n  \"dependencies\": {\n    \"@vitejs/plugin-react\": \"latest\",\n    \"express\": \"latest\",\n    \"react\": \"latest\",\n    \"react-dom\": \"latest\",\n    \"vite\": \"latest\"\n  }\n}\n\n--- css ---\n:root{font-family:Inter,system-ui;color:#1d2939;background:#f7f9fc}*{box-sizing:border-box}body{margin:0}main{min-height:100vh;display:grid;grid-template-columns:240px 1fr}aside{background:#102a43;color:#d9e8f5;padding:30px 22px;display:flex;flex-direction:column;gap:10px}aside strong{font-size:20px;margin-bottom:28px}aside a{padding:11px;border-radius:7px}.active{background:#1f4f75;color:white}section{padding:54px 64px}.eyebrow{text-transform:uppercase;letter-spacing:.1em;color:#52708c;font-size:12px;font-weight:750}h1{font-size:34px;margin:6px 0}.lede{color:#66788a}.panel{margin-top:32px;background:white;border:1px solid #dbe4ec;border-radius:12px;padding:26px;width:min(760px,100%);box-shadow:0 8px 25px #33506b10}.panel>label{display:block;font-weight:700;margin-botto\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 7,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,240p' server.mjs && printf '\\\\n--- package ---\\\\n' && cat package.json && printf '\\\\n--- css ---\\\\n' && sed -n '1,260p' src/styles.css\"",
+      "truncated": true
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 8,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 500, \"y\": 388}",
+      "kind": "computer_use",
+      "sequence": 9,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "The workspace guide confirms the intended distinction: Escape and Tab discard the draft while preserving saved recipients, and Enter adds the custom value. The regression helper currently clears the collection for all three keys, so I\u2019m narrowing the transition to preserve the existing array and append only on Enter.",
+      "kind": "agent_message",
+      "sequence": 10,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "?? dist/\n?? node_modules/\n9ff3309 isolated source baseline",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 11,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git status --short && git log -3 --oneline'",
+      "truncated": false
+    },
+    {
+      "detail": "./src/main.jsx:1:import React,{useEffect,useState}from'react';import{createRoot}from'react-dom/client';import{applyKeyboardTransition}from'./selectionPolicy.js';import'./styles.css';\n./src/main.jsx:2:function App(){const[policy,setPolicy]=useState(null),[selected,setSelected]=useState(['Norway','Sweden']),[draft,setDraft]=useState('');useEffect(()=>{fetch('/api/keyboard-policy').then(r=>r.json()).then(setPolicy)},[]);function onKeyDown(e){if(!['Escape','Enter','Tab'].includes(e.key)||!policy)return;e.preventDefault();setSelected(applyKeyboardTransition(e.key,selected,draft,policy));setDraft('')};return <main><aside><strong>Atlas Campaigns</strong><a>Overview</a><a className=\"active\">Audience</a><a>Templates</a><a>Delivery</a></aside><section><p className=\"eyebrow\">Campaign audience</p><h1>Notification recipients</h1><p className=\"lede\">Choose saved regions or add a custom destination.</p><div className=\"panel\"><label htmlFor=\"recipients\">Recipients</label><div className=\"combo\">{selected.map(x=><span className=\"chip\" key={x}>{x}<button aria-label={`Remove ${x}`}>\u00d7</button></span>)}<input id=\"recipients\" placeholder=\"Type a region or custom value\" value={draft} onChange={e=>setDraft(e.target.value)} onKeyDown={onKeyDown}/></div><p className=\"count\" data-testid=\"selection-count\">{selected.length} selected</p><details><summary>Workspace keyboard behavior</summary><div className=\"guide\">{policy?.guide.map(line=><p key={line}>{line}</p>)}</div></details></div></section></main>};createRoot(document.getElementById('root')).render(<App/>);\n./src/selectionPolicy.js:1:export function applyKeyboardTransition(key, selected, draft, workspacePolicy) {\n./src/styles.css:1::root{font-family:Inter,system-ui;color:#1d2939;background:#f7f9fc}*{box-sizing:border-box}body{margin:0}main{min-h\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 12,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"applyKeyboardTransition|keyboard-policy|guide\\\" . -g '\"'!node_modules'\"' -g '\"'!dist'\"'\"",
+      "truncated": true
+    },
+    {
+      "detail": "I\u2019m making the focused change in `src/selectionPolicy.js`: Enter will append the trimmed custom recipient, while Escape and Tab will return the current selections unchanged. Empty drafts will continue to leave selections untouched.",
+      "kind": "agent_message",
+      "sequence": 13,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/selectionPolicy.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/selectionPolicy.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 14,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 700, \"y\": 286}",
+      "kind": "computer_use",
+      "sequence": 15,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"type\", \"text\": \"Iceland\"}",
+      "kind": "computer_use",
+      "sequence": 16,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Enter\"}",
+      "kind": "computer_use",
+      "sequence": 17,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "The first browser interaction was against the pre-change bundle, so its state still showed the regression. I\u2019m rebuilding the served bundle now, then I\u2019ll reload and repeat Enter plus a discard-key check.",
+      "kind": "agent_message",
+      "sequence": 18,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{\"enter\":[\"Norway\",\"Sweden\",\"Iceland\"],\"escape\":[\"Norway\",\"Sweden\"],\"tab\":[\"Norway\",\"Sweden\"]}",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 19,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node --input-type=module -e \\\"import {applyKeyboardTransition} from './src/selectionPolicy.js'; const selected=['Norway','Sweden']; console.log(JSON.stringify({enter:applyKeyboardTransition('Enter',selected,' Iceland ',{}),escape:applyKeyboardTransition('Escape',selected,' Iceland ',{}),tab:applyKeyboardTransition('Tab',selected,' Iceland ',{})}))\\\"\"",
+      "truncated": false
+    },
+    {
+      "detail": "> build\n> vite build\n\nvite v8.2.1 building client environment for production...\n\u001b[2K\rtransforming...\u2713 16 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.16 kB \u2502 gzip:  0.14 kB\ndist/assets/index-BAIvlxWa.css    1.30 kB \u2502 gzip:  0.65 kB\ndist/assets/index-yybfXx8J.js   192.44 kB \u2502 gzip: 60.80 kB\n\n\u2713 built in 35.04s",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 20,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"CTRL+R\"}",
+      "kind": "computer_use",
+      "sequence": 21,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+R\"}",
+      "kind": "computer_use",
+      "sequence": 22,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 700, \"y\": 285}",
+      "kind": "computer_use",
+      "sequence": 23,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"type\", \"text\": \"Iceland\"}",
+      "kind": "computer_use",
+      "sequence": 24,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 25,
+      "status": "completed",
+      "title": "visual_cua.observe",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 26,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 700, \"y\": 286}",
+      "kind": "computer_use",
+      "sequence": 27,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"type\", \"text\": \"Finland\"}",
+      "kind": "computer_use",
+      "sequence": 28,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+R\"}",
+      "kind": "computer_use",
+      "sequence": 29,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 700, \"y\": 286}",
+      "kind": "computer_use",
+      "sequence": 30,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"type\", \"text\": \"Iceland\"}",
+      "kind": "computer_use",
+      "sequence": 31,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Enter\"}",
+      "kind": "computer_use",
+      "sequence": 32,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "selected!==i&&(e[n].selected=i),i&&r&&(e[n].defaultSelected=!0)}else{for(n=``+Vt(n),t=null,i=0\nselected=!0,r&&(e[i].defaultSelected=!0)\nselected=!0)}}function $t(e,t,n){if(t!=null&&(t=``+Vt(t),t!==e.value&&(e.value=t),n==null)){e.defaultValue!==t&&(e.defaultValue=\nselected`:e.selected=r&&typeof r!=`function`&&typeof r!=`symbol`\nselected`:e.selected=!1\nselected`:e.selected=p&&typeof p!=`function`&&typeof p!=`symbol`\nselected`]}),(0,x.jsxs)(`details`,{children:[(0,x.jsx)(`summary`,{children:`Workspace keyboard behavior`}),(0,x.jsx)(`div`,{clas",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 33,
+      "status": "completed",
+      "title": "/bin/bash -lc 'rg -o \"selected[''^;]{0,120}\" dist/assets/*.js | head -10'",
+      "truncated": false
+    },
+    {
+      "detail": "diff --git a/src/selectionPolicy.js b/src/selectionPolicy.js\nindex cac88fe..446ebe1 100644\n--- a/src/selectionPolicy.js\n+++ b/src/selectionPolicy.js\n@@ -1,6 +1,7 @@\n export function applyKeyboardTransition(key, selected, draft, workspacePolicy) {\n-  if (!draft.trim()) return selected;\n-  // Regression: leaving a non-empty custom-value field resets the collection.\n-  if (['Escape', 'Enter', 'Tab'].includes(key)) return [];\n+  const value = draft.trim();\n+  if (!value) return selected;\n+  if (key === 'Enter') return [...selected, value];\n+  if (['Escape', 'Tab'].includes(key)) return selected;\n   return selected;\n }\n M src/selectionPolicy.js\n?? dist/\n?? node_modules/",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 34,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff -- src/selectionPolicy.js && git status --short'",
+      "truncated": false
+    },
+    {
+      "detail": "The source-level transition now matches the displayed workspace guide, and the pure transition check returns `[\"Norway\",\"Sweden\",\"Iceland\"]` for Enter while preserving the two saved recipients for Escape and Tab. The production build also completes successfully; I\u2019m recording the required rollout notes next.",
+      "kind": "agent_message",
+      "sequence": 35,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "add: rollout_notes.md",
+      "files": [
+        {
+          "kind": "add",
+          "path": "rollout_notes.md"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 36,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "Fixed `src/selectionPolicy.js` so Enter appends the trimmed custom recipient while preserving existing recipients. Escape and Tab now discard the draft without clearing selections.\n\n`npm run build` passes, and rollout notes were written to `rollout/rollout_notes.md`.",
+      "kind": "agent_message",
+      "sequence": 37,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    }
+  ],
+  "provenance": "exact_historical_screenshot_only_gpt56_cua",
+  "run_relation": "historical_exact",
+  "source": "Recovered exact historical Codex JSONL from the archival Web evaluation host",
+  "status": "available",
+  "summary": {
+    "events": 37,
+    "commands": 12,
+    "file_changes": 2,
+    "computer_use_calls": 17,
+    "agent_messages": 6,
+    "plans": 0,
+    "screenshots": 0,
+    "truncated_events": 4,
+    "unfinished_items": 0
+  },
+  "task_id": "web.react-spectrum-combobox-selection.lower-1.001",
+  "terminal_status": "completed",
+  "usage": {
+    "cache_write_input_tokens": 32756,
+    "cached_input_tokens": 518317,
+    "input_tokens": 561483,
+    "output_tokens": 4628,
+    "reasoning_output_tokens": 2359
+  },
+  "activity_source_kind": "retained_timeline",
+  "artifacts": {
+    "Retained event data (partial)": "viewer/media/source/agent/web.react-spectrum-combobox-selection.lower-1.001/activity-export.json",
+    "Run provenance": "viewer/media/source/agent/web.react-spectrum-combobox-selection.lower-1.001/activity-provenance.json"
+  },
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+    }
+  }
+}

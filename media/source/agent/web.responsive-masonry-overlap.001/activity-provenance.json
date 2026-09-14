@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "task_id": "web.responsive-masonry-overlap.001",
+  "run_relation": "historical_exact",
+  "provenance": "exact_historical_screenshot_only_gpt56_cua",
+  "run_label": null,
+  "source_description": "Recovered exact historical Codex JSONL from the archival Web evaluation host",
+  "terminal_status": "completed",
+  "activity_source_kind": "retained_timeline",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/web.responsive-masonry-overlap.001/activity-retained.json": "8edbf196a51c73b63f400d8d94377b86f767e80740a01543152b08637344a6f7"
+  },
+  "activity_sha256": "bce54a7aed87c00d931e40cecbd2d5c31eadff3f560e794aba7249719b352846",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

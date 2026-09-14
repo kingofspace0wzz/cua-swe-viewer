@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "task_id": "web.subscription-renewal-frontier-easy.001",
+  "run_relation": "replacement",
+  "provenance": "fresh_gpt56_luna_screenshot_cua_replacement_20260901",
+  "run_label": null,
+  "source_description": "shuli_exp EFS \u00b7 fresh GPT-5.6 Luna screenshot-only CUA rerun \u00b7 2026-09-01",
+  "terminal_status": "completed",
+  "activity_source_kind": "retained_timeline",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 2. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/web.subscription-renewal-frontier-easy.001/activity-retained.json": "1be3c1d663c30cf303088fe2c84df74a14168c5a067e64a6cab9281cc65fbef2"
+  },
+  "activity_sha256": "90dd8edf21b11df4220a441f0280b3a3b53863f946a146528283c47257b853cb",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

@@ -1,0 +1,388 @@
+{
+  "coverage": "retained_codex_events_partial",
+  "events": [
+    {
+      "detail": "I\u2019ll inspect the game source, reproduce Level 2 through the protected browser, then make a focused fix and verify the build and rendered sequence.",
+      "kind": "agent_message",
+      "sequence": 1,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "jquery.js\nREADME.md\nmaze.js\nThree.js\nBox2dWeb.min.js\ngame_api.js\nkeyboard.js\nTHIRD_PARTY_NOTICES.md\nPROVENANCE.md\nserve.py\nRIGHTS.md\nindex.html",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 2,
+      "status": "completed",
+      "title": "/bin/bash -lc \"pwd && rg --files -g '\"'!node_modules'\"' | sed -n '1,160p'\"",
+      "truncated": false
+    },
+    {
+      "detail": "./README.md",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 3,
+      "status": "completed",
+      "title": "/bin/bash -lc \"git status --short && find . -maxdepth 2 -type f \\\\( -name 'package.json' -o -name 'vite.config.*' -o -name 'README*' \\\\) -print\"",
+      "truncated": false
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 4,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0001.png",
+          "sha256": "8105fa7c716912ca7d2f87cc911a50f3933a7909adb86fc5da58a323c7dd3714"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "function generateSquareMaze(dimension) {\n\n    function iterate(field, x, y) {\n        field[x][y] = false;\n        while(true) {\n            directions = [];\n            if(x > 1 && field[x-2][y] == true) {\n                directions.push([-1, 0]);\n            }\n            if(x < field.dimension - 2 && field[x+2][y] == true) {\n                directions.push([1, 0]);\n            }\n            if(y > 1 && field[x][y-2] == true) {\n                directions.push([0, -1]);\n            }\n            if(y < field.dimension - 2 && field[x][y+2] == true) {\n                directions.push([0, 1]);\n            }\n            if(directions.length == 0) {\n                return field;\n            }\n            dir = directions[Math.floor(Math.random()*directions.length)];\n            field[x+dir[0]][y+dir[1]] = false;\n            field = iterate(field, x+dir[0]*2, y+dir[1]*2);\n        }\n    }\n\n    // Initialize the field.\n    var field = new Array(dimension);\n    field.dimension = dimension;\n    for(var i = 0; i < dimension; i++) {\n        field[i] = new Array(dimension);\n        for (var j = 0; j < dimension; j++) {\n            field[i][j] = true;\n        }\n    }\n\n    // Gnerate the maze recursively.\n    field = iterate(field, 1, 1);\n    \n    return field;\n\n}",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 5,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,240p' maze.js && sed -n '240,520p' maze.js\"",
+      "truncated": false
+    },
+    {
+      "detail": "<html>\n\n    <head>\n<!-- [DETERMINISTIC_RANDOM] -->\n<script>\n// [DETERMINISTIC_RANDOM] Seeded randomness + time for reproducible gameplay\n(function() {\n    'use strict';\n    var SEED = (42 >>> 0);\n    function mulberry32(s) {\n        return function() {\n            s |= 0; s = s + 0x6D2B79F5 | 0;\n            var t = Math.imul(s ^ s >>> 15, 1 | s);\n            t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;\n            return ((t ^ t >>> 14) >>> 0) / 4294967296;\n        };\n    }\n\n    function makeRng(seed) {\n        return mulberry32(seed >>> 0);\n    }\n\n    var rng = makeRng(SEED);\n    var rngCrypto = makeRng(SEED ^ 0x9E3779B9);\n\n    var originalRandom = Math.random;\n    Math.random = function() { return rng(); };\n\n    var originalCrypto = window.crypto || window.msCrypto || null;\n    var originalGetRandomValues = originalCrypto && originalCrypto.getRandomValues\n        ? originalCrypto.getRandomValues.bind(originalCrypto)\n        : null;\n    var originalRandomUUID = originalCrypto && originalCrypto.randomUUID\n        ? originalCrypto.randomUUID.bind(originalCrypto)\n        : null;\n\n    function fillRandomBytes(typedArray) {\n        for (var i = 0; i < typedArray.length; i++) {\n            typedArray[i] = (rngCrypto() * 256) | 0;\n        }\n        return typedArray;\n    }\n\n    function toHex(byte) {\n        var hex = byte.toString(16);\n        return hex.length === 1 ? '0' + hex : hex;\n    }\n\n    function randomUUID() {\n        var bytes = new Uint8Array(16);\n        fillRandomBytes(bytes);\n        bytes[6] = (bytes[6] & 0x0f) | 0x40;\n        bytes[8] = (bytes[8] & 0x3f) | 0x80;\n        return (\n            toHex(bytes[0]) + toHex(bytes[1]) + toHex(bytes[2]) + toHex(bytes[3]) + '-' +\n            toHex(bytes[4]) + toHex(bytes[5]) + '-' +\n            toHex(bytes[6]) + toHex(byt\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 6,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' index.html\"",
+      "truncated": true
+    },
+    {
+      "detail": "(function () {\n  const GAME_ID = '03_astray';\n  const DEFAULT_SEED = 42;\n\n  const capabilities = {\n    supports_seed: false,\n    supports_level_select: true,\n    supports_difficulty: false,\n    supports_inplace_reset: true,\n    supports_reload_reset: false,\n    supports_pause_detection: false,\n    supports_menu_detection: false,\n    provides_actionable_flag: true\n  };\n\n  const session = {\n    seed: DEFAULT_SEED,\n    configuredLevel: null,\n    requestedDifficulty: null,\n    episodeStartMs: Date.now(),\n    episodeCount: 0\n  };\n\n  const runtimeState = {\n    lastResetMethod: null,\n    terminal: null,\n    pathDistanceCache: null\n  };\n\n  function safeNumber(value) {\n    return typeof value === 'number' && Number.isFinite(value) ? value : null;\n  }\n\n  function intOrNull(value) {\n    if (typeof value !== 'number' || !Number.isFinite(value)) return null;\n    return Math.trunc(value);\n  }\n\n  function normalizeOptions(options) {\n    const opts = options || {};\n    let level = null;\n    if (opts.level !== undefined && opts.level !== null && opts.level !== '') {\n      const numeric = Number(opts.level);\n      level = Number.isFinite(numeric) ? Math.trunc(numeric) : String(opts.level);\n    }\n    return {\n      seed: intOrNull(opts.seed),\n      level: level,\n      difficulty:\n        opts.difficulty === undefined || opts.difficulty === null\n          ? null\n          : String(opts.difficulty)\n    };\n  }\n\n  function levelFromDimension(dimension) {\n    if (typeof dimension !== 'number' || !Number.isFinite(dimension)) return null;\n    const level = Math.floor((dimension - 1) / 2 - 4);\n    return level >= 1 ? level : null;\n  }\n\n  function levelFromUrl() {\n    try {\n      const raw = new URLSearchParams(window.location.search || '').get('level');\n      const level = Number(raw);\n      retu\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 7,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,320p' game_api.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "# Astray\n\nA WebGL maze game built with Three.js and Box2dWeb.\n\n\n### License\n\nI don't believe in them. You can order your bits however you please./*!\n * KeyboardJS\n * \n * Copyright 2011, Robert William Hurst\n * Licenced under the BSD License.\n * See https://raw.github.com/RobertWHurst/KeyboardJS/master/license.txt\n */\n(function (context, factory) {\n    if (typeof define === 'function' && define.amd) {\n        // AMD. Register as an anonymous module.\n        define(factory);\n    } else {\n        // Browser globals\n\t    context.k = context.KeyboardJS = factory();\n    }\n}(this, function() {\n\n\t//polyfills for ms's peice o' shit browsers\n\tfunction bind(target, type, handler) { if (target.addEventListener) { target.addEventListener(type, handler, false); } else { target.attachEvent(\"on\" + type, function(event) { return handler.call(target, event); });\u00a0} }\n\t[].indexOf||(Array.prototype.indexOf=function(a,b,c){for(c=this.length,b=(c+~~b)%c;b<c&&(!(b in this)||this[b]!==a);b++);return b^c?b:-1;});\n\n\t//locals\n\tvar locals = {\n\t\t'us': {\n\t\t\t\"backspace\": 8,\n\t\t\t\"tab\": 9,\n\t\t\t\"enter\": 13,\n\t\t\t\"shift\": 16,\n\t\t\t\"ctrl\": 17,\n\t\t\t\"alt\": 18,\n\t\t\t\"pause\": 19, \"break\": 19,\n\t\t\t\"capslock\": 20,\n\t\t\t\"escape\": 27, \"esc\": 27,\n\t\t\t\"space\": 32, \"spacebar\": 32,\n\t\t\t\"pageup\": 33,\n\t\t\t\"pagedown\": 34,\n\t\t\t\"end\": 35,\n\t\t\t\"home\": 36,\n\t\t\t\"left\": 37,\n\t\t\t\"up\": 38,\n\t\t\t\"right\": 39,\n\t\t\t\"down\": 40,\n\t\t\t\"insert\": 45,\n\t\t\t\"delete\": 46,\n\t\t\t\"0\": 48, \"1\": 49, \"2\": 50, \"3\": 51, \"4\": 52, \"5\": 53, \"6\": 54, \"7\": 55, \"8\": 56, \"9\": 57,\n\t\t\t\"a\": 65, \"b\": 66, \"c\": 67, \"d\": 68, \"e\": 69, \"f\": 70, \"g\": 71, \"h\": 72, \"i\": 73, \"j\": 74, \"k\": 75, \"l\": 76, \"m\": 77, \"n\": 78, \"o\": 79, \"p\": 80, \"q\": 81, \"r\": 82, \"s\": 83, \"t\": 84, \"u\": 85, \"v\": 86, \"w\": 87, \"x\": 88, \"y\": 89, \"z\": 90,\n\t\t\t\"meta\": 91, \"command\": 91, \"windows\": 91, \"win\": 91,\n\t\t\t\"_91\": 92,\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 8,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' README.md && sed -n '1,260p' keyboard.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "The opening composition is present, but I\u2019m tracing the Level 2-specific camera, physics, and seal-state code now; the likely failure is in how stage transitions are positioned or retained during forward travel.",
+      "kind": "agent_message",
+      "sequence": 9,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "target[prop] = current;\n            } catch (e) {}\n        }\n        try {\n            Object.defineProperty(target, prop, {\n                configurable: true,\n                get: function() { return current; },\n                set: function(fn) { current = wrapSeedrandom(fn); }\n            });\n        } catch (e) {}\n    }\n\n    hookSeedrandom(Math, 'seedrandom');\n    hookSeedrandom(window, 'seedrandom');\n\n    window.__resetRandom = function() {\n        rng = makeRng(SEED);\n        rngCrypto = makeRng(SEED ^ 0x9E3779B9);\n        Math.random = function() { return rng(); };\n    };\n    window.__restoreRandom = function() {\n        Math.random = originalRandom;\n        if (originalCrypto) {\n            if (originalGetRandomValues) {\n                originalCrypto.getRandomValues = originalGetRandomValues;\n            }\n            if (originalRandomUUID) {\n                originalCrypto.randomUUID = originalRandomUUID;\n            }\n        }\n    };\n\n    console.log('[DeterministicRandom] Seeded with:', SEED);\n})();\n</script>\n<!-- [DETERMINISTIC_RANDOM] -->\n\n        <script src='Box2dWeb.min.js'></script>\n        <script src=\"Three.js\"></script>\n        <script src=\"keyboard.js\"></script>\n        <script src=\"jquery.js\"></script>\n        <script src=\"maze.js\"></script>\n\n        <script>\n\n            function getInitialMazeDimension() {\n                var defaultDimension = 11;\n                try {\n                    var params = new URLSearchParams(window.location.search || '');\n                    var levelRaw = params.get('level');\n                    if (!levelRaw) {\n                        return defaultDimension;\n                    }\n                    var level = parseInt(levelRaw, 10);\n                    if (!isFinite(level) || level < 1) {\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 10,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '120,520p' index.html && sed -n '520,1040p' index.html\"",
+      "truncated": true
+    },
+    {
+      "detail": "420\t                camera = new THREE.PerspectiveCamera(60, aspect, 1, 1000);\n   421\t                camera.position.set(1, 1, 5);\n   422\t                scene.add(camera);\n   423\t\n   424\t                // Add the maze.\n   425\t                mazeMesh = generate_maze_mesh(maze);\n   426\t                scene.add(mazeMesh);\n   427\t\n   428\t                // Add the ground.\n   429\t                g = new THREE.PlaneGeometry(mazeDimension*10, mazeDimension*10, mazeDimension, mazeDimension);\n   430\t                m = new THREE.MeshPhongMaterial({color: 0x30343a});\n   431\t                planeMesh = new THREE.Mesh(g, m);\n   432\t                planeMesh.position.set((mazeDimension-1)/2, (mazeDimension-1)/2, 0);\n   433\t                planeMesh.rotation.set(Math.PI/2, 0, 0);\n   434\t                scene.add(planeMesh);                \n   435\t\n   436\t            }\n   437\t\n   438\t            function updatePhysicsWorld() {\n   439\t\n   440\t                // Apply \"friction\". \n   441\t                var lv = wBall.GetLinearVelocity();\n   442\t                lv.Multiply(0.95);\n   443\t                wBall.SetLinearVelocity(lv);\n   444\t                \n   445\t                // An ordinary Up press starts the Level 2 gallery; true idle stays still.\n   446\t                if (!lensEngaged && lensStage < 3 && keyAxis[1] > 0) {\n   447\t                    lensEngaged = true;\n   448\t                    wBall.SetAwake(true);\n   449\t                }\n   450\t\n   451\t                if (lensEngaged) {\n   452\t                    var runVelocity = wBall.GetLinearVelocity();\n   453\t                    runVelocity.y = 1.72;\n   454\t                    runVelocity.x += (1 - wBall.GetPosition().x)*0.10;\n   455\t                    wBall.SetLinearVelocity(runVelocity);\n   456\t                    v\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 11,
+      "status": "completed",
+      "title": "/bin/bash -lc \"nl -ba index.html | sed -n '420,620p'\"",
+      "truncated": true
+    },
+    {
+      "detail": "./index.html:195:                keyAxis        = [0, 0],\n./index.html:199:                lensDisplays = [],\n./index.html:200:                lensGateMesh = undefined,\n./index.html:201:                lensTrack = [],\n./index.html:202:                lensStage = 0,\n./index.html:203:                lensEngaged = false,\n./index.html:232:                keyAxis = [0, 0];\n./index.html:251:                keyAxis = [0, 0];\n./index.html:254:                lensDisplays = [];\n./index.html:255:                lensGateMesh = undefined;\n./index.html:256:                lensTrack = [];\n./index.html:257:                lensStage = level === 2 ? 0 : 3;\n./index.html:258:                lensEngaged = false;\n./index.html:347:                if (lensStage < 3) {\n./index.html:348:                    lensDisplays = [];\n./index.html:349:                    for (var lensIndex = 0; lensIndex < lensTrack.length; lensIndex++) {\n./index.html:356:                        var coreWarmMaterial = new THREE.MeshBasicMaterial({\n./index.html:361:                        var coreCoolMaterial = new THREE.MeshBasicMaterial({\n./index.html:366:                        var coreWarm = new THREE.Mesh(\n./index.html:368:                            coreWarmMaterial\n./index.html:370:                        var coreCool = new THREE.Mesh(\n./index.html:372:                            coreCoolMaterial\n./index.html:374:                        coreWarm.rotation.x = Math.PI/2;\n./index.html:375:                        coreCool.rotation.x = Math.PI/2;\n./index.html:377:                        var crownWarmMaterial = new THREE.MeshBasicMaterial({\n./index.html:382:                        var crownCoolMaterial = new THREE.MeshBasicMaterial({\n./index.html:387:                        var crownWarm = new THREE.Mesh(\n./index.html:38\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 12,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"lens|Gallery|holdGallery|keyAxis|Level 2|crossbar|seal|core|crown\\\" . -g '\"'!Three.js'\"' -g '\"'!Box2dWeb.min.js'\"' -g '\"'!jquery.js'\"' -g '\"'!keyboard.js'\"'\"",
+      "truncated": true
+    },
+    {
+      "detail": "CUA_SWE_AGENT_ROLLOUT_DIR=<artifact-path>",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 13,
+      "status": "completed",
+      "title": "/bin/bash -lc \"git diff -- index.html; env | rg '\"'^CUA_SWE_AGENT_ROLLOUT_DIR='\"'\"",
+      "truncated": false
+    },
+    {
+      "detail": "{\"duration_ms\": 550, \"kind\": \"key_hold\", \"text\": \"ARROWUP\"}",
+      "kind": "computer_use",
+      "sequence": 14,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "not_recorded",
+      "image_reason": "No screenshot was returned for this call in the retained run."
+    },
+    {
+      "detail": "{\"duration_ms\": 550, \"kind\": \"key_hold\", \"text\": \"Up\"}",
+      "kind": "computer_use",
+      "sequence": 15,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "not_recorded",
+      "image_reason": "No screenshot was returned for this call in the retained run."
+    },
+    {
+      "detail": "{\"duration_ms\": 550, \"kind\": \"key_hold\", \"text\": \"ArrowUp\"}",
+      "kind": "computer_use",
+      "sequence": 16,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0002.png",
+          "sha256": "5d6a4222bf4d889f7d7b149d55969c3b82cdc063446b0d650c1b63dadcebbdce"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "The source snapshot contained `ball.png`, `brick.png`, and `concrete.png`.\nTheir individual provenance was not documented in the discovery directory, so\nthey are not redistributed in this candidate. The rendering code uses solid\nprocedural material colors instead. No audio or additional media is included.\n\n## Local candidate adaptations\n\n- fixed-seed Level 2 selection remains available through `window.gameAPI`;\n- `R` restarts the current maze so the interaction trigger is agent-accessible;\n- the state adapter reports player motion and generic completion progress;\n- the resize handler tolerates events before camera initialization;\n- restart rebinds movement controls so the prior held-input defect is not\n  present in this revision;\n- the final exit is opened before physics fixtures are constructed, retaining\n  the certified revision-002 gameplay repair;\n- the revision-003 rendered-heading input conversion is incorporated rather\n  than left as an alternate repair target;\n- the revision-005 pressure gate and all gate-only metadata were removed after\n  its oracle rejected behaviorally correct repairs for retained pink pixels;\n- revision 006's delivery relay was removed after a formal code-only Sol run\n  reconstructed its fixed landing target and passed the behavioral verifier;\n- revision 007's orientation console was removed after a formal code-only Sol\n  run recognized its world-to-camera transform and repaired both vector sites;\n- revision 008's kinetic chimes, sparse contact sampling, continuous-contact\n  repair target, and contact-weave oracle were removed after the formal\n  code-only repair succeeded and the static verifier produced a source-shape\n  false negative;\n- the broken revision-009 snapshot presents a deterministic three-seal glass\n  gallery whose player state\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 17,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '34,76p' PROVENANCE.md && git log --oneline --all -8\"",
+      "truncated": true
+    },
+    {
+      "detail": "{\"duration_ms\": 700, \"kind\": \"key_hold\", \"text\": \"ArrowUp\"}",
+      "kind": "computer_use",
+      "sequence": 18,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0003.png",
+          "sha256": "5dce4ed0e1035cd342ba6595aa0b048b9b967c58a4fa6261cb89a7203ae2f337"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "I reproduced the defect: each resolved seal is rendering both transparent variants, so the red core obscures the intended green core and the cyan crown contaminates the intended amber crown. I\u2019m narrowing the fix to the resolved-layer visibility so the existing motion, restart, and level-selection paths stay untouched.",
+      "kind": "agent_message",
+      "sequence": 19,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: index.html",
+      "files": [
+        {
+          "kind": "update",
+          "path": "index.html"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 20,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+R\"}",
+      "kind": "computer_use",
+      "sequence": 21,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0004.png",
+          "sha256": "cb1c6f3fe28fc98768454406e2b2e7fe66704179d1dbf7ede0ced57742abaf4f"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 450, \"kind\": \"key_hold\", \"text\": \"ArrowUp\"}",
+      "kind": "computer_use",
+      "sequence": 22,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0005.png",
+          "sha256": "60d39950b51182825a1c192a5b71317b8a9a52a73c842e20b6bbe30b1f8c3a87"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+Shift+R\"}",
+      "kind": "computer_use",
+      "sequence": 23,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0006.png",
+          "sha256": "a4654409e9478c76e3227c41538c1a0181d6af8fe46e1a7ce11594868e2707b7"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 450, \"kind\": \"key_hold\", \"text\": \"ArrowUp\"}",
+      "kind": "computer_use",
+      "sequence": 24,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0007.png",
+          "sha256": "60d39950b51182825a1c192a5b71317b8a9a52a73c842e20b6bbe30b1f8c3a87"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 25,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0008.png",
+          "sha256": "f8e2da63b2678430d99cf61dd50b3314eb9672870a8907732766d4aba9ec6406"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "parsed inline scripts: 2",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 26,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node -e \\\"const fs=require('fs'); const html=fs.readFileSync('index.html','utf8'); const scripts=[...html.matchAll(/<script(?:\\\\s[\"'^>]*)?>(['\"\\\\s\\\\S]*?)<\\\\/script>/gi)].map(m=>m[1]).filter(s=>s.trim()); scripts.forEach((s,i)=>{new Function(s)}); console.log('parsed inline scripts:', scripts.length);\\\"\"",
+      "truncated": false
+    },
+    {
+      "detail": "diff --git a/index.html b/index.html\nindex 9e75a67..dc8a61b 100644\n--- a/index.html\n+++ b/index.html\n@@ -533,12 +533,12 @@\n                     var displayY = lensTrack[lensIndex];\n                     display.lock.visible = !resolved;\n                     display.lock.position.set(1, displayY, 0.95);\n-                    display.coreWarm.visible = resolved;\n+                    display.coreWarm.visible = false;\n                     display.coreCool.visible = resolved;\n                     display.coreWarm.position.set(1, displayY - 0.03, 1.18);\n                     display.coreCool.position.set(1, displayY - 0.03, 1.18);\n                     display.crownWarm.visible = resolved;\n-                    display.crownCool.visible = resolved;\n+                    display.crownCool.visible = false;\n                     display.crownWarm.position.set(1, displayY + 0.31, 1.18);\n                     display.crownCool.position.set(1, displayY + 0.31, 1.18);\n                 }\n M index.html",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 27,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && git diff -- index.html && git status --short'",
+      "truncated": false
+    },
+    {
+      "detail": "npm ERR! code ENOENT\nnpm ERR! syscall open\nnpm ERR! path <artifact-path>\nnpm ERR! errno -2\nnpm ERR! enoent ENOENT: no such file or directory, open '<artifact-path>'\nnpm ERR! enoent This is related to npm not being able to find a file.\nnpm ERR! enoent \n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     <artifact-path>",
+      "exit_code": 254,
+      "kind": "command",
+      "sequence": 28,
+      "status": "failed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "The source-level checks pass. The advertised build command cannot run because this snapshot has no `package.json`; I\u2019m doing one fresh GUI reload through the browser address bar to verify the corrected colors from the edited file.",
+      "kind": "agent_message",
+      "sequence": 29,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+L\"}",
+      "kind": "computer_use",
+      "sequence": 30,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/frames/frame-0009.png",
+          "sha256": "e983200ce17f70e3e40e45f67c0ef2c99fb5979416ebce2c34f9b7c80808c0a3"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "Implemented the Level 2 seal rendering fix in `index.html`: resolved seals now show only the green core and amber crown layers.\n\nChecks:\n\n- Inline JavaScript parses successfully.\n- `git diff --check` passes.\n- `npm run build` unavailable because the repository has no `package.json`.\n- GUI sequence was reproduced.\n- `rollout_notes.md` still needs writing.",
+      "kind": "agent_message",
+      "sequence": 31,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    }
+  ],
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-01",
+  "run_relation": "historical_exact",
+  "status": "available",
+  "summary": {
+    "events": 31,
+    "commands": 14,
+    "file_changes": 1,
+    "computer_use_calls": 11,
+    "agent_messages": 5,
+    "plans": 0,
+    "screenshots": 9,
+    "truncated_events": 7,
+    "unfinished_items": 0
+  },
+  "task_id": "gameqa.astray-level2-parallax-glass.009",
+  "terminal_status": "completed",
+  "usage": {
+    "cache_write_input_tokens": 43309,
+    "cached_input_tokens": 536993,
+    "input_tokens": 589802,
+    "output_tokens": 5833,
+    "reasoning_output_tokens": 3945
+  },
+  "activity_source_kind": "representative_game_bundle",
+  "artifacts": {
+    "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/activity-export.json",
+    "Run provenance": "viewer/media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/activity-provenance.json",
+    "Agent patch": "viewer/media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/patch.diff"
+  },
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 7. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "9 screenshots matched to their recorded calls."
+    }
+  }
+}

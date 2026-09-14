@@ -1,0 +1,280 @@
+{
+  "coverage": "retained_codex_events_partial",
+  "events": [
+    {
+      "detail": "I\u2019ll trace the jetpack restart timing in the local source, reproduce it in the protected browser, make a focused fix, then build and complete Level 3. I\u2019ll also write the required rollout notes.",
+      "kind": "agent_message",
+      "sequence": 1,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "package-lock.json\nLICENSE\npackage.json\ncallisto-big-screenshot.png\nserver.mjs\nshadermin.js\nUPSTREAM.md\ncallisto-small-screenshot.png\nbuild.js\nREADME.md\nsrc/zzfx.js\nsrc/index.js\nsrc/music.js\nsrc/hud.js\nsrc/sound.js\nsrc/mapgen.js\nsrc/zzfxm.js\nsrc/externs.js\nsrc/constants.js\nsrc/index.html\nsrc/menu.js\nsrc/colors.js\nsrc/game_api.js\nsrc/entities/kang.js\nsrc/entities/shooter.js\nsrc/entities/particle.js\nsrc/entities/platform.js\nsrc/entities/coin.js\nsrc/entities/alien.js\nsrc/entities/mystery.js\nsrc/entities/spaceship.js\nsrc/entities/hero.js\nsrc/entities/fuel.js\nsrc/entities/flagpole.js\nsrc/entities/entity.js\nsrc/lib/geometry.js\nsrc/lib/glconstants.js\nsrc/lib/os13k.js\nsrc/lib/shaders.js\nsrc/lib/fbo.js\nsrc/lib/mat4.js\nsrc/lib/bufferset.js\nsrc/lib/keyboard.js\nsrc/lib/debug.js\nsrc/lib/events.js\nsrc/lib/engine.js\nsrc/lib/rng.js\nsrc/lib/vec3.js\nsrc/lib/lib.js\nsrc/lib/codegolf.js\nsrc/lib/camera.js\nsrc/lib/overlay.js\nsrc/lib/shaders/main.frag\nsrc/lib/shaders/bloom.vert\nsrc/lib/shaders/shadow.frag\nsrc/lib/shaders/shadow.vert\nsrc/lib/shaders/post.vert\nsrc/lib/shaders/bloom.frag\nsrc/lib/shaders/main.vert\nsrc/lib/shaders/post.frag",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 2,
+      "status": "completed",
+      "title": "/bin/bash -lc \"pwd && rg --files -g '\"'!node_modules'\"' | sed -n '1,160p'\"",
+      "truncated": false
+    },
+    {
+      "detail": "./server.mjs:36:  console.log(`Captain Callisto listening on http://${host}:${port}`);\n./UPSTREAM.md:9:certified `gameqa.captain-callisto-temporal-jetpack.002` bundle while\n./build.js:48:        'src/entities/fuel.js',\n./shadermin.js:261:              value.unshift('(');\n./README.md:1:# The Adventures of Captain Callisto\n./README.md:5:Our hero, Captain Callisto, blasts through space, seeking adventure. What will he find?\n./README.md:12:* X or shift to jetpack\n./README.md:43:The compo is over. To my delight, The Adventures of Captain Callisto won [3rd place overall](https://2021.js13kgames.com/#winners)! It was also voted #2 for Theme and #4 for Graphics.\n./README.md:90:* The jetpack mechanic was fun, but landing was difficult due to depth issues. This was not game breaking, but it added cognitive load.\n./src/index.html:5:<title>Captain Callisto</title>\n./src/hud.js:22:  drawShadowText('\ud83d\ude80 ' + player.fuel.toFixed(0) + '%', 20, 100);\n./src/index.js:74: * Time of last engine burst.\n./src/index.js:150:    player.jetpack = true;\n./src/index.js:159:    player.jetpack = true;\n./src/index.js:285:    const jetpackKeyDown = isKeyDown(KEY_X) || isKeyDown(KEY_SHIFT);\n./src/index.js:286:    const jetpackReleased = wasKeyReleased(KEY_X) || wasKeyReleased(KEY_SHIFT);\n./src/index.js:287:    player.setJetpackInput(jetpackKeyDown, jetpackReleased);\n./src/index.js:289:    if (player.jetpackThrusting && player.fuel > 0) {\n./src/index.js:292:      player.fuel = Math.max(0, player.fuel - dt * 20);\n./src/index.js:295:    if (player.jetpack && !jetpackSound) {\n./src/index.js:298:    if (!player.jetpack && jetpackSound) {\n./src/index.js:314: * Creates jetpack particles.\n./src/mapgen.js:75:      player.fuel = 100;\n./src/mapgen.js:96:      // The player reaches this pickup with an empty tank while\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 3,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"jetpack|fuel|plume|exhaust|Shift|shift|thrust|burst|Callisto\\\" -g '\"'!node_modules'\"' .\"",
+      "truncated": true
+    },
+    {
+      "detail": "<evaluation-workspace>/rollout",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 4,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git status --short && printenv CUA_SWE_AGENT_ROLLOUT_DIR'",
+      "truncated": false
+    },
+    {
+      "detail": "/**\n * Hero\n */\nclass Hero extends GameEntity {\n  /**\n   * Creates a new astronaut / hero.\n   * @param {number=} x\n   * @param {number=} y\n   * @param {number=} z\n   */\n  constructor(x, y, z) {\n    super(x, y, z);\n    this.bounciness = 0.01;\n    this.fuel = 100;\n    this.jetpack = false;\n    this.jetpackThrusting = false;\n    this.jetpackPower = 0;\n  }\n\n  /**\n   * Updates visible and physical jetpack state from one input sample.\n   * @param {boolean} active\n   * @param {boolean} released\n   */\n  setJetpackInput(active, released) {\n    this.jetpack = active;\n    if (active) {\n      this.jetpackThrusting = true;\n    }\n    if (released && this.jetpack) {\n      this.jetpackThrusting = false;\n      this.jetpackPower = 0;\n    }\n  }\n\n  /**\n   * Advances the jetpack output envelope.\n   * @param {number} elapsed\n   * @return {number}\n   */\n  updateJetpackPower(elapsed) {\n    if (this.jetpackThrusting) {\n      this.jetpackPower = Math.min(1, this.jetpackPower + elapsed * 4);\n    }\n    return this.jetpackPower;\n  }\n\n  /**\n   * Clears all jetpack state for a new episode.\n   */\n  resetJetpackInput() {\n    this.jetpack = false;\n    this.jetpackThrusting = false;\n  }\n\n  /**\n   * Renders the player model.\n   * @override\n   */\n  render() {\n    let leftArmRotationX = 0.0;\n    let leftArmRotationZ = 1.2;\n    let rightArmRotationX = 0.0;\n    let rightArmRotationZ = -1.2;\n    let leftLegRotationX = 0;\n    let rightLegRotationX = 0;\n\n    if (!this.isGrounded() || gameState === GameState.AFTER_LEVEL) {\n      // Jumping = arms up\n      leftArmRotationZ = -0.5;\n      rightArmRotationZ = 0.5;\n    } else if (this.accelerating) {\n      // Running = arms back\n      const r = (gameTime % 0.8) / 0.8 * 2 * Math.PI;\n      rightLegRotationX = leftArmRotationX = 0.07 * Math.hypot(this.velocity[0], this.v\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 5,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,180p' src/entities/hero.js && sed -n '240,340p' src/index.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "/** @const {!vec3} */\nconst cameraTarget = vec3.fromValues(0, 0, 0);\n\n/** @const {!vec3} */\nconst preferredCameraPosition = vec3.fromValues(0, 0, 0);\n\n/** @const {!vec3} */\nconst lightPosition = vec3.fromValues(200, 400, -32);\n\n// 4 geometry types:\nconst cubeGeometry = buildRoundedCube(1, 2);\nconst sphereGeometry = buildRoundedCube(21, 1);\nbuffers.push(\n    new BufferSet(STATIC_DRAW, cubeGeometry, 200000),\n    new BufferSet(STATIC_DRAW, sphereGeometry, 1000),\n    new BufferSet(DYNAMIC_DRAW, cubeGeometry, 4000),\n    new BufferSet(DYNAMIC_DRAW, sphereGeometry, 2000),\n);\n\nconst entities = /** @const {!Array.<!GameEntity>} */ ([]);\nconst player = new Hero();\n\n/**\n * Current camera distance.\n * @type {number}\n */\nconst cameraDistance = 52;\n\n/**\n * Number of coins collected by the player.\n * @type {number}\n */\nlet coins = 0;\n\n/**\n * Number of coins available in the level.\n */\nlet availableCoins = 0;\n\n/**\n * Timestamp of the last coin.\n * This is used to reset the coin sound effect sequence.\n * @type {number}\n */\nlet lastCoinTime = 0;\n\n/**\n * How many coins in the sequence.\n * Resets if no coins for one second.\n * @type {number}\n */\nlet coinSequence = 0;\n\n/**\n * Never called.\n * Keeps eslint happy.\n */\nfunction throwaway() {\n  gameState = GameState.PLAYING;\n  coins++;\n  availableCoins++;\n  lastCoinTime++;\n  coinSequence++;\n}\n\n/**\n * Current level.\n * @type {number}\n */\nlet level = 0;\n\n/**\n * Time of last engine burst.\n * This is used in opening cinematic to control engine animations.\n * @type {number}\n */\nlet lastEngineBurst = 0;\n\n/**\n * Game state enum.\n * @enum {number}\n */\nconst GameState = {\n  WAITING_FOR_FIRST_CLICK: 0,\n  INTRO_STORY1: 1,\n  INTRO_STORY2: 2,\n  BEFORE_LEVEL: 3,\n  PLAYING: 4,\n  AFTER_LEVEL: 5,\n  MAIN_MENU: 99,\n  CREDITS: 100,\n};\n\n/**\n * Global game state.\n *\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 6,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,130p' src/index.js && sed -n '1,180p' src/lib/keyboard.js && sed -n '1,150p' src/game_api.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "{\n  \"name\": \"js13k-callisto\",\n  \"version\": \"1.0.0\",\n  \"description\": \"js13k\",\n  \"license\": \"MIT\",\n  \"main\": \"src/index.js\",\n  \"scripts\": {\n    \"dev\": \"node server.mjs --port 62100\",\n    \"build\": \"node build.js --dev\",\n    \"server\": \"http-server ./dist --port 62100\",\n    \"lint\": \"eslint src/**/*.js\",\n    \"fix\": \"eslint --fix src/**/*.js\",\n    \"test:replay\": \"python3 verifiers/replay_state.py --url http://127.0.0.1:62100/?benchmark=1&level=3\"\n  },\n  \"devDependencies\": {\n    \"archiver\": \"5.3.1\",\n    \"eslint\": \"8.14.0\",\n    \"eslint-config-google\": \"0.14.0\",\n    \"google-closure-compiler\": \"20220405.0.0\",\n    \"http-server\": \"^14.1.0\",\n    \"roadroller\": \"2.1.0\"\n  }\n}\n\n# Upstream provenance\n\nThis benchmark snapshot is generated from `js13k-callisto` commit\n`43651f9a6b273b60f3cb382b93334fb8e7cbc348`. The upstream game is MIT licensed; see `LICENSE`.\n\nCUA-SWE adds a deterministic Level 3 pulse lane, a state bridge, and\na local static server. This successor snapshot derives from the remotely\ncertified `gameqa.captain-callisto-temporal-jetpack.002` bundle while\nretaining the same upstream source attribution and MIT license.\nGameplay code remains editable source.\n5cd9b43 (HEAD -> master) isolated source baseline",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 7,
+      "status": "completed",
+      "title": "/bin/bash -lc \"cat package.json && sed -n '1,140p' UPSTREAM.md && git log --oneline -8 --decorate\"",
+      "truncated": false
+    },
+    {
+      "detail": "The regression is localized: release detection runs after the visible flag is set false, so its guard can never pass. That leaves physical thrust and the power envelope active during release gaps, which explains both hidden fuel drain and later full-plume restarts. I\u2019m confirming the behavior in Level 3 before patching.",
+      "kind": "agent_message",
+      "sequence": 8,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 9,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"duration_ms\": 220, \"kind\": \"key_hold\", \"text\": \"D+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 10,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"duration_ms\": 160, \"kind\": \"key_hold\", \"text\": \"D\"}",
+      "kind": "computer_use",
+      "sequence": 11,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "update: src/entities/hero.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/entities/hero.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 12,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "import {createReadStream, existsSync, statSync} from 'node:fs';\nimport {createServer} from 'node:http';\nimport {extname, join, normalize} from 'node:path';\n\nconst args = process.argv.slice(2);\nconst value = (name, fallback) => {\n  const index = args.indexOf(name);\n  return index >= 0 && args[index + 1] ? args[index + 1] : fallback;\n};\nconst host = value('--host', '127.0.0.1');\nconst port = Number(value('--port', '4173'));\nconst root = join(process.cwd(), 'dist');\nconst contentTypes = {\n  '.html': 'text/html; charset=utf-8',\n  '.js': 'text/javascript; charset=utf-8',\n  '.json': 'application/json; charset=utf-8',\n  '.png': 'image/png',\n};\n\ncreateServer((request, response) => {\n  const requestPath = new URL(request.url, `http://${request.headers.host}`).pathname;\n  const relative = requestPath === '/' ? 'index.html' : requestPath.slice(1);\n  const resolved = normalize(join(root, relative));\n  if (!resolved.startsWith(root) || !existsSync(resolved) || !statSync(resolved).isFile()) {\n    response.writeHead(404);\n    response.end('Not found');\n    return;\n  }\n  response.writeHead(200, {\n    'content-type': contentTypes[extname(resolved)] || 'application/octet-stream',\n    'cache-control': 'no-store',\n  });\n  createReadStream(resolved).pipe(response);\n}).listen(port, host, () => {\n  console.log(`Captain Callisto listening on http://${host}:${port}`);\n});\n    createMetalPlatform(0, 6, 24, 32, 7, 28); // Third platform, z=24..28\n\n    createCoins(2, 6, 10, 28, 0, 2);\n    createCoins(2, 7, 18, 28, 0, 2);\n    createCoins(10, 8, 26, 4, 0, 4);\n\n    const alien1 = new Alien(4, 5, 10);\n    alien1.aggroRange = 0;\n    alien1.waypoints = [vec3.fromValues(4, 5, 10), vec3.fromValues(28, 5, 10)];\n    entities.push(alien1);\n\n    const alien2 = new Alien(4, 6, 18);\n    alien2.aggroRange = 0;\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 13,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,110p' server.mjs && sed -n '50,125p' src/mapgen.js && sed -n '450,525p' src/mapgen.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "src/constants.js:96:/** Whether the deterministic benchmark lane is active. */\nsrc/constants.js:97:const BENCHMARK_MODE =\nsrc/constants.js:98:    new URLSearchParams(window.location.search).get('benchmark') === '1';\nsrc/entities/flagpole.js:3: * The Flagpole class represents the flag goal of the level.\nsrc/entities/flagpole.js:5:class Flagpole extends GameEntity {\nsrc/mapgen.js:40:    entities.push(new Flagpole(30, 10, 26));\nsrc/mapgen.js:67:    entities.push(new Flagpole(2, 7, 26));\nsrc/mapgen.js:71:    if (BENCHMARK_MODE) {\nsrc/mapgen.js:76:      entities.push(new Flagpole(60, 4, 5));\nsrc/mapgen.js:91:    entities.push(new Flagpole(34, 4, 16));\nsrc/mapgen.js:95:    if (BENCHMARK_MODE) {\nsrc/mapgen.js:104:      entities.push(new Flagpole(32, 6, 5));\nsrc/mapgen.js:111:        entities.push(new Coin(x + 2, y + 4, z + 2));\nsrc/mapgen.js:113:      entities.push(new Coin(x + 10, y + 4, z + 2));\nsrc/mapgen.js:114:      entities.push(new Coin(x + 10, y + 4, z + 10));\nsrc/mapgen.js:115:      entities.push(new Coin(x + 2, y + 4, z + 10));\nsrc/mapgen.js:142:    entities.push(new Flagpole(6, 16, 26));\nsrc/mapgen.js:171:    entities.push(new Flagpole(30, 12, 30));\nsrc/mapgen.js:207:    entities.push(new Flagpole(14, 12, 26));\nsrc/mapgen.js:232:        entities.push(new Coin(x, 5, z));\nsrc/mapgen.js:254:    entities.push(new Flagpole(16, 4, 16));\nsrc/mapgen.js:295:    entities.push(new Flagpole(16, 16, 30));\nsrc/mapgen.js:326:    entities.push(new Flagpole(28, 32, 4));\nsrc/mapgen.js:351:    entities.push(new Flagpole(2, 52, 14));\nsrc/mapgen.js:453:    const coin = new Coin();",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 14,
+      "status": "completed",
+      "title": "/bin/bash -lc 'rg -n \"Flagpole|new Coin|level === 3|case 3|BENCHMARK_MODE|benchmark\" src/mapgen.js src/index.js src/entities/flagpole.js src/constants.js'",
+      "truncated": false
+    },
+    {
+      "detail": "diff --git a/src/entities/hero.js b/src/entities/hero.js\nindex e5645dc..2c8d754 100644\n--- a/src/entities/hero.js\n+++ b/src/entities/hero.js\n@@ -25,13 +25,13 @@ class Hero extends GameEntity {\n    */\n   setJetpackInput(active, released) {\n     this.jetpack = active;\n-    if (active) {\n-      this.jetpackThrusting = true;\n-    }\n-    if (released && this.jetpack) {\n+    if (released) {\n       this.jetpackThrusting = false;\n       this.jetpackPower = 0;\n     }\n+    if (active) {\n+      this.jetpackThrusting = true;\n+    }\n   }\n \n   /**\n\n> js13k-callisto@1.0.0 lint\n> eslint src/**/*.js\n\n\n<evaluation-workspace>/workspace/src/lib/codegolf.js\n  18:3  error  The body of a for-in should be wrapped in an if statement to filter unwanted properties from the prototype  guard-for-in\n\n<evaluation-workspace>/workspace/src/lib/shaders.js\n  0:0  warning  File ignored because of a matching ignore pattern. Use \"--no-ignore\" to override\n\n\u2716 2 problems (1 error, 1 warning)",
+      "exit_code": 1,
+      "kind": "command",
+      "sequence": 15,
+      "status": "failed",
+      "title": "/bin/bash -lc 'git diff -- src/entities/hero.js && npm run lint'",
+      "truncated": false
+    },
+    {
+      "detail": "The browser reproduction confirms the hidden-state mismatch: after a brief Shift release, the plume disappears but fuel fell from 95% to 67% and the character kept rising. I\u2019ve applied the minimal release-order correction; next I\u2019m rebuilding the served bundle and verifying that gaps now halt thrust and reset the plume envelope.",
+      "kind": "agent_message",
+      "sequence": 16,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/entities/hero.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/entities/hero.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 17,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "> js13k-callisto@1.0.0 build\n> node build.js --dev\n\nPackage: 21818 bytes (163.90%)",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 18,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"CTRL+R\"}",
+      "kind": "computer_use",
+      "sequence": 19,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+R\"}",
+      "kind": "computer_use",
+      "sequence": 20,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"duration_ms\": 220, \"kind\": \"key_hold\", \"text\": \"D+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 21,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"duration_ms\": 180, \"kind\": \"key_hold\", \"text\": \"D\"}",
+      "kind": "computer_use",
+      "sequence": 22,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "I\u2019m sorry, but I couldn\u2019t complete the implementation and verification within this run.",
+      "kind": "agent_message",
+      "sequence": 23,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "\u2713 Inspect local source and identify jetpack burst/restart timing logic\n\u2713 Reproduce Level 3 behavior in protected browser\n\u2713 Implement focused timing fix\n\u25cb Build, verify gameplay, and complete the level\n\u25cb Write rollout_notes.md",
+      "kind": "plan",
+      "sequence": 24,
+      "status": "completed",
+      "title": "Agent plan",
+      "truncated": false
+    }
+  ],
+  "provenance": "fresh_gpt56_sol_screenshot_cua_replacement_20260901",
+  "run_relation": "replacement",
+  "source": "shuli_exp EFS \u00b7 fresh GPT-5.6 Sol screenshot-only CUA rerun \u00b7 2026-09-01",
+  "status": "available",
+  "summary": {
+    "events": 24,
+    "commands": 10,
+    "file_changes": 2,
+    "computer_use_calls": 7,
+    "agent_messages": 4,
+    "plans": 1,
+    "screenshots": 0,
+    "truncated_events": 4,
+    "unfinished_items": 0
+  },
+  "task_id": "gameqa.captain-callisto-temporal-jetpack.007",
+  "terminal_status": "completed",
+  "usage": {
+    "cache_write_input_tokens": 29192,
+    "cached_input_tokens": 351981,
+    "input_tokens": 388175,
+    "output_tokens": 2946,
+    "reasoning_output_tokens": 1143
+  },
+  "activity_source_kind": "retained_timeline",
+  "artifacts": {
+    "Retained event data (partial)": "viewer/media/source/agent/gameqa.captain-callisto-temporal-jetpack.007/activity-export.json",
+    "Run provenance": "viewer/media/source/agent/gameqa.captain-callisto-temporal-jetpack.007/activity-provenance.json"
+  },
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+    }
+  }
+}

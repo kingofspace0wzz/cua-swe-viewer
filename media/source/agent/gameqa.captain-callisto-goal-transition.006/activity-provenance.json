@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.captain-callisto-goal-transition.006",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_matched_gpt56_sol_cua",
+  "run_label": null,
+  "source_description": "Retained protected matched GPT-5.6 Sol CUA run on shuli_exp EFS",
+  "terminal_status": "completed",
+  "activity_source_kind": "raw_transcript",
+  "raw_transcript_sha256": "546d8a608fb3fa7028802ae43e8949da1cc26cff8b9e4437415b6b001cd8016c",
+  "raw_record_count": 74,
+  "exported_record_count": 74,
+  "thread_id": "01a05b93-d46f-7cb3-9fee-4716cec4ba98",
+  "image_verification": "Ordered original image SHA-256, or every retained base64 prefix/suffix character and the exact omitted length for explicitly truncated image payloads; all published frames hashed",
+  "raw_transcript_retention": "Registered raw transcript in private research repository",
+  "artifact_status": {
+    "event_data": {
+      "status": "complete",
+      "reason": "Every original lifecycle record is retained, with image payloads replaced by verified references."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "16 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/gameqa.captain-callisto-goal-transition.006/agent_stdout.jsonl": "546d8a608fb3fa7028802ae43e8949da1cc26cff8b9e4437415b6b001cd8016c",
+    "viewer/media/source/agent/gameqa.captain-callisto-goal-transition.006/trajectory.jsonl": "b7b58f60ffccf71dae1534505dd86b08aee1b315ba3e7bb3778d4879bae9a4e1",
+    "viewer/media/agent-activity-sources.json": "0d24a2ca83f7979c170f33b13d08f6720497ad0e036ff6d0ea8d97e6bc4d93b1"
+  },
+  "activity_sha256": "de30846cea850f89995b78be55236069c806fba0dbcbff3eedb69c2334099eae",
+  "export_policy": {
+    "all_lifecycle_records_retained": true,
+    "text_truncated": false,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

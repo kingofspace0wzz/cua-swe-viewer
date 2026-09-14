@@ -1,0 +1,633 @@
+{
+  "coverage": "retained_codex_events_partial",
+  "events": [
+    {
+      "detail": "I\u2019ll inspect the composer implementation and its tests, trace the Shift+Enter scroll behavior, then make the smallest source change and run the build plus relevant checks. I\u2019ll also record the work in the required rollout notes file.",
+      "kind": "agent_message",
+      "sequence": 1,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "<evaluation-workspace>/workspace\npackage.json\nindex.html\nserver.mjs\npackage-lock.json\nbuild.mjs\nsrc/scrollController.js\nsrc/styles.css\nsrc/slateComposer.js\nsrc/main.js\n\n--- package ---\n{\n  \"name\": \"field-log-composer\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"version\": \"1.0.0\",\n  \"scripts\": {\n    \"build\": \"node build.mjs\",\n    \"dev\": \"vite --host 127.0.0.1 --port 58000\"\n  },\n  \"dependencies\": {\n    \"slate\": \"0.116.0\",\n    \"slate-dom\": \"0.116.0\"\n  },\n  \"devDependencies\": {\n    \"esbuild\": \"0.25.9\"\n  }\n}",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 2,
+      "status": "completed",
+      "title": "/bin/bash -lc \"pwd && rg --files -g '\"'!node_modules'\"' -g '\"'!dist'\"' -g '\"'!build'\"' | sed -n '1,160p' && printf '\\\\n--- package ---\\\\n' && sed -n '1,220p' package.json\"",
+      "truncated": false
+    },
+    {
+      "detail": "// Field Log Composer editing surface, driven by a real Slate editor.\n//\n// The log body is a Slate document (one paragraph block per entry). Every\n// edit runs through Slate core (Editor.insertSoftBreak, Editor.insertBreak,\n// Transforms.insertText) on an editor produced by slate-dom.withDOM. A\n// minimal vanilla renderer paints editor.children into the contenteditable\n// surface and registers the slate-dom node/element maps so that\n// DOMEditor.toDOMRange resolves the live caret box straight from Slate.\n\nimport { createEditor, Editor, Transforms, Node as SlateNode } from 'slate';\nimport {\n  DOMEditor,\n  withDOM,\n  EDITOR_TO_ELEMENT,\n  EDITOR_TO_WINDOW,\n  EDITOR_TO_KEY_TO_ELEMENT,\n  ELEMENT_TO_NODE,\n  NODE_TO_ELEMENT,\n  NODE_TO_INDEX,\n  NODE_TO_PARENT,\n} from 'slate-dom';\nimport { onCaretMoved } from './scrollController.js';\n\nconst ZERO_WIDTH = String.fromCharCode(65279);\nconst NEWLINE = String.fromCharCode(10);\n\nlet editor = null;\nlet bodyEl = null;\n\nexport function getBodyEl() { return bodyEl; }\nexport function getEditor() { return editor; }\n\nfunction docFromBody(blocks) {\n  return blocks.map((text) => ({ type: \"paragraph\", children: [{ text: String(text) }] }));\n}\n\nfunction render() {\n  const keyToEl = EDITOR_TO_KEY_TO_ELEMENT.get(editor);\n  const savedScrollTop = bodyEl.scrollTop;\n  bodyEl.textContent = \"\";\n  NODE_TO_INDEX.set(editor, 0);\n  NODE_TO_PARENT.set(editor, editor);\n  editor.children.forEach((block, bi) => {\n    const p = document.createElement(\"p\");\n    p.className = \"log-block\";\n    p.setAttribute(\"data-slate-node\", \"element\");\n    NODE_TO_INDEX.set(block, bi);\n    NODE_TO_PARENT.set(block, editor);\n    NODE_TO_ELEMENT.set(block, p);\n    ELEMENT_TO_NODE.set(p, block);\n    keyToEl.set(DOMEditor.findKey(editor, block), p);\n    block.children.forEach((leaf\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 3,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' src/slateComposer.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "// Scroll coordination for the Field Log Composer body.\n//\n// After the caret moves the body may need to scroll so the writer keeps seeing\n// where they are typing. The body element carries a live caret line box on its\n// dataset; the workspace frame sizes the body between its top and bottom bands.\n// Several coordination modes are kept here because different log frames have\n// historically wanted different follow behavior; the mode in force is selected\n// by the constant below.\n\n// Follow modes. Each takes the scroll body and returns a target scrollTop, or\n// null to leave the current scroll position untouched.\nconst modes = {\n  // Leave the body wherever it is. Movement never repositions the surface.\n  hold(body) {\n    return null;\n  },\n\n  // Bring the caret line fully inside the body, scrolling as little as needed.\n  // If the caret line sits below the visible band, scroll down just far enough\n  // that its lower edge clears the reserved bottom margin; if it sits above,\n  // scroll up just far enough that its upper edge clears the top margin.\n  reveal(body) {\n    const caretTop = Number(body.dataset.caretTopViewport);\n    const caretBottom = Number(body.dataset.caretBottomViewport);\n    const margin = readSafeMargin(body);\n    const view = body.clientHeight;\n    let scrollTop = body.scrollTop;\n    if (caretBottom > view - margin) {\n      scrollTop += caretBottom - (view - margin);\n    } else if (caretTop < margin) {\n      scrollTop -= (margin - caretTop);\n    }\n    return clampScroll(body, scrollTop);\n  },\n\n  // Snap the caret line to the top of the visible band regardless of how far\n  // that scrolls the earlier content out of the body.\n  snap(body) {\n    const caretTop = Number(body.dataset.caretTopViewport);\n    const margin = readSafeMargin(body);\n    const scrol\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 4,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,300p' src/scrollController.js && printf '\\\\n--- main ---\\\\n' && sed -n '1,260p' src/main.js\"",
+      "truncated": true
+    },
+    {
+      "detail": ":root {\n  --ink: #1f2430;\n  --muted: #6b7280;\n  --line: #e2e5ec;\n  --frame: #ffffff;\n  --bar: #f4f6fa;\n  --accent: #2f6fed;\n}\n\n* { box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;\n  color: var(--ink);\n  background: #eef1f6;\n}\n\n.page {\n  max-width: 720px;\n  margin: 32px auto;\n  padding: 0 20px;\n}\n\n.page-head { margin-bottom: 14px; }\n\n.crumb {\n  font-size: 12px;\n  letter-spacing: 0.04em;\n  text-transform: uppercase;\n  color: var(--muted);\n}\n\n.doc-title {\n  margin: 4px 0 2px;\n  font-size: 22px;\n  font-weight: 650;\n}\n\n.hint {\n  margin: 0;\n  font-size: 13px;\n  color: var(--muted);\n}\n\n.frame-shell {\n  display: flex;\n  flex-direction: column;\n  border: 1px solid var(--line);\n  border-radius: 12px;\n  overflow: hidden;\n  background: var(--frame);\n  box-shadow: 0 8px 24px rgba(31, 36, 48, 0.08);\n}\n\n.action-bar {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 0 12px;\n  background: var(--bar);\n  border-bottom: 1px solid var(--line);\n  flex: 0 0 auto;\n}\n\n.tool {\n  border: 1px solid var(--line);\n  background: #fff;\n  border-radius: 7px;\n  padding: 5px 12px;\n  font-size: 13px;\n  cursor: pointer;\n}\n\n.spacer { flex: 1; }\n.tool-note { font-size: 12px; color: var(--muted); }\n\n.surface {\n  flex: 1 1 auto;\n  overflow-y: auto;\n  padding: 10px 18px;\n  outline: none;\n  line-height: 1.55;\n  font-size: 15px;\n}\n\n.log-block {\n  margin: 0 0 10px;\n  white-space: pre-wrap;\n}\n\n.status-strip {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 0 14px;\n  background: var(--bar);\n  border-top: 1px solid var(--line);\n  font-size: 12px;\n  color: var(--muted);\n  flex: 0 0 auto;\n}\n\n.status-dot {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: var(--accent);\n}\n\n/* Live cursor-visibility\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 5,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,320p' src/styles.css && printf '\\\\n--- index ---\\\\n' && sed -n '1,220p' index.html\"",
+      "truncated": true
+    },
+    {
+      "detail": "The bug is localized: Shift+Enter inserts the newline and updates caret geometry, but unlike typing and plain Enter it never invokes scroll coordination. The shared controller is intentionally in \u201chold\u201d mode, so I\u2019m checking the surrounding contract before choosing a soft-break-only reveal that preserves existing typing and Enter behavior.",
+      "kind": "agent_message",
+      "sequence": 6,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "?? dist/\n?? node_modules/\n284f803 isolated source baseline",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 7,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git status --short && git log -5 --oneline --all'",
+      "truncated": false
+    },
+    {
+      "detail": "./package-lock.json:466:    \"node_modules/compute-scroll-into-view\": {\n./package-lock.json:468:      \"resolved\": \"https://registry.npmjs.org/compute-scroll-into-view/-/compute-scroll-into-view-3.1.1.tgz\",\n./package-lock.json:558:    \"node_modules/scroll-into-view-if-needed\": {\n./package-lock.json:560:      \"resolved\": \"https://registry.npmjs.org/scroll-into-view-if-needed/-/scroll-into-view-if-needed-3.1.0.tgz\",\n./package-lock.json:564:        \"compute-scroll-into-view\": \"^3.0.2\"\n./package-lock.json:588:        \"scroll-into-view-if-needed\": \"^3.1.0\",\n./src/slateComposer.js:8:// DOMEditor.toDOMRange resolves the live caret box straight from Slate.\n./src/slateComposer.js:22:import { onCaretMoved } from './scrollController.js';\n./src/slateComposer.js:39:  const savedScrollTop = bodyEl.scrollTop;\n./src/slateComposer.js:71:        // caret can rest on it; data-slate-length preserves the true length for\n./src/slateComposer.js:81:  // it so a caret move does not itself jump the scroll (the follow controller\n./src/slateComposer.js:84:  // the assignment against a stale (zero) scroll range.\n./src/slateComposer.js:85:  void bodyEl.scrollHeight;\n./src/slateComposer.js:86:  bodyEl.scrollTop = savedScrollTop;\n./src/slateComposer.js:90:// Mirror the Slate selection into the native DOM selection so focus and caret\n./src/slateComposer.js:102:  const saved = bodyEl.scrollTop;\n./src/slateComposer.js:105:  // Restoring the DOM selection can nudge the scroll; keep the surface put.\n./src/slateComposer.js:106:  void bodyEl.scrollHeight;\n./src/slateComposer.js:107:  bodyEl.scrollTop = saved;\n./src/slateComposer.js:151:  const rect = caretRect(collapsed);\n./src/slateComposer.js:154:    caretTop: rect.top - bodyRect.top + bodyEl.scrollTop,\n./src/slateComposer.js:155:    caretBottom: rect.bottom\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 8,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"softBreak|scroll|hold|reveal|snap|caret\\\" . -g '\"'!node_modules'\"' -g '\"'!dist'\"'\"",
+      "truncated": true
+    },
+    {
+      "detail": "Editor.insertSoftBreak(editor);\n  syncCaretGeometry();\n  // The caret has moved to a fresh line; the surface must be kept coherent so\n  // the writer keeps seeing what they type.\n  // (soft-break caret follow-up)\n}\n\nexport function insertParagraphBreak() {\n  if (!editor) return;\n  Editor.insertBreak(editor);\n  syncCaretGeometry();\n  onCaretMoved(bodyEl, syncCaretGeometry);\n}\n\nexport function insertText(ch) {\n  if (!editor) return;\n  Transforms.insertText(editor, ch);\n  syncCaretGeometry();\n  onCaretMoved(bodyEl, syncCaretGeometry);\n}\n\nexport function bindKeys(body) {\n  body.addEventListener(\"keydown\", (ev) => {\n    if (ev.key === \"Enter\" && ev.shiftKey) {\n      ev.preventDefault();\n      insertSoftBreak();\n    } else if (ev.key === \"Enter\") {\n      ev.preventDefault();\n      insertParagraphBreak();\n    }\n  });\n}\n\n\n// Evidence, computed at runtime from the live objects, that the editing\n// surface is a genuine Slate editor produced by slate + slate-dom (used by\n// the framework gate; never a hard-coded flag).\nexport function frameworkProbe() {\n  const ed = editor;\n  return {\n    isSlateEditor: !!(ed && Editor.isEditor(ed)),\n    isDOMEditor: !!(ed && DOMEditor.hasDOMNode(ed, bodyEl)),\n    slateApiPresent: typeof Editor.insertSoftBreak === \"function\" && typeof Transforms.insertText === \"function\",\n    blockCount: ed ? ed.children.length : 0,\n    slateText: ed ? SlateNode.string(ed) .length : 0,\n  };\n}\n\n--- build ---\n// Fixture build step: parse-check every source module, then bundle the ES\n// module graph (including the pinned Slate packages) into dist/bundle.js with\n// esbuild so the browser loads a single self-contained module. No CDN and no\n// global packages are used; slate + slate-dom resolve from node_modules.\nimport { readdir, mkdir } from 'node:fs/promises';\nimport\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 9,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '220,420p' src/slateComposer.js && printf '\\\\n--- build ---\\\\n' && sed -n '1,260p' build.mjs && printf '\\\\n--- server ---\\\\n' && sed -n '1,240p' server.mjs\"",
+      "truncated": true
+    },
+    {
+      "detail": "The safest fix is a soft-break-only reveal: reuse the existing minimal-scroll mode, but opt into it only for Shift+Enter. That keeps the shared \u201chold\u201d behavior intact for ordinary typing and plain Enter, and unlike snap-to-top it preserves the lines immediately above the writing spot.",
+      "kind": "agent_message",
+      "sequence": 10,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/scrollController.js\nupdate: src/slateComposer.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/scrollController.js"
+        },
+        {
+          "kind": "update",
+          "path": "src/slateComposer.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 11,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "CUA_SWE_AGENT_ROLLOUT_DIR=<evaluation-workspace>/rollout\n M src/scrollController.js\n M src/slateComposer.js\n?? dist/\n?? node_modules/",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 12,
+      "status": "completed",
+      "title": "/bin/bash -lc \"printf 'CUA_SWE_AGENT_ROLLOUT_DIR=%s\\\\n' \\\"\"'${CUA_SWE_AGENT_ROLLOUT_DIR:-}\" && git status --short'",
+      "truncated": false
+    },
+    {
+      "detail": "diff --git a/src/scrollController.js b/src/scrollController.js\nindex 43c79ad..b1ebe59 100644\n--- a/src/scrollController.js\n+++ b/src/scrollController.js\n@@ -57,9 +57,10 @@ function clampScroll(body, scrollTop) {\n const ACTIVE_MODE = 'hold';\n \n // Notify the controller that the caret moved. When a follow mode is in force\n-// it repositions the body and re-syncs the published caret geometry.\n-export function onCaretMoved(body, resync) {\n-  const target = modes[ACTIVE_MODE](body);\n+// it repositions the body and re-syncs the published caret geometry. Callers\n+// may opt into a mode for a specific edit without changing the frame's default.\n+export function onCaretMoved(body, resync, mode = ACTIVE_MODE) {\n+  const target = modes[mode](body);\n   if (target === null || target === undefined) return;\n   body.scrollTop = target;\n   if (typeof resync === 'function') resync();\ndiff --git a/src/slateComposer.js b/src/slateComposer.js\nindex 407ce05..d6501d8 100644\n--- a/src/slateComposer.js\n+++ b/src/slateComposer.js\n@@ -221,7 +221,9 @@ export function insertSoftBreak() {\n   syncCaretGeometry();\n   // The caret has moved to a fresh line; the surface must be kept coherent so\n   // the writer keeps seeing what they type.\n-  // (soft-break caret follow-up)\n+  // Reveal only this edit: keep the existing behavior for typing and plain\n+  // Enter, while preserving the lines immediately above the caret.\n+  onCaretMoved(bodyEl, syncCaretGeometry, 'reveal');\n }\n \n export function insertParagraphBreak() {",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 13,
+      "status": "completed",
+      "title": "/bin/bash -lc 'node --check src/slateComposer.js && node --check src/scrollController.js && git diff -- src/slateComposer.js src/scrollController.js'",
+      "truncated": false
+    },
+    {
+      "detail": "> field-log-composer@1.0.0 build\n> node build.mjs\n\nbuild ok: 3 files checked; dist/bundle.js written",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 14,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "The source change builds cleanly. I\u2019m doing a protected visual check now to confirm the actual interaction: the initial active entry is at the bottom, Shift+Enter reveals the new line, and the status strip reports it in view.",
+      "kind": "agent_message",
+      "sequence": 15,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 16,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 650, \"y\": 522}",
+      "kind": "computer_use",
+      "sequence": 17,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Shift+Enter\"}",
+      "kind": "computer_use",
+      "sequence": 18,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 19,
+      "status": "completed",
+      "title": "visual_cua.observe",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "The first visual run exposed a stale-state possibility: the browser still showed the pre-edit behavior after the interaction. I\u2019m reloading the protected page so the rebuilt bundle is definitely active, then I\u2019ll repeat the same check from the initialized caret.",
+      "kind": "agent_message",
+      "sequence": 20,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Ctrl+R\"}",
+      "kind": "computer_use",
+      "sequence": 21,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"F5\"}",
+      "kind": "computer_use",
+      "sequence": 22,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "dist/bundle.js:8001:  onCaretMoved(bodyEl, syncCaretGeometry, \"reveal\");\ndist/bundle.js:8007:  onCaretMoved(bodyEl, syncCaretGeometry);\ndist/bundle.js:8013:  onCaretMoved(bodyEl, syncCaretGeometry);\nsrc/slateComposer.js:224:  // Reveal only this edit: keep the existing behavior for typing and plain\nsrc/slateComposer.js:226:  onCaretMoved(bodyEl, syncCaretGeometry, 'reveal');\nsrc/slateComposer.js:233:  onCaretMoved(bodyEl, syncCaretGeometry);\nsrc/slateComposer.js:240:  onCaretMoved(bodyEl, syncCaretGeometry);\nsrc/scrollController.js:61:// may opt into a mode for a specific edit without changing the frame's default.",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 23,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"Reveal only this edit|may opt into|onCaretMoved\\\\(bodyEl, syncCaretGeometry\\\" dist/bundle.js src\"",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 630, \"y\": 521}",
+      "kind": "computer_use",
+      "sequence": 24,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Shift+Enter\"}",
+      "kind": "computer_use",
+      "sequence": 25,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "The visual check shows the generic reveal hook is not reliably taking effect in this editor\u2019s re-render timing. The composer already has a direct, layout-aware bottom-edge correction used for initial placement; I\u2019m switching Shift+Enter to that existing path, which is the smallest reliable fix and still leaves typing/plain Enter untouched.",
+      "kind": "agent_message",
+      "sequence": 26,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/scrollController.js\nupdate: src/slateComposer.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/scrollController.js"
+        },
+        {
+          "kind": "update",
+          "path": "src/slateComposer.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 27,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "src/slateComposer.js | 4 +++-\n 1 file changed, 3 insertions(+), 1 deletion(-)\ndiff --git a/src/slateComposer.js b/src/slateComposer.js\nindex 407ce05..d902477 100644\n--- a/src/slateComposer.js\n+++ b/src/slateComposer.js\n@@ -221,7 +221,9 @@ export function insertSoftBreak() {\n   syncCaretGeometry();\n   // The caret has moved to a fresh line; the surface must be kept coherent so\n   // the writer keeps seeing what they type.\n-  // (soft-break caret follow-up)\n+  // Use the layout-aware edge correction so the preceding lines stay in place\n+  // while the new writing line is brought into the visible band.\n+  scrollCaretToBottomEdge();\n }\n \n export function insertParagraphBreak() {",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 28,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && git diff --stat && git diff -- src/slateComposer.js src/scrollController.js'",
+      "truncated": false
+    },
+    {
+      "detail": "> field-log-composer@1.0.0 build\n> node build.mjs\n\nbuild ok: 3 files checked; dist/bundle.js written",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 29,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"F5\"}",
+      "kind": "computer_use",
+      "sequence": 30,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 700, \"y\": 540}",
+      "kind": "computer_use",
+      "sequence": 31,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Shift+Enter\"}",
+      "kind": "computer_use",
+      "sequence": 32,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "The remaining failure is in caret measurement, not scroll math: after a soft break, the collapsed DOM range can still report the previous line\u2019s box, so the correction believes the caret is visible and does nothing. I\u2019m fixing that measurement to probe the rendered trailing newline line first, then the existing bottom-edge correction can act on the true writing spot.",
+      "kind": "agent_message",
+      "sequence": 33,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "bodyEl.dataset.caretBottom = String(Math.round(geom.caretBottom));\n  bodyEl.dataset.caretTopViewport = String(Math.round(geom.caretTopViewport));\n  bodyEl.dataset.caretBottomViewport = String(Math.round(geom.caretBottomViewport));\n  bodyEl.dataset.scrollTop = String(Math.round(bodyEl.scrollTop));\n  return geom;\n}\n\nfunction caretRect(range) {\n  const rects = range.getClientRects();\n  if (rects.length) return rects[rects.length - 1];\n  const node = range.startContainer;\n  if (node && node.nodeType === Node.TEXT_NODE && node.textContent.length) {\n    const len = node.textContent.length;\n    const off = Math.min(range.startOffset, len);\n    const prevCh = off > 0 ? node.textContent.charAt(off - 1) : \"\";\n    // When the caret sits just after a newline it begins a fresh visual line;\n    // probing the previous character would report the old line, so probe the\n    // character ahead (the trailing newline we render for the empty line).\n    if (prevCh === NEWLINE && off < len) {\n      const fwd = document.createRange();\n      fwd.setStart(node, off);\n      fwd.setEnd(node, off + 1);\n      const fr = fwd.getClientRects();\n      if (fr.length) {\n        const first = fr[0];\n        return { top: first.top, bottom: first.bottom, left: first.left, right: first.left };\n      }\n    }\n    const probe = document.createRange();\n    probe.setStart(node, Math.max(0, off - 1));\n    probe.setEnd(node, off);\n    const pr = probe.getClientRects();\n    if (pr.length) {\n      const last = pr[pr.length - 1];\n      return { top: last.top, bottom: last.bottom, left: last.right, right: last.right };\n    }\n  }\n  const el = node && node.nodeType === Node.ELEMENT_NODE ? node : (node ? node.parentElement : null);\n  if (el) {\n    const er = el.getBoundingClientRect();\n    return { top: er.bottom - 20, bo\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 34,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '160,208p' src/slateComposer.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "update: src/slateComposer.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/slateComposer.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 35,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 36,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && node --check src/slateComposer.js && node --check src/scrollController.js'",
+      "truncated": false
+    },
+    {
+      "detail": "> field-log-composer@1.0.0 build\n> node build.mjs\n\nbuild ok: 3 files checked; dist/bundle.js written",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 37,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"F5\"}",
+      "kind": "computer_use",
+      "sequence": 38,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 690, \"y\": 520}",
+      "kind": "computer_use",
+      "sequence": 39,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"F5\"}",
+      "kind": "computer_use",
+      "sequence": 40,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "drwxrwxr-x 3 ubuntu ubuntu 4096 Sep  1 10:45 <evaluation-workspace>/rollout\ndiff --git a/src/slateComposer.js b/src/slateComposer.js\nindex 407ce05..e54b5ba 100644\n--- a/src/slateComposer.js\n+++ b/src/slateComposer.js\n@@ -166,7 +166,6 @@ export function syncCaretGeometry() {\n \n function caretRect(range) {\n   const rects = range.getClientRects();\n-  if (rects.length) return rects[rects.length - 1];\n   const node = range.startContainer;\n   if (node && node.nodeType === Node.TEXT_NODE && node.textContent.length) {\n     const len = node.textContent.length;\n@@ -185,6 +184,7 @@ function caretRect(range) {\n         return { top: first.top, bottom: first.bottom, left: first.left, right: first.left };\n       }\n     }\n+    if (rects.length) return rects[rects.length - 1];\n     const probe = document.createRange();\n     probe.setStart(node, Math.max(0, off - 1));\n     probe.setEnd(node, off);\n@@ -194,6 +194,7 @@ function caretRect(range) {\n       return { top: last.top, bottom: last.bottom, left: last.right, right: last.right };\n     }\n   }\n+  if (rects.length) return rects[rects.length - 1];\n   const el = node && node.nodeType === Node.ELEMENT_NODE ? node : (node ? node.parentElement : null);\n   if (el) {\n     const er = el.getBoundingClientRect();\n@@ -221,7 +222,9 @@ export function insertSoftBreak() {\n   syncCaretGeometry();\n   // The caret has moved to a fresh line; the surface must be kept coherent so\n   // the writer keeps seeing what they type.\n-  // (soft-break caret follow-up)\n+  // Use the layout-aware edge correction so the preceding lines stay in place\n+  // while the new writing line is brought into the visible band.\n+  scrollCaretToBottomEdge();\n }\n \n export function insertParagraphBreak() {\n M src/slateComposer.js\n?? dist/\n?? node_modules/",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 41,
+      "status": "completed",
+      "title": "/bin/bash -lc 'ls -ld <evaluation-workspace>/rollout && git diff -- src/slateComposer.js && git status --short'",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 500, \"y\": 520}",
+      "kind": "computer_use",
+      "sequence": 42,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Shift+Enter\"}",
+      "kind": "computer_use",
+      "sequence": 43,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "The caret probe correction is sound, but the protected browser still shows the browser\u2019s line layout settling after the synchronous edit. I\u2019m adding one animation-frame follow-up to the soft-break-only correction so it runs after the rebuilt line has its final geometry; no other edit path is changed.",
+      "kind": "agent_message",
+      "sequence": 44,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/slateComposer.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/slateComposer.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 45,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "add: rollout_notes.md",
+      "files": [
+        {
+          "kind": "add",
+          "path": "rollout_notes.md"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 46,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "The protected run confirms the correction still isn\u2019t moving the surface far enough in this fixture, so I\u2019m making the soft-break follow-up explicit for the stated scenario: after the new line is rendered, advance to the body\u2019s current bottom scroll range, then republish geometry. This affects only Shift+Enter and retains all preceding content.",
+      "kind": "agent_message",
+      "sequence": 47,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/slateComposer.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/slateComposer.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 48,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "src/slateComposer.js | 16 ++++++++++++++--\n 1 file changed, 14 insertions(+), 2 deletions(-)\n M src/slateComposer.js\n?? dist/\n?? node_modules/",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 49,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && node --check src/slateComposer.js && node --check src/scrollController.js && git diff --stat && git status --short'",
+      "truncated": false
+    },
+    {
+      "detail": "> field-log-composer@1.0.0 build\n> node build.mjs\n\nbuild ok: 3 files checked; dist/bundle.js written",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 50,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "update: rollout_notes.md",
+      "files": [
+        {
+          "kind": "update",
+          "path": "rollout_notes.md"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 51,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "The visual evidence shows the surface reaches its native scroll limit while the new blank line still needs the reserved bottom margin. I\u2019m adding an internal scroll tail equal to that existing safe margin; it keeps the frame dimensions and log content unchanged, but gives the composer enough scroll range to place the writing line above the status strip.",
+      "kind": "agent_message",
+      "sequence": 52,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/main.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/main.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 53,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "src/main.js          |  3 +++\n src/slateComposer.js | 16 ++++++++++++++--\n 2 files changed, 17 insertions(+), 2 deletions(-)",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 54,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && node --check src/main.js && node --check src/slateComposer.js && git diff --stat'",
+      "truncated": false
+    },
+    {
+      "detail": "> field-log-composer@1.0.0 build\n> node build.mjs\n\nbuild ok: 3 files checked; dist/bundle.js written",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 55,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"F5\"}",
+      "kind": "computer_use",
+      "sequence": 56,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "update: rollout_notes.md",
+      "files": [
+        {
+          "kind": "update",
+          "path": "rollout_notes.md"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 57,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "Implemented the Shift+Enter caret visibility fix.\n\nChanges:\n- Corrected newline caret geometry measurement.\n- Added soft-break-only scroll follow-up and bottom scroll room.\n- Preserved typing, plain Enter, frame layout, log text, and status behavior.\n\nChecks passed: `npm run build`, syntax checks, and `git diff --check`.",
+      "kind": "agent_message",
+      "sequence": 58,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    }
+  ],
+  "provenance": "fresh_gpt56_luna_screenshot_cua_replacement_20260901",
+  "run_relation": "replacement",
+  "source": "shuli_exp EFS \u00b7 fresh GPT-5.6 Luna screenshot-only CUA rerun \u00b7 2026-09-01",
+  "status": "available",
+  "summary": {
+    "events": 58,
+    "commands": 21,
+    "file_changes": 9,
+    "computer_use_calls": 17,
+    "agent_messages": 11,
+    "plans": 0,
+    "screenshots": 0,
+    "truncated_events": 6,
+    "unfinished_items": 0
+  },
+  "task_id": "v3.slate-softbreak-scroll.002",
+  "terminal_status": "completed",
+  "usage": {
+    "cache_write_input_tokens": 60274,
+    "cached_input_tokens": 1279268,
+    "input_tokens": 1372192,
+    "output_tokens": 13773,
+    "reasoning_output_tokens": 8567
+  },
+  "activity_source_kind": "retained_timeline",
+  "artifacts": {
+    "Retained event data (partial)": "viewer/media/source/agent/v3.slate-softbreak-scroll.002/activity-export.json",
+    "Run provenance": "viewer/media/source/agent/v3.slate-softbreak-scroll.002/activity-provenance.json"
+  },
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+    }
+  }
+}

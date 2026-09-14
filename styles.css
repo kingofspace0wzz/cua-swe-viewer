@@ -454,6 +454,13 @@ a { color: inherit; }
 .activity-summary strong { color: var(--ink); font-size: 22px; }
 .activity-provenance { margin: 12px 0 0; color: var(--muted); font-size: 9px; overflow-wrap: anywhere; }
 .agent-activity .media-links a { color: var(--accent); }
+.activity-artifact-status { display: grid; gap: 10px; margin: 14px 0; font-size: 11px; line-height: 1.5; }
+.activity-artifact-status > div { padding-left: 10px; border-left: 2px solid var(--line); }
+.activity-artifact-status dt { font-weight: 800; }
+.activity-artifact-status dd { margin: 3px 0 0; color: var(--muted); overflow-wrap: anywhere; }
+.activity-artifact-status [data-status="unavailable"],
+.activity-artifact-status [data-status="partial"] { border-left-color: #b88b19; }
+.activity-image-note { color: var(--muted); font-size: 10px; line-height: 1.5; }
 .activity-relation-note {
   margin: 12px 0 0;
   padding: 10px 12px;

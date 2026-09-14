@@ -364,6 +364,9 @@
         </details>`
       : "";
     const exit = event.exit_code == null ? "" : ` · exit ${event.exit_code}`;
+    const imageNote = event.image_status === "unavailable" || event.image_status === "not_recorded"
+      ? `<p class="activity-image-note">${escapeHtml(event.image_reason)}</p>`
+      : "";
     return `
       <li class="activity-event activity-${escapeHtml(event.kind)}">
         <span class="activity-sequence">${escapeHtml(event.sequence)}</span>
@@ -374,6 +377,7 @@
           </div>
           ${detail}
           ${screenshots}
+          ${imageNote}
         </div>
       </li>`;
   }
@@ -382,10 +386,10 @@
     const activity = taskActivity(task);
     if (activity.status !== "available") {
       return `
-        <section class="agent-activity agent-activity-unavailable" aria-label="Full agent activity">
+        <section class="agent-activity agent-activity-unavailable" aria-label="Agent activity">
           <div class="activity-header">
             <div>
-              <p class="section-kicker">Full agent run</p>
+              <p class="section-kicker">Agent activity</p>
               <h4>Coding transcript unavailable</h4>
             </div>
             <span class="activity-coverage">GUI evidence only</span>
@@ -398,15 +402,16 @@
     const events = Array.isArray(activity.events) ? activity.events : [];
     const replacement = activity.run_relation === "replacement";
     const compact = activity.coverage === "full_codex_event_stream_compact";
+    const partial = activity.artifact_status?.event_data?.status === "partial";
     const failedRun = activity.terminal_status === "failed";
     return `
-      <section class="agent-activity" aria-label="Full agent activity">
+      <section class="agent-activity" aria-label="Agent activity">
         <div class="activity-header">
           <div>
-            <p class="section-kicker">Full agent run</p>
+              <p class="section-kicker">Agent activity</p>
               <h4>Coding + computer-use event stream</h4>
             </div>
-          <span class="activity-coverage">${replacement ? "Replacement rerun" : compact ? "Historical exact · compact" : "Historical exact run"}</span>
+          <span class="activity-coverage">${replacement ? "Replacement rerun" : compact ? "Historical exact · compact" : "Historical exact run"}${partial ? " · partial export" : ""}</span>
         </div>
         <div class="activity-summary">
           <span><strong>${escapeHtml(summary.commands || 0)}</strong> shell commands</span>
@@ -420,17 +425,24 @@
               `<a href="${escapeHtml(relativeLink(path))}" target="_blank" rel="noreferrer">${escapeHtml(label)}</a>`
             ).join("")}</div>`
           : ""}
+        ${activity.artifact_status
+          ? `<dl class="activity-artifact-status">${Object.entries(activity.artifact_status).map(([kind, artifact]) =>
+              `<div data-artifact="${escapeHtml(kind)}" data-status="${escapeHtml(artifact.status)}"><dt>${escapeHtml({
+                event_data: "Event data", run_provenance: "Run provenance", agent_patch: "Agent patch", screenshots: "Timeline screenshots",
+              }[kind] || kind)} · ${escapeHtml(artifact.status)}</dt><dd>${escapeHtml(artifact.reason)}</dd></div>`
+            ).join("")}</dl>`
+          : ""}
         ${summary.unfinished_items
           ? '<p class="activity-relation-note">The original transcript contains an item with no recorded completion. Its last recorded status is shown below.</p>'
           : ""}
         ${replacement
-          ? '<p class="activity-relation-note">This is a fresh rerun of the same task and CUA condition. It is a complete agent transcript, but it is not synchronized to the adjacent historical GUI replay.</p>'
+          ? '<p class="activity-relation-note">This is a fresh rerun of the same task and CUA condition. Its activity is not synchronized to the adjacent historical GUI replay.</p>'
           : ""}
         ${failedRun
           ? `<p class="activity-relation-note">The agent run terminated with an error after the events shown below: ${escapeHtml(activity.terminal_error || "unspecified agent error")}.</p>`
           : ""}
         <details class="activity-timeline-wrap" open>
-          <summary>Complete ordered activity · ${escapeHtml(events.length)} events</summary>
+          <summary>${partial ? "Retained ordered activity" : "Complete ordered activity"} · ${escapeHtml(events.length)} events</summary>
           <ol class="activity-timeline">${events.map(renderActivityEvent).join("")}</ol>
         </details>
       </section>`;

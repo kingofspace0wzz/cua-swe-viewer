@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.vector-relay-primed-pulse-balance-handoff.011",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-02",
+  "source_description": null,
+  "terminal_status": "completed",
+  "activity_source_kind": "representative_game_bundle",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 6,
+      "commands": 13,
+      "computer_use_calls": 17,
+      "events": 40,
+      "file_changes": 3,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 16,
+    "label": "cua-02",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "passing run with most retained observation frames",
+    "success": true
+  },
+  "frame_mapping": [
+    {
+      "event_sequence": 10,
+      "frame_sequence": 1,
+      "audit_sequence": 2,
+      "timestamp": "2026-09-02T10:04:21.592766+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0001.png",
+      "sha256": "3027419997b98b8d58ef046671b80b6f1c04a9284862f6565adeb96f2eaa2863"
+    },
+    {
+      "event_sequence": 11,
+      "frame_sequence": 2,
+      "audit_sequence": 3,
+      "timestamp": "2026-09-02T10:04:25.548357+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0002.png",
+      "sha256": "55ec4c7760043d2407948d0b68793d6175c89bf417118d695c0e7a481d888d5d"
+    },
+    {
+      "event_sequence": 12,
+      "frame_sequence": 3,
+      "audit_sequence": 4,
+      "timestamp": "2026-09-02T10:04:30.105502+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0003.png",
+      "sha256": "01245a857e52dcf43fc0bef683cd6be1e177cb1ea7f0a8e14afd488d816f689f"
+    },
+    {
+      "event_sequence": 14,
+      "frame_sequence": 4,
+      "audit_sequence": 6,
+      "timestamp": "2026-09-02T10:04:53.914297+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0004.png",
+      "sha256": "01245a857e52dcf43fc0bef683cd6be1e177cb1ea7f0a8e14afd488d816f689f"
+    },
+    {
+      "event_sequence": 22,
+      "frame_sequence": 5,
+      "audit_sequence": 7,
+      "timestamp": "2026-09-02T10:05:31.333433+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0005.png",
+      "sha256": "01245a857e52dcf43fc0bef683cd6be1e177cb1ea7f0a8e14afd488d816f689f"
+    },
+    {
+      "event_sequence": 23,
+      "frame_sequence": 6,
+      "audit_sequence": 8,
+      "timestamp": "2026-09-02T10:05:39.414402+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0006.png",
+      "sha256": "3adf3f929909d231c52c0111f46014476fcb298ae0786f9abaa4faab759ffb22"
+    },
+    {
+      "event_sequence": 25,
+      "frame_sequence": 7,
+      "audit_sequence": 9,
+      "timestamp": "2026-09-02T10:06:08.263799+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0007.png",
+      "sha256": "2922918b7540f2bbceafefb05e317da1ea12dc0d23d92524ccb1035f13cefd62"
+    },
+    {
+      "event_sequence": 26,
+      "frame_sequence": 8,
+      "audit_sequence": 10,
+      "timestamp": "2026-09-02T10:06:15.898219+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0008.png",
+      "sha256": "2922918b7540f2bbceafefb05e317da1ea12dc0d23d92524ccb1035f13cefd62"
+    },
+    {
+      "event_sequence": 27,
+      "frame_sequence": 9,
+      "audit_sequence": 11,
+      "timestamp": "2026-09-02T10:06:26.080875+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0009.png",
+      "sha256": "2922918b7540f2bbceafefb05e317da1ea12dc0d23d92524ccb1035f13cefd62"
+    },
+    {
+      "event_sequence": 28,
+      "frame_sequence": 10,
+      "audit_sequence": 12,
+      "timestamp": "2026-09-02T10:06:33.878224+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0010.png",
+      "sha256": "941774bf872da6f41c9bb2f9bf5cee3d82b3316888d077e8b7a81fabd162fab9"
+    },
+    {
+      "event_sequence": 29,
+      "frame_sequence": 11,
+      "audit_sequence": 13,
+      "timestamp": "2026-09-02T10:06:40.940104+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0011.png",
+      "sha256": "e62c21ac607c691b7ab5cb9d86eeb48d66371617bb3222f212bba4cd7c3924c0"
+    },
+    {
+      "event_sequence": 30,
+      "frame_sequence": 12,
+      "audit_sequence": 14,
+      "timestamp": "2026-09-02T10:06:55.112454+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0012.png",
+      "sha256": "3878570f4a62a0d65f57cf1754e0269e56ec797f4e36e26b44c172eb6e800401"
+    },
+    {
+      "event_sequence": 31,
+      "frame_sequence": 13,
+      "audit_sequence": 15,
+      "timestamp": "2026-09-02T10:07:04.673650+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0013.png",
+      "sha256": "3027419997b98b8d58ef046671b80b6f1c04a9284862f6565adeb96f2eaa2863"
+    },
+    {
+      "event_sequence": 32,
+      "frame_sequence": 14,
+      "audit_sequence": 16,
+      "timestamp": "2026-09-02T10:07:13.186137+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0014.png",
+      "sha256": "8081743534ab49c0789e5edbf2e24640f245a8ecc01e7a8044b729aa5d98c08a"
+    },
+    {
+      "event_sequence": 33,
+      "frame_sequence": 15,
+      "audit_sequence": 17,
+      "timestamp": "2026-09-02T10:07:20.606695+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0015.png",
+      "sha256": "c33570ffdf662e325915f29b9c6806a690a14e0ea15a14aaf89e57539017e738"
+    },
+    {
+      "event_sequence": 34,
+      "frame_sequence": 16,
+      "audit_sequence": 18,
+      "timestamp": "2026-09-02T10:07:39.190021+00:00",
+      "path": "media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frames/frame-0016.png",
+      "sha256": "3878570f4a62a0d65f57cf1754e0269e56ec797f4e36e26b44c172eb6e800401"
+    }
+  ],
+  "image_verification": "Run identity, complete successful action sequence, arguments, timestamps, and audit SHA-256",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "16 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/activity.json": "742e8d15b68ca1094ce02f9db0d934d9fe7932ac343e4a1cd00f3a003ee92587",
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/frame-manifest.json": "3ff810b5e3d63e57cd266de2ba34b670d9b5dacb8698c31312cee6f1e273dd18",
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/trajectory.jsonl": "7de2d1cfe127e9c8d0ab2bc99f2baceebfbff2f7bf20c7536c6191c08a358071",
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/cua-audit.jsonl": "6f580febb2b10f42806855ea609f2f7a1ab06fab3c00560f0f73c4d6b9cbd4e1",
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/visual-events.jsonl": "1bb50cbb618d36b7ed0d042247048a9a158a4affd7b7ce53abf1a0643ba771f8",
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/run-result.json": "c9ae2adb12fd9157c968bcb966900cec5628e06588f8025a0a5c2d99ceeb88d0",
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/metadata.json": "5a76f94f52bfa5ebc6d3e4b21c9fc865ed7ae2688352c2981808f775978c74dc",
+    "viewer/media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/patch.diff": "ed1ea4c77c508a384262a8e8fedc6b052ce5497c9f73a59827d7d42d18c73577"
+  },
+  "activity_sha256": "6ddd636ef9eed6209ec9311357fecae925b21143b7b057e6e2731426af878f46",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

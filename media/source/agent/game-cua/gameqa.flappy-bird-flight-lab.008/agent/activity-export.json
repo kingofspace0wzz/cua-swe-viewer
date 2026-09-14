@@ -1,0 +1,898 @@
+{
+  "coverage": "retained_codex_events_partial",
+  "events": [
+    {
+      "detail": "I\u2019ll first reproduce and visually inspect all three Flight Lab scenarios exactly as requested. Then I\u2019ll trace the gameplay contract in source, make a focused fix, build, and run browser verification across lab and ordinary play.",
+      "kind": "agent_message",
+      "sequence": 1,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 2,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0001.png",
+          "sha256": "598a48ecca37cc1c2f8bce760bd060daee49f3d50584745d67cce5dd8ad67b7f"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 246, \"y\": 274}",
+      "kind": "computer_use",
+      "sequence": 3,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0002.png",
+          "sha256": "9b7e1596f05b2334224e30fb14bb3c26e832ad926c37566528848aad32e15542"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 4,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0003.png",
+          "sha256": "8d2ab31baeda49203d076e1919240a5f135a96d149ee0688a07b8e08b8afa8c8"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 727, \"y\": 504}",
+      "kind": "computer_use",
+      "sequence": 5,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0004.png",
+          "sha256": "dfca022bb9a5afa8861965cbfb2579b48ea463badac2c7896469cdee220d36e2"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 483, \"y\": 275}",
+      "kind": "computer_use",
+      "sequence": 6,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0005.png",
+          "sha256": "580c62cf6a2f9ff9c386817edcbeb3312547b242591345a7ac94c8eff3756bbe"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 2500, \"kind\": \"wait\"}\nerror: {'message': 'tool call error: tool call failed for `visual_cua/act`\\n\\nCaused by:\\n    Mcp error: -32603: RuntimeError: Traceback (most recent call last):\\n      File \"<artifact-path>\", line 113, in _post\\n        with request.urlopen(req, timeout=timeout) as response:\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n      File \"/usr/lib/python3.12/urllib/request.py\", line 215, in urlopen\\n        return opener.open(url, data, timeout)\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n      File \"/usr/lib/python3.12/urllib/request.py\", line 521, in open\\n        response = meth(req, response)\\n                   ^^^^^^^^^^^^^^^^^^^\\n      File \"/usr/lib/python3.12/urllib/request.py\", line 630, in http_response\\n        response = self.parent.error(\\n                   ^^^^^^^^^^^^^^^^^^\\n      File \"/usr/lib/python3.12/urllib/request.py\", line 559, in error\\n        return self._call_chain(*args)\\n               ^^^^^^^^^^^^^^^^^^^^^^^\\n      File \"/usr/lib/python3.12/urllib/request.py\", line 492, in _call_chain\\n        result = func(*args)\\n                 ^^^^^^^^^^^\\n      File \"/usr/lib/python3.12/urllib/request.py\", line 639, in http_error_default\\n        raise HTTPError(req.full_url, code, msg, hdrs, fp)\\n    urllib.error.HTTPError: HTTP Error 400: Bad Request\\n    \\n    The above exception was the direct cause of the following exception:\\n    \\n    Traceback (most recent call last):\\n      File \"<artifact-path>\", line 531, in <module>\\n        raise SystemExit(main())\\n                         ^^^^^^\\n      File \"<artifact-path>\", line 527, in main\\n        return args.func(args)\\n               ^^^^^^^^^^^^^^^\\n      File \"<artifact-path>\", line 421, in cmd_act\\n        result = _post(Path(args.session_file).resolve(), \"/act\", payload)\\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n      File \"<artifact-path>\", line 123, in _post\\n        raise RuntimeError(f\"CUA service returned HTTP {exc.code}: {detail}\") from exc\\n    RuntimeError: CUA service returned HTTP 400: ValidationError: 1 validation error for GuiAction\\n      Value error, duration_ms must be between 1 and 2000 [type=value_error, input_value={\\'kind\\': \\'wait\\', \\'duration_ms\\': 2500}, input_type=dict]\\n        For further information visit https://errors.pydantic.dev/2.13/v/value_error'}",
+      "kind": "computer_use",
+      "sequence": 7,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "not_recorded",
+      "image_reason": "No screenshot was returned for this call in the retained run."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 8,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0006.png",
+          "sha256": "897052ec6c3fe0c3a52e477da2ccae5895694e9209016503a3b778759a31b023"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "The first two frozen audits already isolate an asymmetry: TAP records PRESS and RELEASE at S0 but applies only 120 against its 220 target and bumps despite visible clearance; HELD records release at S3, applies its distinct 250 target, matches its arc, and clears. I\u2019m inspecting LATE CONTACT next before touching source.",
+      "kind": "agent_message",
+      "sequence": 9,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 724, \"y\": 501}",
+      "kind": "computer_use",
+      "sequence": 10,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0007.png",
+          "sha256": "aa0609a534ff3cab6a2bee9f7c423c4a0c8bb8960c47b033849fed2d3aadf619"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 714, \"y\": 274}",
+      "kind": "computer_use",
+      "sequence": 11,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0008.png",
+          "sha256": "8e895aa715177162d4d0b73dd909f2051b9e9510e7b8d2a244d40537ce520f64"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 12,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0009.png",
+          "sha256": "6cbc3c954e9ab05108598d0b9b5fc17607fa68ee9b92d90bb0d485e63518af4a"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "LATE CONTACT confirms the second contract break: the moving segment intersects during the fractional 0.00\u21920.55 interval, both endpoint poses are marked safe, and OBSERVED CONTACT is YES\u2014but RETAINED COLLISION is NO, so it incorrectly clears and increments the ledger. I\u2019m now tracing the shared input/impulse and swept-collision decision paths.",
+      "kind": "agent_message",
+      "sequence": 13,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "package.json\nRIGHTS.md\nstyle.css\nserver.py\nindex.html\nbuild_check.py\nsrc/pipes.js\nsrc/renderer.js\nsrc/input.js\nsrc/game_api.js\nsrc/bird.js\nsrc/game.js\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 14,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg --files -g '\"'!node_modules'\"' -g '\"'!dist'\"' | sed -n '1,160p'\"",
+      "truncated": false
+    },
+    {
+      "detail": "./index.html:6:    <title>Flappy Bird Flight Lab</title>\n./index.html:11:      <canvas id=\"game\" width=\"640\" height=\"480\" aria-label=\"Flappy Bird Flight Lab\"></canvas>\n./index.html:12:      <p>Choose a drill, then compare its input receipt, actual and target impulse, thick actual trace, faint target, and any contact interval. Each result freezes until you return. Space, \u2191, click, or tap control the normal run.</p>\n./src/pipes.js:47:      let collision = null;\n./src/pipes.js:61:          collision = Object.freeze({\n./src/pipes.js:88:          collision,\n./src/pipes.js:113:        collision,\n./src/game.js:25:      name: \"TAP ARC\",\n./src/game.js:67:      name: \"LATE CONTACT\",\n./src/game.js:125:        collision: null,\n./src/game.js:324:    finishDrill(outcome, collision) {\n./src/game.js:327:      this.lastCollision = collision || null;\n./src/game.js:432:      if (this.lastBirdFrame.last_impulse) {\n./src/game.js:433:        this.actualImpulse = this.lastBirdFrame.last_impulse;\n./src/game.js:439:        if (this.lastPipeFrame.collision) {\n./src/game.js:440:          this.finishDrill(\"bump\", this.lastPipeFrame.collision);\n./src/game.js:464:      let collision = this.lastPipeFrame.collision;\n./src/game.js:465:      if (!collision && bird.top < CEILING) collision = {kind: \"ceiling\", bird};\n./src/game.js:466:      if (!collision && bird.bottom > FLOOR) collision = {kind: \"ground\", bird};\n./src/game.js:467:      if (collision) this.die(collision);\n./src/game.js:470:    die(collision) {\n./src/game.js:473:      this.lastCollision = collision;\n./src/game.js:474:      this.record(\"collision\", collision);\n./src/game.js:495:        collision: this.lastCollision,\n./src/game.js:500:        actual_impulse: this.actualImpulse,\n./src/game_api.js:37:        reason: world.collision ? world.collision.kind : null,\n./src/game_api.js:63:            actual_impulse: finite(world.actual_impulse),\n./src/game_api.js:64:            target_impulse: world.drill.index === null\n./src/game_api.js:97:        collision: world.collision,\n./src/renderer.js:285:      this.text(`ACTUAL IMPULSE  ${Math.round(world.actual_impulse || 0)}`, 454, 241, 10, {\n./src/renderer.js:313:          `RETAINED COLLISION  ${retained ? \"YES\" : \"NO\"}`,\n./src/bird.js:43:        last_impulse: this.lastImpulse,\n./src/bird.js:58:        const impulse = 120 + this.chargeSeconds * 15000;\n./src/bird.js:59:        this.lastImpulse = Math.min(250, impulse);\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 15,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"Flight Lab|TAP ARC|LATE CONTACT|ACTUAL IMPULSE|RETAINED COLLISION|impulse|collision\\\" . -g '\"'!node_modules'\"' -g '\"'!dist'\"'\"",
+      "truncated": false
+    },
+    {
+      "detail": "",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 16,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git status --short && find .. -name AGENTS.md -print'",
+      "truncated": false
+    },
+    {
+      "detail": "(function () {\n  \"use strict\";\n\n  class FlightInput {\n    constructor(target) {\n      this.target = target;\n      this.down = false;\n      this.pressed = false;\n      this.released = false;\n      this.source = null;\n      this.command = null;\n      this.pointer = Object.freeze({x: 0, y: 0});\n      this.receipt = [];\n      this.pressedAt = null;\n\n      this.onKeyDown = (event) => {\n        if (event.code === \"Digit1\" || event.code === \"Digit2\" || event.code === \"Digit3\") {\n          event.preventDefault();\n          this.command = Number(event.code.slice(-1)) - 1;\n          return;\n        }\n        if (event.code !== \"Space\" && event.code !== \"ArrowUp\") return;\n        event.preventDefault();\n        if (!event.repeat) this.press(\"keyboard\");\n      };\n      this.onKeyUp = (event) => {\n        if (event.code !== \"Space\" && event.code !== \"ArrowUp\") return;\n        event.preventDefault();\n        this.release(\"keyboard\");\n      };\n      this.onPointerDown = (event) => {\n        event.preventDefault();\n        const rect = target.getBoundingClientRect();\n        this.pointer = Object.freeze({\n          x: (event.clientX - rect.left) * target.width / rect.width,\n          y: (event.clientY - rect.top) * target.height / rect.height,\n        });\n        this.press(\"pointer\");\n      };\n      this.onPointerUp = (event) => {\n        event.preventDefault();\n        this.release(\"pointer\");\n      };\n\n      window.addEventListener(\"keydown\", this.onKeyDown);\n      window.addEventListener(\"keyup\", this.onKeyUp);\n      target.addEventListener(\"pointerdown\", this.onPointerDown);\n      window.addEventListener(\"pointerup\", this.onPointerUp);\n      target.addEventListener(\"contextmenu\", (event) => event.preventDefault());\n    }\n\n    press(source) {\n      if (this.down) return;\n      this.down = true;\n      this.pressed = true;\n      this.source = source;\n      this.pressedAt = performance.now();\n      this.receipt.push(Object.freeze({\n        kind: \"press\",\n        source,\n        at: this.pressedAt,\n        held_ms: 0,\n      }));\n    }\n\n    release(source) {\n      if (!this.down || (this.source && this.source !== source)) return;\n      const releasedAt = performance.now();\n      this.down = false;\n      this.released = true;\n      this.source = null;\n      this.receipt.push(Object.freeze({\n        kind: \"release\",\n        source,\n        at: releasedAt,\n        held_ms: this.pressedAt === null\n          ? 0\n          : Math.max(0, releasedAt - this.pressedAt),\n      }));\n      this.pressedAt = null;\n    }\n\n    sample() {\n      const result = Object.freeze({\n        down: this.down,\n        pressed: this.pressed,\n        released: this.released,\n        receipt: Object.freeze(this.receipt.slice()),\n        command: this.command,\n        pointer: this.pointer,\n      });\n      this.pressed = false;\n      this.released = false;\n      this.receipt = [];\n      this.command = null;\n      return result;\n    }\n\n    clear() {\n      this.down = false;\n      this.pressed = false;\n      this.released = false;\n      this.source = null;\n      this.command = null;\n      this.receipt = [];\n      this.pressedAt = null;\n    }\n  }\n\n  window.FlightInput = FlightInput;\n})();\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 17,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,240p' src/bird.js && sed -n '1,220p' src/input.js\"",
+      "truncated": false
+    },
+    {
+      "detail": "(function () {\n  \"use strict\";\n\n  const STEP = 1 / 60;\n  const CEILING = 8;\n  const FLOOR = 400;\n  const PIPE_WIDTH = 58;\n  const LAB_BUTTONS = Object.freeze([\n    Object.freeze({x: 30, y: 156, width: 180, height: 138}),\n    Object.freeze({x: 230, y: 156, width: 180, height: 138}),\n    Object.freeze({x: 430, y: 156, width: 180, height: 138}),\n  ]);\n  const BACK_BUTTON = Object.freeze({x: 454, y: 392, width: 156, height: 48});\n  const RUN_BUTTON = Object.freeze({x: 224, y: 344, width: 192, height: 52});\n  const targetArc = (values, startX = 215) => Object.freeze(\n    values.map((y, index) => Object.freeze({\n      pipeX: startX - index * 5,\n      y,\n    }))\n  );\n  const DRILLS = Object.freeze([\n    Object.freeze({\n      id: 1,\n      slug: \"tap\",\n      name: \"TAP ARC\",\n      note: \"quick release\",\n      birdY: 270,\n      layout: Object.freeze({x: 215, gapTop: 205, gapBottom: 335}),\n      finishX: 159,\n      targetImpulse: 220,\n      target: targetArc([\n        270, 270.1722, 266.6778, 263.3556, 260.2056, 257.2278, 254.4222,\n        251.7889, 249.3278, 247.0389, 244.9222, 242.9778, 241.2056,\n        239.6056, 238.1778, 236.9222, 235.8389, 234.9278, 234.1889,\n        233.6222, 233.2278, 233.0056, 232.9556, 233.0778, 233.3722,\n        233.8389, 234.4778, 235.2889,\n      ]),\n      script: Object.freeze([\n        Object.freeze({frame: 0, kind: \"press\"}),\n        Object.freeze({frame: 0, kind: \"release\"}),\n      ]),\n    }),\n    Object.freeze({\n      id: 2,\n      slug: \"held\",\n      name: \"HELD ARC\",\n      note: \"held control\",\n      birdY: 270,\n      layout: Object.freeze({x: 215, gapTop: 190, gapBottom: 325}),\n      finishX: 80,\n      targetImpulse: 250,\n      target: targetArc([\n        270, 270.1722, 270.5167, 271.0333, 271.7222, 267.7278, 263.9056,\n        260.2556, 256.7778, 253.4722, 250.3389, 247.3778, 244.5889,\n        241.9722, 239.5278, 237.2556, 235.1556, 233.2278, 231.4722,\n        229.8889, 228.4778, 227.2389, 226.1722, 225.2778, 224.5556,\n        224.0056, 223.6278, 223.4222,\n      ]),\n      script: Object.freeze([\n        Object.freeze({frame: 0, kind: \"press\"}),\n        Object.freeze({frame: 3, kind: \"release\"}),\n      ]),\n    }),\n    Object.freeze({\n      id: 3,\n      slug: \"late\",\n      name: \"LATE CONTACT\",\n      note: \"edge recovery\",\n      birdY: 306,\n      layout: Object.freeze({x: 165, gapTop: 205, gapBottom: 315}),\n      finishX: 80,\n      targetImpulse: 220,\n      target: targetArc([\n        306, 304.1722, 302.5167, 301.0333, 299.7222, 298.5833, 297.6167,\n        296.8222, 296.2, 295.75, 295.4722, 295.3667, 295.4333, 295.6722,\n        296.0833, 296.6667, 297.4222, 298.35,\n      ], 165),\n      script: Object.freeze([\n        Object.freeze({frame: 0, kind: \"press\"}),\n        Object.freeze({frame: 0, kind: \"release\"}),\n      ]),\n    }),\n  ]);\n\n  const inside = (point, rect) => (\n    point\n    && point.x >= rect.x\n    && point.x <= rect.x + rect.width\n    && point.y >= rect.y\n    && point.y <= rect.y + rect.height\n  );\n\n  class FlappyGame {\n    constructor(canvas) {\n      this.canvas = canvas;\n      this.input = new window.FlightInput(canvas);\n      this.bird = new window.Bird();\n      this.pipeField = new window.PipeField();\n      this.renderer = new window.Renderer(canvas);\n      this.phase = \"lab\";\n      this.score = 0;\n      this.attempts = 0;\n      this.elapsed = 0;\n      this.accumulator = 0;\n      this.lastTimestamp = null;\n      this.lastCollision = null;\n      this.labResults = {};\n      this.drill = this.drillState(null, false, null, 0, 0, null);\n      this.trail = [];\n      this.lastBirdFrame = this.bird.snapshot();\n      this.lastPipeFrame = this.emptyPipeFrame();\n      this.events = [];\n      this.controlTrace = [];\n      this.drillReceipt = [];\n      this.actualImpulse = 0;\n      this.world = this.composeWorld();\n      this.renderer.draw(this.world);\n      requestAnimationFrame((time) => this.frame(time));\n    }\n\n    emptyPipeFrame() {\n      return Object.freeze({\n        scored: 0,\n        score_events: Object.freeze([]),\n        collision: null,\n        pipes: this.pipeField.snapshot(),\n      });\n    }\n\n    drillState(index, active, outcome, received, score, audit) {\n      const spec = index === null ? null : DRILLS[index];\n      return Object.freeze({\n        index,\n        id: spec ? spec.id : null,\n        slug: spec ? spec.slug : null,\n        name: spec ? spec.name : null,\n        active,\n        outcome,\n        received,\n        score,\n        audit,\n      });\n    }\n\n    reset() {\n      this.phase = \"lab\";\n      this.score = 0;\n      this.elapsed = 0;\n      this.accumulator = 0;\n      this.lastCollision = null;\n      this.labResults = {};\n      this.drill = this.drillState(null, false, null, 0, 0, null);\n      this.trail = [];\n      this.events = [];\n      this.controlTrace = [];\n      this.drillReceipt = [];\n      this.actualImpulse = 0;\n      this.bird.reset();\n      this.pipeField.reset();\n      this.input.clear();\n      this.lastBirdFrame = this.bird.snapshot();\n      this.lastPipeFrame = this.emptyPipeFrame();\n      this.world = this.composeWorld();\n      this.renderer.draw(this.world);\n      return this.getState();\n    }\n\n    showLab() {\n      this.phase = \"lab\";\n      this.elapsed = 0;\n      this.lastCollision = null;\n      this.drill = this.drillState(null, false, null, 0, this.labScore(), null);\n      this.trail = [];\n      this.drillReceipt = [];\n      this.actualImpulse = 0;\n      this.bird.reset();\n      this.pipeField.reset();\n      this.input.clear();\n      this.lastBirdFrame = this.bird.snapshot();\n      this.lastPipeFrame = this.emptyPipeFrame();\n      this.record(\"lab-ready\", {completed: Object.keys(this.labResults).length});\n    }\n\n    labScore() {\n      return Object.values(this.labResults).filter((value) => value === \"clear\").length;\n    }\n\n    launchDrill(index) {\n      const spec = DRILLS[index];\n      if (!spec) return;\n      this.phase = \"drill\";\n      this.elapsed = 0;\n      this.lastCollision = null;\n      this.events = [];\n      this.bird.reset();\n      this.bird.y = spec.birdY;\n      this.bird.pose = this.bird.snapshotPose();\n      this.pipeField.reset({kind: \"drill\", id: spec.id, layout: spec.layout});\n      this.lastBirdFrame = this.bird.snapshot();\n      this.lastPipeFrame = this.emptyPipeFrame();\n      this.drillFrame = 0;\n      this.drill = this.drillState(index, true, null, 0, this.labScore(), null);\n      this.trail = [];\n      this.drillReceipt = [];\n      this.actualImpulse = 0;\n      this.captureTrail();\n      this.input.clear();\n      this.record(\"drill-ready\", {id: spec.id, name: spec.name});\n    }\n\n    applyDrillScript() {\n      const spec = DRILLS[this.drill.index];\n      for (const event of spec.script) {\n        if (event.frame !== this.drillFrame) continue;\n        if (event.kind === \"press\") this.input.press(\"drill\");\n        if (event.kind === \"release\") this.input.release(\"drill\");\n      }\n    }\n\n    captureTrail() {\n      const pipe = this.pipeField.pipes[0];\n      this.trail.push(Object.freeze({\n        x: this.lastBirdFrame.x,\n        y: this.lastBirdFrame.y,\n        bounds: this.lastBirdFrame.bounds,\n        pipe_x: pipe ? pipe.x : null,\n      }));\n    }\n\n    captureReceipt(control) {\n      if (!control.receipt || control.receipt.length === 0) return;\n      for (const edge of control.receipt) {\n        const item = Object.freeze({\n          kind: edge.kind,\n          source: edge.source,\n          step: this.phase === \"drill\" ? this.drillFrame : null,\n          held_ms: edge.held_ms,\n        });\n        this.controlTrace.push(Object.freeze({\n          ...item,\n          phase: this.phase,\n          elapsed: Number(this.elapsed.toFixed(4)),\n        }));\n        if (this.phase === \"drill\") this.drillReceipt.push(item);\n      }\n    }\n\n    contactSegment(spec) {\n      if (this.lastCollision && this.lastCollision.motion_segment) {\n        return this.lastCollision.motion_segment;\n      }\n      if (this.trail.length < 2) return null;\n      const start = this.trail[0];\n      const end = this.trail[1];\n      const startBottom = start.bounds.bottom;\n      const endBottom = end.bounds.bottom;\n      const threshold = spec.layout.gapBottom;\n      const startContact = startBottom > threshold;\n      const endContact = endBottom > threshold;\n      if (!startContact || endContact || startBottom === endBottom) return null;\n      const intervalEnd = Math.max(\n        0,\n        Math.min(1, (startBottom - threshold) / (startBottom - endBottom))\n      );\n      return Object.freeze({\n        start: Object.freeze({\n          x: start.x,\n          y: start.y,\n          pipe_x: start.pipe_x,\n          contact: true,\n        }),\n        end: Object.freeze({\n          x: end.x,\n          y: end.y,\n          pipe_x: end.pipe_x,\n          contact: false,\n        }),\n        interval: Object.freeze({\n          start: 0,\n          end: intervalEnd,\n          marker: intervalEnd / 2,\n        }),\n        endpoint_safe: true,\n      });\n    }\n\n    visualAudit() {\n      const spec = DRILLS[this.drill.index];\n      let closest = null;\n      let contact = null;\n      for (let index = 0; index < this.trail.length; index += 1) {\n        const sample = this.trail[index];\n        const pipeLeft = sample.pipe_x;\n        const pipeRight = pipeLeft + PIPE_WIDTH;\n        const bird = sample.bounds;\n        const overlap = bird.right > pipeLeft && bird.left < pipeRight;\n        const touches = overlap && (\n          bird.top < spec.layout.gapTop || bird.bottom > spec.layout.gapBottom\n        );\n        const distance = Math.abs((pipeLeft + PIPE_WIDTH / 2) - sample.x);\n        if (!closest || distance < closest.distance) {\n          closest = {index, distance, sample};\n        }\n        if (!contact && touches) contact = {index, sample};\n      }\n      const chosen = contact || closest;\n      const segment = spec.slug === \"late\" ? this.contactSegment(spec) : null;\n      return Object.freeze({\n        contact_visible: Boolean(contact),\n        contact_interval: segment ? segment.interval : null,\n        motion_segment: segment,\n        endpoint_safe: segment ? segment.endpoint_safe : null,\n        sample_index: chosen ? chosen.index : null,\n        bird: chosen ? chosen.sample.bounds : null,\n        point: chosen ? Object.freeze({\n          x: chosen.sample.x,\n          y: chosen.sample.y,\n        }) : null,\n        gap_top: spec.layout.gapTop,\n        gap_bottom: spec.layout.gapBottom,\n      });\n    }\n\n    finishDrill(outcome, collision) {\n      const spec = DRILLS[this.drill.index];\n      this.phase = \"drill_result\";\n      this.lastCollision = collision || null;\n      if (!Object.prototype.hasOwnProperty.call(this.labResults, spec.slug)) {\n        this.labResults[spec.slug] = outcome;\n      }\n      const audit = this.visualAudit();\n      const score = this.labScore();\n      this.drill = this.drillState(\n        this.drill.index,\n        false,\n        outcome,\n        this.drill.received,\n        score,\n        audit\n      );\n      this.record(\"drill-result\", {\n        id: spec.id,\n        outcome,\n        score,\n        contact_visible: audit.contact_visible,\n      });\n      this.input.clear();\n    }\n\n    start() {\n      this.phase = \"playing\";\n      this.score = 0;\n      this.elapsed = 0;\n      this.lastCollision = null;\n      this.drill = this.drillState(null, false, null, 0, this.labScore(), null);\n      this.trail = [];\n      this.events = [];\n      this.controlTrace = [];\n      this.drillReceipt = [];\n      this.actualImpulse = 0;\n      this.bird.reset();\n      this.pipeField.reset();\n      this.input.clear();\n      this.lastBirdFrame = this.bird.snapshot();\n      this.lastPipeFrame = this.emptyPipeFrame();\n      this.attempts += 1;\n      this.record(\"start\", {});\n    }\n\n    frame(timestamp) {\n      if (this.lastTimestamp === null) this.lastTimestamp = timestamp;\n      const delta = Math.min(0.05, (timestamp - this.lastTimestamp) / 1000);\n      this.lastTimestamp = timestamp;\n     \n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 18,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,180p' src/pipes.js && sed -n '1,560p' src/game.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "(function () {\n  \"use strict\";\n\n  function finite(value) {\n    return Number.isFinite(value) ? Number(value.toFixed(4)) : null;\n  }\n\n  function serializeBounds(bounds) {\n    if (!bounds) return null;\n    return {\n      left: finite(bounds.left),\n      right: finite(bounds.right),\n      top: finite(bounds.top),\n      bottom: finite(bounds.bottom),\n      width: finite(bounds.width),\n      height: finite(bounds.height),\n    };\n  }\n\n  function state() {\n    const world = window.__flappyGame.getState();\n    const bird = world.bird;\n    const nextPipe = world.pipes.find((pipe) => !pipe.scored) || null;\n    return {\n      schemaVersion: \"1.0\",\n      gameId: \"13_flappy-bird\",\n      seed: 42,\n      timestampMs: Date.now(),\n      gameTimeMs: finite(world.elapsed * 1000),\n      status: world.phase === \"playing\" || world.phase === \"drill\"\n        ? \"playing\"\n        : (world.phase === \"dead\" ? \"terminal\" : \"menu\"),\n      is_actionable: world.phase !== \"drill\",\n      terminal: {\n        isTerminal: world.phase === \"dead\",\n        outcome: world.phase === \"dead\" ? \"fail\" : null,\n        reason: world.collision ? world.collision.kind : null,\n      },\n      game_state: {\n        score: world.score,\n        level: 1,\n        player: {\n          x: finite(bird.x),\n          y: finite(bird.y),\n          vy: finite(bird.velocity_y),\n          rotation: finite(bird.rotation),\n          flap_age: finite(bird.flap_clock),\n          bounds: serializeBounds(bird.bounds),\n        },\n        environment: {\n          phase: world.phase,\n          flight_lab: {\n            selected: world.drill.slug,\n            name: world.drill.name,\n            active: world.drill.active,\n            outcome: world.drill.outcome,\n            pulse_count: world.drill.received,\n            score: world.drill.score,\n            viewed: Object.keys(world.lab_results).length,\n            results: world.lab_results,\n            visual_audit: world.drill.audit,\n            input_receipt: world.drill_receipt,\n            actual_impulse: finite(world.actual_impulse),\n            target_impulse: world.drill.index === null\n              ? null\n              : finite(world.ui.drills[world.drill.index].targetImpulse),\n            target: world.drill.index === null\n              ? []\n              : world.ui.drills[world.drill.index].target.map((point) => ({\n                pipe_x: finite(point.pipeX),\n                y: finite(point.y),\n              })),\n            trail: world.trail.map((point) => ({\n              x: finite(point.x),\n              y: finite(point.y),\n              pipe_x: finite(point.pipe_x),\n            })),\n          },\n          next_pipe: nextPipe ? {\n            id: nextPipe.id,\n            x: finite(nextPipe.x),\n            width: nextPipe.width,\n            gap_top: nextPipe.gap_top,\n            gap_bottom: nextPipe.gap_bottom,\n          } : null,\n          floor_y: 400,\n        },\n        completion_progress: finite(Math.min(1, world.score / 3)),\n      },\n      metrics: {\n        primary_score: world.score,\n        pipes_passed: world.score,\n        attempts: world.attempts,\n        pipes_visible: world.pipes.length,\n      },\n      debug: {\n        collision: world.collision,\n        recent_events: window.__flappyGame.events.slice(-12),\n      },\n      control_trace: world.control_trace,\n    };\n  }\n\n  window.gameAPI = Object.freeze({\n    version: \"1.0\",\n    capabilities: Object.freeze({\n      supports_seed: true,\n      supports_level_select: false,\n      supports_inplace_reset: true,\n      supports_reload_reset: true,\n      provides_actionable_flag: true,\n    }),\n    init: async function () {\n      return {ok: true, applied: {seed: 42, level: 1}};\n    },\n    reset: async function () {\n      window.__flappyGame.reset();\n      return {ok: true, method: \"inplace\", applied: {seed: 42, level: 1}};\n    },\n    getState: state,\n  });\n})();\n        ctx.stroke();\n        this.drawAuditBird(startX, startY, true);\n        this.drawAuditBird(endX, endY, false);\n        this.text(\"CONTACT INTERVAL\", markerX, Math.max(plot.top + 16, markerY - 23), 10, {\n          color: COLORS.red,\n        });\n        this.text(\"ENDPOINT SAFE\", endX, Math.min(plot.bottom - 5, endY + 28), 10, {\n          color: COLORS.green,\n        });\n      }\n\n      this.panel(440, 82, 176, 326, COLORS.panel);\n      this.text(\"FROZEN RESULT\", 528, 104, 12, {color: \"#a9edf0\"});\n      const outcome = world.drill.outcome;\n      this.text(\n        outcome ? outcome.toUpperCase() : \"RUNNING\",\n        528,\n        137,\n        outcome ? 25 : 18,\n        {color: outcome === \"bump\" ? COLORS.red : (outcome ? COLORS.green : COLORS.gold)}\n      );\n      this.text(\"INPUT RECEIPT\", 454, 164, 11, {align: \"left\", color: \"#a9edf0\"});\n      ctx.strokeStyle = \"#5d8992\";\n      ctx.lineWidth = 2;\n      ctx.beginPath();\n      ctx.moveTo(456, 184);\n      ctx.lineTo(600, 184);\n      ctx.stroke();\n      const receipt = world.drill_receipt || [];\n      receipt.slice(0, 4).forEach((edge, index) => {\n        const x = receipt.length <= 1\n          ? 464\n          : 464 + index * (128 / Math.max(1, receipt.length - 1));\n        ctx.fillStyle = edge.kind === \"press\" ? COLORS.gold : COLORS.cyan;\n        ctx.beginPath();\n        ctx.arc(x, 184, 5, 0, Math.PI * 2);\n        ctx.fill();\n        this.text(edge.kind.toUpperCase(), x, 203, 9, {\n          color: edge.kind === \"press\" ? COLORS.gold : COLORS.cyan,\n        });\n        this.text(`S${edge.step}`, x, 216, 9, {color: \"#a9edf0\"});\n      });\n      if (receipt.length === 0) this.text(\"WAITING\", 528, 202, 11, {color: COLORS.gold});\n\n      const specImpulse = spec.targetImpulse;\n      this.text(`ACTUAL IMPULSE  ${Math.round(world.actual_impulse || 0)}`, 454, 241, 10, {\n        align: \"left\",\n        color: COLORS.cyan,\n      });\n      this.text(`TARGET IMPULSE  ${Math.round(specImpulse)}`, 454, 258, 10, {\n        align: \"left\",\n        color: COLORS.cream,\n      });\n      this.text(\"CONTACT INTERVAL\", 454, 284, 10, {align: \"left\", color: \"#a9edf0\"});\n      const interval = audit && audit.contact_interval;\n      this.text(\n        interval ? `${interval.start.toFixed(2)} \u2192 ${interval.end.toFixed(2)}` : \"NONE\",\n        454,\n        304,\n        13,\n        {align: \"left\", color: interval ? COLORS.red : COLORS.cream}\n      );\n      if (audit && audit.endpoint_safe) {\n        this.text(\"ENDPOINT SAFE\", 454, 322, 10, {align: \"left\", color: COLORS.green});\n      }\n      if (spec.slug === \"late\" && world.phase === \"drill_result\") {\n        const retained = Boolean(world.lastCollision && world.lastCollision.kind === \"pipe\");\n        this.text(\n          `OBSERVED CONTACT  ${audit && audit.contact_visible ? \"YES\" : \"NO\"}`,\n          454, 329, 9,\n          {align: \"left\", color: audit && audit.contact_visible ? COLORS.red : COLORS.cream}\n        );\n        this.text(\n          `RETAINED COLLISION  ${retained ? \"YES\" : \"NO\"}`,\n          454, 343, 9,\n          {align: \"left\", color: retained ? COLORS.green : COLORS.red}\n        );\n      }\n      this.text(\"LEDGER\", 454, 357, 9, {align: \"left\", color: \"#a9edf0\"});\n      this.text(\n        `${world.drill.score} CLEAR \u00b7 ${Object.keys(world.lab_results).length}/3`,\n        454,\n        372,\n        13,\n        {\n        align: \"left\",\n      });\n\n      if (world.phase === \"drill_result\") {\n        this.panel(\n          454,\n          world.ui.back_button.y,\n          world.ui.back_button.width,\n          world.ui.back_button.height,\n          \"#315f3d\"\n        );\n        this.text(\"BACK TO LAB\", 532, 423, 17);\n      } else {\n        this.text(\"REPLAY IN FLIGHT\", 532, 423, 14, {color: COLORS.gold});\n      }\n    }\n\n    drawAuditBird(x, y, contact) {\n      const ctx = this.context;\n      ctx.save();\n      ctx.translate(x, y);\n      ctx.fillStyle = \"#f8d33d\";\n      ctx.strokeStyle = contact ? COLORS.red : COLORS.cream;\n      ctx.lineWidth = 4;\n      ctx.beginPath();\n      ctx.ellipse(0, 0, 15, 10, 0, 0, Math.PI * 2);\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 19,
+      "status": "completed",
+      "title": "/bin/bash -lc \"cat package.json && sed -n '1,180p' src/game_api.js && sed -n '240,350p' src/renderer.js\"",
+      "truncated": false
+    },
+    {
+      "detail": "(function () {\n  \"use strict\";\n\n  const COLORS = Object.freeze({\n    ink: \"#102f3a\",\n    cream: \"#fff4c7\",\n    cyan: \"#35d9df\",\n    green: \"#75d35c\",\n    red: \"#ff625f\",\n    gold: \"#ffd45a\",\n    ghost: \"rgba(255,244,199,.38)\",\n    panel: \"#173e4a\",\n    panel2: \"#245665\",\n  });\n\n  class Renderer {\n    constructor(canvas) {\n      this.canvas = canvas;\n      this.context = canvas.getContext(\"2d\");\n    }\n\n    draw(world) {\n      if (world.phase === \"lab\") {\n        this.drawLab(world);\n      } else if (world.phase === \"drill\" || world.phase === \"drill_result\") {\n        this.drawDrill(world);\n      } else {\n        this.drawRun(world);\n      }\n    }\n\n    background() {\n      const ctx = this.context;\n      const gradient = ctx.createLinearGradient(0, 0, 0, this.canvas.height);\n      gradient.addColorStop(0, \"#66ccd5\");\n      gradient.addColorStop(0.72, \"#bce9d5\");\n      gradient.addColorStop(0.73, \"#d9c471\");\n      gradient.addColorStop(1, \"#a9934a\");\n      ctx.fillStyle = gradient;\n      ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);\n    }\n\n    panel(x, y, width, height, fill = COLORS.panel) {\n      const ctx = this.context;\n      ctx.fillStyle = fill;\n      ctx.strokeStyle = COLORS.cream;\n      ctx.lineWidth = 3;\n      ctx.fillRect(x, y, width, height);\n      ctx.strokeRect(x, y, width, height);\n    }\n\n    text(value, x, y, size, options = {}) {\n      const ctx = this.context;\n      ctx.fillStyle = options.color || COLORS.cream;\n      ctx.font = `${options.bold === false ? \"\" : \"bold \"}${size}px monospace`;\n      ctx.textAlign = options.align || \"center\";\n      ctx.textBaseline = options.baseline || \"alphabetic\";\n      ctx.fillText(value, x, y);\n    }\n\n    drawLab(world) {\n      const ctx = this.context;\n      ctx.fillStyle = COLORS.ink;\n      ctx.fillRect(0, 0, 640, 480);\n      this.text(\"FLIGHT LAB\", 320, 58, 35);\n      this.text(\"SELECT A FROZEN DRILL\", 320, 88, 15, {color: \"#a9edf0\"});\n\n      for (let index = 0; index < world.ui.drill_buttons.length; index += 1) {\n        const button = world.ui.drill_buttons[index];\n        const drill = world.ui.drills[index];\n        this.panel(button.x, button.y, button.width, button.height, COLORS.panel2);\n        this.text(String(index + 1), button.x + 25, button.y + 32, 18, {color: COLORS.gold});\n        this.text(drill.name, button.x + button.width / 2, button.y + 62, 20);\n        this.text(drill.note.toUpperCase(), button.x + button.width / 2, button.y + 88, 12, {\n          color: \"#a9edf0\",\n        });\n        const previous = world.lab_results[drill.slug];\n        this.text(\n          previous ? `LAST: ${previous.toUpperCase()}` : \"CLICK TO LAUNCH\",\n          button.x + button.width / 2,\n          button.y + 119,\n          13,\n          {color: previous === \"bump\" ? COLORS.red : (previous ? COLORS.green : COLORS.cream)}\n        );\n      }\n\n      this.panel(\n        world.ui.run_button.x,\n        world.ui.run_button.y,\n        world.ui.run_button.width,\n        world.ui.run_button.height,\n        \"#315f3d\"\n      );\n      this.text(\"START NORMAL RUN\", 320, 377, 18);\n      this.text(\n        `LAB LEDGER  ${Object.keys(world.lab_results).length}/3 VIEWED  \u00b7  ${world.drill.score} CLEAR`,\n        320,\n        438,\n        14,\n        {color: \"#a9edf0\"}\n      );\n    }\n\n    drawDrill(world) {\n      const ctx = this.context;\n      ctx.fillStyle = COLORS.ink;\n      ctx.fillRect(0, 0, 640, 480);\n      this.text(\"FLIGHT LAB \u00b7 VISUAL AUDIT\", 24, 31, 17, {align: \"left\", color: \"#a9edf0\"});\n      this.text(world.drill.name || \"\", 24, 60, 27, {align: \"left\"});\n\n      this.panel(24, 82, 406, 326, \"#0d3440\");\n      this.text(\"ACTUAL TRACE + TARGET + GATE\", 42, 109, 13, {\n        align: \"left\",\n        color: \"#a9edf0\",\n      });\n\n      const plot = {left: 48, right: 406, top: 126, bottom: 374};\n      const spec = world.ui.drills[world.drill.index];\n      const gateX = 326;\n      const mapX = (sample) => Math.max(\n        plot.left,\n        Math.min(plot.right, gateX + sample.x - sample.pipe_x)\n      );\n      const mapY = (value) => plot.top + (value - 155) * (plot.bottom - plot.top) / 205;\n      const gapTop = mapY(spec.layout.gapTop);\n      const gapBottom = mapY(spec.layout.gapBottom);\n\n      ctx.strokeStyle = \"#234f5d\";\n      ctx.lineWidth = 1;\n      for (let y = plot.top; y <= plot.bottom; y += 31) {\n        ctx.beginPath();\n        ctx.moveTo(plot.left, y);\n        ctx.lineTo(plot.right, y);\n        ctx.stroke();\n      }\n\n      ctx.fillStyle = \"#3f7e42\";\n      ctx.strokeStyle = COLORS.green;\n      ctx.lineWidth = 5;\n      ctx.fillRect(gateX, plot.top, 56, Math.max(0, gapTop - plot.top));\n      ctx.strokeRect(gateX, plot.top, 56, Math.max(0, gapTop - plot.top));\n      ctx.fillRect(gateX, gapBottom, 56, Math.max(0, plot.bottom - gapBottom));\n      ctx.strokeRect(gateX, gapBottom, 56, Math.max(0, plot.bottom - gapBottom));\n      ctx.strokeStyle = COLORS.gold;\n      ctx.lineWidth = 4;\n      ctx.beginPath();\n      ctx.moveTo(gateX - 10, gapTop);\n      ctx.lineTo(gateX + 66, gapTop);\n      ctx.moveTo(gateX - 10, gapBottom);\n      ctx.lineTo(gateX + 66, gapBottom);\n      ctx.stroke();\n\n      if (spec.target.length > 1) {\n        ctx.strokeStyle = COLORS.ghost;\n        ctx.lineWidth = spec.slug === \"late\" ? 18 : 14;\n        ctx.lineJoin = \"round\";\n        ctx.lineCap = \"round\";\n        ctx.beginPath();\n        spec.target.forEach((sample, index) => {\n          const x = mapX({x: 154, pipe_x: sample.pipeX});\n          const y = mapY(sample.y);\n          if (index === 0) ctx.moveTo(x, y);\n          else ctx.lineTo(x, y);\n        });\n        ctx.stroke();\n        ctx.strokeStyle = \"rgba(255,244,199,.72)\";\n        ctx.lineWidth = 2;\n        ctx.setLineDash([7, 7]);\n        ctx.stroke();\n        ctx.setLineDash([]);\n        this.text(\n          spec.slug === \"late\" ? \"TARGET CONTACT CORRIDOR\" : \"TARGET ARC\",\n          56,\n          139,\n          11,\n          {align: \"left\", color: \"rgba(255,244,199,.78)\"}\n        );\n      }\n\n      if (world.trail.length > 1) {\n        ctx.strokeStyle = COLORS.cyan;\n        ctx.lineWidth = 8;\n        ctx.lineJoin = \"round\";\n        ctx.lineCap = \"round\";\n        ctx.beginPath();\n        world.trail.forEach((sample, index) => {\n          const x = mapX(sample);\n          const y = mapY(sample.y);\n          if (index === 0) ctx.moveTo(x, y);\n          else ctx.lineTo(x, y);\n        });\n        ctx.stroke();\n        this.text(\"ACTUAL\", 56, 158, 11, {align: \"left\", color: COLORS.cyan});\n      }\n\n      const audit = world.drill.audit;\n      if (audit && audit.point) {\n        const index = audit.sample_index;\n        const x = mapX(world.trail[index]);\n        const y = mapY(audit.point.y);\n        this.drawAuditBird(x, y, audit.contact_visible);\n        if (audit.contact_visible) {\n          ctx.strokeStyle = COLORS.red;\n          ctx.lineWidth = 6;\n          ctx.beginPath();\n          ctx.moveTo(x - 13, y - 13);\n          ctx.lineTo(x + 13, y + 13);\n          ctx.moveTo(x + 13, y - 13);\n          ctx.lineTo(x - 13, y + 13);\n          ctx.stroke();\n          this.text(\"VISIBLE CONTACT\", x, Math.max(plot.top + 18, y - 24), 12, {color: COLORS.red});\n        } else {\n          this.text(\"VISIBLE CLEARANCE\", x, Math.max(plot.top + 18, y - 24), 12, {\n            color: COLORS.green,\n          });\n        }\n      } else {\n        this.drawAuditBird(80, mapY(world.bird.y), false);\n      }\n\n      if (audit && audit.motion_segment) {\n        const segment = audit.motion_segment;\n        const startX = mapX(segment.start);\n        const startY = mapY(segment.start.y);\n        const endX = mapX(segment.end);\n        const endY = mapY(segment.end.y);\n        const marker = segment.interval.marker;\n        const markerX = startX + (endX - startX) * marker;\n        const markerY = startY + (endY - startY) * marker;\n        ctx.strokeStyle = COLORS.red;\n        ctx.lineWidth = 4;\n        ctx.beginPath();\n        ctx.moveTo(startX, startY);\n        ctx.lineTo(markerX, markerY);\n        ctx.stroke();\n        ctx.strokeStyle = COLORS.green;\n        ctx.beginPath();\n        ctx.moveTo(markerX, markerY);\n        ctx.lineTo(endX, endY);\n        ctx.stroke();\n        this.drawAuditBird(startX, startY, true);\n        this.drawAuditBird(endX, endY, false);\n        this.text(\"CONTACT INTERVAL\", markerX, Math.max(plot.top + 16, markerY - 23), 10, {\n          color: COLORS.red,\n        });\n        this.text(\"ENDPOINT SAFE\", endX, Math.min(plot.bottom - 5, endY + 28), 10, {\n          color: COLORS.green,\n        });\n      }\n\n      this.panel(440, 82, 176, 326, COLORS.panel);\n      this.text(\"FROZEN RESULT\", 528, 104, 12, {color: \"#a9edf0\"});\n      const outcome = world.drill.outcome;\n      this.text(\n        outcome ? outcome.toUpperCase() : \"RUNNING\",\n        528,\n        137,\n        outcome ? 25 : 18,\n        {color: outcome === \"bump\" ? COLORS.red : (outcome ? COLORS.green : COLORS.gold)}\n      );\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 20,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' src/renderer.js\"",
+      "truncated": false
+    },
+    {
+      "detail": "efa1fc8 isolated source baseline\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 21,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' build_check.py && git log --oneline -5 --all 2>/dev/null || true && git diff -- src/bird.js src/pipes.js src/game.js\"",
+      "truncated": false
+    },
+    {
+      "detail": "The source confirms two focused defects: quick release uses an unintended 120 base while the authored TAP contract is 220, and pipe collision checks only the post-step endpoint, discarding contact that existed during the bird/pipe motion segment. I\u2019m correcting those shared primitives so normal play receives the same input and collision semantics as the lab.",
+      "kind": "agent_message",
+      "sequence": 22,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "[{\"kind\": \"update\", \"path\": \"<artifact-path>\"}, {\"kind\": \"update\", \"path\": \"<artifact-path>\"}, {\"kind\": \"update\", \"path\": \"<artifact-path>\"}]",
+      "kind": "edit",
+      "sequence": 23,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "\n> build\n> python3 build_check.py\n\n{\n  \"missing\": [],\n  \"script_order_ok\": true,\n  \"source_files\": [\n    \"src/input.js\",\n    \"src/bird.js\",\n    \"src/pipes.js\",\n    \"src/renderer.js\",\n    \"src/game.js\",\n    \"src/game_api.js\"\n  ]\n}\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 24,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": " src/bird.js  |  7 +++--\n src/game.js  |  3 +-\n src/pipes.js | 93 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-\n 3 files changed, 99 insertions(+), 4 deletions(-)\n M src/bird.js\n M src/game.js\n M src/pipes.js\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 25,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && git diff --stat && git status --short'",
+      "truncated": false
+    },
+    {
+      "detail": "{\n  \"tap\": 220,\n  \"held\": 250,\n  \"late_collision\": \"pipe\",\n  \"interval\": {\n    \"start\": 0,\n    \"end\": 0.28616852146263716,\n    \"marker\": 0.14308426073131858\n  }\n}\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 26,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node <<'NODE'\nglobal.window = global;\nconst fs = require('fs');\nfor (const file of ['src/bird.js', 'src/pipes.js']) eval(fs.readFileSync(file, 'utf8'));\nconst tap = new Bird();\ntap.y = 270;\ntap.pose = tap.snapshotPose();\ntap.step(1 / 60, {pressed: true, down: false, released: true});\nconst held = new Bird();\nheld.y = 270;\nheld.pose = held.snapshotPose();\nheld.step(1 / 60, {pressed: true, down: true, released: false});\nheld.step(1 / 60, {pressed: false, down: true, released: false});\nheld.step(1 / 60, {pressed: false, down: true, released: false});\nheld.step(1 / 60, {pressed: false, down: false, released: true});\nconst field = new PipeField();\nfield.reset({kind: 'drill', id: 3, layout: {x: 165, gapTop: 205, gapBottom: 315}});\nconst bird = new Bird();\nbird.y = 306;\nbird.pose = bird.snapshotPose();\nconst before = bird.snapshot();\nconst after = bird.step(1 / 60, {pressed: true, down: false, released: true});\nconst frame = field.step(1 / 60, after, before);\nconsole.log(JSON.stringify({tap: tap.lastImpulse, held: held.lastImpulse, late_collision: frame.collision && frame.collision.kind, interval: frame.collision && frame.collision.motion_segment.interval}, null, 2));\nNODE\"",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"CTRL+R\"}\nerror: {'message': 'tool call error: tool call failed for `visual_cua/act`\\n\\nCaused by:\\n    Mcp error: -32603: RuntimeError: Traceback (most recent call last):\\n      File \"<artifact-path>\", line 113, in _post\\n        with request.urlopen(req, timeout=timeout) as response:\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n      File \"/usr/lib/python3.12/urllib/request.py\", line 215, in urlopen\\n        return opener.open(url, data, timeout)\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n      File \"/usr/lib/python3.12/urllib/request.py\", line 521, in open\\n        response = meth(req, response)\\n                   ^^^^^^^^^^^^^^^^^^^\\n      File \"/usr/lib/python3.12/urllib/request.py\", line 630, in http_response\\n        response = self.parent.error(\\n                   ^^^^^^^^^^^^^^^^^^\\n      File \"/usr/lib/python3.12/urllib/request.py\", line 559, in error\\n        return self._call_chain(*args)\\n               ^^^^^^^^^^^^^^^^^^^^^^^\\n      File \"/usr/lib/python3.12/urllib/request.py\", line 492, in _call_chain\\n        result = func(*args)\\n                 ^^^^^^^^^^^\\n      File \"/usr/lib/python3.12/urllib/request.py\", line 639, in http_error_default\\n        raise HTTPError(req.full_url, code, msg, hdrs, fp)\\n    urllib.error.HTTPError: HTTP Error 500: Internal Server Error\\n    \\n    The above exception was the direct cause of the following exception:\\n    \\n    Traceback (most recent call last):\\n      File \"<artifact-path>\", line 531, in <module>\\n        raise SystemExit(main())\\n                         ^^^^^^\\n      File \"<artifact-path>\", line 527, in main\\n        return args.func(args)\\n               ^^^^^^^^^^^^^^^\\n      File \"<artifact-path>\", line 421, in cmd_act\\n        result = _post(Path(args.session_file).resolve(), \"/act\", payload)\\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n      File \"<artifact-path>\", line 123, in _post\\n        raise RuntimeError(f\"CUA service returned HTTP {exc.code}: {detail}\") from exc\\n    RuntimeError: CUA service returned HTTP 500: Error: Keyboard.press: Unknown key: \"CTRL\"'}",
+      "kind": "computer_use",
+      "sequence": 27,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "not_recorded",
+      "image_reason": "No screenshot was returned for this call in the retained run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+R\"}",
+      "kind": "computer_use",
+      "sequence": 28,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0010.png",
+          "sha256": "6cbc3c954e9ab05108598d0b9b5fc17607fa68ee9b92d90bb0d485e63518af4a"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 246, \"y\": 274}",
+      "kind": "computer_use",
+      "sequence": 29,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0011.png",
+          "sha256": "46e588e2610880ecb61e8d98960a7688e8eaeba211bc9923571dc33acae7a04f"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+Shift+R\"}",
+      "kind": "computer_use",
+      "sequence": 30,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0012.png",
+          "sha256": "46e588e2610880ecb61e8d98960a7688e8eaeba211bc9923571dc33acae7a04f"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 246, \"y\": 274}",
+      "kind": "computer_use",
+      "sequence": 31,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0013.png",
+          "sha256": "0df703fd1dbbdc7239bdbd64d5a3861255fdc8977ce8afb466ac68c10f4ef0e5"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 32,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0014.png",
+          "sha256": "97c0128ae5fce15cf15653500dfddbbdd14f80b4073fd1345e87e6d69f6a93ee"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "2026-09-04 10:10:49.054383610 +0000 src/bird.js\n2026-09-04 10:10:49.056383706 +0000 src/pipes.js\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 33,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' server.py && stat -c '%y %n' src/bird.js src/pipes.js\"",
+      "truncated": false
+    },
+    {
+      "detail": "      1 /usr/bin/bwrap --die-with-parent --new-session --unshare-pid --ro-bind /usr /usr --ro-bind /etc /etc --symlink usr/bin /bin --symlink usr/lib /lib --symlink usr/lib64 /lib64 --symlink usr/sbin /sbin --proc /proc --dev /dev --tmpfs /tmp --dir /home --dir /run --dir /home/ubuntu --dir /run/systemd --dir /home/ubuntu/cua-swe-game-sessions --dir /run/systemd/resolve --dir <artifact-path> --ro-bind /usr/local/bin /usr/local/bin --ro-bind /usr/local/lib/node_modules/@openai/codex /usr/local/lib/node_modules/@openai/codex --ro-bind /usr/local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64 /usr/local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64 --ro-bind <artifact-path> <artifact-path> --ro-bind /run/systemd/resolve/stub-resolv.conf /run/systemd/resolve/stub-resolv.conf --ro-bind /run/systemd/resolve/resolv.conf /run/systemd/resolve/resolv.conf --dir <artifact-path> --bind <artifact-path> <artifact-path> --bind <artifact-path> <artifact-path> --bind <artifact-path> <artifact-path> --ro-bind <artifact-path> <artifact-path> --chdir <artifact-path> env -u AWS_ACCESS_KEY_ID -u AWS_SECRET_ACCESS_KEY -u AWS_SESSION_TOKEN -u AWS_SECURITY_TOKEN -u AWS_PROFILE -u AWS_CONFIG_FILE -u AWS_SHARED_CREDENTIALS_FILE -u GITHUB_TOKEN -u GH_TOKEN -u GIT_ASKPASS -u SSH_AUTH_SOCK -u NETRC -u NPM_TOKEN -u NODE_AUTH_TOKEN -u PIP_INDEX_URL -u PIP_EXTRA_INDEX_URL -u LD_PRELOAD -u LD_LIBRARY_PATH -u NODE_OPTIONS -u BROWSER -u CHROME_BIN -u CHROME_PATH -u PUPPETEER_EXECUTABLE_PATH -u PLAYWRIGHT_NODEJS_PATH -u ELECTRON_RUN_AS_NODE -u PYTHONHOME -u PYTHONINSPECT -u PYTHONPATH -u PYTHONSTARTUP -u PYTHONUSERBASE -u OPENAI_API_KEY -u ANTHROPIC_API_KEY -u XAI_API_KEY -u KIMI_API_KEY -u PLAYWRIGHT_BROWSERS_PATH -u AWS_REGION -u AWS_DEFAULT_REGION -u CUA_SWE_TASK_CONTEXT -u CUA_SWE_TASK_VALIDATION_FLOW -u CUA_SWE_CODEX_PROFILE CUA_SWE_AGENT_ROLLOUT_DIR=<artifact-path> CUA_SWE_TASK_ID=gameqa.flappy-bird-flight-lab.008 CUA_SWE_TASK_INSTRUCTION=The deterministic Flappy Bird build opens on a selectable Flight Lab. Before editing, use the browser to launch TAP ARC, HELD ARC, and LATE CONTACT one by one and inspect a screenshot of every indefinitely frozen result. Compare TAP's INPUT RECEIPT showing PRESS and RELEASE in one step, its ACTUAL IMPULSE versus TARGET IMPULSE, and its actual versus target arc. Compare HELD's longer receipt timeline and its distinct impulse and arc. For LATE CONTACT, compare the moving bird/pipe segment, both endpoint poses, the fractional CONTACT INTERVAL marker, OBSERVED CONTACT versus RETAINED COLLISION, the result, and the ledger. Repair the underlying gameplay contract so TAP and HELD follow their different targets and clear, while LATE CONTACT retains the observed contact as gameplay collision, bumps, and earns no clear. Then verify ordinary three-pipe scoring, collision/death, quick keyboard and pointer flaps, both restart paths, and stable frozen results. CUA_SWE_BUILD_COMMAND=npm run build CUA_SWE_AGENT_RUNTIME=codex CUA_SWE_AGENT_PYTHON=<artifact-path> CUA_SWE_PYTHON=<artifact-path> CUA_SWE_BEDROCK_REGION=us-east-1 AWS_REGION=us-east-1 AWS_DEFAULT_REGION=us-east-1 CUA_SWE_CODEX_MODEL=openai.gpt-5.6-sol CUA_SWE_CODEX_PROVIDER=amazon-bedrock CUA_SWE_CODEX_REASONING_EFFORT=medium CODEX_HOME=<artifact-path> HOME=<artifact-path> XDG_CACHE_HOME=<artifact-path> npm_config_cache=<artifact-path> DO_NOT_TRACK=1 NEXT_TELEMETRY_DISABLED=1 TURBO_TELEMETRY_DISABLED=1 NO_UPDATE_NOTIFIER=1 npm_config_offline=true npm_config_update_notifier=false CUA_SWE_CODEX_BIN=/usr/local/lib/node_modules/@openai/codex/bin/codex.js CUA_SWE_ANTHROPIC_AGENT=<artifact-path> CUA_SWE_ANTHROPIC_MODEL=openai.gpt-5.6-sol CUA_SWE_KIMI_AGENT=<artifact-path> CUA_SWE_KIMI_MODEL=openai.gpt-5.6-sol CUA_SWE_QWEN_AGENT=<artifact-path> CUA_SWE_QWEN_MODEL=openai.gpt-5.6-sol PYTHONNOUSERSITE=1 CUA_SWE_WEB_PORT=49402 CUA_SWE_WEB_URL=http://127.0.0.1:49402/ CUA_SWE_WEB_CUA_TOOL=<artifact-path> CUA_SWE_WEB_CUA_PYTHON=<artifact-path> CUA_SWE_WEB_CUA_LAUNCHER=<artifact-path> CUA_SWE_WEB_VIEWPORT=960x720 CUA_SWE_WEB_OBSERVATION_MODE=visual bash <artifact-path>\n      7 node /usr/local/lib/node_modules/@openai/codex/bin/codex.js exec --json --ephemeral --ignore-user-config --ignore-rules --strict-config --disable plugins --model openai.gpt-5.6-sol --config mcp_servers.visual_cua.command=\"<artifact-path>\" --config mcp_servers.visual_cua.args=[\"-I\", \"<artifact-path>\"] --config mcp_servers.visual_cua.startup_timeout_sec=30 --config mcp_servers.visual_cua.tool_timeout_sec=90 --config mcp_servers.visual_cua.env.CUA_SWE_WEB_CUA_LAUNCHER=\"<artifact-path>\" --config mcp_servers.visual_cua.env.CUA_SWE_WEB_CUA_SESSION=\"<artifact-path>\" --config mcp_servers.visual_cua.env.CUA_SWE_AGENT_ROLLOUT_DIR=\"<artifact-path>\" --config mcp_servers.visual_cua.env.CUA_SWE_WEB_URL=\"http://127.0.0.1:49402/\" --config mcp_servers.visual_cua.env.CUA_SWE_WEB_VIEWPORT=\"960x720\" --config model_provider=\"amazon-bedrock\" --config model_reasoning_effort=\"medium\" --dangerously-bypass-approvals-and-sandbox --cd <artifact-path> --output-last-message <artifact-path> # CUA-SWE Web Task  You are a coding agent in a broken web application workspace. Solve the task by inspecting and editing the local application source.  ## Task ID  `gameqa.flappy-bird-flight-lab.008`  ## Task  The deterministic Flappy Bird build opens on a selectable Flight Lab. Before editing, use the browser to launch TAP ARC, HELD ARC, and LATE CONTACT one by one and inspect a screenshot of every indefinitely frozen result. Compare TAP's INPUT RECEIPT showing PRESS and RELEASE in one step, its ACTUAL IMPULSE versus TARGET IMPULSE, and its actual versus target arc. Compare HELD's longer receipt timeline and its distinct impulse and arc. For LATE CONTACT, compare the moving bird/pipe segment, both endpoint poses, the fractional CONTACT INTERVAL marker, OBSERVED CONTACT versus RETAINED COLLISION, the result, and the ledger. Repair the underlying gameplay contract so TAP and HELD follow their different targets and clear, while LATE CONTACT retains the observed contact as gameplay collision, bumps, and earns no clear. Then verify ordinary three-pipe scoring, collision/death, quick keyboard and pointer flaps, both restart paths, and stable frozen results.  ## Capability Policy  <!-- CUA-SWE CAPABILITY POLICY START --> Browser GUI capability is available only through the protected `visual_cua` MCP tools. Start with `visual_cua.start`, then use `visual_cua.act` for coordinate actions and `visual_cua.observe` when another observation is needed. Every successful tool result attaches screenshot pixels directly to the model. Infer the visible UI from those pixels and choose click and scroll coordinates from the screenshot itself.  The tools do not provide body text, DOM data, element labels, coordinates, viewport metadata, URL metadata, accessibility trees, or OCR. Do not use the shell launcher, Playwright, Puppeteer, Selenium, browser developer protocols, HTTP requests, raw sockets, or any other browser path. The retained application is already running at `http://127.0.0.1:49402/`; do not start, replace, or stop its server. <!-- CUA-SWE CAPABILITY POLICY END -->  ## Public Task Build Command  ```bash npm run build ```  ## Requirements  1. Make a focused source change that solves the task while preserving the    application behavior described in the task. 2. You may inspect application source and configuration, edit source files,    and run the public build command and existing non-browser unit tests. 3. Do not inspect or modify benchmark task files, verifier files, gold or    negative patches, replay documents, or evaluation artifacts. The benchmark    harness evaluates the workspace after the agent exits. 4. Do not use web search or external documentation; use the local workspace    and the capabilities allowed above. 5. Write `rollout_notes.md` in the directory named by    `CUA_SWE_AGENT_ROLLOUT_DIR`, summarizing the work performed, source files    inspected and changed, checks run, and any relevant observations.\n     18 /usr/local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/bin/codex exec --json --ephemeral --ignore-user-config --ignore-rules --strict-config --disable plugins --model openai.gpt-5.6-sol --config mcp_servers.visual_cua.command=\"<artifact-path>\" --config mcp_servers.visual_cua.args=[\"-I\", \"<artifact-path>\"] --config mcp_servers.visual_cua.startup_timeout_sec=30 --config mcp_servers.visual_cua.tool_timeout_sec=90 --config mcp_servers.visual_cua.env.CUA_SWE_WEB_CUA_LAUNCHER=\"<artifact-path>\" --config mcp_servers.visual_cua.env.CUA_SWE_WEB_CUA_SESSION=\"<artifact-path>\" --config mcp_servers.visual_cua.env.CUA_SWE_AGENT_ROLLOUT_DIR=\"<artifact-path>\" --config mcp_servers.visual_cua.env.CUA_SWE_WEB_URL=\"http://127.0.0.1:49402/\" --config mcp_servers.visual_cua.env.CUA_SWE_WEB_VIEWPORT=\"960x720\" --config model_provider=\"amazon-bedrock\" --config model_reasoning_effort=\"medium\" --dangerously-bypass-approvals-and-sandbox --cd <artifact-path> --output-last-message <artifact-path> # CUA-SWE Web Task  You are a coding agent in a broken web application workspace. Solve the task by inspecting and editing the local application source.  ## Task ID  `gameqa.flappy-bird-flight-lab.008`  ## Task  The deterministic Flappy Bird build opens on a selectable Flight Lab. Before editing, use the browser to launch TAP ARC, HELD ARC, and LATE CONTACT one by one and inspect a screenshot of every indefinitely frozen result. Compare TAP's INPUT RECEIPT showing PRESS and RELEASE in one step, its ACTUAL IMPULSE versus TARGET IMPULSE, and its actual versus target arc. Compare HELD's longer receipt timeline and its distinct impulse and arc. For LATE CONTACT, compare the moving bird/pipe segment, both endpoint poses, the fractional CONTACT INTERVAL marker, OBSERVED CONTACT versus RETAINED COLLISION, the result, and the ledger. Repair the underlying gameplay contract so TAP and HELD follow their different targets and clear, while LATE CONTACT retains the observed contact as gameplay collision, bumps, and earns no clear. Then verify ordinary three-pipe scoring, collision/death, quick keyboard and pointer flaps, both restart paths, and stable frozen results.  ## Capability Policy  <!-- CUA-SWE CAPABILITY POLICY START --> Browser GUI capability is available only through the protected `visual_cua` MCP tools. Start with `visual_cua.start`, then use `visual_cua.act` for coordinate actions and `visual_cua.observe` when another observation is needed. Every successful tool result attaches screenshot pixels directly to the model. Infer the visible UI from those pixels and choose click and scroll coordinates from the screenshot itself.  The tools do not provide body text, DOM data, element labels, coordinates, viewport metadata, URL metadata, accessibility trees, or OCR. Do not use the shell launcher, Playwright, Puppeteer, Selenium, browser developer protocols, HTTP requests, raw sockets, or any other browser path. The retained application is already running at `http://127.0.0.1:49402/`; do not start, replace, or stop its server. <!-- CUA-SWE CAPABILITY POLICY END -->  ## Public Task Build Command  ```bash npm run build ```  ## Requirements  1. Make a focused source change that solves the task while preserving the    application behavior described in the task. 2. You may inspect application source and configuration, edit source files,    and run the public build command and existing non-browser unit tests. 3. Do not inspect or modify benchmark task files, verifier files, gold or    negative patches, replay documents, or evaluation artifacts. The benchmark    harness evaluates the workspace after the agent exits. 4. Do not use web search or external documentation; use the local workspace    and the capabilities allowed above. 5. Write `rollout_notes.md` in the directory named by    `CUA_SWE_AGENT_ROLLOUT_D\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 34,
+      "status": "completed",
+      "title": "/bin/bash -lc \"ps -eo pid,args | rg 'server.py|49402' && for pid in \"'$(pgrep -f '\"'server.py.*49402'); do readlink -f /proc/\"'$pid/cwd; done'",
+      "truncated": true
+    },
+    {
+      "detail": "The code-level checks now produce TAP 220, HELD 250, and a retained swept pipe collision. The protected browser appears to be serving cached scripts after reload, so I\u2019m navigating through the browser UI with a cache-busting page URL to verify the edited build itself.",
+      "kind": "agent_message",
+      "sequence": 35,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+L\"}",
+      "kind": "computer_use",
+      "sequence": 36,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0015.png",
+          "sha256": "97c0128ae5fce15cf15653500dfddbbdd14f80b4073fd1345e87e6d69f6a93ee"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"type\", \"text\": \"http://127.0.0.1:49402/?revision=flight-contract-008\"}",
+      "kind": "computer_use",
+      "sequence": 37,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0016.png",
+          "sha256": "97c0128ae5fce15cf15653500dfddbbdd14f80b4073fd1345e87e6d69f6a93ee"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Enter\"}",
+      "kind": "computer_use",
+      "sequence": 38,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0017.png",
+          "sha256": "97c0128ae5fce15cf15653500dfddbbdd14f80b4073fd1345e87e6d69f6a93ee"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <title>Flappy Bird Flight Lab</title>\n    <link rel=\"stylesheet\" href=\"style.css\">\n  </head>\n  <body>\n    <main>\n      <canvas id=\"game\" width=\"640\" height=\"480\" aria-label=\"Flappy Bird Flight Lab\"></canvas>\n      <p>Choose a drill, then compare its input receipt, actual and target impulse, thick actual trace, faint target, and any contact interval. Each result freezes until you return. Space, \u2191, click, or tap control the normal run.</p>\n    </main>\n    <script src=\"src/input.js\"></script>\n    <script src=\"src/bird.js\"></script>\n    <script src=\"src/pipes.js\"></script>\n    <script src=\"src/renderer.js\"></script>\n    <script src=\"src/game.js\"></script>\n    <script src=\"src/game_api.js\"></script>\n  </body>\n</html>\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 39,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,80p' index.html\"",
+      "truncated": false
+    },
+    {
+      "detail": "[{\"kind\": \"update\", \"path\": \"<artifact-path>\"}]",
+      "kind": "edit",
+      "sequence": 40,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+Shift+R\"}",
+      "kind": "computer_use",
+      "sequence": 41,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0018.png",
+          "sha256": "97c0128ae5fce15cf15653500dfddbbdd14f80b4073fd1345e87e6d69f6a93ee"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 246, \"y\": 274}",
+      "kind": "computer_use",
+      "sequence": 42,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0019.png",
+          "sha256": "46e588e2610880ecb61e8d98960a7688e8eaeba211bc9923571dc33acae7a04f"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 43,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0020.png",
+          "sha256": "46e588e2610880ecb61e8d98960a7688e8eaeba211bc9923571dc33acae7a04f"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\n  \"index\": 0,\n  \"phase\": \"drill_result\",\n  \"outcome\": \"bump\",\n  \"impulse\": 220,\n  \"score\": 0,\n  \"receipt\": [\n    {\n      \"kind\": \"press\",\n      \"source\": \"drill\",\n      \"step\": 0,\n      \"held_ms\": 0\n    },\n    {\n      \"kind\": \"release\",\n      \"source\": \"drill\",\n      \"step\": 0,\n      \"held_ms\": 16.6667\n    }\n  ],\n  \"collision\": null,\n  \"audit\": {\n    \"visible\": false,\n    \"interval\": null\n  }\n}\n{\n  \"index\": 1,\n  \"phase\": \"drill_result\",\n  \"outcome\": \"clear\",\n  \"impulse\": 250,\n  \"score\": 1,\n  \"receipt\": [\n    {\n      \"kind\": \"press\",\n      \"source\": \"drill\",\n      \"step\": 0,\n      \"held_ms\": 0\n    },\n    {\n      \"kind\": \"release\",\n      \"source\": \"drill\",\n      \"step\": 3,\n      \"held_ms\": 16.6667\n    }\n  ],\n  \"collision\": null,\n  \"audit\": {\n    \"visible\": false,\n    \"interval\": null\n  }\n}\n{\n  \"index\": 2,\n  \"phase\": \"drill_result\",\n  \"outcome\": \"bump\",\n  \"impulse\": 220,\n  \"score\": 1,\n  \"receipt\": [\n    {\n      \"kind\": \"press\",\n      \"source\": \"drill\",\n      \"step\": 0,\n      \"held_ms\": 0\n    },\n    {\n      \"kind\": \"release\",\n      \"source\": \"drill\",\n      \"step\": 0,\n      \"held_ms\": 16.66669999999999\n    }\n  ],\n  \"collision\": \"pipe\",\n  \"audit\": {\n    \"visible\": true,\n    \"interval\": {\n      \"start\": 0,\n      \"end\": 0.28616852146263716,\n      \"marker\": 0.14308426073131858\n    }\n  }\n}\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 44,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node <<'NODE'\nconst fs = require('fs');\nglobal.window = global;\nglobal.performance = {now: (() => { let t = 0; return () => (t += 16.6667); })()};\nglobal.requestAnimationFrame = () => {};\nglobal.Renderer = class { draw() {} };\nglobal.document = {getElementById() { return {addEventListener() {}, getBoundingClientRect() { return {left: 0, top: 0, width: 640, height: 480}; }}; }};\nglobal.addEventListener = () => {};\nfor (const file of ['src/input.js','src/bird.js','src/pipes.js','src/game.js']) eval(fs.readFileSync(file, 'utf8'));\nconst game = global.__flappyGame;\nfor (let index = 0; index < 3; index += 1) {\n  game.showLab();\n  game.launchDrill(index);\n  let steps = 0;\n  while (game.phase === 'drill' && steps++ < 300) game.update(1 / 60);\n  const world = game.getState();\n  console.log(JSON.stringify({index, phase: world.phase, outcome: world.drill.outcome, impulse: world.actual_impulse, score: world.drill.score, receipt: world.drill_receipt, collision: world.collision && world.collision.kind, audit: world.drill.audit && {visible: world.drill.audit.contact_visible, interval: world.drill.audit.contact_interval}}, null, 2));\n}\nNODE\"",
+      "truncated": false
+    },
+    {
+      "detail": "0 [\n  [ 0, 270, 270, 0 ],\n  [ 1, 266.5056, 270.1722, -3.6666 ],\n  [ 2, 263.1833, 266.6778, -3.4945 ],\n  [ 3, 260.0333, 263.3556, -3.3223 ],\n  [ 4, 257.0556, 260.2056, -3.15 ],\n  [ 5, 254.25, 257.2278, -2.9778 ],\n  [ 6, 251.6167, 254.4222, -2.8055 ],\n  [ 7, 249.1556, 251.7889, -2.6333 ]\n]\n1 [\n  [ 0, 270, 270, 0 ],\n  [ 1, 270.1722, 270.1722, 0 ],\n  [ 2, 270.5167, 270.5167, -0 ],\n  [ 3, 271.0333, 271.0333, 0 ],\n  [ 4, 267.0389, 271.7222, -4.6833 ],\n  [ 5, 263.2167, 267.7278, -4.5111 ],\n  [ 6, 259.5667, 263.9056, -4.3389 ],\n  [ 7, 256.0889, 260.2556, -4.1667 ]\n]\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 45,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node <<'NODE'\nconst fs=require('fs');global.window=global;global.performance={now:(()=>{let t=0;return()=>t+=16.6667})()};global.requestAnimationFrame=()=>{};global.Renderer=class{draw(){}};global.document={getElementById(){return{addEventListener(){},getBoundingClientRect(){return{left:0,top:0,width:640,height:480}}}}};global.addEventListener=()=>{};for(const f of ['src/input.js','src/bird.js','src/pipes.js','src/game.js'])eval(fs.readFileSync(f,'utf8'));const g=__flappyGame;for(let d=0;d<2;d++){g.showLab();g.launchDrill(d);let n=0;while(g.phase==='drill'&&n++<300)g.update(1/60);const spec=g.world.ui.drills[d];console.log(d,g.trail.slice(0,8).map((p,i)=>[i,+p.y.toFixed(4),spec.target[i]&&spec.target[i].y,+((p.y-(spec.target[i]?.y??p.y))).toFixed(4)]));}\nNODE\"",
+      "truncated": false
+    },
+    {
+      "detail": "The full deterministic simulation exposed one additional contract error in the drill adjudicator: TAP deliberately freezes while the pipe is still at the gate, but completion was incorrectly requiring the pipe\u2019s normal scoring edge to have passed the bird. A collision-free gate finish should be a lab clear; ordinary scoring remains unchanged.",
+      "kind": "agent_message",
+      "sequence": 46,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "[{\"kind\": \"update\", \"path\": \"<artifact-path>\"}]",
+      "kind": "edit",
+      "sequence": 47,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "The deterministic full-game harness now returns the intended lab outcomes: TAP clear at 220, HELD clear at 250, and LATE bump with a retained pipe collision and fractional contact interval. I\u2019m refreshing the protected browser with the finalized adjudication change, then I\u2019ll exercise normal play and restarts.",
+      "kind": "agent_message",
+      "sequence": 48,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"F5\"}",
+      "kind": "computer_use",
+      "sequence": 49,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0021.png",
+          "sha256": "46e588e2610880ecb61e8d98960a7688e8eaeba211bc9923571dc33acae7a04f"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 246, \"y\": 274}",
+      "kind": "computer_use",
+      "sequence": 50,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0022.png",
+          "sha256": "2cfe3942789e8acc9be9c607bd3056784338dab10eca03519d343a6326b5a171"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Shift+F5\"}",
+      "kind": "computer_use",
+      "sequence": 51,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0023.png",
+          "sha256": "97c0128ae5fce15cf15653500dfddbbdd14f80b4073fd1345e87e6d69f6a93ee"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"F5\"}",
+      "kind": "computer_use",
+      "sequence": 52,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0024.png",
+          "sha256": "97c0128ae5fce15cf15653500dfddbbdd14f80b4073fd1345e87e6d69f6a93ee"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 480, \"y\": 447}",
+      "kind": "computer_use",
+      "sequence": 53,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0025.png",
+          "sha256": "46e588e2610880ecb61e8d98960a7688e8eaeba211bc9923571dc33acae7a04f"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 480, \"y\": 447}",
+      "kind": "computer_use",
+      "sequence": 54,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0026.png",
+          "sha256": "abfc48ab95b89ca783886719477887f47585e40c7141604693ce2181e8b74aca"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Space\"}",
+      "kind": "computer_use",
+      "sequence": 55,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0027.png",
+          "sha256": "abfc48ab95b89ca783886719477887f47585e40c7141604693ce2181e8b74aca"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 320, \"y\": 320}",
+      "kind": "computer_use",
+      "sequence": 56,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0028.png",
+          "sha256": "abfc48ab95b89ca783886719477887f47585e40c7141604693ce2181e8b74aca"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 50, \"kind\": \"key_hold\", \"text\": \"Space\"}",
+      "kind": "computer_use",
+      "sequence": 57,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0029.png",
+          "sha256": "4767354cdb71b9d9d2940ef34ec37c032529e31b08072ec66b86e443a0d6070b"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 200, \"kind\": \"key_hold\", \"text\": \"Space\"}",
+      "kind": "computer_use",
+      "sequence": 58,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0030.png",
+          "sha256": "e1557d765d59e57cfaf53eb1159f3300f7af9a23e7c8e4c36a3a0e5e18fc8620"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 200, \"kind\": \"key_hold\", \"text\": \"Space\"}",
+      "kind": "computer_use",
+      "sequence": 59,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0031.png",
+          "sha256": "cb07e7acbe099b75c298c838d0093e681aa4e22daa974d4961469ca1420d2f9b"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 600, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 60,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0032.png",
+          "sha256": "664de4c1067fb7400fe7362ed543d9d5f607ef36c3b8edec154183c3abafff69"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Space\"}",
+      "kind": "computer_use",
+      "sequence": 61,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0033.png",
+          "sha256": "5ff439cc5af643b5124d736be58df5e4b040fc9e6773bfbae6bb9d32c7ceb636"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 1500, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 62,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0034.png",
+          "sha256": "664de4c1067fb7400fe7362ed543d9d5f607ef36c3b8edec154183c3abafff69"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 320, \"y\": 320}",
+      "kind": "computer_use",
+      "sequence": 63,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/frames/frame-0035.png",
+          "sha256": "5ff439cc5af643b5124d736be58df5e4b040fc9e6773bfbae6bb9d32c7ceb636"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\n  \"phase\": \"playing\",\n  \"score\": 3,\n  \"steps\": 486,\n  \"flaps\": 12,\n  \"bird_y\": 222.83888888888941,\n  \"events\": [\n    {\n      \"score\": 1,\n      \"pipe_id\": 1,\n      \"pipe_right\": 138.13333333333276,\n      \"bird_left\": 139\n    },\n    {\n      \"score\": 2,\n      \"pipe_id\": 2,\n      \"pipe_right\": 138.73333333333062,\n      \"bird_left\": 139\n    },\n    {\n      \"score\": 3,\n      \"pipe_id\": 3,\n      \"pipe_right\": 137.59999999999513,\n      \"bird_left\": 139\n    }\n  ]\n}\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 64,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node <<'NODE'\nconst fs=require('fs');global.window=global;global.performance={now:(()=>{let t=0;return()=>t+=1})()};global.requestAnimationFrame=()=>{};global.Renderer=class{draw(){}};global.document={getElementById(){return{addEventListener(){},getBoundingClientRect(){return{left:0,top:0,width:640,height:480}}}}};global.addEventListener=()=>{};for(const f of ['src/input.js','src/bird.js','src/pipes.js','src/game.js'])eval(fs.readFileSync(f,'utf8'));const g=__flappyGame;g.start();let steps=0, flaps=0;while(g.phase==='playing'&&g.score<3&&steps++<3000){const next=g.lastPipeFrame.pipes.find(p=>\"'!p.scored);const target=next?(next.gap_top+next.gap_bottom)/2:220;if(g.lastBirdFrame.y>target+10&&g.lastBirdFrame.velocity_y>-80){g.input.press('\"'keyboard');g.input.release('keyboard');flaps++;}g.update(1/60);}console.log(JSON.stringify({phase:g.phase,score:g.score,steps,flaps,bird_y:g.lastBirdFrame.y,events:g.events.filter(e=>e.type==='score').map(e=>e.details)},null,2));\nNODE\"",
+      "truncated": false
+    },
+    {
+      "detail": "[{\"kind\": \"update\", \"path\": \"<artifact-path>\"}]",
+      "kind": "edit",
+      "sequence": 65,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "Normal-play verification is also covered now: protected-browser checks exercised quick keyboard/pointer input, ground death, and both keyboard and pointer restart paths; a deterministic normal-run harness passed three pipes in order. I\u2019m running the final consolidated assertions/build and then writing the required rollout notes.",
+      "kind": "agent_message",
+      "sequence": 66,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "\n> build\n> python3 build_check.py\n\n{\n  \"missing\": [],\n  \"script_order_ok\": true,\n  \"source_files\": [\n    \"src/input.js\",\n    \"src/bird.js\",\n    \"src/pipes.js\",\n    \"src/renderer.js\",\n    \"src/game.js\",\n    \"src/game_api.js\"\n  ]\n}\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 67,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": " M src/bird.js\n M src/game.js\n M src/pipes.js\n src/bird.js  |  7 +++--\n src/game.js  |  5 ++--\n src/pipes.js | 93 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-\n 3 files changed, 100 insertions(+), 5 deletions(-)\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 68,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && git status --short && git diff --stat'",
+      "truncated": false
+    },
+    {
+      "detail": "PASS: lab contracts, frozen stability, quick inputs, 3-pipe scoring, death, and both restarts\n",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 69,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node <<'NODE'\nconst fs = require('fs');\nconst assert = require('assert');\nglobal.window = global;\nglobal.performance = {now: (() => { let time = 0; return () => (time += 16.6667); })()};\nglobal.requestAnimationFrame = () => {};\nglobal.Renderer = class { draw() {} };\nglobal.document = {getElementById() { return {addEventListener() {}, getBoundingClientRect() { return {left: 0, top: 0, width: 640, height: 480}; }}; }};\nglobal.addEventListener = () => {};\nfor (const file of ['src/input.js', 'src/bird.js', 'src/pipes.js', 'src/game.js']) eval(fs.readFileSync(file, 'utf8'));\nconst game = global.__flappyGame;\nconst runDrill = (index) => {\n  game.showLab();\n  game.launchDrill(index);\n  let steps = 0;\n  while (game.phase === 'drill' && steps++ < 300) game.update(1 / 60);\n  assert(steps < 300);\n  return game.getState();\n};\nlet world = runDrill(0);\nassert.equal(world.drill.outcome, 'clear');\nassert.equal(world.actual_impulse, 220);\nassert.deepEqual(world.drill_receipt.map(({kind, step}) => [kind, step]), [['press', 0], ['release', 0]]);\nconst frozenTap = JSON.stringify({phase: world.phase, drill: world.drill, trail: world.trail});\nfor (let i = 0; i < 120; i += 1) game.update(1 / 60);\nworld = game.getState();\nassert.equal(JSON.stringify({phase: world.phase, drill: world.drill, trail: world.trail}), frozenTap);\nworld = runDrill(1);\nassert.equal(world.drill.outcome, 'clear');\nassert.equal(world.actual_impulse, 250);\nassert.deepEqual(world.drill_receipt.map(({kind, step}) => [kind, step]), [['press', 0], ['release', 3]]);\nworld = runDrill(2);\nassert.equal(world.drill.outcome, 'bump');\nassert.equal(world.drill.score, 2);\nassert.equal(world.collision.kind, 'pipe');\nassert.equal(world.drill.audit.contact_visible, true);\nassert(world.drill.audit.contact_interval.end > 0 && world.drill.audit.contact_interval.end < 1);\nassert.equal(world.drill.audit.endpoint_safe, true);\nassert.deepEqual(world.lab_results, {tap: 'clear', held: 'clear', late: 'bump'});\n\ngame.start();\ngame.input.press('keyboard');\ngame.input.release('keyboard');\ngame.update(1 / 60);\nassert.equal(game.actualImpulse, 220);\ngame.input.press('pointer');\ngame.input.release('pointer');\ngame.update(1 / 60);\nassert.equal(game.actualImpulse, 220);\n\ngame.start();\nlet steps = 0;\nwhile (game.phase === 'playing' && game.score < 3 && steps++ < 3000) {\n  const next = game.lastPipeFrame.pipes.find((pipe) => \"'!pipe.scored);\n  const target = next ? (next.gap_top + next.gap_bottom) / 2 : 220;\n  if (game.lastBirdFrame.y > target + 10 && game.lastBirdFrame.velocity_y > -80) {\n    game.input.press('\"'keyboard');\n    game.input.release('keyboard');\n  }\n  game.update(1 / 60);\n}\nassert.equal(game.phase, 'playing');\nassert.equal(game.score, 3);\nassert.deepEqual(game.events.filter((event) => event.type === 'score').map((event) => event.details.pipe_id), [1, 2, 3]);\n\ngame.start();\nsteps = 0;\nwhile (game.phase === 'playing' && steps++ < 300) game.update(1 / 60);\nassert.equal(game.phase, 'dead');\ngame.input.press('keyboard');\ngame.update(1 / 60);\nassert.equal(game.phase, 'playing');\ngame.die({kind: 'test'});\ngame.input.press('pointer');\ngame.update(1 / 60);\nassert.equal(game.phase, 'playing');\nconsole.log('PASS: lab contracts, frozen stability, quick inputs, 3-pipe scoring, death, and both restarts');\nNODE\"",
+      "truncated": false
+    },
+    {
+      "detail": "[{\"kind\": \"add\", \"path\": \"<artifact-path>\"}]",
+      "kind": "edit",
+      "sequence": 70,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "Implemented the gameplay contract repair:\n\n- TAP impulse corrected to 220 and now clears.\n- HELD remains distinct at 250 and clears.\n- Swept collision retains LATE CONTACT, causing bump with no clear.\n- Normal scoring, death, quick inputs, restarts, and frozen stability verified.\n- `npm run build` and consolidated assertions pass.\n\nNotes: [rollout_notes.md](<artifact-path>",
+      "kind": "agent_message",
+      "sequence": 71,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "[{\"completed\": true, \"text\": \"Inspect gameplay and Flight Lab source for input impulse and collision retention logic\"}, {\"completed\": true, \"text\": \"Implement focused gameplay contract fix\"}, {\"completed\": true, \"text\": \"Run build and available non-browser tests\"}, {\"completed\": true, \"text\": \"Verify lab scenarios and normal gameplay in protected browser\"}, {\"completed\": true, \"text\": \"Write rollout notes\"}]",
+      "kind": "plan",
+      "sequence": 72,
+      "status": "completed",
+      "title": "Plan",
+      "truncated": false
+    }
+  ],
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-02",
+  "run_relation": "historical_exact",
+  "status": "available",
+  "summary": {
+    "events": 72,
+    "commands": 20,
+    "file_changes": 5,
+    "computer_use_calls": 37,
+    "agent_messages": 9,
+    "plans": 1,
+    "screenshots": 35,
+    "truncated_events": 2,
+    "unfinished_items": 0
+  },
+  "task_id": "gameqa.flappy-bird-flight-lab.008",
+  "terminal_status": "completed",
+  "usage": {
+    "cache_write_input_tokens": 74400,
+    "cached_input_tokens": 2565304,
+    "input_tokens": 2670744,
+    "output_tokens": 17471,
+    "reasoning_output_tokens": 9264
+  },
+  "activity_source_kind": "representative_game_bundle",
+  "artifacts": {
+    "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/activity-export.json",
+    "Run provenance": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/activity-provenance.json",
+    "Agent patch": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/patch.diff"
+  },
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 2. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "35 screenshots matched to their recorded calls."
+    }
+  }
+}

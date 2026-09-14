@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.captain-callisto-temporal-jetpack.006",
+  "run_relation": "replacement",
+  "provenance": "fresh_gpt56_sol_screenshot_cua_replacement_20260901",
+  "run_label": null,
+  "source_description": "shuli_exp EFS \u00b7 fresh GPT-5.6 Sol screenshot-only CUA rerun \u00b7 2026-09-01",
+  "terminal_status": "failed",
+  "activity_source_kind": "retained_timeline",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 13. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/gameqa.captain-callisto-temporal-jetpack.006/activity-retained.json": "1ecf44979c7570ca8d4d3b49be2ee66362e44b2e2a65fd47a3e97d0c7d8416a7"
+  },
+  "activity_sha256": "de72a8b03ab5e88c25aa69dd9bfae0ca15f4108fa37d87ca2cc65bcc5ef54e5e",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

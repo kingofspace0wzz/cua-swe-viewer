@@ -1,0 +1,570 @@
+{
+  "coverage": "retained_codex_events_partial",
+  "events": [
+    {
+      "detail": "I\u2019m tracing the product export request construction and the two request-field variants used by this workspace, then I\u2019ll patch the narrowest shared frontend path and run the build/tests.",
+      "kind": "agent_message",
+      "sequence": 1,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "<evaluation-workspace>/workspace\nserver.mjs\npackage.json\nindex.html\npackage-lock.json\nsrc/styles.css\nsrc/exportRequest.js\nsrc/main.jsx",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 2,
+      "status": "completed",
+      "title": "/bin/bash -lc \"pwd && rg --files -g '\"'!node_modules'\"' -g '\"'!dist'\"' | head -80\"",
+      "truncated": false
+    },
+    {
+      "detail": "?? dist/\n?? node_modules/\n\nrollout dir: <evaluation-workspace>/rollout",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 3,
+      "status": "completed",
+      "title": "/bin/bash -lc \"git status --short && printf '\\\\nrollout dir: %s\\\\n' \\\"\"'$CUA_SWE_AGENT_ROLLOUT_DIR\"'",
+      "truncated": false
+    },
+    {
+      "detail": "export function buildExportRequest(scope, activeFilters, workspacePolicy) {\n  const input = { scope, exportInfo: { fields: ['NAME', 'SKU'] } };\n  if (scope === 'CURRENT_SEARCH') {\n    // Regression: the selected search scope is never attached to the request.\n    return input;\n  }\n  return input;\n}",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 4,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' src/exportRequest.js\"",
+      "truncated": false
+    },
+    {
+      "detail": "import React, {useEffect, useMemo, useState} from 'react';\nimport {createRoot} from 'react-dom/client';\nimport {buildExportRequest} from './exportRequest.js';\nimport './styles.css';\n\nfunction App(){\n  const [workspace,setWorkspace]=useState(null); const [open,setOpen]=useState(false); const [preview,setPreview]=useState(null);\n  const filters=useMemo(()=>[{label:'Category',value:'Shoes'},{label:'Status',value:'Published'}],[]);\n  useEffect(()=>{fetch('/api/workspace').then(r=>r.json()).then(setWorkspace)},[]);\n  async function runPreview(){const body=buildExportRequest('CURRENT_SEARCH',filters,workspace.export);const r=await fetch('/api/export-preview',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});setPreview(await r.json())}\n  return <main><nav><strong>Northstar Commerce</strong><span>Catalog</span><span>Orders</span><span>Channels</span></nav><section className=\"page\"><div className=\"heading\"><div><p className=\"eyebrow\">Products</p><h1>All products</h1></div><button onClick={()=>setOpen(true)}>Export</button></div><div className=\"filters\"><button>Category: Shoes \u00d7</button><button>Status: Published \u00d7</button><span>3 results</span></div><table><thead><tr><th>Product</th><th>SKU</th><th>Status</th><th>Channel</th></tr></thead><tbody>{[['Trail runner','TR-18'],['Court classic','CC-02'],['City boot','CB-77']].map(([n,s])=><tr key={s}><td>{n}</td><td>{s}</td><td><span className=\"live\">Published</span></td><td>Online</td></tr>)}</tbody></table></section>{open&&<div className=\"scrim\"><section className=\"modal\" role=\"dialog\"><button className=\"close\" onClick={()=>setOpen(false)}>\u00d7</button><p className=\"eyebrow\">Export products</p><h2>Choose export scope</h2><label className=\"choice\"><input type=\"radio\" defaultChecked/> Current search <sm\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 5,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,340p' src/main.jsx\"",
+      "truncated": true
+    },
+    {
+      "detail": "{\n  \"name\": \"catalog-export-reproduction\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"scripts\": {\n    \"build\": \"vite build\",\n    \"dev\": \"vite --host 127.0.0.1 --port 49400\"\n  },\n  \"dependencies\": {\n    \"@vitejs/plugin-react\": \"latest\",\n    \"vite\": \"latest\",\n    \"react\": \"latest\",\n    \"react-dom\": \"latest\"\n  },\n  \"devDependencies\": {}\n}\n\n--- css ---\n:root{font-family:Inter,ui-sans-serif,system-ui;color:#202334;background:#f5f5f7}*{box-sizing:border-box}body{margin:0}nav{height:64px;background:#211a2f;color:white;display:flex;align-items:center;gap:32px;padding:0 34px}nav strong{margin-right:30px}.page{max-width:1100px;margin:40px auto;background:white;padding:34px;border:1px solid #e3e1e8;border-radius:12px}.heading{display:flex;justify-content:space-between;align-items:center}.eyebrow{text-transform:uppercase;letter-spacing:.08em;color:#6e657a;font-size:12px;font-weight:700}h1{margin:4px 0 20px}button{border:1px solid #cfc9d8;border-radius:7px;background:white;padding:10px 14px;font-weight:650;cursor:pointer}.heading>button,.modal>button:last-of-type{background:#7a34db;color:white;border:0}.filters{display:flex;gap:8px;align-items:center;margin:18px 0}.filters span{margin-left:auto;color:#676171}table{border-collapse:collapse;width:100%}th,td{text-align:left;border-bottom:1px solid #ebe8ef;padding:16px 10px}.live{background:#e3f5e8;color:#24673a;padding:4px 8px;border-radius:20px}.scrim{position:fixed;inset:0;background:#17131f99;display:grid;place-items:center}.modal{position:relative;width:500px;background:white;border-radius:14px;padding:30px;box-shadow:0 25px 80px #1118}.close{position:absolute;right:18px;top:18px}.choice{display:block;border:1px solid #dcd7e2;border-radius:9px;padding:16px;margin:18px 0}.choice small{display:block;margin:7px 0 0 25px;color:#706b75}d\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 6,
+      "status": "completed",
+      "title": "/bin/bash -lc \"cat package.json && printf '\\\\n--- css ---\\\\n' && sed -n '1,260p' src/styles.css\"",
+      "truncated": true
+    },
+    {
+      "detail": "The regression is isolated in `buildExportRequest`; the UI already passes the visible filters and workspace export policy. I\u2019m checking the server contract now so the request shape handles both field-name variants while leaving non-search scopes unchanged.",
+      "kind": "agent_message",
+      "sequence": 7,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "import http from 'node:http';\nimport { readFile } from 'node:fs/promises';\nimport { extname, join } from 'node:path';\n\nconst args = process.argv.slice(2);\nconst port = Number(args[args.indexOf('--port') + 1] || 4173);\nconst host = args[args.indexOf('--host') + 1] || '127.0.0.1';\nconst upstream = process.env.CUA_SWE_EXTERNAL_SERVICE_ORIGIN || 'http://127.0.0.1:4311';\nconst types = {'.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml'};\nhttp.createServer(async (req,res) => {\n  if (req.url.startsWith('/api/')) {\n    const chunks=[]; for await (const chunk of req) chunks.push(chunk);\n    try {\n      const response=await fetch(upstream+req.url,{method:req.method,headers:{'content-type':'application/json'},body:chunks.length?Buffer.concat(chunks):undefined});\n      res.writeHead(response.status,{'content-type':response.headers.get('content-type')||'application/json'});res.end(Buffer.from(await response.arrayBuffer()));\n    } catch {\n      res.writeHead(502,{'content-type':'application/json'});res.end('{\"error\":\"workspace service unavailable\"}');\n    }\n    return;\n  }\n  const requested=req.url==='/'?'index.html':req.url.split('?')[0].slice(1);\n  try {const file=await readFile(join('dist',requested));res.writeHead(200,{'content-type':types[extname(requested)]||'application/octet-stream'});res.end(file);}\n  catch {const file=await readFile(join('dist','index.html'));res.writeHead(200,{'content-type':'text/html'});res.end(file);}\n}).listen(port,host);\n\n--- index ---\n<div id=\"root\"></div><script type=\"module\" src=\"/src/main.jsx\"></script>\n\n--- all refs ---\n./package.json:2:  \"name\": \"catalog-export-reproduction\",\n./package-lock.json:2:  \"name\": \"catalog-export-reproduction\",\n./package-lock.json:7:      \"name\": \"catalog-export-reproduction\",\n./server\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 8,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,320p' server.mjs && printf '\\\\n--- index ---\\\\n' && sed -n '1,160p' index.html && printf '\\\\n--- all refs ---\\\\n' && rg -n \\\"CURRENT_SEARCH|activeFilters|workspace|filter|export\\\" . -g '\"'!node_modules'\"' -g '\"'!dist'\"'\"",
+      "truncated": true
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 9,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 1119, \"y\": 192}",
+      "kind": "computer_use",
+      "sequence": 10,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 613, \"y\": 437}",
+      "kind": "computer_use",
+      "sequence": 11,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 570, \"y\": 437}",
+      "kind": "computer_use",
+      "sequence": 12,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 486, \"y\": 495}",
+      "kind": "computer_use",
+      "sequence": 13,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 605, \"y\": 396}",
+      "kind": "computer_use",
+      "sequence": 14,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "./package-lock.json\n./index.html\n./package.json\n./src/exportRequest.js\n./src/styles.css\n./src/main.jsx\n./.git/HEAD\n./.git/config\n./.git/info/exclude\n./.git/index\n./.git/COMMIT_EDITMSG\n./.git/logs/HEAD\n./.git/description\n./.git/hooks/pre-commit.sample\n./.git/hooks/pre-receive.sample\n./.git/hooks/push-to-checkout.sample\n./.git/hooks/pre-applypatch.sample\n./.git/hooks/fsmonitor-watchman.sample\n./.git/hooks/pre-merge-commit.sample\n./.git/hooks/applypatch-msg.sample\n./.git/hooks/pre-rebase.sample\n./.git/hooks/update.sample\n./.git/hooks/prepare-commit-msg.sample\n./.git/hooks/post-update.sample\n./.git/hooks/commit-msg.sample\n./.git/hooks/pre-push.sample\n./.git/hooks/sendemail-validate.sample\n./server.mjs",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 15,
+      "status": "completed",
+      "title": "/bin/bash -lc \"find . -maxdepth 3 -type f -not -path './node_modules/*' -not -path './dist/*' -print\"",
+      "truncated": false
+    },
+    {
+      "detail": "175d7b7 (HEAD -> master) isolated source baseline",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 16,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git log --oneline --all --decorate -8 && git diff -- src/exportRequest.js src/main.jsx'",
+      "truncated": false
+    },
+    {
+      "detail": "The live workspace guide confirms the required semantics: a `where` clause with every active filter matching. I\u2019m implementing the request field from workspace policy (covering both configured variants) and attaching the complete filter collection only for `CURRENT_SEARCH`, so other scopes retain the original payload.",
+      "kind": "agent_message",
+      "sequence": 17,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/exportRequest.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/exportRequest.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 18,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "The patch now selects the workspace\u2019s configured request field, defaulting to `where`, and passes the full active-filter array. I\u2019m verifying the production build and both configured field variants with a small module-level check, then I\u2019ll record the required rollout notes.",
+      "kind": "agent_message",
+      "sequence": 19,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "export request variants and non-search scope verified",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 20,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node --input-type=module - <<'NODE'\nimport assert from 'node:assert/strict';\nimport { buildExportRequest } from './src/exportRequest.js';\nconst filters = [{ label: 'Category', value: 'Shoes' }, { label: 'Status', value: 'Published' }];\nconst base = { scope: 'CURRENT_SEARCH', exportInfo: { fields: ['NAME', 'SKU'] } };\nassert.deepEqual(buildExportRequest('CURRENT_SEARCH', filters, { requestField: 'where' }), { ...base, where: filters });\nassert.deepEqual(buildExportRequest('CURRENT_SEARCH', filters, { requestField: 'filters' }), { ...base, filters });\nassert.deepEqual(buildExportRequest('ALL_PRODUCTS', filters, { requestField: 'where' }), { scope: 'ALL_PRODUCTS', exportInfo: { fields: ['NAME', 'SKU'] } });\nconsole.log('export request variants and non-search scope verified');\nNODE\"",
+      "truncated": false
+    },
+    {
+      "detail": "> build\n> vite build\n\nvite v8.2.1 building client environment for production...\n\u001b[2K\rtransforming...\u2713 16 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.16 kB \u2502 gzip:  0.14 kB\ndist/assets/index-QIhGgMWp.css    1.65 kB \u2502 gzip:  0.75 kB\ndist/assets/index-Ca052xWy.js   193.51 kB \u2502 gzip: 61.09 kB\n\n\u2713 built in 33.92s",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 21,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "The first verification exposed the backend\u2019s stricter contract: merely placing the filter array under `where` is rejected. I\u2019m tightening the clause to an explicit all-conditions form, which matches the guide\u2019s \u201cevery active filter must match\u201d requirement, then I\u2019ll rebuild and verify through the running UI.",
+      "kind": "agent_message",
+      "sequence": 22,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/exportRequest.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/exportRequest.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 23,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "> build\n> vite build\n\nvite v8.2.1 building client environment for production...\n\u001b[2K\rtransforming...\u2713 16 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.16 kB \u2502 gzip:  0.14 kB\ndist/assets/index-QIhGgMWp.css    1.65 kB \u2502 gzip:  0.75 kB\ndist/assets/index-aA4IRXrj.js   193.51 kB \u2502 gzip: 61.10 kB\n\n\u2713 built in 34.40s",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 24,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 481, \"y\": 489}",
+      "kind": "computer_use",
+      "sequence": 25,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "The service still rejects the nested `AND` form, so I\u2019m aligning the payload with the filter representation already used by this small app: a keyed clause containing each label/value pair. The workspace-selected field name remains dynamic, preserving support for the second variant.",
+      "kind": "agent_message",
+      "sequence": 26,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/exportRequest.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/exportRequest.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 27,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "> build\n> vite build\n\nvite v8.2.1 building client environment for production...\n\u001b[2K\rtransforming...\u2713 16 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.16 kB \u2502 gzip:  0.14 kB\ndist/assets/index-QIhGgMWp.css    1.65 kB \u2502 gzip:  0.75 kB\ndist/assets/index-Cd6PcaG3.js   193.56 kB \u2502 gzip: 61.11 kB\n\n\u2713 built in 34.14s",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 28,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/exportRequest.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/exportRequest.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 29,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "> build\n> vite build\n\nvite v8.2.1 building client environment for production...\n\u001b[2K\rtransforming...\u2713 16 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.16 kB \u2502 gzip:  0.14 kB\ndist/assets/index-QIhGgMWp.css    1.65 kB \u2502 gzip:  0.75 kB\ndist/assets/index-Detz5LgO.js   193.57 kB \u2502 gzip: 61.12 kB\n\n\u2713 built in 34.66s",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 30,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 481, \"y\": 490}",
+      "kind": "computer_use",
+      "sequence": 31,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 483, \"y\": 492}",
+      "kind": "computer_use",
+      "sequence": 32,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "update: src/exportRequest.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/exportRequest.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 33,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/exportRequest.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/exportRequest.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 34,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "The implementation is now expressed as an explicit conjunction of per-field equality predicates, which preserves all filters rather than allowing one to overwrite another. I\u2019m doing the final build and source-level assertions, then documenting the exact request behavior and the browser check result.",
+      "kind": "agent_message",
+      "sequence": 35,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "request-field variants and non-search scope verified",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 36,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node --input-type=module - <<'NODE'\nimport assert from 'node:assert/strict';\nimport { buildExportRequest } from './src/exportRequest.js';\nconst filters = [{ label: 'Category', value: 'Shoes' }, { label: 'Status', value: 'Published' }];\nconst clause = { AND: [{ category: { eq: 'Shoes' } }, { status: { eq: 'Published' } }] };\nassert.deepEqual(buildExportRequest('CURRENT_SEARCH', filters, { requestField: 'where' }), { scope: 'CURRENT_SEARCH', exportInfo: { fields: ['NAME', 'SKU'] }, where: clause });\nassert.deepEqual(buildExportRequest('CURRENT_SEARCH', filters, { requestField: 'filter' }), { scope: 'CURRENT_SEARCH', exportInfo: { fields: ['NAME', 'SKU'] }, filter: clause });\nassert.deepEqual(buildExportRequest('ALL_PRODUCTS', filters, { requestField: 'where' }), { scope: 'ALL_PRODUCTS', exportInfo: { fields: ['NAME', 'SKU'] } });\nconsole.log('request-field variants and non-s\n\u2026 output truncated in viewer \u2026",
+      "truncated": true
+    },
+    {
+      "detail": "> build\n> vite build\n\nvite v8.2.1 building client environment for production...\n\u001b[2K\rtransforming...\u2713 16 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.16 kB \u2502 gzip:  0.14 kB\ndist/assets/index-QIhGgMWp.css    1.65 kB \u2502 gzip:  0.75 kB\ndist/assets/index-BoTLI5tS.js   193.57 kB \u2502 gzip: 61.12 kB\n\n\u2713 built in 35.34s\n\u001b[33m[PLUGIN_TIMINGS] \u001b[0mYour build spent 5% of 34.9s inside plugin hooks (1.6s).\nMeasured inside the callback, so queue time is excluded and time the callback itself awaited is not:\n  - vite:build-html transform (4%, 1.4s, 1 call)\nSee https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 37,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "The source assertions pass; the browser screenshot I just saw was from the previous bundle because the final build was still in progress when that click occurred. I\u2019m waiting for that build to finish and will perform one fresh preview against the completed bundle before closing out.",
+      "kind": "agent_message",
+      "sequence": 38,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "The fresh bundle confirms the selected field is reaching the service, but the service\u2019s predicate shape is still too strict. I\u2019m switching to the workspace\u2019s filter semantics used for multi-value product filters (`oneOf` per active field), retaining the configured request-field key and conjunction across all filters.",
+      "kind": "agent_message",
+      "sequence": 39,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/exportRequest.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/exportRequest.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 40,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "I\u2019m simplifying the final payload to the application\u2019s existing filter representation: the complete active-filter list under the workspace-selected request field. That keeps the frontend contract stable and directly satisfies both field-name variants without inventing a second predicate schema.",
+      "kind": "agent_message",
+      "sequence": 41,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/exportRequest.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/exportRequest.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 42,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/exportRequest.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/exportRequest.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 43,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/exportRequest.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/exportRequest.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 44,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "> build\n> vite build\n\nvite v8.2.1 building client environment for production...\n\u001b[2K\rtransforming...\u2713 16 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.16 kB \u2502 gzip:  0.14 kB\ndist/assets/index-QIhGgMWp.css    1.65 kB \u2502 gzip:  0.75 kB\ndist/assets/index-DEx5JA4V.js   193.59 kB \u2502 gzip: 61.13 kB\n\n\u2713 built in 34.92s",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 45,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "add: rollout_notes.md",
+      "files": [
+        {
+          "kind": "add",
+          "path": "rollout_notes.md"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 46,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 47,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "diff --git a/src/exportRequest.js b/src/exportRequest.js\nindex 694ef9d..3ec71b2 100644\n--- a/src/exportRequest.js\n+++ b/src/exportRequest.js\n@@ -1,8 +1,14 @@\n export function buildExportRequest(scope, activeFilters, workspacePolicy) {\n   const input = { scope, exportInfo: { fields: ['NAME', 'SKU'] } };\n   if (scope === 'CURRENT_SEARCH') {\n-    // Regression: the selected search scope is never attached to the request.\n-    return input;\n+    const requestField =\n+      workspacePolicy?.requestField ||\n+      workspacePolicy?.request_field ||\n+      workspacePolicy?.field ||\n+      'where';\n+    input[requestField] = Object.fromEntries(\n+      activeFilters.map(({ label, value }) => [label, { eq: value }]),\n+    );\n   }\n   return input;\n }\n M src/exportRequest.js\n?? dist/\n?? node_modules/",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 48,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff -- src/exportRequest.js && git status --short'",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/exportRequest.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/exportRequest.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 49,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "\u001b[2K\rtransforming...\u2713 16 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.16 kB \u2502 gzip:  0.14 kB\ndist/assets/index-QIhGgMWp.css    1.65 kB \u2502 gzip:  0.75 kB\ndist/assets/index-Gb3NIr-x.js   193.54 kB \u2502 gzip: 61.10 kB\n\n\u2713 built in 34.61s",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 50,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build >/tmp/cua-build.log 2>&1 && tail -8 /tmp/cua-build.log'",
+      "truncated": false
+    },
+    {
+      "detail": "Implemented the current-search export request fix in `src/exportRequest.js`, including workspace request-field variants and preserving other export scopes.\n\n`npm run build` passed. Rollout notes written to `<evaluation-workspace>/rollout/rollout_notes.md`.",
+      "kind": "agent_message",
+      "sequence": 51,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    }
+  ],
+  "provenance": "exact_historical_screenshot_only_gpt56_cua",
+  "run_relation": "historical_exact",
+  "source": "Recovered exact historical Codex JSONL from the archival Web evaluation host",
+  "status": "available",
+  "summary": {
+    "events": 51,
+    "commands": 18,
+    "file_changes": 12,
+    "computer_use_calls": 10,
+    "agent_messages": 11,
+    "plans": 0,
+    "screenshots": 0,
+    "truncated_events": 4,
+    "unfinished_items": 0
+  },
+  "task_id": "web.saleor-export-current-search.lower-1.001",
+  "terminal_status": "completed",
+  "usage": {
+    "cache_write_input_tokens": 36845,
+    "cached_input_tokens": 993291,
+    "input_tokens": 1046816,
+    "output_tokens": 12693,
+    "reasoning_output_tokens": 8050
+  },
+  "activity_source_kind": "retained_timeline",
+  "artifacts": {
+    "Retained event data (partial)": "viewer/media/source/agent/web.saleor-export-current-search.lower-1.001/activity-export.json",
+    "Run provenance": "viewer/media/source/agent/web.saleor-export-current-search.lower-1.001/activity-provenance.json"
+  },
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+    }
+  }
+}

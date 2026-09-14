@@ -1,0 +1,273 @@
+{
+  "schema_version": 1,
+  "task_id": "gameqa.flappy-bird-flight-lab.012",
+  "run_relation": "historical_exact",
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-03",
+  "source_description": null,
+  "terminal_status": "completed",
+  "activity_source_kind": "representative_game_bundle",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 13,
+      "commands": 15,
+      "computer_use_calls": 28,
+      "events": 61,
+      "file_changes": 5,
+      "plans": 0
+    },
+    "condition": "cua",
+    "frame_count": 26,
+    "label": "cua-03",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "diagnostic failure with most retained observation frames",
+    "success": false
+  },
+  "frame_mapping": [
+    {
+      "event_sequence": 2,
+      "frame_sequence": 1,
+      "audit_sequence": 2,
+      "timestamp": "2026-09-04T13:16:17.102724+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0001.png",
+      "sha256": "598a48ecca37cc1c2f8bce760bd060daee49f3d50584745d67cce5dd8ad67b7f"
+    },
+    {
+      "event_sequence": 3,
+      "frame_sequence": 2,
+      "audit_sequence": 3,
+      "timestamp": "2026-09-04T13:16:22.028982+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0002.png",
+      "sha256": "4717e795007b303deb52e683736ba10b7da9629bec601cd72506831126a582f5"
+    },
+    {
+      "event_sequence": 5,
+      "frame_sequence": 3,
+      "audit_sequence": 5,
+      "timestamp": "2026-09-04T13:16:31.000959+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0003.png",
+      "sha256": "fa98e290ca6bce360cc8d49e95e51a274564a6066524f66bfb3f1a1466541be8"
+    },
+    {
+      "event_sequence": 7,
+      "frame_sequence": 4,
+      "audit_sequence": 6,
+      "timestamp": "2026-09-04T13:16:35.642529+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0004.png",
+      "sha256": "dfca022bb9a5afa8861965cbfb2579b48ea463badac2c7896469cdee220d36e2"
+    },
+    {
+      "event_sequence": 9,
+      "frame_sequence": 5,
+      "audit_sequence": 7,
+      "timestamp": "2026-09-04T13:16:42.493643+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0005.png",
+      "sha256": "6b41f7ba13ef724762ba0798cd5e78ce6098dd3143b9252989346013c001d713"
+    },
+    {
+      "event_sequence": 10,
+      "frame_sequence": 6,
+      "audit_sequence": 8,
+      "timestamp": "2026-09-04T13:16:50.015661+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0006.png",
+      "sha256": "5f69cecc19e9107106ea58c746ff9cf7e608bfd3e049865204fee7f9e75158d2"
+    },
+    {
+      "event_sequence": 12,
+      "frame_sequence": 7,
+      "audit_sequence": 9,
+      "timestamp": "2026-09-04T13:16:55.130227+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0007.png",
+      "sha256": "aa0609a534ff3cab6a2bee9f7c423c4a0c8bb8960c47b033849fed2d3aadf619"
+    },
+    {
+      "event_sequence": 13,
+      "frame_sequence": 8,
+      "audit_sequence": 10,
+      "timestamp": "2026-09-04T13:16:59.212009+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0008.png",
+      "sha256": "207dcda3bf1328b09c9b158355dd4dda3bc4af5fd0a46e012e2466e7f988a1c2"
+    },
+    {
+      "event_sequence": 14,
+      "frame_sequence": 9,
+      "audit_sequence": 11,
+      "timestamp": "2026-09-04T13:17:06.443895+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0009.png",
+      "sha256": "835b2166755cb0ec6c066708070b76534d529df764738fd2e42d5b2be4130f66"
+    },
+    {
+      "event_sequence": 29,
+      "frame_sequence": 10,
+      "audit_sequence": 13,
+      "timestamp": "2026-09-04T13:18:32.341078+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0010.png",
+      "sha256": "835b2166755cb0ec6c066708070b76534d529df764738fd2e42d5b2be4130f66"
+    },
+    {
+      "event_sequence": 31,
+      "frame_sequence": 11,
+      "audit_sequence": 14,
+      "timestamp": "2026-09-04T13:18:40.355031+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0011.png",
+      "sha256": "46e588e2610880ecb61e8d98960a7688e8eaeba211bc9923571dc33acae7a04f"
+    },
+    {
+      "event_sequence": 32,
+      "frame_sequence": 12,
+      "audit_sequence": 15,
+      "timestamp": "2026-09-04T13:18:47.273085+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0012.png",
+      "sha256": "46e588e2610880ecb61e8d98960a7688e8eaeba211bc9923571dc33acae7a04f"
+    },
+    {
+      "event_sequence": 35,
+      "frame_sequence": 13,
+      "audit_sequence": 16,
+      "timestamp": "2026-09-04T13:19:06.736841+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0013.png",
+      "sha256": "46e588e2610880ecb61e8d98960a7688e8eaeba211bc9923571dc33acae7a04f"
+    },
+    {
+      "event_sequence": 36,
+      "frame_sequence": 14,
+      "audit_sequence": 17,
+      "timestamp": "2026-09-04T13:19:11.806287+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0014.png",
+      "sha256": "031bbacba08ef301a3ed70175a7053974addc7172b64a0fb5d36934acbfe852b"
+    },
+    {
+      "event_sequence": 37,
+      "frame_sequence": 15,
+      "audit_sequence": 18,
+      "timestamp": "2026-09-04T13:19:19.372134+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0015.png",
+      "sha256": "eb61bb740a0b7a4ff42e01c83edd8145d088909f1588b8cc7fe7c3243d49aaf8"
+    },
+    {
+      "event_sequence": 42,
+      "frame_sequence": 16,
+      "audit_sequence": 19,
+      "timestamp": "2026-09-04T13:19:58.103353+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0016.png",
+      "sha256": "eb61bb740a0b7a4ff42e01c83edd8145d088909f1588b8cc7fe7c3243d49aaf8"
+    },
+    {
+      "event_sequence": 43,
+      "frame_sequence": 17,
+      "audit_sequence": 20,
+      "timestamp": "2026-09-04T13:20:14.220121+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0017.png",
+      "sha256": "eb61bb740a0b7a4ff42e01c83edd8145d088909f1588b8cc7fe7c3243d49aaf8"
+    },
+    {
+      "event_sequence": 44,
+      "frame_sequence": 18,
+      "audit_sequence": 21,
+      "timestamp": "2026-09-04T13:20:20.520538+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0018.png",
+      "sha256": "eb61bb740a0b7a4ff42e01c83edd8145d088909f1588b8cc7fe7c3243d49aaf8"
+    },
+    {
+      "event_sequence": 45,
+      "frame_sequence": 19,
+      "audit_sequence": 22,
+      "timestamp": "2026-09-04T13:20:26.721108+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0019.png",
+      "sha256": "eb61bb740a0b7a4ff42e01c83edd8145d088909f1588b8cc7fe7c3243d49aaf8"
+    },
+    {
+      "event_sequence": 46,
+      "frame_sequence": 20,
+      "audit_sequence": 23,
+      "timestamp": "2026-09-04T13:20:38.955273+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0020.png",
+      "sha256": "46e588e2610880ecb61e8d98960a7688e8eaeba211bc9923571dc33acae7a04f"
+    },
+    {
+      "event_sequence": 47,
+      "frame_sequence": 21,
+      "audit_sequence": 24,
+      "timestamp": "2026-09-04T13:20:47.457650+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0021.png",
+      "sha256": "46e588e2610880ecb61e8d98960a7688e8eaeba211bc9923571dc33acae7a04f"
+    },
+    {
+      "event_sequence": 53,
+      "frame_sequence": 22,
+      "audit_sequence": 25,
+      "timestamp": "2026-09-04T13:21:37.069145+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0022.png",
+      "sha256": "abfc48ab95b89ca783886719477887f47585e40c7141604693ce2181e8b74aca"
+    },
+    {
+      "event_sequence": 54,
+      "frame_sequence": 23,
+      "audit_sequence": 26,
+      "timestamp": "2026-09-04T13:21:48.432975+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0023.png",
+      "sha256": "664de4c1067fb7400fe7362ed543d9d5f607ef36c3b8edec154183c3abafff69"
+    },
+    {
+      "event_sequence": 55,
+      "frame_sequence": 24,
+      "audit_sequence": 27,
+      "timestamp": "2026-09-04T13:21:56.352338+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0024.png",
+      "sha256": "5ff439cc5af643b5124d736be58df5e4b040fc9e6773bfbae6bb9d32c7ceb636"
+    },
+    {
+      "event_sequence": 56,
+      "frame_sequence": 25,
+      "audit_sequence": 28,
+      "timestamp": "2026-09-04T13:22:04.467700+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0025.png",
+      "sha256": "abfc48ab95b89ca783886719477887f47585e40c7141604693ce2181e8b74aca"
+    },
+    {
+      "event_sequence": 57,
+      "frame_sequence": 26,
+      "audit_sequence": 29,
+      "timestamp": "2026-09-04T13:22:20.600252+00:00",
+      "path": "media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frames/frame-0026.png",
+      "sha256": "5ff439cc5af643b5124d736be58df5e4b040fc9e6773bfbae6bb9d32c7ceb636"
+    }
+  ],
+  "image_verification": "Run identity, complete successful action sequence, arguments, timestamps, and audit SHA-256",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 1. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "26 screenshots matched to their recorded calls."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/activity.json": "a0af65dfac02b5971f3860b3fbc759aee3369a5f4d4b03af80a032e6c059b566",
+    "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/frame-manifest.json": "10c3dc5ed63d74a8cefcf51f2728c687715de76bff4824f5ee72614a19c1fc39",
+    "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/trajectory.jsonl": "c6e142f83d5d3a460e9285e00aa022bfd0b00cccc1930e98841465d34f5bb922",
+    "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/cua-audit.jsonl": "c302a143a9ecb556af3fb2ce90f50b2c82161d067b7a0246126a86c70d50de5f",
+    "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/visual-events.jsonl": "702304cee96b69447d7d352f86ba1d4cd1ba2eee1931c3a78690068883f5310f",
+    "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/run-result.json": "2af691ba179f46997fc2e1c33f70531716077cb1fffdf8cde1d3917d2a89cc76",
+    "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/metadata.json": "06973ad9c87c893c7d38bd9171adb6bef6705a08b37605fc60747b0c2b365fa4",
+    "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/patch.diff": "4c7a12fdbff442a0d3ab1d4fd1acbd1a87e2228f962de579dafacab3a5330998"
+  },
+  "activity_sha256": "9d514ad4dfa5505eed5c65504a0daa22d84cebfba952fe7c194cf26b5fb2d8fd",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

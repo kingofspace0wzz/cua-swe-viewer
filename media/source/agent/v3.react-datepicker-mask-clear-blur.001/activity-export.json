@@ -1,0 +1,407 @@
+{
+  "coverage": "retained_codex_events_partial",
+  "events": [
+    {
+      "detail": "I\u2019ll trace the appointment form\u2019s date-field state handling, reproduce the clear/blur behavior through the permitted visual browser tools, then make the smallest source fix and run the build. I\u2019ll also record the required rollout notes.",
+      "kind": "agent_message",
+      "sequence": 1,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 2,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "<evaluation-workspace>/workspace\npackage.json\npackage-lock.json\nindex.html\nserver.mjs\nbuild.mjs\nsrc/index.jsx\nsrc/DatePickerField.jsx\n\n--- package ---\n{\n  \"name\": \"react-datepicker-mask-clear-blur\",\n  \"private\": true,\n  \"version\": \"0.0.0\",\n  \"type\": \"module\",\n  \"scripts\": {\n    \"build\": \"node build.mjs\",\n    \"dev\": \"vite --host 127.0.0.1 --port 57600\"\n  },\n  \"dependencies\": {\n    \"react\": \"18.2.0\",\n    \"react-dom\": \"18.2.0\",\n    \"date-fns\": \"4.1.0\"\n  },\n  \"devDependencies\": {\n    \"esbuild\": \"0.21.5\"\n  }\n}",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 3,
+      "status": "completed",
+      "title": "/bin/bash -lc \"pwd && rg --files -g '\"'!node_modules'\"' -g '\"'!dist'\"' | sed -n '1,120p' && printf '\\\\n--- package ---\\\\n' && sed -n '1,220p' package.json\"",
+      "truncated": false
+    },
+    {
+      "detail": "// Behavior-derived clean-room port of the react-datepicker date-input state\n// machine (Hacker0x01/react-datepicker src/index.tsx @ base\n// 0231bbd7e707d87397e1486d0f2b453cf7f50367). It preserves the EXACT upstream\n// decision surface for the input's controlled value across type / change /\n// blur, using the real date-fns parse/format helpers. Only the parts that\n// participate in the reported blur behavior are reproduced; calendar popper,\n// floating-ui, and range/multiple modes are intentionally omitted because they\n// are irrelevant to the contract and prohibitively heavy to isolate faithfully.\n//\n// Upstream flow reproduced verbatim:\n//   getInputValue(): if state.inputValue is a string, return it; else format\n//                    the currently-`selected` date with dateFormat.\n//   handleChange(e): setState({ inputValue: e.target.value }); if the typed\n//                    value parses to a valid date, call onChange(date).\n//   resetInputValue(): setState({ inputValue: null }).\n//   handleBlur(e): resetInputValue(); (upstream also toggles open/focus).\n//\n// The BROKEN consequence: after the user clears the field to a masked pattern\n// like \"__/__/____\" and blurs, resetInputValue() drops the typed inputValue,\n// so getInputValue() falls back to re-formatting the still-`selected` date and\n// the field REVERTS to the old date.\nimport React from \"react\";\nimport { parse, format, isValid } from \"date-fns\";\n\nconst DATE_FORMAT = \"MM/dd/yyyy\";\n\nfunction safeFormat(date) {\n  return date && isValid(date) ? format(date, DATE_FORMAT) : \"\";\n}\nfunction safeParse(value) {\n  const d = parse(value, DATE_FORMAT, new Date());\n  return isValid(d) && value === safeFormat(d) ? d : null;\n}\n\nexport function DatePickerField({ selected, onChange, id, label, getMaskForCleared }) {\n  const [\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 4,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' src/DatePickerField.jsx\"",
+      "truncated": true
+    },
+    {
+      "detail": "// Appointment booking form. The date field uses a common input-mask behavior:\n// when the user clears the field, the mask library shows the pattern\n// \"__/__/____\" instead of an empty string (this mirrors imask / cleave style\n// masks used widely in production forms). The field's controlled value logic\n// is provided by DatePickerField (the editable date-input state machine).\nimport React from \"react\";\nimport { createRoot } from \"react-dom/client\";\nimport { DatePickerField } from \"./DatePickerField.jsx\";\n\n// The input-mask runtime lives behind the /mask endpoint (a mask library the\n// form was configured with). When the field is cleared, the product asks the\n// mask runtime for the placeholder pattern to display. The concrete pattern is\n// owned by that runtime and is not known statically in this source.\nasync function getMaskForCleared() {\n  // The mask library is configured per form instance; forward the current\n  // form's mask profile (carried on the page query) to the mask runtime.\n  const profile = new URLSearchParams(location.search).get(\"scene\");\n  const q = profile ? `?scene=${encodeURIComponent(profile)}` : \"\";\n  const res = await fetch(\"/mask\" + q);\n  const data = await res.json();\n  return data.cleared;\n}\n\nfunction App() {\n  const [selected, setSelected] = React.useState(new Date(2024, 11, 25)); // Dec 25 2024\n\n  return (\n    <div className=\"card\" id=\"booking-card\">\n      <h1>Book an appointment</h1>\n      <p className=\"hint\">Choose the appointment date.</p>\n      <MaskedDateField\n        selected={selected}\n        onChange={setSelected}\n      />\n      <div className=\"summary\">\n        <span className=\"summary-label\">Selected date:</span>\n        <span id=\"selected-readout\" className=\"summary-value\">\n          {selected ? formatReadout(selected) : \"None\"}\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 5,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' src/index.jsx && printf '\\\\n--- build ---\\\\n' && sed -n '1,260p' build.mjs && printf '\\\\n--- server ---\\\\n' && sed -n '1,220p' server.mjs\"",
+      "truncated": true
+    },
+    {
+      "detail": "The bug is localized in `DatePickerField`: clearing currently only stores the mask placeholder and never clears the parent\u2019s `selected` value; blur then unconditionally discards the transient input and falls back to that stale selection. I\u2019m going to track \u201ccleared\u201d separately from ordinary invalid text so blur can clear the selection only for the former.",
+      "kind": "agent_message",
+      "sequence": 6,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "?? dist/\n?? node_modules/\n\nrollout dir: <evaluation-workspace>/rollout",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 7,
+      "status": "completed",
+      "title": "/bin/bash -lc \"git status --short && printf '\\\\nrollout dir: %s\\\\n' \\\"\"'${CUA_SWE_AGENT_ROLLOUT_DIR:-<unset>}\"'",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/DatePickerField.jsx",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/DatePickerField.jsx"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 8,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\" />\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n<title>Appointment booking</title>\n<style>\n  :root { color-scheme: light; }\n  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;\n         background: #f3f4f6; margin: 0; padding: 40px; color: #111827; }\n  .card { background: #fff; max-width: 420px; margin: 0 auto; padding: 28px 32px;\n          border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.12); }\n  h1 { font-size: 20px; margin: 0 0 4px; }\n  .hint { color: #6b7280; margin: 0 0 20px; font-size: 14px; }\n  .field { display: flex; flex-direction: column; gap: 6px; }\n  .field label { font-size: 13px; font-weight: 600; color: #374151; }\n  .field input { font-size: 16px; padding: 10px 12px; border: 1px solid #d1d5db;\n                 border-radius: 8px; font-variant-numeric: tabular-nums; }\n  .field input:focus { outline: 2px solid #2563eb; border-color: #2563eb; }\n  .summary { margin-top: 22px; display: flex; gap: 8px; font-size: 15px; }\n  .summary-label { color: #6b7280; }\n  .summary-value { font-weight: 700; }\n</style>\n</head>\n<body>\n<div id=\"root\"></div>\n<script src=\"./dist/app.bundle.js\"></script>\n</body>\n</html>",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 9,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,220p' index.html\"",
+      "truncated": false
+    },
+    {
+      "detail": "> react-datepicker-mask-clear-blur@0.0.0 build\n> node build.mjs\n\n\n  dist/app.bundle.js  352.0kb\n\n\u26a1 Done in 6030ms\nbuilt dist/app.bundle.js",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 10,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 633, \"y\": 177}",
+      "kind": "computer_use",
+      "sequence": 11,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"CTRL+A\"}",
+      "kind": "computer_use",
+      "sequence": 12,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+A\"}",
+      "kind": "computer_use",
+      "sequence": 13,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Backspace\"}",
+      "kind": "computer_use",
+      "sequence": 14,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+R\"}",
+      "kind": "computer_use",
+      "sequence": 15,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 633, \"y\": 177}",
+      "kind": "computer_use",
+      "sequence": 16,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+Shift+R\"}",
+      "kind": "computer_use",
+      "sequence": 17,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+A\"}",
+      "kind": "computer_use",
+      "sequence": 18,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Backspace\"}",
+      "kind": "computer_use",
+      "sequence": 19,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "dist/app.bundle.js:10508:    const wasCleared = import_react.default.useRef(false);\ndist/app.bundle.js:10513:        wasCleared.current = true;\ndist/app.bundle.js:10514:        onChange(null);\ndist/app.bundle.js:10516:        if (wasCleared.current) setInputValue(masked);\ndist/app.bundle.js:10519:      wasCleared.current = false;\ndist/app.bundle.js:10529:      wasCleared.current = false;\nsrc/DatePickerField.jsx:18:// The BROKEN consequence: after the user clears the field to a masked pattern\nsrc/DatePickerField.jsx:37:  const wasCleared = React.useRef(false);\nsrc/DatePickerField.jsx:49:      wasCleared.current = true;\nsrc/DatePickerField.jsx:50:      onChange(null);\nsrc/DatePickerField.jsx:52:      if (wasCleared.current) setInputValue(masked);\nsrc/DatePickerField.jsx:55:    wasCleared.current = false;\nsrc/DatePickerField.jsx:70:    wasCleared.current = false;",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 20,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"wasCleared|onChange\\\\(null\\\\)|BROKEN\\\" src/DatePickerField.jsx dist/app.bundle.js | sed -n '1,40p'\"",
+      "truncated": false
+    },
+    {
+      "detail": "ubuntu         1       0  0 10:36 ?        00:00:00 /usr/bin/bwrap --die-with-parent --new-session --unshare-pid --ro-bind /usr /usr --ro-bind /etc /etc --symlink usr/bin /bin --symlink usr/lib /lib --symlink usr/lib64 /lib64 --symlink usr/sbin /sbin --proc /proc --dev /dev --tmpfs /tmp --dir /efs --dir /run --dir /efs/user --dir /run/systemd --dir /efs/user/shulij --dir /run/systemd/resolve --dir /efs/user/shulij/cua-swe --dir /efs/user/shulij/cua-swe/game-runtime-goal005 --ro-bind /usr/local/bin /usr/local/bin --ro-bind /efs/user/shulij/cua-swe/game-runtime-goal005/node-v20.19.5 /efs/user/shulij/cua-swe/game-runtime-goal005/node-v20.19.5 --ro-bind /usr/local/lib/node_modules/@openai/codex /usr/local/lib/node_modules/@openai/codex --ro-bind /usr/local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64 /usr/local/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64 --ro-bind /efs/user/shulij/cua-swe/game-runtime-goal005/venv /efs/user/shulij/cua-swe/game-runtime-goal005/venv --ro-bind /run/systemd/resolve/stub-resolv.conf /run/systemd/resolve/stub-resolv.conf --ro-bind /run/systemd/resolve/resolv.conf /run/systemd/resolve/resolv.conf --dir <evaluation-workspace> --bind <evaluation-workspace> <evaluation-workspace> --bind <evaluation-workspace>/workspace <evaluation-workspace>/workspace --bind <evaluation-workspace>/rollout <evaluation-workspace>/rollout --ro-bind <evaluation-workspace>/tools <evaluation-workspace>/tools --chdir <evaluation-workspace>/workspace env -u AWS_ACCESS_KEY_ID -u AWS_SECRET_ACCESS_KEY -u AWS_SESSION_TOKEN -u AWS_SECURITY_TOKEN -u AWS_PROFILE -u AWS_CONFIG_FILE -u AWS_SHARED_CREDENTIALS_FILE -u GITHUB_TOKEN -u GH_TOKEN -u GIT_ASKPASS -u SSH_AUTH_SOCK -u NETRC -u NPM_TOKEN -u NODE_AUTH_TOKEN -u PIP_INDEX_URL -u PIP_\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 21,
+      "status": "completed",
+      "title": "/bin/bash -lc \"ps -ef | rg 'server.mjs|vite|57600' | rg -v rg\"",
+      "truncated": true
+    },
+    {
+      "detail": "The visual run confirmed the mask placeholder appears, but the selection should be committed as `None` at blur time so the existing \u201cinvalid non-empty input preserves selection\u201d behavior remains unchanged while editing. I\u2019m refining the patch accordingly: mark a true clear during change, then clear the parent selection only when that clear blurs.",
+      "kind": "agent_message",
+      "sequence": 22,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/DatePickerField.jsx",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/DatePickerField.jsx"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 23,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 740, \"y\": 228}",
+      "kind": "computer_use",
+      "sequence": 24,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "> react-datepicker-mask-clear-blur@0.0.0 build\n> node build.mjs\n\n\n  dist/app.bundle.js  352.0kb\n\n\u26a1 Done in 4222ms\nbuilt dist/app.bundle.js\ndiff --git a/src/DatePickerField.jsx b/src/DatePickerField.jsx\nindex 07a6e0a..ccfd9d7 100644\n--- a/src/DatePickerField.jsx\n+++ b/src/DatePickerField.jsx\n@@ -34,6 +34,7 @@ function safeParse(value) {\n \n export function DatePickerField({ selected, onChange, id, label, getMaskForCleared }) {\n   const [inputValue, setInputValue] = React.useState(null); // null => derive from `selected`\n+  const wasCleared = React.useRef(false);\n \n   // getInputValue(): upstream precedence.\n   const value = typeof inputValue === \"string\" ? inputValue : safeFormat(selected);\n@@ -45,10 +46,12 @@ export function DatePickerField({ selected, onChange, id, label, getMaskForClear\n     // runtime) instead of an empty string. The exact pattern is a runtime\n     // detail owned by the mask library, not a value known statically here.\n     if (v.trim() === \"\" && typeof getMaskForCleared === \"function\") {\n+      wasCleared.current = true;\n       const masked = await getMaskForCleared();\n-      setInputValue(masked);\n+      if (wasCleared.current) setInputValue(masked);\n       return;\n     }\n+    wasCleared.current = false;\n     setInputValue(v);\n     const parsed = safeParse(v);\n     if (parsed) onChange(parsed);\n@@ -59,9 +62,12 @@ export function DatePickerField({ selected, onChange, id, label, getMaskForClear\n   }\n \n   function handleBlur() {\n-    // === BROKEN: unconditional reset drops a cleared-mask value, so the field\n-    // reverts to the old formatted `selected` date. ===\n+    // A cleared mask is only a visual placeholder. Clear the transient value\n+    // so the now-null selected date remains empty after blur. Invalid,\n+    // non-empty input still follows\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 25,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build && git diff -- src/DatePickerField.jsx'",
+      "truncated": true
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+Shift+R\"}",
+      "kind": "computer_use",
+      "sequence": 26,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 630, \"y\": 177}",
+      "kind": "computer_use",
+      "sequence": 27,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+A\"}",
+      "kind": "computer_use",
+      "sequence": 28,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Backspace\"}",
+      "kind": "computer_use",
+      "sequence": 29,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 744, \"y\": 229}",
+      "kind": "computer_use",
+      "sequence": 30,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "Screenshots for this replacement run were not retained; the historical reel belongs to another run."
+    },
+    {
+      "detail": "The browser check exposed that the mask can replace the raw empty value with its placeholder during the event sequence, so a boolean alone is too narrow. I\u2019m making the clear detection robust by also remembering the runtime-provided placeholder and recognizing it on blur; ordinary non-empty invalid text still resets to the selected date.",
+      "kind": "agent_message",
+      "sequence": 31,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: src/DatePickerField.jsx",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/DatePickerField.jsx"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 32,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "> react-datepicker-mask-clear-blur@0.0.0 build\n> node build.mjs\n\n\n  dist/app.bundle.js  352.2kb\n\n\u26a1 Done in 6502ms\nbuilt dist/app.bundle.js\nfunction safeParse(value) {\n  const d = parse(value, DATE_FORMAT, new Date());\n  return isValid(d) && value === safeFormat(d) ? d : null;\n}\n\nexport function DatePickerField({ selected, onChange, id, label, getMaskForCleared }) {\n  const [inputValue, setInputValue] = React.useState(null); // null => derive from `selected`\n  const wasCleared = React.useRef(false);\n  const clearedMaskValue = React.useRef(null);\n\n  // getInputValue(): upstream precedence.\n  const value = typeof inputValue === \"string\" ? inputValue : safeFormat(selected);\n\n  async function handleChange(e) {\n    let v = e.target.value;\n    // Product-owned input mask: when the user clears the field, the mask\n    // library surfaces its placeholder pattern (obtained from the mask\n    // runtime) instead of an empty string. The exact pattern is a runtime\n    // detail owned by the mask library, not a value known statically here.\n    if (v.trim() === \"\" && typeof getMaskForCleared === \"function\") {\n      wasCleared.current = true;\n      const masked = await getMaskForCleared();\n      clearedMaskValue.current = masked;\n      if (wasCleared.current) setInputValue(masked);\n      return;\n    }\n    wasCleared.current = false;\n    clearedMaskValue.current = null;\n    setInputValue(v);\n    const parsed = safeParse(v);\n    if (parsed) onChange(parsed);\n  }\n\n  function resetInputValue() {\n    setInputValue(null);\n  }\n\n  function handleBlur() {\n    // A cleared mask is only a visual placeholder. Clear the transient value\n    // so the now-null selected date remains empty after blur. Invalid,\n    // non-empty input still follows the normal reset-to-selected behavior.\n    if (wasCleared.\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 33,
+      "status": "completed",
+      "title": "/bin/bash -lc \"npm run build && git diff --check && sed -n '30,90p' src/DatePickerField.jsx\"",
+      "truncated": true
+    },
+    {
+      "detail": "total 472\ndrwxrwxr-x 3 ubuntu ubuntu   4096 Sep  1 10:38 .\ndrwx------ 8 ubuntu ubuntu   4096 Sep  1 10:36 ..\n-rw-rw-r-- 1 ubuntu ubuntu    239 Sep  1 10:37 agent_stderr.txt\n-rw-rw-r-- 1 ubuntu ubuntu 458356 Sep  1 10:46 agent_stdout.txt\ndrwxrwxr-x 2 ubuntu ubuntu   4096 Sep  1 10:45 cua-adapter\n-rw-rw-r-- 1 ubuntu ubuntu   3225 Sep  1 10:45 visual-mcp-trajectory.jsonl",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 34,
+      "status": "completed",
+      "title": "/bin/bash -lc 'ls -la <evaluation-workspace>/rollout'",
+      "truncated": false
+    },
+    {
+      "detail": "add: rollout_notes.md",
+      "files": [
+        {
+          "kind": "add",
+          "path": "rollout_notes.md"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 35,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "Implemented the date clear/blur fix in `src/DatePickerField.jsx`.\n\n- Cleared mask values now clear the selected date on blur.\n- Invalid non-empty values still restore the previous date.\n- Async mask responses are guarded against stale updates.\n- `npm run build` and `git diff --check` pass.\n- Added required rollout notes.",
+      "kind": "agent_message",
+      "sequence": 36,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    }
+  ],
+  "provenance": "fresh_gpt56_luna_screenshot_cua_replacement_20260901",
+  "run_relation": "replacement",
+  "source": "shuli_exp EFS \u00b7 fresh GPT-5.6 Luna screenshot-only CUA rerun \u00b7 2026-09-01",
+  "status": "available",
+  "summary": {
+    "events": 36,
+    "commands": 11,
+    "file_changes": 4,
+    "computer_use_calls": 16,
+    "agent_messages": 5,
+    "plans": 0,
+    "screenshots": 0,
+    "truncated_events": 5,
+    "unfinished_items": 0
+  },
+  "task_id": "v3.react-datepicker-mask-clear-blur.001",
+  "terminal_status": "completed",
+  "usage": {
+    "cache_write_input_tokens": 46343,
+    "cached_input_tokens": 686779,
+    "input_tokens": 762403,
+    "output_tokens": 6501,
+    "reasoning_output_tokens": 3697
+  },
+  "activity_source_kind": "retained_timeline",
+  "artifacts": {
+    "Retained event data (partial)": "viewer/media/source/agent/v3.react-datepicker-mask-clear-blur.001/activity-export.json",
+    "Run provenance": "viewer/media/source/agent/v3.react-datepicker-mask-clear-blur.001/activity-provenance.json"
+  },
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+    }
+  }
+}
