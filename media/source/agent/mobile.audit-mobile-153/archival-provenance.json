@@ -1,0 +1,22 @@
+{
+  "candidate_id": "audit-mobile-153",
+  "frame_count": 5,
+  "frame_sha256": {
+    "screenshot-0001.png": "6b0b65fea276d942b294d3a08cd767828cb4819083680ede06df42ff9ca339c0",
+    "screenshot-0002.png": "16344952d01250490329f236bf99cbd5059e2a37c1b36c50e1ccae26a4041b20",
+    "screenshot-0003.png": "e036964d7683db68fabb4a3f22cf5bbf7df31073f18d1571238c72f6658b1cfd",
+    "screenshot-0004.png": "3fe57339caa3298d384f06dcd9eeadc1ff55763afd89adb7cbb17d10f42ac676",
+    "screenshot-0005.png": "3fe57339caa3298d384f06dcd9eeadc1ff55763afd89adb7cbb17d10f42ac676"
+  },
+  "legacy_gate_report_infrastructure_valid": false,
+  "legacy_gate_report_outcome": "invalid",
+  "model": "openai.gpt-5.6-sol",
+  "normalization_note": "The terminal lane closure admitted this as a model-valid upper-anchor failure after separating semantic verifier failure from infrastructure validity.",
+  "provenance": "terminally_normalized_legacy_formal_gpt56_cua",
+  "result": "fail",
+  "role": "upper_anchor",
+  "schema_version": 1,
+  "selected_revision_digest": "c157f5fb19ec1a6d7c2158be651efcb9a9856649cafaebb9c6ab6c57d74c8ea0",
+  "task_id": "mobile.audit-mobile-153",
+  "trajectory_sha256": "35cf1fadb4359ab17193230910a61e877da5081a80da974acec5d4eded55d4fa"
+}

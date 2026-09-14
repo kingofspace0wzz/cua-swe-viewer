@@ -1,0 +1,39 @@
+{
+  "candidate_id": "audit-mobile-205",
+  "capture": {
+    "capture_result": "replay/capture-result.json",
+    "frame_count": 4,
+    "frames": [
+      "replay/frames/000_seeded_post.png",
+      "replay/frames/001_after_add_comment.png",
+      "replay/frames/002_after_compaction.png",
+      "replay/frames/003_after_reload.png"
+    ],
+    "kind": "source_native_mobilegym_playwright_real_ui",
+    "localhost_only": true,
+    "trajectory": "replay/trajectory.jsonl"
+  },
+  "custody": {
+    "apply_patch_ordinal": 2183,
+    "approximate_reconstructed_state_excluded": true,
+    "broken_sha256": "810233eb2258ae801724c8584b0319ad3bf50d83c8cb31c000e7d4b9550408ec",
+    "codex_session": "archival construction session log (not included in viewer package)"
+  },
+  "generated_at": "2026-09-13T23:46:03.615032+00:00",
+  "protected_verifier": {
+    "exit_code_file": "verifier/pytest-frozen-exit-code.txt",
+    "kind": "original protected pytest selector",
+    "passed": true,
+    "result": "3 passed",
+    "result_file": "verifier/pytest-frozen.log",
+    "result_sha256": "ecce7ace2f38ac65e3e4804bdde6e79448f4731a9f0f7225974bbe5774196b8c",
+    "selector": "CommentRetentionIdentityCompaction",
+    "simulated_time": "2026-09-11 05:00:00"
+  },
+  "schema_version": 1,
+  "source_commit": "57bc275accdb06eea3aee13880afdebbe80583d3",
+  "source_hashes": {
+    "exact-gold-state.ts": "f189f70f3fa4a72dd82afab42d5bc93feeefc565e8de78cd9c61313afd1f1964"
+  },
+  "status": "exact_gold_verified_and_captured"
+}

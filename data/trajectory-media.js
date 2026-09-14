@@ -6,10 +6,10 @@ window.TRAJECTORY_MEDIA = {
   },
   "schema_version": 1,
   "summary": {
-    "agent_available": 94,
-    "gold_available": 71,
-    "paired_available": 71,
-    "tasks": 96
+    "agent_available": 114,
+    "gold_available": 91,
+    "paired_available": 91,
+    "tasks": 116
   },
   "tasks": {
     "gameqa.2048-seeded-restart-parity.002": {
@@ -670,6 +670,566 @@ window.TRAJECTORY_MEDIA = {
         "status": "unavailable"
       }
     },
+    "mobile.audit-mobile-153": {
+      "agent": {
+        "duration_sec": 6.0,
+        "frame_count": 5,
+        "poster": "media/generated/mobile.audit-mobile-153/agent-poster.png",
+        "provenance": "terminally_normalized_legacy_formal_gpt56_cua",
+        "result": "fail",
+        "shard_id": "mobile-final-upper-153",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-153/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-153/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-153/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 3.6,
+        "frame_count": 3,
+        "poster": "media/generated/mobile.audit-mobile-153/gold-poster.png",
+        "provenance": "exact_gold_verifier_replay_frames",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-153",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-153/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-153/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-161": {
+      "agent": {
+        "duration_sec": 2.4,
+        "frame_count": 2,
+        "poster": "media/generated/mobile.audit-mobile-161/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "pass",
+        "shard_id": "mobile-final-lower-161",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-161/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-161/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-161/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 4.8,
+        "frame_count": 4,
+        "poster": "media/generated/mobile.audit-mobile-161/gold-poster.png",
+        "provenance": "exact_gold_verifier_replay_frames",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-161",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-161/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-161/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-163": {
+      "agent": {
+        "duration_sec": 2.4,
+        "frame_count": 2,
+        "poster": "media/generated/mobile.audit-mobile-163/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "pass",
+        "shard_id": "mobile-final-lower-163",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-163/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-163/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-163/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 5.4,
+        "frame_count": 10,
+        "poster": "media/generated/mobile.audit-mobile-163/gold-poster.png",
+        "provenance": "exact_gold_runtime_replay",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-163",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-163/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-163/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-165": {
+      "agent": {
+        "duration_sec": 30.0,
+        "frame_count": 25,
+        "poster": "media/generated/mobile.audit-mobile-165/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "pass",
+        "shard_id": "mobile-final-lower-165",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-165/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-165/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-165/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 3.6,
+        "frame_count": 3,
+        "poster": "media/generated/mobile.audit-mobile-165/gold-poster.png",
+        "provenance": "exact_gold_verifier_replay_frames",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-165",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-165/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-165/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-191": {
+      "agent": {
+        "duration_sec": 1.2,
+        "frame_count": 1,
+        "poster": "media/generated/mobile.audit-mobile-191/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "pass",
+        "shard_id": "mobile-final-lower-191",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-191/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-191/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-191/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 14.4,
+        "frame_count": 12,
+        "poster": "media/generated/mobile.audit-mobile-191/gold-poster.png",
+        "provenance": "exact_gold_verifier_replay_frames",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-191",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-191/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-191/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-193": {
+      "agent": {
+        "duration_sec": 7.2,
+        "frame_count": 6,
+        "poster": "media/generated/mobile.audit-mobile-193/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "pass",
+        "shard_id": "mobile-final-lower-193",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-193/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-193/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-193/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 7.2,
+        "frame_count": 6,
+        "poster": "media/generated/mobile.audit-mobile-193/gold-poster.png",
+        "provenance": "exact_gold_verifier_replay_frames",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-193",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-193/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-193/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-194": {
+      "agent": {
+        "duration_sec": 3.6,
+        "frame_count": 3,
+        "poster": "media/generated/mobile.audit-mobile-194/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "pass",
+        "shard_id": "mobile-final-lower-194",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-194/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-194/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-194/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 7.2,
+        "frame_count": 6,
+        "poster": "media/generated/mobile.audit-mobile-194/gold-poster.png",
+        "provenance": "exact_gold_verifier_replay_frames",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-194",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-194/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-194/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-196": {
+      "agent": {
+        "duration_sec": 38.4,
+        "frame_count": 32,
+        "poster": "media/generated/mobile.audit-mobile-196/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "fail",
+        "shard_id": "mobile-final-upper-196",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-196/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-196/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-196/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 2.4,
+        "frame_count": 2,
+        "poster": "media/generated/mobile.audit-mobile-196/gold-poster.png",
+        "provenance": "exact_gold_verifier_replay_frames",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-196",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-196/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-196/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-197": {
+      "agent": {
+        "duration_sec": 67.2,
+        "frame_count": 56,
+        "poster": "media/generated/mobile.audit-mobile-197/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "pass",
+        "shard_id": "mobile-final-lower-197",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-197/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-197/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-197/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 14.4,
+        "frame_count": 26,
+        "poster": "media/generated/mobile.audit-mobile-197/gold-poster.png",
+        "provenance": "exact_gold_runtime_replay",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-197",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-197/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-197/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-198": {
+      "agent": {
+        "duration_sec": 19.2,
+        "frame_count": 16,
+        "poster": "media/generated/mobile.audit-mobile-198/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "pass",
+        "shard_id": "mobile-final-lower-198",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-198/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-198/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-198/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 7.1,
+        "frame_count": 7,
+        "poster": "media/generated/mobile.audit-mobile-198/gold-poster.png",
+        "provenance": "exact_gold_runtime_replay",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-198",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-198/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-198/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-200": {
+      "agent": {
+        "duration_sec": 7.2,
+        "frame_count": 6,
+        "poster": "media/generated/mobile.audit-mobile-200/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "fail",
+        "shard_id": "mobile-final-upper-200",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-200/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-200/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-200/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 3.6,
+        "frame_count": 3,
+        "poster": "media/generated/mobile.audit-mobile-200/gold-poster.png",
+        "provenance": "exact_gold_verifier_replay_frames",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-200",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-200/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-200/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-202": {
+      "agent": {
+        "duration_sec": 20.4,
+        "frame_count": 17,
+        "poster": "media/generated/mobile.audit-mobile-202/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "fail",
+        "shard_id": "mobile-final-upper-202",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-202/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-202/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-202/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 14.4,
+        "frame_count": 12,
+        "poster": "media/generated/mobile.audit-mobile-202/gold-poster.png",
+        "provenance": "exact_gold_verifier_replay_frames",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-202",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-202/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-202/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-203": {
+      "agent": {
+        "duration_sec": 16.8,
+        "frame_count": 14,
+        "poster": "media/generated/mobile.audit-mobile-203/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "fail",
+        "shard_id": "mobile-final-upper-203",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-203/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-203/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-203/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 3.6,
+        "frame_count": 3,
+        "poster": "media/generated/mobile.audit-mobile-203/gold-poster.png",
+        "provenance": "exact_gold_verifier_replay_frames",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-203",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-203/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-203/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-205": {
+      "agent": {
+        "duration_sec": 52.8,
+        "frame_count": 44,
+        "poster": "media/generated/mobile.audit-mobile-205/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "pass",
+        "shard_id": "mobile-final-lower-205",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-205/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-205/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-205/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 4.4,
+        "frame_count": 4,
+        "poster": "media/generated/mobile.audit-mobile-205/gold-poster.png",
+        "provenance": "exact_gold_runtime_replay",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-205",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-205/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-205/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-209": {
+      "agent": {
+        "duration_sec": 44.4,
+        "frame_count": 37,
+        "poster": "media/generated/mobile.audit-mobile-209/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "fail",
+        "shard_id": "mobile-final-upper-209",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-209/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-209/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-209/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 2.4,
+        "frame_count": 2,
+        "poster": "media/generated/mobile.audit-mobile-209/gold-poster.png",
+        "provenance": "exact_gold_verifier_replay_frames",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-209",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-209/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-209/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-210": {
+      "agent": {
+        "duration_sec": 1.2,
+        "frame_count": 1,
+        "poster": "media/generated/mobile.audit-mobile-210/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "pass",
+        "shard_id": "mobile-final-lower-210",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-210/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-210/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-210/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 1.2,
+        "frame_count": 1,
+        "poster": "media/generated/mobile.audit-mobile-210/gold-poster.png",
+        "provenance": "exact_gold_verifier_replay_frames",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-210",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-210/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-210/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-211": {
+      "agent": {
+        "duration_sec": 19.2,
+        "frame_count": 16,
+        "poster": "media/generated/mobile.audit-mobile-211/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "pass",
+        "shard_id": "mobile-final-lower-211",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-211/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-211/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-211/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 6.3,
+        "frame_count": 6,
+        "poster": "media/generated/mobile.audit-mobile-211/gold-poster.png",
+        "provenance": "exact_gold_runtime_replay",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-211",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-211/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-211/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-220": {
+      "agent": {
+        "duration_sec": 6.0,
+        "frame_count": 5,
+        "poster": "media/generated/mobile.audit-mobile-220/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "fail",
+        "shard_id": "mobile-final-upper-220",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-220/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-220/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-220/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 11.2,
+        "frame_count": 9,
+        "poster": "media/generated/mobile.audit-mobile-220/gold-poster.png",
+        "provenance": "exact_gold_runtime_replay",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-220",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-220/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-220/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-229": {
+      "agent": {
+        "duration_sec": 18.0,
+        "frame_count": 15,
+        "poster": "media/generated/mobile.audit-mobile-229/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "fail",
+        "shard_id": "mobile-final-upper-229",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-229/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-229/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-229/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 3.6,
+        "frame_count": 3,
+        "poster": "media/generated/mobile.audit-mobile-229/gold-poster.png",
+        "provenance": "exact_gold_verifier_replay_frames",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-229",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-229/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-229/gold.mp4"
+      }
+    },
+    "mobile.audit-mobile-230": {
+      "agent": {
+        "duration_sec": 37.2,
+        "frame_count": 31,
+        "poster": "media/generated/mobile.audit-mobile-230/agent-poster.png",
+        "provenance": "formal_screenshot_only_gpt56_cua",
+        "result": "fail",
+        "shard_id": "mobile-final-upper-230",
+        "source": "viewer/media/source/agent/mobile.audit-mobile-230/screenshots",
+        "status": "available",
+        "timing": "fixed_1.2s_frame_duration",
+        "trajectory": "viewer/media/source/agent/mobile.audit-mobile-230/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-230/agent.mp4"
+      },
+      "gold": {
+        "duration_sec": 3.6,
+        "frame_count": 3,
+        "poster": "media/generated/mobile.audit-mobile-230/gold-poster.png",
+        "provenance": "exact_gold_verifier_replay_frames",
+        "result": null,
+        "shard_id": null,
+        "source": "viewer/media/source/gold/mobile.audit-mobile-230",
+        "status": "available",
+        "timing": "trajectory_timestamps",
+        "trajectory": "viewer/media/source/gold/mobile.audit-mobile-230/trajectory.jsonl",
+        "video": "media/generated/mobile.audit-mobile-230/gold.mp4"
+      }
+    },
     "v3.ag-grid-master-detail-sticky.003": {
       "agent": {
         "duration_sec": 8.4,
@@ -797,7 +1357,7 @@ window.TRAJECTORY_MEDIA = {
         "video": "media/generated/v3.jupyterlab-shiftclick-cellselect.001/agent.mp4"
       },
       "gold": {
-        "duration_sec": 4.4,
+        "duration_sec": 4.3,
         "frame_count": 10,
         "poster": "media/generated/v3.jupyterlab-shiftclick-cellselect.001/gold-poster.png",
         "provenance": "exact_gold_patch_replay",

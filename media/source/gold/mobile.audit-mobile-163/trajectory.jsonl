@@ -1,0 +1,10 @@
+{"event": "verifier.task_setup", "timestamp": "2026-09-13T23:21:21.853891+00:00", "observation": {"screenshot_path": "screenshots/screenshot-0001.png", "url": "http://127.0.0.1:58163/"}}
+{"event": "capture.open_reddit", "timestamp": "2026-09-13T23:21:22.086358+00:00", "observation": {"screenshot_path": "screenshots/screenshot-0002.png", "url": "http://127.0.0.1:58163/"}}
+{"event": "capture.open_chat_list", "timestamp": "2026-09-13T23:21:22.304019+00:00", "observation": {"screenshot_path": "screenshots/screenshot-0003.png", "url": "http://127.0.0.1:58163/"}}
+{"event": "capture.open_conversation", "timestamp": "2026-09-13T23:21:22.490318+00:00", "observation": {"screenshot_path": "screenshots/screenshot-0004.png", "url": "http://127.0.0.1:58163/"}}
+{"event": "capture.open_selected_message_thread", "timestamp": "2026-09-13T23:21:22.677661+00:00", "observation": {"screenshot_path": "screenshots/screenshot-0005.png", "url": "http://127.0.0.1:58163/"}}
+{"event": "verifier.dispatch_sendChatReply", "timestamp": "2026-09-13T23:21:22.829276+00:00", "observation": {"screenshot_path": "screenshots/screenshot-0006.png", "url": "http://127.0.0.1:58163/"}}
+{"event": "capture.return_to_conversation", "timestamp": "2026-09-13T23:21:23.023289+00:00", "observation": {"screenshot_path": "screenshots/screenshot-0007.png", "url": "http://127.0.0.1:58163/"}}
+{"event": "verifier.dispatch_deleteChatMessage", "timestamp": "2026-09-13T23:21:23.177128+00:00", "observation": {"screenshot_path": "screenshots/screenshot-0008.png", "url": "http://127.0.0.1:58163/"}}
+{"event": "verifier.evaluate_current_state", "timestamp": "2026-09-13T23:21:23.350568+00:00", "observation": {"screenshot_path": "screenshots/screenshot-0009.png", "url": "http://127.0.0.1:58163/"}}
+{"event": "verifier.evaluate_reloaded_state", "timestamp": "2026-09-13T23:21:24.752038+00:00", "observation": {"screenshot_path": "screenshots/screenshot-0010.png", "url": "http://127.0.0.1:58163/"}}

@@ -1,0 +1,45 @@
+{
+  "candidate_id": "audit-mobile-220",
+  "capture": {
+    "capture_result": "replay/capture-result.json",
+    "frame_count": 9,
+    "frames": [
+      "replay/frames/000_initial.png",
+      "replay/frames/001_deleted_lilac.png",
+      "replay/frames/002_deleted_cobalt.png",
+      "replay/frames/003_deleted_amber.png",
+      "replay/frames/004_trash_before_reload.png",
+      "replay/frames/005_trash_after_reload.png",
+      "replay/frames/006_restored_all.png",
+      "replay/frames/007_home_restored.png",
+      "replay/frames/008_home_after_reload.png"
+    ],
+    "kind": "source_native_mobilegym_playwright_real_ui",
+    "localhost_only": true,
+    "trajectory": "replay/trajectory.jsonl"
+  },
+  "custody": {
+    "apply_patch_ordinal": 1311,
+    "approximate_reconstructed_state_excluded": true,
+    "broken_sha256": null,
+    "codex_session": "archival construction session log (not included in viewer package)"
+  },
+  "generated_at": "2026-09-13T23:46:08.404754+00:00",
+  "protected_verifier": {
+    "certified_result_sha256": "9424c0593f0ce4a7390e425987126c74d9095ec9f446d29b54b03f1245653e99",
+    "kind": "original protected live_restore_all_stable_oracle probe logic",
+    "launch_note": "Probe logic unchanged; added isolated tmpfs mount for generated node_modules/.vite cache.",
+    "passed": true,
+    "result": "passed",
+    "result_file": "verifier/cachefix-run/PROBE_RESULT.json",
+    "result_sha256": "9424c0593f0ce4a7390e425987126c74d9095ec9f446d29b54b03f1245653e99"
+  },
+  "schema_version": 1,
+  "source_commit": "57bc275accdb06eea3aee13880afdebbe80583d3",
+  "source_hashes": {
+    "exact-gold-state.ts": "6736f45ded14209e0bb2d5f585589a492ee1f262942028fc1db189c5187c58e2",
+    "source/system/Notes/pages/TrashPage.tsx": "5fa0117677e5289a7a28592f016cd65f4ae0643904fca4c9a3e01b6a7484b487",
+    "source/system/Notes/types.ts": "5d40b35a33fed8b5bab94590d8743e578f592ccca17f69418274fdc552b730cc"
+  },
+  "status": "exact_gold_verified_and_captured"
+}

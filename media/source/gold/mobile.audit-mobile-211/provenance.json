@@ -1,0 +1,54 @@
+{
+  "candidate_id": "audit-mobile-211",
+  "capture": {
+    "capture_method": "Playwright interactions against the actual retained MobileGym Vite runtime",
+    "frame_count": 6,
+    "frames": "frames",
+    "runtime_checks": {
+      "no_username_key": true,
+      "protected_root_id_from_body_order_preserved": true,
+      "reply_1_exact_once": true,
+      "reply_1_no_leak": true,
+      "reply_1_prefix_preserved": true,
+      "reply_2_exact_once": true,
+      "reply_2_no_leak": true,
+      "reply_2_prefix_preserved": true,
+      "untouched_reply_preserved": true
+    },
+    "synthetic_frames": false,
+    "trajectory": "trajectory.jsonl",
+    "trajectory_event_count": 6,
+    "trajectory_sha256": "71a00858674ae2610416b4a18e58f8a2721dd227bf0956920ef7df251ff21f72"
+  },
+  "completed_at": "2026-09-13T23:32:44.076297+00:00",
+  "deterministic_certification": {
+    "path": "certification/PREFLIGHT_RECEIPT.json",
+    "sha256": "0a416e711f54eac9ad8e3b6803fe9c6ae218178288b93bc134ad9bdbdd9323b4",
+    "status": "passed"
+  },
+  "gold_change": {
+    "file": "apps/Reddit/state.ts",
+    "gold_source_matches_original_mobilegym_cache": true,
+    "operation": "replace the unique broken username-only reply key with the exact composite username:messageId key"
+  },
+  "runtime": {"kind": "mobilegym_vite_playwright", "source_native": true},
+  "protected_verifier": {
+    "identity": "exact_composite_reply_oracle.py --scenario canonical|varied",
+    "passed": true,
+    "path": "protected/exact_composite_reply_oracle.py",
+    "sha256": "b2d0cf9240e206a79fa56ab89c331a05bf0d82788e0503d6b42e0227de461a70"
+  },
+  "provenance": "exact_gold_patch_replay",
+  "schema_version": 1,
+  "selected_revision": "e7762e520315a8daea07b9f52de905928916026dea3c93f9a4eff5314f920b03",
+  "source_commit": "57bc275accdb06eea3aee13880afdebbe80583d3",
+  "source_hashes": {
+    "broken_source_sha256": "1b8d0e56cc79b1a26bdaa6f2d25c8a91492bb7060ee5b977bb9e4d6fbc37d9a3",
+    "fixture_sha256": "a31b3d84fca210b00250f441101e208287f0237c454806bd0d119aebe78a7acd",
+    "gold_source_sha256": "bf3fda11c76523a585484c28e78866bc580e17ac9ed9ad12b292a2b49ff0c635",
+    "upstream_gold_source_sha256": "bf3fda11c76523a585484c28e78866bc580e17ac9ed9ad12b292a2b49ff0c635"
+  },
+  "started_at": "2026-09-13T23:32:19.208589+00:00",
+  "status": "verified",
+  "task_id": "audit-mobile-211"
+}

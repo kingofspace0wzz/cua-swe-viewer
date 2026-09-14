@@ -1,0 +1,9 @@
+{"action": "seed certified three-way equal-time fixture", "observation": {"screenshot_path": "frames/000_initial.png"}, "seq": 0, "timestamp": "2026-09-13T23:44:17.053277+00:00"}
+{"action": "delete AM220 Lilac target", "observation": {"screenshot_path": "frames/001_deleted_lilac.png"}, "seq": 1, "timestamp": "2026-09-13T23:44:18.437880+00:00"}
+{"action": "delete AM220 Cobalt target", "observation": {"screenshot_path": "frames/002_deleted_cobalt.png"}, "seq": 2, "timestamp": "2026-09-13T23:44:19.767855+00:00"}
+{"action": "delete AM220 Amber target", "observation": {"screenshot_path": "frames/003_deleted_amber.png"}, "seq": 3, "timestamp": "2026-09-13T23:44:21.099734+00:00"}
+{"action": "open Trash", "observation": {"screenshot_path": "frames/004_trash_before_reload.png"}, "seq": 4, "timestamp": "2026-09-13T23:44:21.756691+00:00"}
+{"action": "reload Trash", "observation": {"screenshot_path": "frames/005_trash_after_reload.png"}, "seq": 5, "timestamp": "2026-09-13T23:44:23.675532+00:00"}
+{"action": "click Restore all", "observation": {"screenshot_path": "frames/006_restored_all.png"}, "seq": 6, "timestamp": "2026-09-13T23:44:24.450139+00:00"}
+{"action": "open Notes home", "observation": {"screenshot_path": "frames/007_home_restored.png"}, "seq": 7, "timestamp": "2026-09-13T23:44:25.128490+00:00"}
+{"action": "reload restored Notes", "observation": {"screenshot_path": "frames/008_home_after_reload.png"}, "seq": 8, "timestamp": "2026-09-13T23:44:27.050981+00:00"}

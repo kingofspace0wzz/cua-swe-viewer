@@ -22,12 +22,16 @@
     tasks: [
       ...sourceAudit.tasks
         .filter((task) => task.recommendation !== "remove_redundant")
-        .map((task) => ({
-          ...task,
-          domain: "web",
-          difficulty_band: task.cua === "pass" ? "easy" : "frontier",
-          is_game_cua: false,
-        })),
+        .map((task) => {
+          const isMobile = String(task.task_id).startsWith("mobile.");
+          return {
+            ...task,
+            domain: isMobile ? "mobile" : "web",
+            difficulty_band: task.cua === "pass" ? "easy" : "frontier",
+            is_game_cua: false,
+            is_mobile_cua: isMobile,
+          };
+        }),
       ...gameTasks,
     ],
   };
@@ -90,6 +94,7 @@
       calibration_keep: ["Calibration", "calibration"],
       diagnostic_keep: ["Diagnostic", "diagnostic"],
       game_cua: ["Game CUA", "game-cua"],
+      mobile_keep: ["Mobile CUA", "mobile"],
       remove_redundant: ["Remove", "remove"],
     };
     const [label, style] = labels[task.recommendation] || ["Unknown", "unknown"];
@@ -121,7 +126,9 @@
       coverage: "gui_only",
       reason: task.is_game_cua
         ? "The exact scored run's Codex event stream was not copied into the viewer bundle. Only its verified GUI screenshots and visual actions are retained."
-        : "The historical Web publication retained screenshots, patches, verifier reports, and visual trajectories, while the base64-heavy Codex stdout remained on the execution host and is not part of this viewer bundle.",
+        : task.is_mobile_cua
+          ? "The retained Mobile evidence contains the formal screenshot-only CUA trajectory and exact visual observations. A separate full coding transcript was not retained for this run."
+          : "The historical Web publication retained screenshots, patches, verifier reports, and visual trajectories, while the base64-heavy Codex stdout remained on the execution host and is not part of this viewer bundle.",
     };
   }
 
@@ -297,6 +304,9 @@
     const scopeNote = kind === "agent" && hasMedia(entry)
       ? `<p class="media-scope-note">This MP4 contains only browser/game screenshots. Terminal commands, code edits, and test runs are shown separately below when the exact agent event stream was retained.</p>`
       : "";
+    const trajectoryLink = hasMedia(entry) && entry.trajectory
+      ? `<a href="${relativeLink(entry.trajectory)}" target="_blank" rel="noreferrer">Trajectory JSONL</a>`
+      : "";
     const artifactLinks = kind === "agent" && entry.artifacts
       ? [
           ["Trajectory JSONL", "agent/trajectory.jsonl"],
@@ -315,7 +325,7 @@
         <div class="media-frame">${content}</div>
         <div class="media-meta">${escapeHtml(provenance)}</div>
         ${scopeNote}
-        ${artifactLinks ? `<div class="media-links">${artifactLinks}</div>` : ""}
+        ${trajectoryLink || artifactLinks ? `<div class="media-links">${trajectoryLink}${artifactLinks}</div>` : ""}
       </section>`;
   }
 
@@ -600,31 +610,40 @@
   els.openCompare.addEventListener("click", openComparison);
   document.querySelector("#closeCompare").addEventListener("click", () => els.compareDialog.close());
 
-  const summary = audit.summary;
   const gameTaskCount = Number(gameCollection.summary?.tasks || gameTasks.length);
   const webTasks = audit.tasks.filter((task) => task.domain === "web");
+  const mobileTasks = audit.tasks.filter((task) => task.domain === "mobile");
   const webTaskCount = webTasks.length;
+  const mobileTaskCount = mobileTasks.length;
   const webEasyCount = webTasks.filter((task) => task.difficulty_band === "easy").length;
   const webFrontierCount = webTaskCount - webEasyCount;
   const gameEasyCount = gameTasks.filter((task) => task.difficulty_band === "easy").length;
   const gameFrontierCount = gameTaskCount - gameEasyCount;
-  document.querySelector("#totalMetric").textContent =
-    webTaskCount + gameTaskCount;
+  const mobileEasyCount = mobileTasks.filter((task) => task.difficulty_band === "easy").length;
+  const mobileFrontierCount = mobileTaskCount - mobileEasyCount;
+  const totalTaskCount = webTaskCount + gameTaskCount + mobileTaskCount;
+  document.querySelector("#totalMetric").textContent = totalTaskCount;
   document.querySelector("#webMetric").textContent = webTaskCount;
   document.querySelector("#gameMetric").textContent = gameTaskCount;
+  document.querySelector("#mobileMetric").textContent = mobileTaskCount;
   document.querySelector("#webCapabilityMetric").textContent = `${webTaskCount} tasks`;
   document.querySelector("#webEasyMetric").textContent = `${webEasyCount} Easy`;
   document.querySelector("#webFrontierMetric").textContent = `${webFrontierCount} Frontier`;
-  document.querySelector("#gameCapabilityMetric").textContent =
-    `${gameTaskCount} task${gameTaskCount === 1 ? "" : "s"}`;
+  document.querySelector("#gameCapabilityMetric").textContent = `${gameTaskCount} tasks`;
   document.querySelector("#gameEasyMetric").textContent = `${gameEasyCount} Easy`;
   document.querySelector("#gameFrontierMetric").textContent = `${gameFrontierCount} Frontier`;
-  document.querySelector("#allScopeTab").textContent = `All ${webTaskCount + gameTaskCount}`;
+  document.querySelector("#mobileCapabilityMetric").textContent = `${mobileTaskCount} tasks`;
+  document.querySelector("#mobileEasyMetric").textContent = `${mobileEasyCount} Lower`;
+  document.querySelector("#mobileFrontierMetric").textContent = `${mobileFrontierCount} Upper`;
+  document.querySelector("#allScopeTab").textContent = `All ${totalTaskCount}`;
   document.querySelector("#webScopeTab").textContent = `Web ${webTaskCount}`;
-  document.querySelector("#gameScopeTab").textContent =
-    `Game ${gameTaskCount}`;
+  document.querySelector("#gameScopeTab").textContent = `Game ${gameTaskCount}`;
+  document.querySelector("#mobileScopeTab").textContent = `Mobile ${mobileTaskCount}`;
   document.querySelector("#auditReportLink").href = publicExport ? "public-docs/web-curation-audit.md" : relativeLink(
     "dataset/reports/WEB_CANONICAL_67_CURATION_REPORT.md",
+  );
+  document.querySelector("#mobileReportLink").href = publicExport ? "public-docs/mobile-viewer-report.md" : relativeLink(
+    "dataset/reports/MOBILE_CUA_20_VIEWER_REPORT.md",
   );
 
   renderAll();

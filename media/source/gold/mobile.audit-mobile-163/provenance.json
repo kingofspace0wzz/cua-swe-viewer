@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "candidate_id": "audit-mobile-163",
+  "task_id": "reddit.Reddit_DeepThreadReplyAndDeleteSeedMessage",
+  "provenance": "exact_gold_source_replay",
+  "generated_at": "2026-09-13T23:23:03Z",
+  "source_commit": "57bc275accdb06eea3aee13880afdebbe80583d3",
+  "immutable_revision_digest": "6271d44e26de7791c27f8beca139db85e57013d96c1b0261f9be8c525947d840",
+  "runtime": {
+    "runtime_kind": "mobilegym_vite_playwright",
+    "node_image": "node@sha256:8a34c4ab3ea2c5cd194f07e317b2a8f09461d3c8b05c4e34c8ccd56d56024c4d",
+    "source_mounted_read_only": true
+  },
+  "gold_sources": [
+    {
+      "path": "apps/Reddit/state.ts",
+      "sha256": "bf3fda11c76523a585484c28e78866bc580e17ac9ed9ad12b292a2b49ff0c635",
+      "expected_sha256": "bf3fda11c76523a585484c28e78866bc580e17ac9ed9ad12b292a2b49ff0c635"
+    }
+  ],
+  "custody_files": [
+    {
+      "path": "REVISION_METADATA.json",
+      "sha256": "c752db7c8aa355527d53d4d57ac6073dd3320b90f2fa15f4405d11b22cc300a1"
+    },
+    {
+      "path": "PUBLIC_TASK.json",
+      "sha256": "25248405f6aa69e6300ceba874932dcaee849ab5f541c63fce1a3b01f4ae27c6"
+    }
+  ],
+  "protected_verifiers": [
+    {
+      "kind": "original_mobilegym_selected_live_test",
+      "source": "bench_env/tests/reddit/test_live.py",
+      "source_sha256": "2cf01506a3a3ffb303d8e47ef1bbbfda4a087debb8d0950b215167778bb37870",
+      "task_definition_source": "bench_env/task/reddit/tasks.py",
+      "task_definition_sha256": "d66def61352035b7068cd44517c27e735997a9e917e3b39e5e3ad37ea03c2119",
+      "selector": "DeepThreadReplyAndDeleteSeedMessage",
+      "returncode": 0,
+      "result": "2 passed in 6.75s",
+      "log": "logs/protected-verifier.log"
+    }
+  ],
+  "build": {
+    "returncode": 0,
+    "log": "logs/build.log"
+  },
+  "capture": {
+    "kind": "real_visible_effects_of_original_live_verifier_actions",
+    "synthetic_frames": false,
+    "frame_count": 10,
+    "trajectory": "trajectory.jsonl",
+    "trajectory_sha256": "9dcc3e1e57e51df805e187ed1b6b2232ef1f087ce4717ba086d3f4be0c1e2f2e",
+    "screenshot_manifest": "screenshots.sha256",
+    "screenshot_manifest_sha256": "897c56c7f5b41b63603237db725331f3655e65c2b2705f2cae05b76f50bbf164",
+    "capture_result": "capture-result.json",
+    "capture_result_sha256": "f76e97c817bfb8983167b0d98f6d0613780005b6c6a547110e9b6896eefd8a92",
+    "current_full_verdict_passed": true,
+    "reloaded_task_goals_succeeded": true,
+    "reloaded_clean": false,
+    "reloaded_cleanliness_note": "Only unrelated time-derived fixture timestamps changed after reload; the two judged Reddit goals remained successful.",
+    "capture_wrapper_raw_returncode": 1,
+    "capture_wrapper_normalization": "The wrapper initially required global post-reload cleanliness. The original protected verifier passed 2/2, the current full task verdict passed, and both judged task goals remained successful after reload; only unrelated dynamic fixture timestamps triggered cleanliness warnings."
+  },
+  "validated": true
+}

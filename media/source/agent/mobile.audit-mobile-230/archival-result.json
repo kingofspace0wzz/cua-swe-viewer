@@ -1,0 +1,191 @@
+{
+  "accessibility_tree_exposed": false,
+  "agent_returncode": 0,
+  "agent_sandbox_backend": "bubblewrap",
+  "attempt": 1,
+  "body_text_exposed": false,
+  "broker_audit_sha256": "2d376cf71a10d94e0a5a0b2eff3ffbe932ca21d40827976d02c697a394973924",
+  "broker_network_audit_sha256": "5e19440cceb7cdf0b1ec4cb7a5365a2c7d3f278a4a498357d1b37c1ab06ee1c4",
+  "browser_pixels_only": true,
+  "candidate_id": "audit-mobile-230",
+  "cleanup_clean": true,
+  "cleanup_diagnostics": {
+    "attempts": [
+      {
+        "attempt": 1,
+        "failures": [
+          {
+            "errno": 1,
+            "error": "PermissionError(1, 'Operation not permitted')",
+            "operation": "chmod",
+            "phase": "pre_chmod",
+            "state": {
+              "exists": true,
+              "file_type": "directory",
+              "findmnt": "{\n   \"filesystems\": [\n      {\n         \"target\": \"/\",\n         \"source\": \"/dev/nvme0n1p1\",\n         \"fstype\": \"ext4\",\n         \"options\": \"rw,relatime,discard,errors=remount-ro,commit=30,stripe=32761\"\n      }\n   ]\n}",
+              "findmnt_returncode": 0,
+              "gid": 0,
+              "is_mount": false,
+              "mode": "0o755",
+              "mountinfo_matches": [],
+              "path": "/tmp/audit-mobile-230-a1-live-cua-9nhmbejm/evaluator/node_modules",
+              "uid": 0
+            }
+          },
+          {
+            "errno": 1,
+            "error": "PermissionError(1, 'Operation not permitted')",
+            "operation": "chmod",
+            "phase": "pre_chmod",
+            "state": {
+              "exists": true,
+              "file_type": "directory",
+              "findmnt": "{\n   \"filesystems\": [\n      {\n         \"target\": \"/\",\n         \"source\": \"/dev/nvme0n1p1\",\n         \"fstype\": \"ext4\",\n         \"options\": \"rw,relatime,discard,errors=remount-ro,commit=30,stripe=32761\"\n      }\n   ]\n}",
+              "findmnt_returncode": 0,
+              "gid": 0,
+              "is_mount": false,
+              "mode": "0o755",
+              "mountinfo_matches": [],
+              "path": "/tmp/audit-mobile-230-a1-live-cua-9nhmbejm/evaluator/node_modules",
+              "uid": 0
+            }
+          },
+          {
+            "errno": 1,
+            "error": "PermissionError(1, 'Operation not permitted')",
+            "operation": "chmod",
+            "phase": "pre_chmod",
+            "state": {
+              "exists": true,
+              "file_type": "directory",
+              "findmnt": "{\n   \"filesystems\": [\n      {\n         \"target\": \"/\",\n         \"source\": \"/dev/nvme0n1p1\",\n         \"fstype\": \"ext4\",\n         \"options\": \"rw,relatime,discard,errors=remount-ro,commit=30,stripe=32761\"\n      }\n   ]\n}",
+              "findmnt_returncode": 0,
+              "gid": 0,
+              "is_mount": false,
+              "mode": "0o755",
+              "mountinfo_matches": [],
+              "path": "/tmp/audit-mobile-230-a1-live-cua-9nhmbejm/workspace/node_modules",
+              "uid": 0
+            }
+          },
+          {
+            "errno": 1,
+            "error": "PermissionError(1, 'Operation not permitted')",
+            "operation": "chmod",
+            "phase": "pre_chmod",
+            "state": {
+              "exists": true,
+              "file_type": "directory",
+              "findmnt": "{\n   \"filesystems\": [\n      {\n         \"target\": \"/\",\n         \"source\": \"/dev/nvme0n1p1\",\n         \"fstype\": \"ext4\",\n         \"options\": \"rw,relatime,discard,errors=remount-ro,commit=30,stripe=32761\"\n      }\n   ]\n}",
+              "findmnt_returncode": 0,
+              "gid": 0,
+              "is_mount": false,
+              "mode": "0o755",
+              "mountinfo_matches": [],
+              "path": "/tmp/audit-mobile-230-a1-live-cua-9nhmbejm/workspace/node_modules",
+              "uid": 0
+            }
+          }
+        ],
+        "finished_at": "2026-09-11T11:28:09.336154+00:00",
+        "removed": true,
+        "started_at": "2026-09-11T11:28:09.011329+00:00"
+      }
+    ],
+    "backoff_seconds": [
+      0.0,
+      0.25,
+      0.75,
+      1.5,
+      3.0
+    ],
+    "removed": true,
+    "scratch": "/tmp/audit-mobile-230-a1-live-cua-9nhmbejm"
+  },
+  "codex_transport_shim_sha256": "2bc6b6d31fb31b4fb4194e490547ce7ceced9b8145a480ecfab9ec152f54b73d",
+  "complete_tool_packet_validated": true,
+  "containment_selftest_sha256": "67b02f4da45903867aa6ff854ce0f27e748e63690d9c77f66895b8184d1dff25",
+  "cua_adapter_contract": "game_visual_cua_mcp_v1",
+  "direct_http_exposed": false,
+  "dom_exposed": false,
+  "finished_at": "2026-09-11T11:28:09.336191+00:00",
+  "forced_scratch_process_groups": [],
+  "gate": "cua",
+  "host_agent_exec_audit_sha256": "54b1a1ee75c34417db64110528e0eab4ea8eb50cd9d8354b644fc9bb896771a3",
+  "infrastructure_valid": true,
+  "managed_codex_version": "codex-cli 0.151.0",
+  "matched_code_only_outcome": "fail",
+  "matched_code_only_report": "archival source path omitted from portable viewer package",
+  "matched_code_only_report_sha256": "b9c691d39aad33277691bd8f40265a3b52fa1464c79039119b32cf12186a7cfe",
+  "matched_code_only_revision_digest": "8a214349c966c42c88f5562ab84f36ba329064a9638d1ecdc0845392fb7788f1",
+  "matched_code_only_validated_before_model_launch": true,
+  "model": "openai.gpt-5.6-sol",
+  "model_evidence_valid": true,
+  "observation_mode": "screenshot_only",
+  "outcome": "fail",
+  "packet_adapter_selftest_returncode": 0,
+  "packet_adapter_selftest_sha256": "677047ce87f6a0fe5ff9157ff74a68feaa99e256854f79e8ebe21519c0ad36ed",
+  "post_repair_build_returncode": 0,
+  "protected_material_exposed": false,
+  "protected_oracle_returncodes": {
+    "canonical": 1,
+    "varied": 1
+  },
+  "provider": "amazon-bedrock",
+  "proxy_audit_sha256": "37efd7646d9b7f6059cc235ea1bd742898e26f29ba79d464ff1eca0033a5d01d",
+  "schema_version": 3,
+  "screenshot_hashes": {
+    "rollout/cua-adapter/screenshot-0001.png": "db3065af64e467320fbc6f575b41374275345d5023d76b713207f9c70499c2ae",
+    "rollout/cua-adapter/screenshot-0002.png": "a8ffc270f944a699e2b3249ce799e2bcf60449b5b316523d8d732733988014c1",
+    "rollout/cua-adapter/screenshot-0003.png": "1e1f0cf0c06b75cf9df5f021102503ac408df292850fb859fac1b5534ffbb18a",
+    "rollout/cua-adapter/screenshot-0004.png": "cd71ac27a88f06366755410cb23aadcdc72fdb3037b01d4477fc12233659f5b5",
+    "rollout/cua-adapter/screenshot-0005.png": "518bd5a38bd962b15b3b2d85b689ae14843832c3afe4440ecefb06c93ec137d1",
+    "rollout/cua-adapter/screenshot-0006.png": "e935a3176d99cf55bf78d53ce8c1a8cbef6cadec964dbbe87917f593da2d99cc",
+    "rollout/cua-adapter/screenshot-0007.png": "3bbb7baf734f4c469baeab5d5f65eaa61e0d1c5b146e2c5da9dd7c06aedcb2c1",
+    "rollout/cua-adapter/screenshot-0008.png": "58e1a74379eebc29637433dadbecf869efa9d376b8be08369da6643741ce7826",
+    "rollout/cua-adapter/screenshot-0009.png": "9c278f4b2ed59108248406828d170352e0f053a164a0833226e776a7be72b9d5",
+    "rollout/cua-adapter/screenshot-0010.png": "534b6515c9776f3d9f4508762349f65cf0bc6633d5bdf951f8c73494964e13d1",
+    "rollout/cua-adapter/screenshot-0011.png": "dc2ac27c2e111c7ec3724d533954f391badaa281976128cb4a7e131c6ae49d0a",
+    "rollout/cua-adapter/screenshot-0012.png": "bea8b79bb6376dead23e1c892c3d671e9e0bb699a1ace2a26fd33957dc40e4de",
+    "rollout/cua-adapter/screenshot-0013.png": "deabf55c7dbdfb18df6896df2c60b316d4cd23080252bbe6f3d9326ef73e40aa",
+    "rollout/cua-adapter/screenshot-0014.png": "7858058cf06675243d12c8687641428ca1df7675b24e3b82dcff5f83b99b0568",
+    "rollout/cua-adapter/screenshot-0015.png": "0d0e4f80f3db396000b37ee66188a083155aa777e72d633e6090191f7b14b97b",
+    "rollout/cua-adapter/screenshot-0016.png": "4def6896ec10c7651551783e31f3fa983966a1a7043bc2da82aba786e6d13d2b",
+    "rollout/cua-adapter/screenshot-0017.png": "128350c397e00303e0ec499ebc1e7e1acdbed2a9e517349bffd58160c55c3a9e",
+    "rollout/cua-adapter/screenshot-0018.png": "e1c4de5af40dda59a54f9d2b2c3abf9cc40ae7cf2092c7bffe0dc9fcc9c7ffe4",
+    "rollout/cua-adapter/screenshot-0019.png": "4aaca3192679f364b258c4f32308033528a66118ef3a1ebc21f1d50c041d4004",
+    "rollout/cua-adapter/screenshot-0020.png": "0523166f62059d46488fac3918ea4ef673e8a9f8a8140c40784e259636cc015b",
+    "rollout/cua-adapter/screenshot-0021.png": "dc517ba91be9efe28510e76e63b287e8af2f94b3877aaeea0aa71c00e18a2ee8",
+    "rollout/cua-adapter/screenshot-0022.png": "a491e0ede31bde13578c0045fec21ada10b938f23d10479ad84d173d15fec261",
+    "rollout/cua-adapter/screenshot-0023.png": "e6741a3be283dd86246ccd7c1caf43cd821c528f3bfb0d8c8bfa23dc214ac213",
+    "rollout/cua-adapter/screenshot-0024.png": "d1395ea2c7dfe491a4d5d000a95b08b75a9d17e2754da17ced1439fd44c422dd",
+    "rollout/cua-adapter/screenshot-0025.png": "dc517ba91be9efe28510e76e63b287e8af2f94b3877aaeea0aa71c00e18a2ee8",
+    "rollout/cua-adapter/screenshot-0026.png": "a491e0ede31bde13578c0045fec21ada10b938f23d10479ad84d173d15fec261",
+    "rollout/cua-adapter/screenshot-0027.png": "e6741a3be283dd86246ccd7c1caf43cd821c528f3bfb0d8c8bfa23dc214ac213",
+    "rollout/cua-adapter/screenshot-0028.png": "f2fbb058ee2085dc9df626009fecc378dbce5239d5469c38355b109abc0270db",
+    "rollout/cua-adapter/screenshot-0029.png": "da2315f6f32bf820bc3f451af7532a93809d6fedef86fc24e4c8c9882a15e91b",
+    "rollout/cua-adapter/screenshot-0030.png": "da2315f6f32bf820bc3f451af7532a93809d6fedef86fc24e4c8c9882a15e91b",
+    "rollout/cua-adapter/screenshot-0031.png": "da2315f6f32bf820bc3f451af7532a93809d6fedef86fc24e4c8c9882a15e91b"
+  },
+  "semantic_parent_revision_digest": "8a214349c966c42c88f5562ab84f36ba329064a9638d1ecdc0845392fb7788f1",
+  "source_native_receipt_validated": true,
+  "started_at": "2026-09-11T11:18:51.194109+00:00",
+  "status": "completed",
+  "structured_state_exposed": false,
+  "successful_screenshot_result_count": 31,
+  "tool_packet_digest": "73c1d3196986df1061e21096e846a6da652974e3899731aa0448b4a1908ee11a",
+  "verifier": {
+    "candidate_source_sha256": {
+      "apps/Railway12306/pages/OrderConfirmPage.tsx": "319cce067847ea4b7eb714c9ebd37325cc0eb0f08055323b030576bbf26f458f",
+      "apps/Railway12306/pages/PassengerListPage.tsx": "b54672caf00369bae909bd6e57b4b04c4d698083cb1693efcc83f44675dc1c19",
+      "apps/Railway12306/types.ts": "d0fb5dc5da0f9c599a89f1580fdce5e8a68e70beac85dfb5ea7329fd40d3d029"
+    },
+    "kind": "frozen_railway_transactional_seat_draft_oracle",
+    "passed": false,
+    "report_paths": {
+      "canonical": "verifier/oracle-canonical.json",
+      "varied": "verifier/oracle-varied.json"
+    }
+  },
+  "visual_mcp_trajectory_sha256": "dbeb496a7bf841a45fa1e09526b7d78bbe5fcef82bd9b8fef59d9fa2d1df4d20"
+}

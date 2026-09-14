@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "candidate_id": "audit-mobile-197",
+  "task_id": "reddit.Reddit_ImportedMessageOccurrenceIdentity",
+  "provenance": "exact_gold_specimen_replay",
+  "generated_at": "2026-09-13T23:23:04Z",
+  "source_commit": "57bc275accdb06eea3aee13880afdebbe80583d3",
+  "immutable_revision_digest": "cfbb15a25d0e0993f06108c1fae9cbd6c23cf17684fa89c5f32c92317b7657be",
+  "runtime": {
+    "runtime_kind": "mobilegym_vite_playwright",
+    "node_image": "node@sha256:8a34c4ab3ea2c5cd194f07e317b2a8f09461d3c8b05c4e34c8ccd56d56024c4d",
+    "source_mounted_read_only": true,
+    "gold_specimens_overlaid_read_only": true
+  },
+  "gold_sources": [
+    {
+      "path": "specimens/gold.state.ts",
+      "sha256": "8d1707676d27747835761cef52c068ce5f7e2472ab5f2e48f34b13a0807ab34d"
+    },
+    {
+      "path": "specimens/gold.ChatThreadPage.tsx",
+      "sha256": "59b2281c22071be285d2cf460aebf427cd00cb8be958cb6f3b5b9ac9c6543a67"
+    },
+    {
+      "path": "specimens/gold.ChatMessageThreadPage.tsx",
+      "sha256": "c8d5a60490b087a04a9b3664681f5a95be2acf06a7bd6245b7be5219638a1dc0"
+    }
+  ],
+  "custody_files": [
+    {
+      "path": "REVISION_METADATA.json",
+      "sha256": "3d6b62f0a2adccb882cbe9f45fd9b0b9b1c6850cb74909d7c53d33e421473242"
+    },
+    {
+      "path": "PUBLIC_TASK.json",
+      "sha256": "92eca3e3d42d6bb03d6f71594a8ca882fe9d137dcd0f16ad5307978fa2bbffee"
+    }
+  ],
+  "protected_verifiers": [
+    {
+      "kind": "instance_identity_probe",
+      "source": "protected/instance_identity_probe.py",
+      "source_sha256": "47c511a0db9dbeca3ec8cb5538e6e52ba45b5b86ce264ea9b2d1aab733ec556b",
+      "scenario": "canonical",
+      "accepted_attempt": 2,
+      "returncode": 0,
+      "result": {
+        "name": "primary",
+        "passed": true,
+        "failures": []
+      },
+      "report": "verifier/oracle-canonical.json",
+      "attempt_1": {
+        "returncode": 1,
+        "outcome": "infrastructure_invalid",
+        "reason": "Playwright target detached during scroll_into_view_if_needed before verifier verdict",
+        "log": "logs/oracle-canonical.log"
+      }
+    },
+    {
+      "kind": "instance_identity_probe",
+      "source": "protected/instance_identity_probe.py",
+      "source_sha256": "47c511a0db9dbeca3ec8cb5538e6e52ba45b5b86ce264ea9b2d1aab733ec556b",
+      "scenario": "varied",
+      "returncode": 0,
+      "result": {
+        "name": "control",
+        "passed": true,
+        "failures": []
+      },
+      "report": "verifier/oracle-varied.json"
+    }
+  ],
+  "build": {
+    "returncode": 0,
+    "log": "logs/build.log"
+  },
+  "capture": {
+    "kind": "protected_verifier_visible_steps",
+    "synthetic_frames": false,
+    "frame_count": 26,
+    "trajectory": "trajectory.jsonl",
+    "trajectory_sha256": "dd657ec525eaafdefd999420f6524016f5b0278d529ed55b744e9cbada41acdd",
+    "screenshot_manifest": "screenshots.sha256",
+    "screenshot_manifest_sha256": "7dc5ccffa3f5cac2782f3cad3fd090636e27ff1d2f59351beb05d28867b32a57",
+    "capture_result": "capture-result.json",
+    "capture_result_sha256": "f0129146f15713c032324ea1d9ac0f98f758b81012ed0dc84ac9497af16e3fc8",
+    "primary_passed": true,
+    "control_passed": true
+  },
+  "validated": true
+}

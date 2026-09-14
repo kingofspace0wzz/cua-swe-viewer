@@ -1,0 +1,30 @@
+{
+  "candidate_id": "audit-mobile-211",
+  "frame_count": 16,
+  "frame_sha256": {
+    "screenshot-0001.png": "b9847f0c6adbcdb63dda1c7ca13194f70b1be31787d0c30b013413ec026c200f",
+    "screenshot-0002.png": "e5cf5c4abcfe4aa733a3ac8bace74059a1b8c8e51e3634193a38aa522380616e",
+    "screenshot-0003.png": "e5cf5c4abcfe4aa733a3ac8bace74059a1b8c8e51e3634193a38aa522380616e",
+    "screenshot-0004.png": "769307f89de98abcd027abaad90940879b643da4991bbc44861befca950b7590",
+    "screenshot-0005.png": "4f49e2dde177a9d540b4db68272169d651b37554ae0cf42a5ed46864f78f8fa7",
+    "screenshot-0006.png": "4f49e2dde177a9d540b4db68272169d651b37554ae0cf42a5ed46864f78f8fa7",
+    "screenshot-0007.png": "4f49e2dde177a9d540b4db68272169d651b37554ae0cf42a5ed46864f78f8fa7",
+    "screenshot-0008.png": "d8b6b03115e8da6c05f210423687b4810d19250ab97defbf77a2898af85fe3a9",
+    "screenshot-0009.png": "1907dec076d58bf87c22c0fb612db0733b5a33daa1d1c41a6e2ecc70df67d12a",
+    "screenshot-0010.png": "9787b4bea2f021233b89421ad85e486f7a4843630fb03f635ee645953a44e6a6",
+    "screenshot-0011.png": "27728c615a1a91095dced78860d01c2d3110aac765ad4bfa7aa853f166564df8",
+    "screenshot-0012.png": "36b48b114d9565235ec3acee0d366197940c32c8bc7ac883f547a8927573c817",
+    "screenshot-0013.png": "ea1d9fdfe801665facd898d11d7fdc65191547eaad1a28b8aa1549baccd480f1",
+    "screenshot-0014.png": "02b17716b84743c456de88993b52088bbad19134bb3d22f77f266b90d518f9dc",
+    "screenshot-0015.png": "02b17716b84743c456de88993b52088bbad19134bb3d22f77f266b90d518f9dc",
+    "screenshot-0016.png": "577df5050d0ff7681bb23d7a15708be207fdf15259bd59bef781fa716c0f38a0"
+  },
+  "model": "openai.gpt-5.6-sol",
+  "provenance": "formal_screenshot_only_gpt56_cua",
+  "result": "pass",
+  "role": "lower_anchor",
+  "schema_version": 1,
+  "selected_revision_digest": "e7762e520315a8daea07b9f52de905928916026dea3c93f9a4eff5314f920b03",
+  "task_id": "mobile.audit-mobile-211",
+  "trajectory_sha256": "7e211d1e0d1c2b2c02f90d3a5273b74b72f22d38489a38e73d8eb1202994fbc1"
+}

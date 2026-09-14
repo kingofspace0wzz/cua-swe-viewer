@@ -154,7 +154,7 @@ a { color: inherit; }
 .metric-strip {
   width: min(1120px, 100%);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   margin-top: 70px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -185,7 +185,7 @@ a { color: inherit; }
 .capability-grid {
   max-width: 1240px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   margin: 0 auto;
   border-top: 1px solid var(--line-dark);
   border-bottom: 1px solid var(--line-dark);
@@ -564,6 +564,7 @@ tbody tr:hover td, tbody tr.is-selected td { background: #eaf2ef; }
 .badge-web { color: #245b88; background: #dfeefa; }
 .badge-game { color: #553f9e; background: #e8e3ff; }
 .badge-game-cua { color: #553f9e; background: #e8e3ff; }
+.badge-mobile { color: #8a4c16; background: #fff0d9; }
 .badge-calibration { color: #6a4d10; background: #f6e9c9; }
 .badge-diagnostic, .badge-unknown { color: #50545b; background: #e9eaed; }
 .badge-remove, .badge-fail { color: var(--fail); background: var(--fail-soft); }

@@ -1,0 +1,23 @@
+{
+  "candidate_id": "audit-mobile-202",
+  "frame_count": 12,
+  "frame_sha256": {
+    "screenshot-0001.png": "c3a828e608ae4109a2757619580eae48c974f8a72673814a4594e7e123bf53a9",
+    "screenshot-0002.png": "1aabcbb2706d4311c8870b6630f1dcdcf71716e8cb702ce6365d42b1d2112934",
+    "screenshot-0003.png": "9e80248ba31dfaf35d79bb5de75f15bc618733c1d030e4dfbe90eb57cb00b8a2",
+    "screenshot-0004.png": "d52c5820c769024cb1190b8d7abf00134759ad19849b749aefd79621beb32d68",
+    "screenshot-0005.png": "b5b3ca4eb5c7feb47cdb7a4e949e2a257b0d51269ee91fe289f35cab5c6c63d0",
+    "screenshot-0006.png": "7e5c38faae04906df74de82e66ad45145b190ee09340a543b09ad8099e1b7b9b",
+    "screenshot-0007.png": "50ff4f5dc53c4ec11d73cb94dbce60760739ebc3912d709ceee82d4e5d4dd50d",
+    "screenshot-0008.png": "af4c24154f86f28e1e7dca65057ad6ba992969f56aaefae930c47f9a3c3dd58d",
+    "screenshot-0009.png": "d2f7c0ae7fd72edff6671ebf78266e9f3c83fec0a9942c85c3d4051fedf73ef0",
+    "screenshot-0010.png": "b0477542803ea3afd4adc7e9bca164f7621ed79cc6d82858ebfb42408874165a",
+    "screenshot-0011.png": "d80a8584bb709210cf34c4e0b12c0dd1cbf959891255abbd0f19a2e6d6bfed39",
+    "screenshot-0012.png": "1404347448f110c2ab740f8f92069a025aecf098ef52bf80f7eadfa91adf5792"
+  },
+  "ordering_note": "Frames are retained outputs from exact-gold deterministic certification and are ordered lexically by source evidence path.",
+  "provenance": "exact_gold_verifier_replay_frames",
+  "schema_version": 1,
+  "selected_revision_digest": "38b2b8cfef606641b9461be00e53d3a2fd2cdf307b4232899914b1db6d98c1e7",
+  "task_id": "mobile.audit-mobile-202"
+}
