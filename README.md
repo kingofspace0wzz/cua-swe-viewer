@@ -6,6 +6,6 @@ This repository contains only the static browser, its display data, selected GUI
 
 Raw base64-heavy Codex stdout remains in the private source; the prepared event exports and linked representative artifacts are public. Partial event data and unavailable run artifacts are explicitly marked.
 
-Current inventory: 33 Web + 29 Game + 20 Mobile = 82 tasks. The domains retain separate reporting.
+Current inventory: 33 Web + 29 Game + 20 Mobile + 20 DevOps = 102 tasks. The domains retain separate reporting.
 
-Automatically exported from source revision `8892fffce71baa0e0be636213cbbcc4cedcb6bc1`. See `publication.json` for exported file hashes. Do not edit generated files here; updates come from the private source repository's public-viewer workflow.
+Automatically exported from source revision `8dea9012f564323df57594f3a262a90e81996339`. See `publication.json` for exported file hashes. Do not edit generated files here; updates come from the private source repository's public-viewer workflow.

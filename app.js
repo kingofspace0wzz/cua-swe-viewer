@@ -5,6 +5,7 @@
   const registry = window.CANONICAL_REGISTRY;
   const canonicalTaskIds = new Set((registry?.domains || []).flatMap(domain => domain.task_ids));
   const gameCollection = window.GAME_CUA_TASKS || { tasks: [], summary: {} };
+  const devopsCollection = window.DEVOPS_TASKS || { tasks: [], summary: {} };
   const mediaIndex = window.TRAJECTORY_MEDIA || { tasks: {}, summary: {} };
   const activityIndex = window.AGENT_ACTIVITY || { tasks: {}, summary: {} };
   if (!sourceAudit || !Array.isArray(sourceAudit.tasks) || !registry || canonicalTaskIds.size !== registry.task_count) {
@@ -18,6 +19,11 @@
         difficulty_band: task.difficulty_band || (task.cua === "pass" ? "easy" : "frontier"),
         is_game_cua: true,
       }))
+    : [];
+  const devopsTasks = Array.isArray(devopsCollection.tasks)
+    ? devopsCollection.tasks
+        .filter(task => canonicalTaskIds.has(task.task_id))
+        .map(task => ({ ...task, domain: "devops", is_devops_cua: true }))
     : [];
   const audit = {
     ...sourceAudit,
@@ -35,6 +41,7 @@
           };
         }),
       ...gameTasks,
+      ...devopsTasks,
     ],
   };
 
@@ -97,6 +104,7 @@
       diagnostic_keep: ["Diagnostic", "diagnostic"],
       game_cua: ["Game CUA", "game-cua"],
       mobile_keep: ["Mobile CUA", "mobile"],
+      devops_keep: ["DevOps CUA", "devops"],
       remove_redundant: ["Remove", "remove"],
     };
     const [label, style] = labels[task.recommendation] || ["Unknown", "unknown"];
@@ -130,6 +138,8 @@
         ? "The exact scored run's Codex event stream was not copied into the viewer bundle. Only its verified GUI screenshots and visual actions are retained."
         : task.is_mobile_cua
           ? "The published Mobile evidence contains screenshot-view records and visual observations. The full coding transcript was excluded from the artifact packet and must be recovered from the original run."
+          : task.is_devops_cua
+            ? "The full selected DevOps trajectories and screenshots remain on the evaluation EFS. They were audited but are not committed into the source repository or public viewer."
           : "The historical Web publication retained screenshots, patches, verifier reports, and visual trajectories, while the base64-heavy Codex stdout remained on the execution host and is not part of this viewer bundle.",
     };
   }
@@ -241,6 +251,9 @@
         ["Model", task.evaluation?.model],
         ["Scorable rows", `${task.evaluation?.scorable_rows}/${task.evaluation?.total_rows}`],
       );
+    }
+    if (task.is_devops_cua) {
+      rows.push(["Frontier tier", humanize(task.frontier_tier)]);
     }
     return rows
       .map(([label, value]) => `<dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd>`)
@@ -462,7 +475,7 @@
       ? `<a class="button" href="${relativeLink(task.task_file)}" target="_blank" rel="noreferrer">Task YAML${publicExport ? " · repo access" : ""}</a>`
       : "";
     const evidenceAction = task.evidence_file
-      ? `<a class="button" href="${publicExport ? `data/${task.is_game_cua ? "game-cua-tasks" : "corpus-audit"}.json` : relativeLink(task.evidence_file)}" target="_blank" rel="noreferrer">Evidence inventory</a>`
+      ? `<a class="button" href="${publicExport ? `data/${task.is_game_cua ? "game-cua-tasks" : task.is_devops_cua ? "devops-tasks" : "corpus-audit"}.json` : relativeLink(task.evidence_file)}" target="_blank" rel="noreferrer">Evidence inventory</a>`
       : "";
     els.stage.innerHTML = `
       <div class="stage-header">
@@ -647,6 +660,7 @@
   document.querySelector("#closeCompare").addEventListener("click", () => els.compareDialog.close());
 
   const gameTaskCount = Number(gameCollection.summary?.tasks || gameTasks.length);
+  const devopsTaskCount = Number(devopsCollection.summary?.tasks || devopsTasks.length);
   const webTasks = audit.tasks.filter((task) => task.domain === "web");
   const mobileTasks = audit.tasks.filter((task) => task.domain === "mobile");
   const webTaskCount = webTasks.length;
@@ -657,11 +671,14 @@
   const gameFrontierCount = gameTaskCount - gameEasyCount;
   const mobileEasyCount = mobileTasks.filter((task) => task.difficulty_band === "easy").length;
   const mobileFrontierCount = mobileTaskCount - mobileEasyCount;
-  const totalTaskCount = webTaskCount + gameTaskCount + mobileTaskCount;
+  const devopsEasyCount = devopsTasks.filter((task) => task.difficulty_band === "easy").length;
+  const devopsFrontierCount = devopsTaskCount - devopsEasyCount;
+  const totalTaskCount = webTaskCount + gameTaskCount + mobileTaskCount + devopsTaskCount;
   document.querySelector("#totalMetric").textContent = totalTaskCount;
   document.querySelector("#webMetric").textContent = webTaskCount;
   document.querySelector("#gameMetric").textContent = gameTaskCount;
   document.querySelector("#mobileMetric").textContent = mobileTaskCount;
+  document.querySelector("#devopsMetric").textContent = devopsTaskCount;
   document.querySelector("#webCapabilityMetric").textContent = `${webTaskCount} tasks`;
   document.querySelector("#webEasyMetric").textContent = `${webEasyCount} Easy`;
   document.querySelector("#webFrontierMetric").textContent = `${webFrontierCount} Frontier`;
@@ -671,10 +688,14 @@
   document.querySelector("#mobileCapabilityMetric").textContent = `${mobileTaskCount} tasks`;
   document.querySelector("#mobileEasyMetric").textContent = `${mobileEasyCount} Lower`;
   document.querySelector("#mobileFrontierMetric").textContent = `${mobileFrontierCount} Upper`;
+  document.querySelector("#devopsCapabilityMetric").textContent = `${devopsTaskCount} tasks`;
+  document.querySelector("#devopsEasyMetric").textContent = `${devopsEasyCount} Lower`;
+  document.querySelector("#devopsFrontierMetric").textContent = `${devopsFrontierCount} Differential / Upper`;
   document.querySelector("#allScopeTab").textContent = `All ${totalTaskCount}`;
   document.querySelector("#webScopeTab").textContent = `Web ${webTaskCount}`;
   document.querySelector("#gameScopeTab").textContent = `Game ${gameTaskCount}`;
   document.querySelector("#mobileScopeTab").textContent = `Mobile ${mobileTaskCount}`;
+  document.querySelector("#devopsScopeTab").textContent = `DevOps ${devopsTaskCount}`;
   document.querySelector("#auditReportLink").href = publicExport ? "public-docs/web-curation-audit.md" : relativeLink(
     "dataset/reports/WEB_CANONICAL_67_CURATION_REPORT.md",
   );

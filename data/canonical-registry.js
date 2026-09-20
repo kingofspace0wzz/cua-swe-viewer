@@ -1,7 +1,7 @@
 window.CANONICAL_REGISTRY = {
   "schema_version": 1,
-  "release_id": "cua-swe.canonical-82",
-  "task_count": 82,
+  "release_id": "cua-swe.canonical-102",
+  "task_count": 102,
   "domains": [
     {
       "domain": "web",
@@ -104,6 +104,33 @@ window.CANONICAL_REGISTRY = {
         "mobile.audit-mobile-220",
         "mobile.audit-mobile-229",
         "mobile.audit-mobile-230"
+      ]
+    },
+    {
+      "domain": "devops",
+      "manifest": "dataset/devops/manifest.yaml",
+      "task_count": 20,
+      "task_ids": [
+        "devops.trace-await-context.lower-1.frontier-hard-r1.001",
+        "devops.trace-clock-skew.lower-3.frontier-hard-r1.001",
+        "devops.alert-inhibition-equal-labels.harder-1.frontier-hard-r1.001",
+        "devops.rate-before-aggregation.harder-1.frontier-hard-r1.001",
+        "devops.slo-availability-rollup.harder-1.frontier-hard-r1.001",
+        "devops.log-severity-normalization.r1.frontier-hard-r1.001",
+        "devops.tail-sampling-decision-window.owner20-r1.frontier-hard-r2.001",
+        "devops.alert-pending-identity.receiver-selector-r2.frontier-hard-r1.001",
+        "devops.statsd-gauge-update-mode.owner32-r1.frontier-hard-r4.001",
+        "devops.rate-before-aggregation.harder-1.frontier-hard-r1.cua-upper-r1.001",
+        "devops.tail-sampling-decision-window.owner20-r1.frontier-hard-r3.cua-diff-r2.001",
+        "devops.statsd-gauge-update-mode.owner32-r1.frontier-hard-r5.001",
+        "devops.rate-before-aggregation.harder-1.frontier-hard-r1.cua-upper-r2.001",
+        "devops.trace-await-context.lower-1.frontier-hard-r1.cua-diff-r1.001",
+        "devops.slo-availability-rollup.harder-1.frontier-hard-r1.cua-upper-r1.001",
+        "devops.alert-inhibition-equal-labels.harder-1.frontier-hard-r1.cua-upper-r3.001",
+        "devops.log-severity-normalization.r1.frontier-hard-r1.cua-upper-r2.001",
+        "devops.trace-clock-skew.lower-3.frontier-hard-r1.cua-upper-r6.001",
+        "devops.alert-pending-identity.receiver-selector-r2.frontier-hard-r2.cua-upper-r2.001",
+        "devops.scrape-response-phase-deadline.owner29-r1.frontier-hard-r2.cua-diff-r3.001"
       ]
     }
   ],

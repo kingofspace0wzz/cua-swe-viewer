@@ -22,10 +22,10 @@
 
     <main id="top">
       <section class="hero">
-        <p class="section-kicker">Research dataset · Web + Game + Mobile CUA frontiers</p>
+        <p class="section-kicker">Research dataset · Web + Game + Mobile + DevOps CUA frontiers</p>
         <h1>CUA-SWE<br>Corpus Viewer</h1>
         <p class="hero-copy">
-          An evidence-first view of web, game-debugging, and Mobile tasks
+          An evidence-first view of web, game-debugging, Mobile, and DevOps tasks
           that distinguish code-only agents from agents that can inspect and
           operate running software.
         </p>
@@ -35,19 +35,20 @@
           <a id="mobileReportLink" class="button" href="../dataset/reports/MOBILE_CUA_20_VIEWER_REPORT.md">Mobile viewer report</a>
         </div>
         <div class="metric-strip" aria-label="Corpus summary">
-          <div><strong id="totalMetric">82</strong><span>Total tasks</span></div>
+          <div><strong id="totalMetric">102</strong><span>Total tasks</span></div>
           <div><strong id="webMetric">33</strong><span>Web domain</span></div>
           <div><strong id="gameMetric">29</strong><span>Game domain</span></div>
           <div><strong id="mobileMetric">20</strong><span>Mobile domain</span></div>
+          <div><strong id="devopsMetric">20</strong><span>DevOps domain</span></div>
         </div>
       </section>
 
       <section id="corpus" class="section section-capabilities">
         <div class="section-heading">
           <p class="section-kicker">01 · Corpus domains</p>
-          <h2>Three domains, one evaluation vocabulary.</h2>
+          <h2>Four domains, one evaluation vocabulary.</h2>
           <p>
-            Tasks are grouped first by software domain: Web, Game, and Mobile.
+            Tasks are grouped first by software domain: Web, Game, Mobile, and DevOps.
             Easy/Lower means the evaluated CUA condition solved the task;
             Frontier/Upper means it did not.
           </p>
@@ -71,6 +72,12 @@
             <strong id="mobileCapabilityMetric">20 tasks</strong>
             <p><span id="mobileEasyMetric">11 Lower</span> · <span id="mobileFrontierMetric">9 Upper</span>. MobileGym-derived tasks with formal GPT-5.6 CUA runs and exact-gold visual replays.</p>
           </article>
+          <article>
+            <span class="capability-index">D</span>
+            <h3>DevOps domain</h3>
+            <strong id="devopsCapabilityMetric">20 tasks</strong>
+            <p><span id="devopsEasyMetric">15 Lower</span> · <span id="devopsFrontierMetric">5 Differential / Upper</span>. Operator-console debugging with deterministic protected-runtime verification.</p>
+          </article>
         </div>
       </section>
 
@@ -91,6 +98,7 @@
           <button id="webScopeTab" type="button" data-scope="web">Web 33</button>
           <button id="gameScopeTab" type="button" data-scope="game">Game 29</button>
           <button id="mobileScopeTab" type="button" data-scope="mobile">Mobile 20</button>
+          <button id="devopsScopeTab" type="button" data-scope="devops">DevOps 20</button>
         </div>
 
         <div class="explorer">
@@ -109,6 +117,7 @@
                   <option value="v3">V3</option>
                   <option value="game">Game CUA</option>
                   <option value="mobile-v1">Mobile CUA</option>
+                  <option value="devops-v1">DevOps CUA</option>
                 </select>
               </label>
               <label>
@@ -140,7 +149,7 @@
         <div class="section-heading compact">
           <p class="section-kicker">03 · Performance and curation</p>
           <h2>The domain-first corpus ledger.</h2>
-          <p>Compare Web, Game, and Mobile tasks, then refine by difficulty and collection.</p>
+          <p>Compare Web, Game, Mobile, and DevOps tasks, then refine by difficulty and collection.</p>
         </div>
         <div class="ledger-controls">
           <label>
@@ -152,6 +161,7 @@
               <option value="diagnostic_keep">Web diagnostic</option>
               <option value="game_cua">Game CUA</option>
               <option value="mobile_keep">Mobile CUA</option>
+              <option value="devops_keep">DevOps CUA</option>
             </select>
           </label>
           <span id="filterSummary">Showing the curated corpus</span>
@@ -194,9 +204,10 @@
       <div id="compareGrid" class="compare-grid"></div>
     </dialog>
 
-    <script src="data/canonical-registry.js?v=domain-layout-82"></script>
-    <script src="data/corpus-audit.js?v=domain-layout-82"></script>
-    <script src="data/game-cua-tasks.js?v=domain-layout-82"></script>
+    <script src="data/canonical-registry.js?v=domain-layout-102"></script>
+    <script src="data/corpus-audit.js?v=domain-layout-102"></script>
+    <script src="data/game-cua-tasks.js?v=domain-layout-102"></script>
+    <script src="data/devops-tasks.js?v=domain-layout-102"></script>
     <script src="data/trajectory-media.js?v=20260905-1"></script>
     <script src="data/agent-activity.js?v=web-game-artifacts-20260914"></script>
     <script>window.PUBLIC_VIEWER_EXPORT = true;</script>
