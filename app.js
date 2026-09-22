@@ -35,7 +35,9 @@
           return {
             ...task,
             domain: isMobile ? "mobile" : "web",
-            difficulty_band: task.cua === "pass" ? "easy" : "frontier",
+            difficulty_band: isMobile
+              ? (task.cua === "pass" ? "easy" : "frontier")
+              : (task.difficulty_band || "model_specific"),
             is_game_cua: false,
             is_mobile_cua: isMobile,
           };
@@ -102,6 +104,7 @@
       primary_keep: ["Primary", "primary"],
       calibration_keep: ["Calibration", "calibration"],
       diagnostic_keep: ["Diagnostic", "diagnostic"],
+      web_keep: ["Web36", "primary"],
       game_cua: ["Game CUA", "game-cua"],
       mobile_keep: ["Mobile CUA", "mobile"],
       devops_keep: ["DevOps CUA", "devops"],
@@ -121,8 +124,21 @@
         ? `../${encodeURI(path)}`
         : `${githubFileRoot}${encodeURI(path)}`;
 
+  function revisionMatches(task, entry) {
+    return task?.media_evidence_policy !== "exact_task_input_required"
+      || Boolean(task.evaluated_task_input_sha256
+        && entry?.evaluated_task_input_sha256 === task.evaluated_task_input_sha256);
+  }
+
   function taskMedia(taskId) {
-    return mediaIndex.tasks?.[taskId] || {
+    const task = audit.tasks.find(row => row.task_id === taskId);
+    const entry = mediaIndex.tasks?.[taskId];
+    if (entry && revisionMatches(task, entry)) return entry;
+    if (task?.media_evidence_policy === "exact_task_input_required") {
+      const reason = "No viewer replay is bound to this evaluated Web36 input. Older same-ID recordings remain historical evidence.";
+      return { gold: { status: "unavailable", reason }, agent: { status: "unavailable", reason } };
+    }
+    return {
       gold: { status: "unavailable", reason: "No gold replay recording is registered." },
       agent: { status: "unavailable", reason: "No formal agent screenshot sequence is registered." },
     };
@@ -130,7 +146,14 @@
 
   function taskActivity(task) {
     const published = activityIndex.tasks?.[task.task_id];
-    if (published) return published;
+    if (published && revisionMatches(task, published)) return published;
+    if (task.media_evidence_policy === "exact_task_input_required") {
+      return {
+        status: "unavailable",
+        coverage: "not_registered_for_revision",
+        reason: "The Web36 evaluation was audited, but no public activity stream is registered against this exact evaluated input. An older same-ID transcript is not substituted.",
+      };
+    }
     return {
       status: "unavailable",
       coverage: "gui_only",
@@ -405,7 +428,7 @@
               <p class="section-kicker">Agent activity</p>
               <h4>Coding transcript unavailable</h4>
             </div>
-            <span class="activity-coverage">GUI evidence only</span>
+            <span class="activity-coverage">Activity unavailable</span>
           </div>
           <p>${escapeHtml(activity.reason)}</p>
           <p>The viewer does not reconstruct terminal or editing actions from the final patch because that would not be the original trajectory.</p>
@@ -468,6 +491,9 @@
       return;
     }
     const media = taskMedia(task.task_id);
+    const reasons = Array.isArray(task.reasons)
+      ? task.reasons
+      : [task.rationale].filter(Boolean);
     const appAction = task.app_file
       ? `<a class="button" href="${relativeLink(task.app_file)}" target="_blank" rel="noreferrer">${publicExport ? "Fixture source · repo access" : "Open fixture"}</a>`
       : "";
@@ -486,8 +512,8 @@
             ${badge(humanize(task.domain), task.domain)}
             ${difficultyBadge(task)}
             ${scopeBadge(task)}
-            <span class="tag ${task.code_only === "fail" ? "tag-fail" : ""}">Code-only ${escapeHtml(task.code_only)}</span>
-            <span class="tag ${task.cua === "pass" ? "tag-pass" : "tag-fail"}">CUA ${escapeHtml(task.cua)}</span>
+            <span class="tag ${task.code_only === "fail" ? "tag-fail" : ""}">Code-only ${escapeHtml(humanize(task.code_only))}</span>
+            <span class="tag ${task.cua === "pass" ? "tag-pass" : task.cua === "fail" ? "tag-fail" : ""}">CUA ${escapeHtml(humanize(task.cua))}</span>
           </div>
         </div>
         <div class="stage-actions">
@@ -509,7 +535,7 @@
       <div class="evidence-grid">
         <section>
           <h4>Curation decision</h4>
-          <ul>${task.reasons.map((reason) => `<li>${escapeHtml(reason)}</li>`).join("")}</ul>
+          <ul>${reasons.map((reason) => `<li>${escapeHtml(reason)}</li>`).join("")}</ul>
         </section>
         <section>
           <h4>Audit dimensions</h4>
@@ -680,8 +706,8 @@
   document.querySelector("#mobileMetric").textContent = mobileTaskCount;
   document.querySelector("#devopsMetric").textContent = devopsTaskCount;
   document.querySelector("#webCapabilityMetric").textContent = `${webTaskCount} tasks`;
-  document.querySelector("#webEasyMetric").textContent = `${webEasyCount} Easy`;
-  document.querySelector("#webFrontierMetric").textContent = `${webFrontierCount} Frontier`;
+  document.querySelector("#webEasyMetric").textContent = "All tasks in denominator";
+  document.querySelector("#webFrontierMetric").textContent = "Results by model and condition";
   document.querySelector("#gameCapabilityMetric").textContent = `${gameTaskCount} tasks`;
   document.querySelector("#gameEasyMetric").textContent = `${gameEasyCount} Easy`;
   document.querySelector("#gameFrontierMetric").textContent = `${gameFrontierCount} Frontier`;
