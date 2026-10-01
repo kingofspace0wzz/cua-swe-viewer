@@ -1,0 +1,9 @@
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-fg6ii7x7/rollout/cua-adapter/screenshot-0001.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:40:06.018979+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-fg6ii7x7/rollout/cua-adapter/screenshot-0002.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:40:24.032239+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-fg6ii7x7/rollout/cua-adapter/screenshot-0003.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:40:59.055015+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-fg6ii7x7/rollout/cua-adapter/screenshot-0004.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:41:51.463466+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-fg6ii7x7/rollout/cua-adapter/screenshot-0005.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:42:00.123255+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-fg6ii7x7/rollout/cua-adapter/screenshot-0006.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:42:35.496557+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-fg6ii7x7/rollout/cua-adapter/screenshot-0007.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:42:42.715008+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-fg6ii7x7/rollout/cua-adapter/screenshot-0008.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:42:48.946495+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-fg6ii7x7/rollout/cua-adapter/screenshot-0009.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:42:57.434072+00:00"}

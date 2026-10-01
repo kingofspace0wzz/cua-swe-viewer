@@ -1,0 +1,4 @@
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-g1fwx31i/rollout/cua-adapter/screenshot-0001.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T08:14:46.498009+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-g1fwx31i/rollout/cua-adapter/screenshot-0002.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T08:14:53.175913+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-g1fwx31i/rollout/cua-adapter/screenshot-0003.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T08:14:59.986847+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-g1fwx31i/rollout/cua-adapter/screenshot-0004.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T08:15:36.034560+00:00"}

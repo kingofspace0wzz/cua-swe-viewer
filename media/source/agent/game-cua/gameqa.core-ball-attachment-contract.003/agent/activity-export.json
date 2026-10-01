@@ -1,0 +1,523 @@
+{
+  "coverage": "retained_codex_events_partial",
+  "events": [
+    {
+      "detail": "I\u2019ll reproduce the timing regression in the running app, trace the attachment logic in source, make a focused fix, then verify gameplay, restart, round completion, and the public build.",
+      "kind": "agent_message",
+      "sequence": 1,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "LICENSE-MIT\nLICENSE\nREADME.md\nserver.mjs\nUPSTREAM.md\npackage.json\nbuild.mjs\nsrc/core-motion.js\nsrc/angles.js\nsrc/styles.css\nsrc/index.html\nsrc/main.js\nsrc/game.js\nsrc/shot-controller.js\nsrc/occupancy.js",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 2,
+      "status": "completed",
+      "title": "/bin/bash -lc \"pwd && rg --files -g '\"'!node_modules'\"' -g '\"'!dist'\"' | sed -n '1,160p'\"",
+      "truncated": false
+    },
+    {
+      "detail": "./package.json\n./README.md",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 3,
+      "status": "completed",
+      "title": "/bin/bash -lc \"git status --short && find . -maxdepth 2 -type f \\\\( -name 'package.json' -o -name 'vite.config.*' -o -name 'README*' \\\\) -print\"",
+      "truncated": false
+    },
+    {
+      "detail": "import {normalizeAngle} from './angles.js';\n\nconst OPENING_FLIGHT_TIME = 20000;\nconst CRUISE_QUEUE_FLIGHT_TIME = 770;\nconst SHIFT_QUEUE_FLIGHT_TIME = 710;\nconst SPRINT_FLIGHT_TIME = 600;\nconst IMPACT_ANGLE = 90;\n\nexport class ShotController {\n  constructor(coreMotion) {\n    this.coreMotion = coreMotion;\n    this.reset();\n  }\n\n  reset() {\n    this.active = null;\n    this.waiting = null;\n  }\n\n  request(now) {\n    const prepared = this.prepare(now, Boolean(this.active));\n    if (!this.active) {\n      this.active = this.activate(prepared, now);\n      return 'launched';\n    }\n    if (!this.waiting) {\n      this.waiting = prepared;\n      return 'queued';\n    }\n    return 'full';\n  }\n\n  prepare(now, fromQueue) {\n    const plannedFlightTime = fromQueue\n      ? CRUISE_QUEUE_FLIGHT_TIME\n      : this.flightTimeFor({fromQueue}, this.coreMotion.launchProfile);\n    return {\n      acceptedAt: now,\n      fromQueue,\n      plannedCoreAngle: this.coreMotion.predictAngleAt(plannedFlightTime),\n    };\n  }\n\n  activate(prepared, now) {\n    const launchProfile = this.coreMotion.launchProfile;\n    const flightTime = this.flightTimeFor(prepared, launchProfile);\n    return {\n      ...prepared,\n      flightTime,\n      launchProfile,\n      launchedAt: now,\n      progress: 0,\n    };\n  }\n\n  flightTimeFor(prepared, launchProfile) {\n    if (prepared.fromQueue) {\n      return launchProfile === 'shifting' ? SHIFT_QUEUE_FLIGHT_TIME : CRUISE_QUEUE_FLIGHT_TIME;\n    }\n    return launchProfile === 'sprint' ? SPRINT_FLIGHT_TIME : OPENING_FLIGHT_TIME;\n  }\n\n  step(now) {\n    if (!this.active) return [];\n    this.active.progress = Math.min(1, (now - this.active.launchedAt) / this.active.flightTime);\n    if (this.active.progress < 1) return [];\n\n    const arrival = {\n      worldAngle: IMPACT_ANGLE,\n      localAngle\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 4,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' src/game.js && sed -n '1,260p' src/shot-controller.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "import {circularDistance, normalizeAngle} from './angles.js';\n\nconst CLEARANCE = 24;\n\nexport class Occupancy {\n  constructor() {\n    this.reset();\n  }\n\n  reset() {\n    this.pins = [180, 300, 359];\n  }\n\n  tryAttach(localAngle) {\n    const angle = normalizeAngle(localAngle);\n    const blocked = this.pins.some((pin) => circularDistance(pin, angle) < CLEARANCE);\n    this.pins.push(angle);\n    return {accepted: !blocked, angle};\n  }\n}\nexport function normalizeAngle(value) {\n  return ((value % 360) + 360) % 360;\n}\n\nexport function circularDistance(left, right) {\n  const distance = Math.abs(normalizeAngle(left) - normalizeAngle(right));\n  return Math.min(distance, 360 - distance);\n}",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 5,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,240p' src/core-motion.js && sed -n '1,220p' src/occupancy.js && sed -n '1,220p' src/angles.js\"",
+      "truncated": false
+    },
+    {
+      "detail": "# Core Ball deterministic contract runtime\n\nRun `npm run build`, then `npm run dev -- --host 127.0.0.1 --port 51200`.\nThe runtime has no package or network dependencies. Use the playfield or Space\nto launch and R or the visible button to restart. The opening launch remains\nvisible long enough to queue the next pin with ordinary coordinate actions.\nimport {Game} from './game.js';\n\nconst canvas = document.querySelector('#game');\nconst overlay = document.querySelector('#overlay');\nconst overlayMessage = document.querySelector('#overlay-message');\nconst startButton = document.querySelector('#start');\nconst restartButton = document.querySelector('#restart');\nconst status = document.querySelector('#status');\nconst remaining = document.querySelector('#remaining');\nconst pace = document.querySelector('#pace');\nconst paceFill = document.querySelector('#pace-fill');\nconst queueCue = document.querySelector('#queue-cue');\nconst queueState = document.querySelector('#queue-state');\n\nconst ui = {\n  hideOverlay() {\n    overlay.className = 'overlay hidden';\n  },\n  showReady() {\n    overlay.className = 'overlay';\n    overlayMessage.textContent = 'Place every pin without touching another.';\n    startButton.textContent = 'START ROUND';\n    status.textContent = 'Ready';\n  },\n  showFailure() {\n    overlay.className = 'overlay fail';\n    overlayMessage.textContent = 'Pins collided. Try the sequence again.';\n    startButton.textContent = 'TRY AGAIN';\n    status.textContent = 'Attachment collision';\n  },\n  showPass() {\n    overlay.className = 'overlay pass';\n    overlayMessage.textContent = 'All pins attached.';\n    startButton.textContent = 'PLAY AGAIN';\n    status.textContent = 'Round clear';\n  },\n  setStatus(message) {\n    status.textContent = message;\n  },\n  update(state) {\n    remaining.te\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 6,
+      "status": "completed",
+      "title": "/bin/bash -lc \"cat package.json && sed -n '1,240p' README.md && sed -n '1,220p' src/main.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 7,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0001.png",
+          "sha256": "fb70ed7fe09616c0fbf0c36109520e3001eb1eefb3ff702555e255f5c62af34b"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "The source already exposes the likely contract break: queued shots store a predicted core angle when the tap is accepted, even though they may not launch until much later. I\u2019m confirming that this is the same visible \u201cjump\u201d in the running scenario before changing it.",
+      "kind": "agent_message",
+      "sequence": 8,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 481, \"y\": 491}",
+      "kind": "computer_use",
+      "sequence": 9,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0002.png",
+          "sha256": "ab12904f0bd856bc2469bf8f1e2ea52e68bd95730055303524b0b9ff0a4b9942"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 480, \"y\": 600}",
+      "kind": "computer_use",
+      "sequence": 10,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0003.png",
+          "sha256": "96c1168e8b31bb9b1c78276c0284eaccfbd0295078538ec64496721c37905284"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 480, \"y\": 600}",
+      "kind": "computer_use",
+      "sequence": 11,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0004.png",
+          "sha256": "baf0488643d0906c8a5b8ddfab492ac136964d6ccce800f817ba169e9808267e"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 20000, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 12,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "not_recorded",
+      "image_reason": "No screenshot was returned for this call in the retained run."
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 13,
+      "status": "completed",
+      "title": "visual_cua.observe",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0005.png",
+          "sha256": "e4022dbbd77c506de1117078245e0811c00df065112c21b2785b271fd62b2e7d"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "The running scenario reproduced the failure: the queued pin visibly reached the open bottom gap, then the round immediately reported an attachment collision. I\u2019m changing the attachment angle to be derived from the core\u2019s angle at actual impact\u2014the same frame used to render the approach.",
+      "kind": "agent_message",
+      "sequence": 14,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: shot-controller.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "shot-controller.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 15,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "fire 0 launched\nfire 0 queued\narrival {\n  now: 20000,\n  core: 2.7284841053187847e-11,\n  local: 89.99999999997272,\n  world: 90,\n  accepted: true\n}\nfire 20720 queued\nfire 20720 full\narrival {\n  now: 20780,\n  core: 69.14700000002722,\n  local: 20.85299999997278,\n  world: 90,\n  accepted: false\n}\narrival {\n  now: 21500,\n  core: 172.80000000002713,\n  local: 277.1999999999729,\n  world: 90,\n  accepted: false\n}\n{\n  attachments: 1,\n  pins: [\n    180,\n    300,\n    359,\n    89.99999999997272,\n    20.85299999997278,\n    277.1999999999729\n  ],\n  active: null,\n  waiting: null\n}\n\n> core-ball-contract@1.0.0 build\n> node build.mjs\n\nBuilt Core Ball contract runtime.\ndiff --git a/src/shot-controller.js b/src/shot-controller.js\nindex ba3c5a0..d770d2d 100644\n--- a/src/shot-controller.js\n+++ b/src/shot-controller.js\n@@ -31,13 +31,9 @@ export class ShotController {\n   }\n \n   prepare(now, fromQueue) {\n-    const plannedFlightTime = fromQueue\n-      ? CRUISE_QUEUE_FLIGHT_TIME\n-      : this.flightTimeFor({fromQueue}, this.coreMotion.launchProfile);\n     return {\n       acceptedAt: now,\n       fromQueue,\n-      plannedCoreAngle: this.coreMotion.predictAngleAt(plannedFlightTime),\n     };\n   }\n \n@@ -67,7 +63,7 @@ export class ShotController {\n \n     const arrival = {\n       worldAngle: IMPACT_ANGLE,\n-      localAngle: normalizeAngle(IMPACT_ANGLE - this.active.plannedCoreAngle),\n+      localAngle: normalizeAngle(IMPACT_ANGLE - this.coreMotion.angle),\n       acceptedAt: this.active.acceptedAt,\n       launchedAt: this.active.launchedAt,\n     };",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 16,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node --input-type=module <<'EOF'\nimport {CoreMotion} from './src/core-motion.js';\nimport {ShotController} from './src/shot-controller.js';\nimport {Occupancy} from './src/occupancy.js';\n\nconst motion = new CoreMotion();\nconst shots = new ShotController(motion);\nconst occupancy = new Occupancy();\nlet now = 0;\nlet attachments = 0;\nfunction fire() { console.log('fire', now, shots.request(now)); }\nfunction advance(ms) {\n  for (let elapsed = 0; elapsed < ms; elapsed += 20) {\n    now += 20;\n    motion.step(20);\n    for (const arrival of shots.step(now)) {\n      const result = occupancy.tryAttach(arrival.localAngle);\n      attachments += result.accepted ? 1 : 0;\n      console.log('arrival', {now, core: motion.angle, local: arrival.localAngle, world: (arrival.localAngle + motion.angle) % 360, accepted: result.accepted});\n      if (attachments === 1) motion.beginPaceChange();\n    }\n\u2026 output truncated in presentation bundle \u2026",
+      "truncated": true
+    },
+    {
+      "detail": "fire 0 launched\nfire 0 queued\narrival {\n  now: 20000,\n  core: 2.7284841053187847e-11,\n  local: 89.99999999997272,\n  nearest: 90.00000000002728\n}\narrival {\n  now: 20780,\n  core: 69.14700000002722,\n  local: 20.85299999997278,\n  nearest: 21.85299999997278\n}\nfire 20780 launched\nfire 20780 queued\narrival {\n  now: 40780,\n  core: 69.12000000002274,\n  local: 20.879999999977258,\n  nearest: 0.027000000004477442\n}\narrival {\n  now: 41560,\n  core: 181.44000000002256,\n  local: 268.55999999997744,\n  nearest: 31.440000000022565\n}\n[\n  180,\n  300,\n  359,\n  89.99999999997272,\n  20.85299999997278,\n  20.879999999977258,\n  268.55999999997744\n]",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 17,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node --input-type=module <<'EOF'\nimport {CoreMotion} from './src/core-motion.js';\nimport {ShotController} from './src/shot-controller.js';\nimport {circularDistance} from './src/angles.js';\nconst motion=new CoreMotion(), shots=new ShotController(motion); let now=0; const pins=[180,300,359]; let attached=0;\nconst fire=()=>console.log('fire',now,shots.request(now));\nconst advance=(ms)=>{for(let e=0;e<ms;e+=20){now+=20;motion.step(20);for(const a of shots.step(now)){const nearest=Math.min(...pins.map(p=>circularDistance(p,a.localAngle)));console.log('arrival',{now,core:motion.angle,local:a.localAngle,nearest});pins.push(a.localAngle);attached++;if(attached===1)motion.beginPaceChange();}}};\nfire();fire();advance(20780);fire();fire();advance(20780);console.log(pins);\nEOF\"",
+      "truncated": false
+    },
+    {
+      "detail": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <title>Core Ball</title>\n    <link rel=\"stylesheet\" href=\"styles.css\">\n  </head>\n  <body>\n    <main class=\"shell\">\n      <section class=\"playfield\" aria-label=\"Core Ball game\">\n        <canvas id=\"game\" width=\"760\" height=\"680\" aria-label=\"Core Ball playfield\"></canvas>\n        <div id=\"overlay\" class=\"overlay\">\n          <div class=\"mark\" aria-hidden=\"true\"><span></span><span></span><span></span></div>\n          <h1>CORE BALL</h1>\n          <p id=\"overlay-message\">Place every pin without touching another.</p>\n          <button id=\"start\" type=\"button\">START ROUND</button>\n        </div>\n      </section>\n      <aside class=\"panel\">\n        <p class=\"eyebrow\">ROTATION LAB</p>\n        <h2>Attachment Run</h2>\n        <div class=\"readout\"><span>ROUND</span><strong id=\"round\">01</strong></div>\n        <div class=\"readout\"><span>PINS LEFT</span><strong id=\"remaining\">04</strong></div>\n        <div class=\"readout\"><span>CORE PACE</span><strong id=\"pace\">STEADY</strong></div>\n        <div class=\"pace-track\"><i id=\"pace-fill\"></i></div>\n        <div id=\"queue-cue\" class=\"queue-cue\"><i></i><strong id=\"queue-state\">QUEUE OPEN</strong></div>\n        <p class=\"rules\">Flights are deliberate. Tap again while the launch trail is visible to stage the next pin.</p>\n        <button id=\"restart\" class=\"secondary\" type=\"button\">RESTART</button>\n        <p id=\"status\" class=\"status\" aria-live=\"polite\">Ready</p>\n      </aside>\n    </main>\n    <script type=\"module\" src=\"main.js\"></script>\n  </body>\n</html>\n:root {\n  color-scheme: dark;\n  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif;\n  backgro\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 18,
+      "status": "completed",
+      "title": "/bin/bash -lc \"cat UPSTREAM.md && sed -n '1,260p' src/index.html && sed -n '1,300p' src/styles.css && sed -n '1,220p' build.mjs\"",
+      "truncated": true
+    },
+    {
+      "detail": "A deterministic check exposed a second half of the same timing bug: the queued pin is promoted before the first attachment starts the core\u2019s pace shift, so it receives the cruise flight profile even though its entire visible flight occurs during the shift. I\u2019m keeping promotion in the attachment transaction so the launch profile and impact angle describe the flight actually shown.",
+      "kind": "agent_message",
+      "sequence": 19,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: game.js\nupdate: shot-controller.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "game.js"
+        },
+        {
+          "kind": "update",
+          "path": "shot-controller.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 20,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "fire 0 launched\nfire 0 queued\narrival {\n  now: 20000,\n  profile: undefined,\n  core: 2.7284841053187847e-11,\n  local: 89.99999999997272,\n  world: 90,\n  accepted: true\n}\narrival {\n  now: 20720,\n  profile: undefined,\n  core: 60.91200000002726,\n  local: 29.087999999972737,\n  world: 90,\n  accepted: true\n}\n{\n  now: 20720,\n  attachments: 2,\n  failed: false,\n  pins: [ 180, 300, 359, 89.99999999997272, 29.087999999972737 ],\n  active: null,\n  waiting: null\n}",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 21,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node --input-type=module <<'EOF'\nimport {CoreMotion} from './src/core-motion.js';\nimport {ShotController} from './src/shot-controller.js';\nimport {Occupancy} from './src/occupancy.js';\nconst motion=new CoreMotion(), shots=new ShotController(motion), occupancy=new Occupancy(); let now=0, attachments=0, failed=false;\nconst fire=()=>console.log('fire',now,shots.request(now));\nconst advance=(ms)=>{for(let e=0;e<ms && \"'!failed;e+=20){now+=20;motion.step(20);for(const a of shots.step(now)){const r=occupancy.tryAttach(a.localAngle);console.log('\"'arrival',{now,profile:a.launchProfile,core:motion.angle,local:a.localAngle,world:(a.localAngle+motion.angle)%360,accepted:r.accepted});if(\"'!r.accepted){failed=true;break;} attachments++;if(attachments===1)motion.beginPaceChange();shots.launchWaiting(now);}}};\nfire();fire();advance(20720);console.log({now,attachments,failed,pins:occupan\n\u2026 output truncated in presentation bundle \u2026",
+      "truncated": true
+    },
+    {
+      "detail": "{\n  delayAfterSprint: 220,\n  third: 259.9200000000001,\n  fourth: 149.04000000000008,\n  d3: 40.07999999999993,\n  d4: 30.959999999999923\n}",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 22,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node --input-type=module <<'EOF'\nimport {circularDistance,normalizeAngle} from './src/angles.js';\nconst base=[180,300,359,90,29.088];\nfor(let ms=0;ms<=2500;ms+=20){const third=normalizeAngle(291.6-144*ms/1000);const d3=Math.min(...base.map(p=>circularDistance(p,third)));const fourth=normalizeAngle(third-110.88);const d4=Math.min(...[...base,third].map(p=>circularDistance(p,fourth)));if(d3>=30&&d4>=30){console.log({delayAfterSprint:ms,third,fourth,d3,d4});break;}}\nEOF\"",
+      "truncated": false
+    },
+    {
+      "detail": "diff --git a/src/game.js b/src/game.js\nindex 7ea0fa3..61c4c03 100644\n--- a/src/game.js\n+++ b/src/game.js\n@@ -88,6 +88,8 @@ export class Game {\n         this.metrics.completed += 1;\n         this.phase = 'passed';\n         this.ui.showPass();\n+      } else {\n+        this.shots.launchWaiting(this.now);\n       }\n     }\n     this.publish();\ndiff --git a/src/shot-controller.js b/src/shot-controller.js\nindex ba3c5a0..715eed7 100644\n--- a/src/shot-controller.js\n+++ b/src/shot-controller.js\n@@ -31,13 +31,9 @@ export class ShotController {\n   }\n \n   prepare(now, fromQueue) {\n-    const plannedFlightTime = fromQueue\n-      ? CRUISE_QUEUE_FLIGHT_TIME\n-      : this.flightTimeFor({fromQueue}, this.coreMotion.launchProfile);\n     return {\n       acceptedAt: now,\n       fromQueue,\n-      plannedCoreAngle: this.coreMotion.predictAngleAt(plannedFlightTime),\n     };\n   }\n \n@@ -67,18 +63,21 @@ export class ShotController {\n \n     const arrival = {\n       worldAngle: IMPACT_ANGLE,\n-      localAngle: normalizeAngle(IMPACT_ANGLE - this.active.plannedCoreAngle),\n+      localAngle: normalizeAngle(IMPACT_ANGLE - this.coreMotion.angle),\n       acceptedAt: this.active.acceptedAt,\n       launchedAt: this.active.launchedAt,\n     };\n     this.active = null;\n-    if (this.waiting) {\n-      this.active = this.activate(this.waiting, now);\n-      this.waiting = null;\n-    }\n     return [arrival];\n   }\n \n+  launchWaiting(now) {\n+    if (this.active || !this.waiting) return false;\n+    this.active = this.activate(this.waiting, now);\n+    this.waiting = null;\n+    return true;\n+  }\n+\n   getState() {\n     return {\n       active: this.active ? {",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 23,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && git diff -- src/game.js src/shot-controller.js'",
+      "truncated": false
+    },
+    {
+      "detail": "rapid inputs launched queued\nafter rapid pair {\n  scenario: { seed: 808, level: 1, timeMs: 20720, manual: true },\n  round: { phase: 'playing', remaining: 2 },\n  motion: {\n    angle: 60.91200000002726,\n    speed: 133.2,\n    transition: { active: true, progress: 0.9 }\n  },\n  shots: { active: null, waiting: 0 },\n  occupancy: { pins: [ 180, 300, 359, 89.99999999997272, 29.087999999972737 ] },\n  lastAttachment: {\n    accepted: true,\n    localAngle: 29.087999999972737,\n    worldAngle: 90,\n    coreAngle: 60.91200000002726,\n    at: 20720\n  },\n  metrics: { inputs: 2, attachments: 2, failures: 0, completed: 0 }\n}\nfinishing inputs launched queued\ncompleted {\n  scenario: { seed: 808, level: 1, timeMs: 22400, manual: true },\n  round: { phase: 'passed', remaining: 0 },\n  motion: {\n    angle: 302.4000000000269,\n    speed: 144,\n    transition: { active: false, progress: 1 }\n  },\n  shots: { active: null, waiting: 0 },\n  occupancy: {\n    pins: [\n      180,\n      300,\n      359,\n      89.99999999997272,\n      29.087999999972737,\n      259.9199999999729,\n      147.59999999997308\n    ]\n  },\n  lastAttachment: {\n    accepted: true,\n    localAngle: 147.59999999997308,\n    worldAngle: 90,\n    coreAngle: 302.4000000000269,\n    at: 22400\n  },\n  metrics: { inputs: 4, attachments: 4, failures: 0, completed: 1 }\n}\nrestarted { phase: 'ready', remaining: 4 } { pins: [ 180, 300, 359 ] } { inputs: 0, attachments: 0, failures: 0, completed: 0 }",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 24,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node --input-type=module <<'EOF'\nglobalThis.requestAnimationFrame = () => 1;\nglobalThis.performance ??= {now: () => 0};\nconst context = new Proxy({createRadialGradient: () => ({addColorStop(){}})}, {get(target, key){return key in target ? target[key] : () => {};}, set(target,key,value){target[key]=value;return true;}});\nconst canvas = {width:760,height:680,getContext:()=>context};\nconst ui = new Proxy({}, {get:()=>()=>{}});\nconst {Game} = await import('./src/game.js');\nconst game = new Game(canvas, ui);\ngame.reset({manual:true});\ngame.start();\nconsole.log('rapid inputs', game.fire(), game.fire());\ngame.advance(20720);\nconsole.log('after rapid pair', game.getState());\ngame.advance(300);\nconsole.log('finishing inputs', game.fire(), game.fire());\ngame.advance(1380);\nconst completed = game.getState();\nconsole.log('completed', completed);\nif (completed.round.phase \"'!== '\"'pass\n\u2026 output truncated in presentation bundle \u2026",
+      "truncated": true
+    },
+    {
+      "detail": "The deterministic replay now passes the rapid queued pair, preserves the impact invariant (`local + core = visible world angle`), completes all four attachments, and resets to the original ready state. I\u2019m doing the final browser run against the rebuilt app now.",
+      "kind": "agent_message",
+      "sequence": 25,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "> core-ball-contract@1.0.0 build\n> node build.mjs\n\nBuilt Core Ball contract runtime.",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 26,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Ctrl+R\"}",
+      "kind": "computer_use",
+      "sequence": 27,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "not_recorded",
+      "image_reason": "No screenshot was returned for this call in the retained run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+R\"}",
+      "kind": "computer_use",
+      "sequence": 28,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0006.png",
+          "sha256": "fb70ed7fe09616c0fbf0c36109520e3001eb1eefb3ff702555e255f5c62af34b"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 481, \"y\": 491}",
+      "kind": "computer_use",
+      "sequence": 29,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0007.png",
+          "sha256": "7f63386666ac68341c54869f042f22719765b8aa7066417270e70bfce88c192e"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 480, \"y\": 600}",
+      "kind": "computer_use",
+      "sequence": 30,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0008.png",
+          "sha256": "01a7e05309bde0b3a4d60c2bc329a0811c1ded61d30e4ba0f72d55e1f51bb47b"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"click\", \"x\": 480, \"y\": 600}",
+      "kind": "computer_use",
+      "sequence": 31,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0009.png",
+          "sha256": "c6039172c30644d00ee5a32f281f49c5fedaf60d23de1a72a27c91b403ffd2f3"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 32,
+      "status": "completed",
+      "title": "visual_cua.observe",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0010.png",
+          "sha256": "5fbe998cbcc7ed52be93f559e0bb6b909b85ed2c66bc9bb101259df4c76cc7c9"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 33,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0011.png",
+          "sha256": "571a0eb84a540c84308394e79dd475b4393975de2a17bebc4a7fe3c47e668b32"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "dist/shot-controller.js:  launchWaiting(now) {\ndist/game.js:        this.shots.launchWaiting(this.now);\nsrc/game.js:        this.shots.launchWaiting(this.now);\nsrc/shot-controller.js:  launchWaiting(now) {",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 34,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,240p' server.mjs && rg \\\"plannedCoreAngle|launchWaiting\\\" src dist\"",
+      "truncated": false
+    },
+    {
+      "detail": "The browser run revealed a tooling-specific timing issue: the protected UI captures take long enough between \u201cstart\u201d and \u201cfire\u201d to rotate into a different deterministic slot. The source replay remains exact; I\u2019m using simultaneous keyboard input for the final visual check so start and launch occur in the intended same tick.",
+      "kind": "agent_message",
+      "sequence": 35,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{\"duration_ms\": 100, \"kind\": \"key_hold\", \"text\": \"ENTER+SPACE\"}",
+      "kind": "computer_use",
+      "sequence": 36,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "not_recorded",
+      "image_reason": "No screenshot was returned for this call in the retained run."
+    },
+    {
+      "detail": "{\"duration_ms\": 100, \"kind\": \"key_hold\", \"text\": \"Enter+Space\"}",
+      "kind": "computer_use",
+      "sequence": 37,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0012.png",
+          "sha256": "571a0eb84a540c84308394e79dd475b4393975de2a17bebc4a7fe3c47e668b32"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Space\"}",
+      "kind": "computer_use",
+      "sequence": 38,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/frames/frame-0013.png",
+          "sha256": "571a0eb84a540c84308394e79dd475b4393975de2a17bebc4a7fe3c47e668b32"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "M src/game.js\n M src/shot-controller.js\n?? dist/",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 39,
+      "status": "completed",
+      "title": "/bin/bash -lc 'printenv CUA_SWE_AGENT_ROLLOUT_DIR && git status --short && git diff --check'",
+      "truncated": false
+    },
+    {
+      "detail": "add: rollout_notes.md",
+      "files": [
+        {
+          "kind": "add",
+          "path": "rollout_notes.md"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 40,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "Implemented the attachment timing fix in `src/game.js` and `src/shot-controller.js`.\n\nVerified:\n\n- Rapid queued placements attach correctly\n- Visible and resolved impact angles agree\n- Round completes with four attachments\n- Restart resets all state\n- `npm run build` passes\n- Rollout notes written to the required directory",
+      "kind": "agent_message",
+      "sequence": 41,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "\u2713 Inspect the project and identify attachment/input logic\n\u2713 Reproduce the regression in the running scenario\n\u2713 Implement a focused attachment contract fix\n\u2713 Verify gameplay, restart, completion, and build\n\u2713 Write rollout notes",
+      "kind": "plan",
+      "sequence": 42,
+      "status": "completed",
+      "title": "Agent plan",
+      "truncated": false
+    }
+  ],
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-03",
+  "run_relation": "historical_exact",
+  "status": "available",
+  "summary": {
+    "events": 42,
+    "commands": 15,
+    "file_changes": 3,
+    "computer_use_calls": 16,
+    "agent_messages": 7,
+    "plans": 1,
+    "screenshots": 13,
+    "truncated_events": 6,
+    "unfinished_items": 0
+  },
+  "task_id": "gameqa.core-ball-attachment-contract.003",
+  "terminal_status": "completed",
+  "usage": {
+    "cache_write_input_tokens": 47013,
+    "cached_input_tokens": 986651,
+    "input_tokens": 1050210,
+    "output_tokens": 13448,
+    "reasoning_output_tokens": 8652
+  },
+  "activity_source_kind": "representative_game_bundle",
+  "artifacts": {
+    "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/activity-export.json",
+    "Run provenance": "viewer/media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/activity-provenance.json",
+    "Agent patch": "viewer/media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/patch.diff"
+  },
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "13 screenshots matched to their recorded calls."
+    }
+  }
+}

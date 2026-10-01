@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "task_id": "v3.tiptap-keyboard-focus-position.002",
+  "provenance": "exact_gold_patch_replay",
+  "gold_patch_sha256": "6ed01763bff25eb9fecf4cdb6e580b7d0b9be8b839f79ba3908d5e6542e7da49",
+  "task_file_sha256": "3f5bc0727f122620487e1f92b0c6f8b4033c995e7fd213883ee0d30b8f3791ba",
+  "verifier": "python3 verifiers/browser_check.py",
+  "frame_count": 6
+}

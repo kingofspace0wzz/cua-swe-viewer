@@ -1,0 +1,97 @@
+diff --git a/js/Hex.js b/js/Hex.js
+index 7d245d5388333f1de3aed13fb0700c7e1b63bcfa..269159c54ba352caab9762bf21a1d27876c23a33 100644
+--- a/js/Hex.js
++++ b/js/Hex.js
+@@ -11,6 +11,7 @@ function Hex(sideLength) {
+ 	this.angle = 180 / this.sides;
+ 	this.targetAngle = this.angle;
+ 	this.shakes = [];
++	this.pendingConsolidations = [];
+ 	this.sideLength = sideLength;
+ 	this.strokeColor = 'blue';
+ 	this.x = trueCanvas.width / 2;
+diff --git a/js/checking.js b/js/checking.js
+index 800013709ce62a37fb4e666089b25827082ba12e..80bac139a1692248e58cfd1dbfa2754bc979306e 100644
+--- a/js/checking.js
++++ b/js/checking.js
+@@ -26,7 +26,7 @@ function floodFill(hex, side, index, deleting) {
+ 			if(hex.blocks[curSide] === undefined){continue;}
+ 			if(hex.blocks[curSide][curIndex] !== undefined){
+ 				// checking equivalency of color, if its already been explored, and if it isn't already deleted
+-				if(hex.blocks[curSide][curIndex].color == color && search(deleting,[curSide,curIndex]) === false && hex.blocks[curSide][curIndex].deleted === 0 ) {
++				if(hex.blocks[curSide][curIndex].color == color && hex.blocks[curSide][curIndex].settled === 1 && search(deleting,[curSide,curIndex]) === false && hex.blocks[curSide][curIndex].deleted === 0 ) {
+ 					//add this to the array of already explored
+ 					deleting.push([curSide,curIndex]);
+ 					//recall with next block explored
+diff --git a/js/update.js b/js/update.js
+index 4a5d0d6d24e1285adb6376a9e7c8f007d05dd05d..4313e30e0cf073299443735f5699c57daa07fe30 100644
+--- a/js/update.js
++++ b/js/update.js
+@@ -1,4 +1,45 @@
+ 
++function queueConsolidation(block) {
++	if (!MainHex.pendingConsolidations) MainHex.pendingConsolidations = [];
++	if (!block || block.deleted !== 0 || MainHex.pendingConsolidations.indexOf(block) !== -1) return;
++	MainHex.pendingConsolidations.push(block);
++}
++
++function hasMovingColor(color) {
++	for (var side = 0; side < MainHex.blocks.length; side++) {
++		for (var index = 0; index < MainHex.blocks[side].length; index++) {
++			var block = MainHex.blocks[side][index];
++			if (block.color === color && block.deleted === 0 && block.settled !== 1) {
++				return true;
++			}
++		}
++	}
++	return false;
++}
++
++function releasePendingConsolidations() {
++	if (!MainHex.pendingConsolidations) MainHex.pendingConsolidations = [];
++	for (var i = 0; i < MainHex.pendingConsolidations.length;) {
++		var block = MainHex.pendingConsolidations[i];
++
++		if (block.deleted !== 0) {
++			MainHex.pendingConsolidations.splice(i, 1);
++			continue;
++		}
++
++		if (hasMovingColor(block.color)) {
++			i++;
++			continue;
++		}
++
++		var index = block.getIndex();
++		MainHex.pendingConsolidations.splice(i, 1);
++		if (index !== undefined) {
++			consolidateBlocks(MainHex, block.attachedLane, index);
++		}
++	}
++}
++
+ //remember to update history function to show the respective iter speeds
+ function update(dt) {
+ 	var fallSpeed = (settings && settings.fallSpeedMultiplier) || 1;
+@@ -55,14 +96,21 @@ function update(dt) {
+ 	for (i = 0; i < MainHex.blocks.length; i++) {
+ 		for (j = 0; j < MainHex.blocks[i].length; j++) {
+ 			block = MainHex.blocks[i][j];
++			var wasSettled = block.settled;
+ 			MainHex.doesBlockCollide(block, j, MainHex.blocks[i]);
+ 
++			if (!wasSettled && block.settled === 1) {
++				queueConsolidation(block);
++			}
++
+ 			if (!MainHex.blocks[i][j].settled) {
+ 				MainHex.blocks[i][j].distFromHex -= block.iter * dt * settings.scale * fallSpeed;
+ 			}
+ 		}
+ 	}
+ 
++	releasePendingConsolidations();
++
+ 	for(i = 0; i < blocks.length;i++){
+ 		if (blocks[i].removed == 1) {
+ 			blocks.splice(i,1);

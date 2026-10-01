@@ -1,0 +1,17 @@
+{
+  "candidate_id": "audit-mobile-194",
+  "frame_count": 6,
+  "frame_sha256": {
+    "screenshot-0001.png": "854f4a92c37705f49e48967814adcb5b05e2058e9b2d65c32f99a23632a22c0c",
+    "screenshot-0002.png": "81627b13a0dcc9280b0bcf62d8d30da108b2acc2ef58e5d00809f441af4b8711",
+    "screenshot-0003.png": "e22d7925333d72b7a281813fd305f52e957a492fe09c77fa9a9bbd1b65665da9",
+    "screenshot-0004.png": "37c87f33a195706771fb5fc50c46f5e56e2c4bcac8ba5b5df0452d8d7b5b9ec6",
+    "screenshot-0005.png": "fd7ba46557aa8038e972a8db823cb2dd5805b7aa9c5b8379d3f9221bb8cd3d9a",
+    "screenshot-0006.png": "44eca418eeb078cf2f128031c9a4c93d57f5a79705038c7e6d8ec3ac0c5569b2"
+  },
+  "ordering_note": "Frames are retained outputs from exact-gold deterministic certification and are ordered lexically by source evidence path.",
+  "provenance": "exact_gold_verifier_replay_frames",
+  "schema_version": 1,
+  "selected_revision_digest": "4fb758b7184f3ed498d3a3390329ffcfd6667eb2e2f73ce610d51b4a1149ff4d",
+  "task_id": "mobile.audit-mobile-194"
+}

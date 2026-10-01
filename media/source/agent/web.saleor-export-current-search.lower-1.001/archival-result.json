@@ -1,0 +1,8 @@
+{
+  "task_id": "web.saleor-export-current-search.lower-1.001",
+  "success": false,
+  "progress": 0.5,
+  "patch_path": "/tmp/cua-swe-archive-v2-rl-shard01/trials/cua/gpt56-luna/web.saleor-export-current-search.lower-1.001/attempt-1/result/web.saleor-export-current-search.lower-1.001/patch.diff",
+  "verifier_report_path": "/tmp/cua-swe-archive-v2-rl-shard01/trials/cua/gpt56-luna/web.saleor-export-current-search.lower-1.001/attempt-1/result/web.saleor-export-current-search.lower-1.001/verifier_report.json",
+  "workspace_path": "/tmp/cua-swe-archive-v2-rl-shard01/trials/cua/gpt56-luna/web.saleor-export-current-search.lower-1.001/attempt-1/isolated-workspace-removed"
+}

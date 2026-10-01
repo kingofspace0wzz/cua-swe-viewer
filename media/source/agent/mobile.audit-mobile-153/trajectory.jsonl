@@ -1,0 +1,5 @@
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/audit-mobile-153-live-cua-tsl28czy/rollout/cua-adapter/screenshot-0001.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-09-09T19:11:28.026414+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/audit-mobile-153-live-cua-tsl28czy/rollout/cua-adapter/screenshot-0002.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-09-09T19:11:39.973423+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/audit-mobile-153-live-cua-tsl28czy/rollout/cua-adapter/screenshot-0003.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-09-09T19:12:06.402750+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/audit-mobile-153-live-cua-tsl28czy/rollout/cua-adapter/screenshot-0004.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-09-09T19:16:29.896463+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/audit-mobile-153-live-cua-tsl28czy/rollout/cua-adapter/screenshot-0005.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-09-09T19:16:50.960353+00:00"}

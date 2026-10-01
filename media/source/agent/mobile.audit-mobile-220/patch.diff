@@ -1,0 +1,33 @@
+--- a/system/Notes/state.ts
++++ b/system/Notes/state.ts
+@@ -17,6 +17,12 @@
+ 
+ function isPrivate(note: Note): boolean {
+   return !!note.isPrivate;
++}
++
++function restoreFromTrash(note: Note): Note {
++  const restored = { ...note };
++  delete restored.trashedAt;
++  return restored;
+ }
+ 
+ function sortNotes(notes: Note[]): Note[] {
+@@ -155,14 +161,13 @@
+     deleteNote: (id: string) => {
+       const now = TimeService.now();
+       set(state => ({
+-        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, trashedAt: now, updatedAt: now } : n))),
++        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, trashedAt: now } : n))),
+       }));
+     },
+ 
+     restoreNote: (id: string) => {
+-      const now = TimeService.now();
+-      set(state => ({
+-        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, trashedAt: undefined, updatedAt: now } : n))),
++      set(state => ({
++        notes: sortNotes(state.notes.map(n => (n.id === id ? restoreFromTrash(n) : n))),
+       }));
+     },
+ 

@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "task_id": "v3.react-datepicker-mask-clear-blur.001",
+  "provenance": "exact_gold_patch_replay",
+  "gold_patch_sha256": "f677f85abe8d14f1a2cec479e69153b5ba6c3cd4e7f3585fd0b16e19cc91bd18",
+  "task_file_sha256": "87a676912df5271348b8dec36b68c3816e6f4bad948881a6acea22c043aa55b3",
+  "verifier": "python3 verifiers/verify.py",
+  "frame_count": 14
+}

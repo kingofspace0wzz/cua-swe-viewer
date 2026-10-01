@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "task_id": "web.react-spectrum-combobox-selection.lower-1.001",
+  "provenance": "exact_gold_patch_replay",
+  "gold_patch_sha256": "860478cf331c15bd4f837100e3d971e20a634b05b4029348ebbb8f55498dc3ce",
+  "task_file_sha256": "c7f1f6e5130da5fcfb7222dd6414e5a37e333e67ed79420d9126ece475972dd1",
+  "verifier": "python3 verifiers/browser_check.py",
+  "capture_verifier_exit_code": 0,
+  "frame_count": 6
+}

@@ -1,0 +1,29 @@
+{
+  "excluded": [
+    "raw base64-heavy agent transcript",
+    "evaluation workspace and dependencies",
+    "browser profile and caches",
+    "non-representative screenshot sequences",
+    "verifier screenshots and construction artifacts"
+  ],
+  "game": "core-ball",
+  "presentation_policy": "one representative scored CUA run plus aggregate matched results",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 7,
+      "commands": 15,
+      "computer_use_calls": 16,
+      "events": 42,
+      "file_changes": 3,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 13,
+    "label": "cua-03",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "diagnostic failure with most retained observation frames",
+    "success": false
+  },
+  "task_id": "gameqa.core-ball-attachment-contract.003"
+}

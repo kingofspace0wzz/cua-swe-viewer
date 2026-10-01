@@ -1,0 +1,416 @@
+{
+  "format": "ordered_png_observation_sequence",
+  "frame_count": 23,
+  "frames": [
+    {
+      "action": null,
+      "file": "frames/frame-0001.png",
+      "sequence": 1,
+      "source_frame": "screenshot-0001.png",
+      "timestamp": "2026-09-05T01:56:17.215587+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 614,
+        "y": 358
+      },
+      "file": "frames/frame-0002.png",
+      "sequence": 2,
+      "source_frame": "screenshot-0002.png",
+      "timestamp": "2026-09-05T01:56:23.159983+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 689,
+        "y": 279
+      },
+      "file": "frames/frame-0003.png",
+      "sequence": 3,
+      "source_frame": "screenshot-0003.png",
+      "timestamp": "2026-09-05T01:56:28.667305+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 714,
+        "y": 305
+      },
+      "file": "frames/frame-0004.png",
+      "sequence": 4,
+      "source_frame": "screenshot-0004.png",
+      "timestamp": "2026-09-05T01:56:35.638938+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 689,
+        "y": 305
+      },
+      "file": "frames/frame-0005.png",
+      "sequence": 5,
+      "source_frame": "screenshot-0005.png",
+      "timestamp": "2026-09-05T01:56:47.711581+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 2000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0006.png",
+      "sequence": 6,
+      "source_frame": "screenshot-0006.png",
+      "timestamp": "2026-09-05T01:57:00.530094+00:00"
+    },
+    {
+      "action": null,
+      "file": "frames/frame-0007.png",
+      "sequence": 7,
+      "source_frame": "screenshot-0007.png",
+      "timestamp": "2026-09-05T01:58:10.601940+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 614,
+        "y": 358
+      },
+      "file": "frames/frame-0008.png",
+      "sequence": 8,
+      "source_frame": "screenshot-0008.png",
+      "timestamp": "2026-09-05T01:58:16.870969+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 689,
+        "y": 305
+      },
+      "file": "frames/frame-0009.png",
+      "sequence": 9,
+      "source_frame": "screenshot-0009.png",
+      "timestamp": "2026-09-05T01:58:22.437149+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 664,
+        "y": 305
+      },
+      "file": "frames/frame-0010.png",
+      "sequence": 10,
+      "source_frame": "screenshot-0010.png",
+      "timestamp": "2026-09-05T01:58:39.477968+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 668,
+        "y": 463
+      },
+      "file": "frames/frame-0011.png",
+      "sequence": 11,
+      "source_frame": "screenshot-0011.png",
+      "timestamp": "2026-09-05T01:58:52.712957+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 718,
+        "y": 385
+      },
+      "file": "frames/frame-0012.png",
+      "sequence": 12,
+      "source_frame": "screenshot-0012.png",
+      "timestamp": "2026-09-05T01:59:00.063421+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 689,
+        "y": 385
+      },
+      "file": "frames/frame-0013.png",
+      "sequence": 13,
+      "source_frame": "screenshot-0013.png",
+      "timestamp": "2026-09-05T01:59:08.922516+00:00"
+    },
+    {
+      "action": null,
+      "file": "frames/frame-0014.png",
+      "sequence": 14,
+      "source_frame": "screenshot-0014.png",
+      "timestamp": "2026-09-05T01:59:15.483519+00:00"
+    },
+    {
+      "action": null,
+      "file": "frames/frame-0015.png",
+      "sequence": 15,
+      "source_frame": "screenshot-0015.png",
+      "timestamp": "2026-09-05T01:59:37.470691+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 668,
+        "y": 463
+      },
+      "file": "frames/frame-0016.png",
+      "sequence": 16,
+      "source_frame": "screenshot-0016.png",
+      "timestamp": "2026-09-05T01:59:45.066474+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 714,
+        "y": 385
+      },
+      "file": "frames/frame-0017.png",
+      "sequence": 17,
+      "source_frame": "screenshot-0017.png",
+      "timestamp": "2026-09-05T01:59:51.719658+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Control+L",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0018.png",
+      "sequence": 18,
+      "source_frame": "screenshot-0018.png",
+      "timestamp": "2026-09-05T02:00:06.998897+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "type",
+        "steps": null,
+        "text": "http://127.0.0.1:50003/?episode-fix=2100",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0019.png",
+      "sequence": 19,
+      "source_frame": "screenshot-0019.png",
+      "timestamp": "2026-09-05T02:00:14.707690+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Enter",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0020.png",
+      "sequence": 20,
+      "source_frame": "screenshot-0020.png",
+      "timestamp": "2026-09-05T02:00:21.800192+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 668,
+        "y": 463
+      },
+      "file": "frames/frame-0021.png",
+      "sequence": 21,
+      "source_frame": "screenshot-0021.png",
+      "timestamp": "2026-09-05T02:00:32.383877+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 714,
+        "y": 385
+      },
+      "file": "frames/frame-0022.png",
+      "sequence": 22,
+      "source_frame": "screenshot-0022.png",
+      "timestamp": "2026-09-05T02:00:40.390201+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Control+L",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0023.png",
+      "sequence": 23,
+      "source_frame": "screenshot-0023.png",
+      "timestamp": "2026-09-05T02:00:55.161140+00:00"
+    }
+  ],
+  "run_label": "cua-03",
+  "task_id": "gameqa.minesweeper-delayed-loss-episode-identity.003"
+}

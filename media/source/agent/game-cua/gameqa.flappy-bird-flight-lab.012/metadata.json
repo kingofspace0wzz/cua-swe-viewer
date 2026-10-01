@@ -1,0 +1,29 @@
+{
+  "excluded": [
+    "raw base64-heavy agent transcript",
+    "evaluation workspace and dependencies",
+    "browser profile and caches",
+    "non-representative screenshot sequences",
+    "verifier screenshots and construction artifacts"
+  ],
+  "game": "flappy-bird",
+  "presentation_policy": "one representative scored CUA run plus aggregate matched results",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 13,
+      "commands": 15,
+      "computer_use_calls": 28,
+      "events": 61,
+      "file_changes": 5,
+      "plans": 0
+    },
+    "condition": "cua",
+    "frame_count": 26,
+    "label": "cua-03",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "diagnostic failure with most retained observation frames",
+    "success": false
+  },
+  "task_id": "gameqa.flappy-bird-flight-lab.012"
+}

@@ -1,0 +1,14 @@
+--- a/apps/Reddit/state.ts
++++ b/apps/Reddit/state.ts
+@@ -412,7 +412,10 @@
+       const trimmed = body.trim();
+       if (!trimmed) return;
+       const s = get();
+-      const k = username;
++      const thread = Array.isArray(s.chatThreads[username]) ? s.chatThreads[username] : [];
++      const sourceMessage = thread.find((message) => String(message.id) === String(messageId));
++      if (!sourceMessage) return;
++      const k = `${username}:${sourceMessage.id}`;
+       const reply: ChatMessage = {
+         id: `reply_${Math.floor(TimeService.now() / 1000)}_${++localSeq}`,
+         from: 'me',

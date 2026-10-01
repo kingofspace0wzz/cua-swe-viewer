@@ -1,0 +1,695 @@
+{
+  "format": "ordered_png_observation_sequence",
+  "frame_count": 35,
+  "frames": [
+    {
+      "action": null,
+      "file": "frames/frame-0001.png",
+      "sequence": 1,
+      "source_frame": "screenshot-0001.png",
+      "timestamp": "2026-09-04T10:08:35.018376+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 246,
+        "y": 274
+      },
+      "file": "frames/frame-0002.png",
+      "sequence": 2,
+      "source_frame": "screenshot-0002.png",
+      "timestamp": "2026-09-04T10:08:40.483595+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 2000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0003.png",
+      "sequence": 3,
+      "source_frame": "screenshot-0003.png",
+      "timestamp": "2026-09-04T10:08:46.651114+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 727,
+        "y": 504
+      },
+      "file": "frames/frame-0004.png",
+      "sequence": 4,
+      "source_frame": "screenshot-0004.png",
+      "timestamp": "2026-09-04T10:08:52.263572+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 483,
+        "y": 275
+      },
+      "file": "frames/frame-0005.png",
+      "sequence": 5,
+      "source_frame": "screenshot-0005.png",
+      "timestamp": "2026-09-04T10:08:58.646710+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 2000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0006.png",
+      "sequence": 6,
+      "source_frame": "screenshot-0006.png",
+      "timestamp": "2026-09-04T10:09:10.561395+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 724,
+        "y": 501
+      },
+      "file": "frames/frame-0007.png",
+      "sequence": 7,
+      "source_frame": "screenshot-0007.png",
+      "timestamp": "2026-09-04T10:09:18.546195+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 714,
+        "y": 274
+      },
+      "file": "frames/frame-0008.png",
+      "sequence": 8,
+      "source_frame": "screenshot-0008.png",
+      "timestamp": "2026-09-04T10:09:23.493554+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 2000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0009.png",
+      "sequence": 9,
+      "source_frame": "screenshot-0009.png",
+      "timestamp": "2026-09-04T10:09:35.386062+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Control+R",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0010.png",
+      "sequence": 10,
+      "source_frame": "screenshot-0010.png",
+      "timestamp": "2026-09-04T10:11:22.351247+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 246,
+        "y": 274
+      },
+      "file": "frames/frame-0011.png",
+      "sequence": 11,
+      "source_frame": "screenshot-0011.png",
+      "timestamp": "2026-09-04T10:11:28.151402+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Control+Shift+R",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0012.png",
+      "sequence": 12,
+      "source_frame": "screenshot-0012.png",
+      "timestamp": "2026-09-04T10:11:37.991901+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 246,
+        "y": 274
+      },
+      "file": "frames/frame-0013.png",
+      "sequence": 13,
+      "source_frame": "screenshot-0013.png",
+      "timestamp": "2026-09-04T10:11:45.521160+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 2000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0014.png",
+      "sequence": 14,
+      "source_frame": "screenshot-0014.png",
+      "timestamp": "2026-09-04T10:11:56.843349+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Control+L",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0015.png",
+      "sequence": 15,
+      "source_frame": "screenshot-0015.png",
+      "timestamp": "2026-09-04T10:12:25.839449+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "type",
+        "steps": null,
+        "text": "http://127.0.0.1:49402/?revision=flight-contract-008",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0016.png",
+      "sequence": 16,
+      "source_frame": "screenshot-0016.png",
+      "timestamp": "2026-09-04T10:12:34.611995+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Enter",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0017.png",
+      "sequence": 17,
+      "source_frame": "screenshot-0017.png",
+      "timestamp": "2026-09-04T10:12:42.172874+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Control+Shift+R",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0018.png",
+      "sequence": 18,
+      "source_frame": "screenshot-0018.png",
+      "timestamp": "2026-09-04T10:13:19.615866+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 246,
+        "y": 274
+      },
+      "file": "frames/frame-0019.png",
+      "sequence": 19,
+      "source_frame": "screenshot-0019.png",
+      "timestamp": "2026-09-04T10:13:29.386784+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 2000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0020.png",
+      "sequence": 20,
+      "source_frame": "screenshot-0020.png",
+      "timestamp": "2026-09-04T10:13:41.436070+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "F5",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0021.png",
+      "sequence": 21,
+      "source_frame": "screenshot-0021.png",
+      "timestamp": "2026-09-04T10:15:05.563461+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 246,
+        "y": 274
+      },
+      "file": "frames/frame-0022.png",
+      "sequence": 22,
+      "source_frame": "screenshot-0022.png",
+      "timestamp": "2026-09-04T10:15:13.846603+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Shift+F5",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0023.png",
+      "sequence": 23,
+      "source_frame": "screenshot-0023.png",
+      "timestamp": "2026-09-04T10:15:27.199735+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "F5",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0024.png",
+      "sequence": 24,
+      "source_frame": "screenshot-0024.png",
+      "timestamp": "2026-09-04T10:15:39.247235+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 480,
+        "y": 447
+      },
+      "file": "frames/frame-0025.png",
+      "sequence": 25,
+      "source_frame": "screenshot-0025.png",
+      "timestamp": "2026-09-04T10:15:55.689283+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 480,
+        "y": 447
+      },
+      "file": "frames/frame-0026.png",
+      "sequence": 26,
+      "source_frame": "screenshot-0026.png",
+      "timestamp": "2026-09-04T10:16:06.369968+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Space",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0027.png",
+      "sequence": 27,
+      "source_frame": "screenshot-0027.png",
+      "timestamp": "2026-09-04T10:16:16.331721+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 320,
+        "y": 320
+      },
+      "file": "frames/frame-0028.png",
+      "sequence": 28,
+      "source_frame": "screenshot-0028.png",
+      "timestamp": "2026-09-04T10:16:25.210611+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 50,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "Space",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0029.png",
+      "sequence": 29,
+      "source_frame": "screenshot-0029.png",
+      "timestamp": "2026-09-04T10:16:37.876948+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 200,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "Space",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0030.png",
+      "sequence": 30,
+      "source_frame": "screenshot-0030.png",
+      "timestamp": "2026-09-04T10:16:49.063483+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 200,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "Space",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0031.png",
+      "sequence": 31,
+      "source_frame": "screenshot-0031.png",
+      "timestamp": "2026-09-04T10:16:59.128047+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 600,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0032.png",
+      "sequence": 32,
+      "source_frame": "screenshot-0032.png",
+      "timestamp": "2026-09-04T10:17:10.673411+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Space",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0033.png",
+      "sequence": 33,
+      "source_frame": "screenshot-0033.png",
+      "timestamp": "2026-09-04T10:17:22.408797+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 1500,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0034.png",
+      "sequence": 34,
+      "source_frame": "screenshot-0034.png",
+      "timestamp": "2026-09-04T10:17:35.958547+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "click",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": 320,
+        "y": 320
+      },
+      "file": "frames/frame-0035.png",
+      "sequence": 35,
+      "source_frame": "screenshot-0035.png",
+      "timestamp": "2026-09-04T10:17:46.928466+00:00"
+    }
+  ],
+  "run_label": "cua-02",
+  "task_id": "gameqa.flappy-bird-flight-lab.008"
+}

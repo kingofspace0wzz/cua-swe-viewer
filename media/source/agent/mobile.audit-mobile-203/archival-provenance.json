@@ -1,0 +1,28 @@
+{
+  "candidate_id": "audit-mobile-203",
+  "frame_count": 14,
+  "frame_sha256": {
+    "screenshot-0001.png": "78cbed03cb2144eafd44dc1c4691b3f1a49202795f73705aacf2dcc856fd3dac",
+    "screenshot-0002.png": "63327469796987fc982e124217b9213a92ab1a7fd4ff5ddaf95ca783bcc408b6",
+    "screenshot-0003.png": "4f49e2dde177a9d540b4db68272169d651b37554ae0cf42a5ed46864f78f8fa7",
+    "screenshot-0004.png": "4f49e2dde177a9d540b4db68272169d651b37554ae0cf42a5ed46864f78f8fa7",
+    "screenshot-0005.png": "4f49e2dde177a9d540b4db68272169d651b37554ae0cf42a5ed46864f78f8fa7",
+    "screenshot-0006.png": "0ceb7358c2505b53293bd5b86433820b6ac2b0457644f0a277860d3299122964",
+    "screenshot-0007.png": "30b059e1feacdfb1a8b7c1dc9f92dbdbdd80436c3af2fb48f408a1355fe97b1a",
+    "screenshot-0008.png": "a8cabbd087fb1f2e477e4778e673c342f105553fcadeee9620041df41040e2f4",
+    "screenshot-0009.png": "d3a0efe58cc2370a57be90dc910432eaa8486233bf06b416f00d54b4a6211b84",
+    "screenshot-0010.png": "ec2657785a3b72e6a482e9e517eeb5a59cb1bc25beccac41ab77488cfeabeb8a",
+    "screenshot-0011.png": "e6504b884ad3a5fb46ef4d8d395fae61c5c30ff41a2659eade2ad6d782f1b8f5",
+    "screenshot-0012.png": "ec2657785a3b72e6a482e9e517eeb5a59cb1bc25beccac41ab77488cfeabeb8a",
+    "screenshot-0013.png": "48fef409c9eb8c1b438665db49b6ab7c24cd97788b9a9740d05ab68d0106c81a",
+    "screenshot-0014.png": "48fef409c9eb8c1b438665db49b6ab7c24cd97788b9a9740d05ab68d0106c81a"
+  },
+  "model": "openai.gpt-5.6-sol",
+  "provenance": "formal_screenshot_only_gpt56_cua",
+  "result": "fail",
+  "role": "upper_anchor",
+  "schema_version": 1,
+  "selected_revision_digest": "fc47e678ee7725e4491aed42b2e3d155c5f0dbccf5c11f6144d16849526b80b8",
+  "task_id": "mobile.audit-mobile-203",
+  "trajectory_sha256": "025f0a5ce5c2eabdaca448df5bd2fe96da7524a9fbe2a4776b4872a244f0e0c5"
+}

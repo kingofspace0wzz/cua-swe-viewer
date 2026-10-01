@@ -1,0 +1,31 @@
+{
+  "model": "gpt-5.6-sol",
+  "rows": [
+    {
+      "condition": "code-only",
+      "label": "code-01",
+      "model": "gpt-5.6-sol",
+      "scorable": true,
+      "success": false
+    },
+    {
+      "condition": "cua",
+      "label": "cua-01",
+      "model": "gpt-5.6-sol",
+      "scorable": true,
+      "success": false
+    }
+  ],
+  "summary": {
+    "code_only_attempts": 1,
+    "code_only_success_rate": 0.0,
+    "code_only_successes": 0,
+    "cua_attempts": 1,
+    "cua_success_rate": 0.0,
+    "cua_successes": 0,
+    "delta_cua": 0.0,
+    "scorable_rows": 2,
+    "total_rows": 2
+  },
+  "task_id": "gameqa.astray-level2-parallax-glass.009"
+}

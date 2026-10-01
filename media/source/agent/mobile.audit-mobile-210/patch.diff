@@ -1,0 +1,131 @@
+--- a/system/Sms/state.ts
++++ b/system/Sms/state.ts
+@@ -2,7 +2,7 @@
+ import { createAppStoreWithActions } from '../../os/createAppStore';
+ import { SMS_CONFIG } from './data';
+ import ContentResolver from '../../os/ContentResolver';
+-import { ensureSmsProviderRegistered } from '../../os/providers/SmsProvider';
++import { ensureSmsProviderRegistered, useSmsProviderStore } from '../../os/providers/SmsProvider';
+ import * as TimeService from '../../os/TimeService';
+ import { NotificationService } from '../../os/NotificationService';
+ import type { Conversation, Message } from './types';
+@@ -118,15 +118,111 @@
+ }
+ 
+ export function ensureConversation(recipient: string, phoneNumber?: string): string {
+-  const normalized = recipient.trim();
+-  if (!normalized) return '';
+-  const existing = ContentResolver.query<Conversation>(
+-    `content://sms/conversations?sender=${encodeURIComponent(normalized)}`,
+-  ).items[0];
+-  if (existing) return existing.id;
++  const collapseWhitespace = (value: string) => value.trim().replace(/\s+/gu, ' ');
++  const normalizeSenderIdentity = (value: string) => (
++    collapseWhitespace(value.normalize('NFKC')).toLowerCase()
++  );
++  const normalizePhoneIdentity = (value: string | undefined) => {
++    const digits = String(value ?? '').replace(/\D/g, '');
++    return digits.length >= 3 ? digits : '';
++  };
++
++  const displayRecipient = collapseWhitespace(recipient);
++  if (!displayRecipient) return '';
++
++  const senderIdentity = normalizeSenderIdentity(recipient);
++  const phoneIdentity = normalizePhoneIdentity(phoneNumber);
++  const displayPhone = phoneIdentity ? collapseWhitespace(String(phoneNumber)) : '';
++
++  ensureSmsProviderRegistered();
++  const { conversations, messagesByConversationId } = useSmsProviderStore.getState();
++  const identities = conversations.map((conversation) => ({
++    sender: normalizeSenderIdentity(conversation.sender),
++    phone: normalizePhoneIdentity(conversation.phoneNumber),
++  }));
++  const componentIndexes = new Set<number>();
++  const senderIdentities = new Set(senderIdentity ? [senderIdentity] : []);
++  const phoneIdentities = new Set(phoneIdentity ? [phoneIdentity] : []);
++
++  let changed = true;
++  while (changed) {
++    changed = false;
++    identities.forEach((identity, index) => {
++      if (componentIndexes.has(index)) return;
++      const isAdjacent = (
++        (identity.sender !== '' && senderIdentities.has(identity.sender))
++        || (identity.phone !== '' && phoneIdentities.has(identity.phone))
++      );
++      if (!isAdjacent) return;
++
++      componentIndexes.add(index);
++      if (identity.sender) senderIdentities.add(identity.sender);
++      if (identity.phone) phoneIdentities.add(identity.phone);
++      changed = true;
++    });
++  }
++
++  if (componentIndexes.size > 0) {
++    const orderedIndexes = [...componentIndexes].sort((a, b) => a - b);
++    const survivorIndex = orderedIndexes[0];
++    const survivor = conversations[survivorIndex];
++    const seenMessageIds = new Set<string>();
++    let occurrenceOrder = 0;
++    const retainedMessages: Array<{ message: Message; order: number }> = [];
++
++    orderedIndexes.forEach((index) => {
++      const conversation = conversations[index];
++      const messages = messagesByConversationId[conversation.id] ?? [];
++      messages.forEach((message) => {
++        const order = occurrenceOrder++;
++        if (seenMessageIds.has(message.id)) return;
++        seenMessageIds.add(message.id);
++        retainedMessages.push({ message, order });
++      });
++    });
++
++    retainedMessages.sort((left, right) => {
++      if (left.message.timestamp < right.message.timestamp) return -1;
++      if (left.message.timestamp > right.message.timestamp) return 1;
++      return left.order - right.order;
++    });
++    const mergedMessages = retainedMessages.map(({ message }) => message);
++    const componentIds = new Set(orderedIndexes.map((index) => conversations[index].id));
++    const mergedConversation: Conversation = {
++      ...survivor,
++      sender: displayRecipient,
++      ...(displayPhone ? { phoneNumber: displayPhone } : {}),
++      isUnread: orderedIndexes.some((index) => conversations[index].isUnread),
++      isPinned: orderedIndexes.some((index) => conversations[index].isPinned),
++      messageCount: mergedMessages.length,
++      timestamp: mergedMessages.length > 0
++        ? mergedMessages[mergedMessages.length - 1].timestamp
++        : survivor.timestamp,
++    };
++
++    (useSmsProviderStore.setState as any)((state: {
++      conversations: Conversation[];
++      messagesByConversationId: MessagesByConversationId;
++    }) => {
++      state.conversations[survivorIndex] = mergedConversation;
++      state.conversations = state.conversations.filter((
++        conversation,
++        index,
++      ) => index === survivorIndex || !componentIds.has(conversation.id));
++      state.messagesByConversationId[survivor.id] = mergedMessages;
++      componentIds.forEach((conversationId) => {
++        if (conversationId !== survivor.id) {
++          delete state.messagesByConversationId[conversationId];
++        }
++      });
++    });
++    ContentResolver.notifyChange(`content://sms/conversations/${survivor.id}`);
++    return survivor.id;
++  }
++
+   const uri = ContentResolver.insert('content://sms/conversations', {
+-    sender: normalized,
+-    ...(phoneNumber ? { phoneNumber } : {}),
++    sender: displayRecipient,
++    ...(displayPhone ? { phoneNumber: displayPhone } : {}),
+   });
+   return String(uri.split('/').pop() ?? '');
+ }

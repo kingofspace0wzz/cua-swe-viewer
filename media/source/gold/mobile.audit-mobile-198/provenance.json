@@ -1,0 +1,50 @@
+{
+  "candidate_id": "audit-mobile-198",
+  "capture": {
+    "capture_method": "Playwright interactions against the actual retained MobileGym Vite runtime",
+    "frame_count": 7,
+    "frames": "frames",
+    "runtime_checks": {
+      "delete_exact": true,
+      "no_username_key": true,
+      "old_reply_preserved": true,
+      "other_chat_preserved": true,
+      "reply_exact": true
+    },
+    "synthetic_frames": false,
+    "trajectory": "trajectory.jsonl",
+    "trajectory_event_count": 7,
+    "trajectory_sha256": "4c44f9e05bc345f2b3c815e5a64e02938b3a9b41b6859208aa5d68295da58140"
+  },
+  "completed_at": "2026-09-13T23:30:20.102749+00:00",
+  "deterministic_certification": {
+    "path": "certification/deterministic-certification-report.json",
+    "sha256": "8584531f76f2d7d4f5cc1c68133187988253b1b4d6e0a16157abf7b77f4cc789",
+    "status": "passed"
+  },
+  "gold_change": {
+    "file": "apps/Reddit/state.ts",
+    "gold_source_matches_original_mobilegym_cache": true,
+    "operation": "replace the unique broken username-only reply key with the exact composite username:messageId key"
+  },
+  "runtime": {"kind": "mobilegym_vite_playwright", "source_native": true},
+  "protected_verifier": {
+    "identity": "pytest bench_env/tests/reddit/test_live.py -k DeepThreadReplyAndDeleteSeedMessage plus test_tasks.py and retained negatives",
+    "passed": true,
+    "path": "bench_env/tests/reddit/test_live.py",
+    "sha256": "b9102e008f1fcfad136df530472c212004b1d94a071ab9c8ba4177a09d9c2fb5"
+  },
+  "provenance": "exact_gold_patch_replay",
+  "schema_version": 1,
+  "selected_revision": "25c93152df5b193406a5c24ab6011ddc9c3ce4428a119aac112c0620da186995",
+  "source_commit": "57bc275accdb06eea3aee13880afdebbe80583d3",
+  "source_hashes": {
+    "broken_source_sha256": "1b8d0e56cc79b1a26bdaa6f2d25c8a91492bb7060ee5b977bb9e4d6fbc37d9a3",
+    "fixture_sha256": "dd9040965e1849c7a2171f701b60fea6f7c8f795f79fd44d36d0db6d717c127c",
+    "gold_source_sha256": "bf3fda11c76523a585484c28e78866bc580e17ac9ed9ad12b292a2b49ff0c635",
+    "upstream_gold_source_sha256": "bf3fda11c76523a585484c28e78866bc580e17ac9ed9ad12b292a2b49ff0c635"
+  },
+  "started_at": "2026-09-13T23:24:08.820399+00:00",
+  "status": "verified",
+  "task_id": "audit-mobile-198"
+}

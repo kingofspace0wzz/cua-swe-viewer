@@ -1,0 +1,559 @@
+{
+  "task_id": "mobile.audit-mobile-191",
+  "status": "available",
+  "coverage": "full_codex_event_stream_compact",
+  "run_relation": "historical_exact",
+  "provenance": "exact_historical_mobile_gpt56_sol_cua",
+  "source": "Original CUA attempt, verified against the published Mobile media",
+  "run_label": "evaluations/cua/89863810469b7e8fba24c3ab4543d1ee1d5145c982a817fe65ab72c7613129b8/attempt-004",
+  "terminal_status": "completed",
+  "usage": {
+    "input_tokens": 195198,
+    "cached_input_tokens": 169392,
+    "cache_write_input_tokens": 21578,
+    "output_tokens": 1951,
+    "reasoning_output_tokens": 502
+  },
+  "raw_record_count": 28,
+  "records": [
+    {
+      "type": "thread.started",
+      "thread_id": "01a08e91-70db-74d1-ad44-351cc643f231"
+    },
+    {
+      "type": "turn.started"
+    },
+    {
+      "type": "item.started",
+      "item": {
+        "id": "item_0",
+        "type": "mcp_tool_call",
+        "server": "visual_cua",
+        "tool": "start",
+        "arguments": {},
+        "result": null,
+        "error": null,
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_0",
+        "type": "mcp_tool_call",
+        "server": "visual_cua",
+        "tool": "start",
+        "arguments": {},
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Protected screenshot attached."
+            },
+            {
+              "type": "image",
+              "mimeType": "image/png",
+              "path": "media/source/agent/mobile.audit-mobile-191/screenshots/screenshot-0001.png",
+              "sha256": "4f49e2dde177a9d540b4db68272169d651b37554ae0cf42a5ed46864f78f8fa7"
+            }
+          ],
+          "structured_content": null
+        },
+        "error": null,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_1",
+        "type": "agent_message",
+        "text": "I\u2019ve completed the required live visual observation; the retained app currently renders a black screen. I\u2019ll now inspect only the local source needed to identify the Notes state implementation, then make the focused `state.ts` fix and validate it."
+      }
+    },
+    {
+      "type": "item.started",
+      "item": {
+        "id": "item_2",
+        "type": "command_execution",
+        "command": "/bin/bash -lc \"rg --files -g 'state.ts' -g '\"'!bench_env/**'\"'\"",
+        "aggregated_output": "",
+        "exit_code": null,
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "item.started",
+      "item": {
+        "id": "item_3",
+        "type": "command_execution",
+        "command": "/bin/bash -lc 'printenv CUA_SWE_AGENT_ROLLOUT_DIR'",
+        "aggregated_output": "",
+        "exit_code": null,
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "item.started",
+      "item": {
+        "id": "item_4",
+        "type": "command_execution",
+        "command": "/bin/bash -lc 'git status --short'",
+        "aggregated_output": "",
+        "exit_code": null,
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_4",
+        "type": "command_execution",
+        "command": "/bin/bash -lc 'git status --short'",
+        "aggregated_output": "fatal: not a git repository (or any parent up to mount point /tmp)\nStopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).\n",
+        "exit_code": 128,
+        "status": "failed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_3",
+        "type": "command_execution",
+        "command": "/bin/bash -lc 'printenv CUA_SWE_AGENT_ROLLOUT_DIR'",
+        "aggregated_output": "<rollout>/\n",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_2",
+        "type": "command_execution",
+        "command": "/bin/bash -lc \"rg --files -g 'state.ts' -g '\"'!bench_env/**'\"'\"",
+        "aggregated_output": "system/AnswerSheet/state.ts\nsystem/Browser/state.ts\nsystem/Contacts/state.ts\nsystem/FileManager/state.ts\nsystem/Calendar/state.ts\nsystem/Clock/state.ts\nsystem/Calculator2/state.ts\nsystem/Settings/state.ts\napps/Bilibili/state.ts\nsystem/Compass/state.ts\nsystem/Notes/state.ts\nsystem/Gallery/state.ts\nsystem/Sms/state.ts\napps/X/state.ts\napps/Railway12306/state.ts\napps/Spotify/state.ts\napps/RedBook/state.ts\napps/WechatReading/state.ts\napps/Map/state.ts\napps/Ebay/state.ts\napps/Alipay/state.ts\napps/Weather/state.ts\napps/TencentMeeting/state.ts\napps/Wechat/state.ts\napps/Reddit/state.ts\n",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.started",
+      "item": {
+        "id": "item_5",
+        "type": "command_execution",
+        "command": "/bin/bash -lc \"sed -n '1,260p' system/Notes/state.ts\"",
+        "aggregated_output": "",
+        "exit_code": null,
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_5",
+        "type": "command_execution",
+        "command": "/bin/bash -lc \"sed -n '1,260p' system/Notes/state.ts\"",
+        "aggregated_output": "import { createAppStoreWithActions, memoSelector } from '../../os/createAppStore';\nimport { NOTES_CONFIG } from './data';\nimport * as TimeService from '../../os/TimeService';\nimport type {\n  Note,\n  NotesFolder,\n  NotesSettings,\n  NotesViewMode,\n  NotesTodo,\n} from './types';\n\n// ---- Helper functions ----\n\nfunction isTrashed(note: Note): boolean {\n  return typeof note.trashedAt === 'number' && Number.isFinite(note.trashedAt);\n}\n\nfunction isPrivate(note: Note): boolean {\n  return !!note.isPrivate;\n}\n\nfunction sortNotes(notes: Note[]): Note[] {\n  return [...notes].sort((a, b) => {\n    const ap = a.pinned ? 1 : 0;\n    const bp = b.pinned ? 1 : 0;\n    if (ap !== bp) return ap - bp;\n    return b.updatedAt - a.updatedAt;\n  });\n}\n\nfunction sortTodos(todos: NotesTodo[]): NotesTodo[] {\n  return [...todos].sort((a, b) => {\n    const ac = a.completed ? 1 : 0;\n    const bc = b.completed ? 1 : 0;\n    if (ac !== bc) return ac - bc;\n    return b.updatedAt - a.updatedAt;\n  });\n}\n\nfunction sortTrashedNotes(notes: Note[]): Note[] {\n  return [...notes]\n    .filter(isTrashed)\n    .sort((a, b) => (b.trashedAt ?? 0) - (a.trashedAt ?? 0));\n}\n\n// ---- Types ----\n\ninterface NotesState {\n  notes: Note[];\n  todos: NotesTodo[];\n  folders: NotesFolder[];\n  selectedFolderId: string;\n  settings: NotesSettings;\n}\n\ninterface NotesActions {\n  setSelectedFolderId: (folderId: string) => void;\n  addFolder: (name: string) => NotesFolder;\n  renameFolder: (id: string, name: string) => void;\n  deleteFolder: (id: string) => void;\n  updateSettings: (patch: Partial<NotesSettings>) => void;\n  addNote: (input?: Partial<Pick<Note, 'title' | 'content' | 'folderId'>>) => Note;\n  updateNote: (\n    id: string,\n    patch: Partial<\n      Pick<Note, 'title' | 'content' | 'folderId' | 'pinned' | 'locked' | 'isPrivate' | 'trashedAt' | 'alarmAt'>\n    >,\n  ) => void;\n  deleteNote: (id: string) => void;\n  restoreNote: (id: string) => void;\n  deleteNoteForever: (id: string) => void;\n  hideNote: (id: string) => void;\n  unhideNote: (id: string) => void;\n  addTodo: (text: string) => NotesTodo;\n  toggleTodo: (id: string) => void;\n  updateTodoText: (id: string, text: string) => void;\n  deleteTodo: (id: string) => void;\n}\n\n// ---- Store ----\n\nconst initialState: NotesState = {\n  notes: NOTES_CONFIG.sampleNotes,\n  todos: NOTES_CONFIG.sampleTodos,\n  folders: [...NOTES_CONFIG.folders],\n  selectedFolderId: NOTES_CONFIG.defaultFolderId as string,\n  settings: { ...(NOTES_CONFIG.settings as NotesSettings) },\n};\n\nexport const useNotesStore = createAppStoreWithActions<NotesState, NotesActions>(\n  'notes',\n  initialState,\n  (set, get) => ({\n    setSelectedFolderId: (folderId: string) => {\n      const ok = get().folders.some(f => f.id === folderId);\n      set({ selectedFolderId: ok ? folderId : NOTES_CONFIG.defaultFolderId });\n    },\n\n    addFolder: (name: string) => {\n      const trimmed = name.trim();\n      const newFolder: NotesFolder = {\n        id: `xf_${Math.random().toString(36).slice(2, 10)}`,\n        name: trimmed || '\u65b0\u5efa\u6587\u4ef6\u5939',\n        system: false,\n      };\n      set(state => ({\n        folders: [...state.folders, newFolder],\n        selectedFolderId: newFolder.id,\n      }));\n      return newFolder;\n    },\n\n    renameFolder: (id: string, name: string) => {\n      const trimmed = name.trim();\n      if (!trimmed) return;\n      set(state => ({\n        folders: state.folders.map(f => (f.id === id && !f.system ? { ...f, name: trimmed } : f)),\n      }));\n    },\n\n    deleteFolder: (id: string) => {\n      set(state => {\n        const target = state.folders.find(f => f.id === id);\n        if (!target || target.system) return {};\n        return {\n          folders: state.folders.filter(f => f.id !== id),\n          notes: sortNotes(state.notes.map(n => (n.folderId === id ? { ...n, folderId: 'unfiled' } : n))),\n          selectedFolderId: state.selectedFolderId === id ? 'all' : state.selectedFolderId,\n        };\n      });\n    },\n\n    updateSettings: (patch: Partial<NotesSettings>) => {\n      set(state => ({ settings: { ...state.settings, ...patch } }));\n    },\n\n    addNote: (input?) => {\n      const newNote: Note = {\n        id: Math.random().toString(36).slice(2, 10),\n        title: input?.title ?? '',\n        content: input?.content ?? '',\n        updatedAt: TimeService.now(),\n        folderId: input?.folderId ?? 'unfiled',\n      };\n      set(state => ({ notes: sortNotes([newNote, ...state.notes]) }));\n      return newNote;\n    },\n\n    updateNote: (id, patch) => {\n      set(state => ({\n        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, ...patch, updatedAt: TimeService.now() } : n))),\n      }));\n    },\n\n    deleteNote: (id: string) => {\n      const now = TimeService.now();\n      set(state => ({\n        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, trashedAt: now, updatedAt: now } : n))),\n      }));\n    },\n\n    restoreNote: (id: string) => {\n      const now = TimeService.now();\n      set(state => ({\n        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, trashedAt: undefined, updatedAt: now } : n))),\n      }));\n    },\n\n    deleteNoteForever: (id: string) => {\n      set(state => ({ notes: state.notes.filter(n => n.id !== id) }));\n    },\n\n    hideNote: (id: string) => {\n      const now = TimeService.now();\n      set(state => ({\n        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, isPrivate: true, updatedAt: now } : n))),\n      }));\n    },\n\n    unhideNote: (id: string) => {\n      const now = TimeService.now();\n      set(state => ({\n        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, isPrivate: false, updatedAt: now } : n))),\n      }));\n    },\n\n    addTodo: (text: string) => {\n      const trimmed = text.trim();\n      const newTodo: NotesTodo = {\n        id: Math.random().toString(36).slice(2, 10),\n        text: trimmed,\n        completed: false,\n        updatedAt: TimeService.now(),\n      };\n      set(state => ({ todos: sortTodos([newTodo, ...state.todos]) }));\n      return newTodo;\n    },\n\n    toggleTodo: (id: string) => {\n      set(state => ({\n        todos: sortTodos(\n          state.todos.map(t =>\n            t.id === id ? { ...t, completed: !t.completed, updatedAt: TimeService.now() } : t,\n          ),\n        ),\n      }));\n    },\n\n    updateTodoText: (id: string, text: string) => {\n      const trimmed = text.trim();\n      set(state => ({\n        todos: sortTodos(\n          state.todos.map(t =>\n            t.id === id ? { ...t, text: trimmed, updatedAt: TimeService.now() } : t,\n          ),\n        ),\n      }));\n    },\n\n    deleteTodo: (id: string) => {\n      set(state => ({ todos: state.todos.filter(t => t.id !== id) }));\n    },\n  }),\n);\n\n// ---- Memoized Selectors ----\n\ntype NotesStore = NotesState & NotesActions;\n\nexport const selectVisibleNotes = memoSelector(\n  (s: NotesStore) => s.notes,\n  notes => notes.filter(n => !isTrashed(n) && !isPrivate(n)),\n);\n\nexport const selectPrivateNotes = memoSelector(\n  (s: NotesStore) => s.notes,\n  notes => notes.filter(n => !isTrashed(n) && isPrivate(n)),\n);\n\nexport const selectTrashedNotes = memoSelector(\n  (s: NotesStore) => s.notes,\n  sortTrashedNotes,\n);\n",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_6",
+        "type": "agent_message",
+        "text": "The defect is isolated to `sortNotes`: pinned notes are encoded as `1`, but the comparator sorts ascending, placing them after ordinary notes. Reversing only that comparison preserves the existing `pinned` field, timestamp ordering, action behavior, and persisted store shape."
+      }
+    },
+    {
+      "type": "item.started",
+      "item": {
+        "id": "item_7",
+        "type": "file_change",
+        "changes": [
+          {
+            "path": "<workspace>/system/Notes/state.ts",
+            "kind": "update"
+          }
+        ],
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_7",
+        "type": "file_change",
+        "changes": [
+          {
+            "path": "<workspace>/system/Notes/state.ts",
+            "kind": "update"
+          }
+        ],
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.started",
+      "item": {
+        "id": "item_8",
+        "type": "command_execution",
+        "command": "/bin/bash -lc 'npm run build -- --configLoader runner'",
+        "aggregated_output": "",
+        "exit_code": null,
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_8",
+        "type": "command_execution",
+        "command": "/bin/bash -lc 'npm run build -- --configLoader runner'",
+        "aggregated_output": "\n> mobile-gym@0.1.0 build\n> vite build --configLoader runner\n\nsh: 1: vite: not found\n",
+        "exit_code": 127,
+        "status": "failed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_9",
+        "type": "agent_message",
+        "text": "The focused change is in place. The public production build is running now; after it completes I\u2019ll record the required rollout note with the inspected file, exact change, and validation result."
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_10",
+        "type": "agent_message",
+        "text": "The build could not start because workspace dependencies are unavailable (`vite: not found`), rather than because of a compile error. I\u2019ll do a small local comparator behavior check and then write the required rollout record, explicitly noting that build limitation."
+      }
+    },
+    {
+      "type": "item.started",
+      "item": {
+        "id": "item_11",
+        "type": "command_execution",
+        "command": "/bin/bash -lc \"node - <<'NODE'\nconst sortNotes = notes => [...notes].sort((a, b) => {\n  const ap = a.pinned ? 1 : 0;\n  const bp = b.pinned ? 1 : 0;\n  if (ap \"'!== bp) return bp - ap;\n  return b.updatedAt - a.updatedAt;\n});\nconst notes = [\n  { id: '\"'ordinary-new', updatedAt: 40 },\n  { id: 'pinned-old', pinned: true, updatedAt: 10 },\n  { id: 'ordinary-old', updatedAt: 20 },\n  { id: 'newly-pinned', pinned: true, updatedAt: 50 },\n];\nconst actual = sortNotes(notes).map(note => note.id);\nconst expected = ['newly-pinned', 'pinned-old', 'ordinary-new', 'ordinary-old'];\nif (actual.join('|') \"'!== expected.join('\"'|')) {\n  throw new Error(\"'`unexpected order: ${actual.join('\"', ')}\"'`);\n}\nconsole.log(actual.join('\"' -> '));\nNODE\"",
+        "aggregated_output": "",
+        "exit_code": null,
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "item.started",
+      "item": {
+        "id": "item_12",
+        "type": "command_execution",
+        "command": "/bin/bash -lc \"sed -n '15,32p' system/Notes/state.ts && test \"'! -x node_modules/.bin/vite && echo '\"'vite executable absent'\"",
+        "aggregated_output": "",
+        "exit_code": null,
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_12",
+        "type": "command_execution",
+        "command": "/bin/bash -lc \"sed -n '15,32p' system/Notes/state.ts && test \"'! -x node_modules/.bin/vite && echo '\"'vite executable absent'\"",
+        "aggregated_output": "  return typeof note.trashedAt === 'number' && Number.isFinite(note.trashedAt);\n}\n\nfunction isPrivate(note: Note): boolean {\n  return !!note.isPrivate;\n}\n\nfunction sortNotes(notes: Note[]): Note[] {\n  return [...notes].sort((a, b) => {\n    const ap = a.pinned ? 1 : 0;\n    const bp = b.pinned ? 1 : 0;\n    if (ap !== bp) return bp - ap;\n    return b.updatedAt - a.updatedAt;\n  });\n}\n\nfunction sortTodos(todos: NotesTodo[]): NotesTodo[] {\n  return [...todos].sort((a, b) => {\nvite executable absent\n",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_11",
+        "type": "command_execution",
+        "command": "/bin/bash -lc \"node - <<'NODE'\nconst sortNotes = notes => [...notes].sort((a, b) => {\n  const ap = a.pinned ? 1 : 0;\n  const bp = b.pinned ? 1 : 0;\n  if (ap \"'!== bp) return bp - ap;\n  return b.updatedAt - a.updatedAt;\n});\nconst notes = [\n  { id: '\"'ordinary-new', updatedAt: 40 },\n  { id: 'pinned-old', pinned: true, updatedAt: 10 },\n  { id: 'ordinary-old', updatedAt: 20 },\n  { id: 'newly-pinned', pinned: true, updatedAt: 50 },\n];\nconst actual = sortNotes(notes).map(note => note.id);\nconst expected = ['newly-pinned', 'pinned-old', 'ordinary-new', 'ordinary-old'];\nif (actual.join('|') \"'!== expected.join('\"'|')) {\n  throw new Error(\"'`unexpected order: ${actual.join('\"', ')}\"'`);\n}\nconsole.log(actual.join('\"' -> '));\nNODE\"",
+        "aggregated_output": "newly-pinned -> pinned-old -> ordinary-new -> ordinary-old\n",
+        "exit_code": 0,
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.started",
+      "item": {
+        "id": "item_13",
+        "type": "file_change",
+        "changes": [
+          {
+            "path": "<rollout>/rollout_notes.md",
+            "kind": "add"
+          }
+        ],
+        "status": "in_progress"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_13",
+        "type": "file_change",
+        "changes": [
+          {
+            "path": "<rollout>/rollout_notes.md",
+            "kind": "add"
+          }
+        ],
+        "status": "completed"
+      }
+    },
+    {
+      "type": "item.completed",
+      "item": {
+        "id": "item_14",
+        "type": "agent_message",
+        "text": "Fixed [state.ts](<workspace>/system/Notes/state.ts): pinned notes now appear first, with both sections newest-first.\n\nFocused ordering check passed. Build was blocked because `vite` is not installed (`vite: not found`). Rollout notes were written as required."
+      }
+    },
+    {
+      "type": "turn.completed",
+      "usage": {
+        "input_tokens": 195198,
+        "cached_input_tokens": 169392,
+        "cache_write_input_tokens": 21578,
+        "output_tokens": 1951,
+        "reasoning_output_tokens": 502
+      }
+    }
+  ],
+  "events": [
+    {
+      "sequence": 1,
+      "item_id": "item_0",
+      "source_records": [
+        3,
+        4
+      ],
+      "kind": "computer_use",
+      "status": "completed",
+      "truncated": false,
+      "title": "visual_cua.start",
+      "detail": "{\n  \"arguments\": {},\n  \"result\": {\n    \"content\": [\n      {\n        \"type\": \"text\",\n        \"text\": \"Protected screenshot attached.\"\n      },\n      {\n        \"type\": \"image\",\n        \"mimeType\": \"image/png\",\n        \"path\": \"media/source/agent/mobile.audit-mobile-191/screenshots/screenshot-0001.png\",\n        \"sha256\": \"4f49e2dde177a9d540b4db68272169d651b37554ae0cf42a5ed46864f78f8fa7\"\n      }\n    ],\n    \"structured_content\": null\n  },\n  \"error\": null\n}",
+      "images": [
+        {
+          "path": "media/source/agent/mobile.audit-mobile-191/screenshots/screenshot-0001.png",
+          "sha256": "4f49e2dde177a9d540b4db68272169d651b37554ae0cf42a5ed46864f78f8fa7"
+        }
+      ]
+    },
+    {
+      "sequence": 2,
+      "item_id": "item_1",
+      "source_records": [
+        5
+      ],
+      "kind": "agent_message",
+      "status": "completed",
+      "truncated": false,
+      "title": "Agent update",
+      "detail": "I\u2019ve completed the required live visual observation; the retained app currently renders a black screen. I\u2019ll now inspect only the local source needed to identify the Notes state implementation, then make the focused `state.ts` fix and validate it."
+    },
+    {
+      "sequence": 3,
+      "item_id": "item_2",
+      "source_records": [
+        6,
+        11
+      ],
+      "kind": "command",
+      "status": "completed",
+      "truncated": false,
+      "title": "/bin/bash -lc \"rg --files -g 'state.ts' -g '\"'!bench_env/**'\"'\"",
+      "detail": "system/AnswerSheet/state.ts\nsystem/Browser/state.ts\nsystem/Contacts/state.ts\nsystem/FileManager/state.ts\nsystem/Calendar/state.ts\nsystem/Clock/state.ts\nsystem/Calculator2/state.ts\nsystem/Settings/state.ts\napps/Bilibili/state.ts\nsystem/Compass/state.ts\nsystem/Notes/state.ts\nsystem/Gallery/state.ts\nsystem/Sms/state.ts\napps/X/state.ts\napps/Railway12306/state.ts\napps/Spotify/state.ts\napps/RedBook/state.ts\napps/WechatReading/state.ts\napps/Map/state.ts\napps/Ebay/state.ts\napps/Alipay/state.ts\napps/Weather/state.ts\napps/TencentMeeting/state.ts\napps/Wechat/state.ts\napps/Reddit/state.ts\n",
+      "exit_code": 0
+    },
+    {
+      "sequence": 4,
+      "item_id": "item_3",
+      "source_records": [
+        7,
+        10
+      ],
+      "kind": "command",
+      "status": "completed",
+      "truncated": false,
+      "title": "/bin/bash -lc 'printenv CUA_SWE_AGENT_ROLLOUT_DIR'",
+      "detail": "<rollout>/\n",
+      "exit_code": 0
+    },
+    {
+      "sequence": 5,
+      "item_id": "item_4",
+      "source_records": [
+        8,
+        9
+      ],
+      "kind": "command",
+      "status": "failed",
+      "truncated": false,
+      "title": "/bin/bash -lc 'git status --short'",
+      "detail": "fatal: not a git repository (or any parent up to mount point /tmp)\nStopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).\n",
+      "exit_code": 128
+    },
+    {
+      "sequence": 6,
+      "item_id": "item_5",
+      "source_records": [
+        12,
+        13
+      ],
+      "kind": "command",
+      "status": "completed",
+      "truncated": false,
+      "title": "/bin/bash -lc \"sed -n '1,260p' system/Notes/state.ts\"",
+      "detail": "import { createAppStoreWithActions, memoSelector } from '../../os/createAppStore';\nimport { NOTES_CONFIG } from './data';\nimport * as TimeService from '../../os/TimeService';\nimport type {\n  Note,\n  NotesFolder,\n  NotesSettings,\n  NotesViewMode,\n  NotesTodo,\n} from './types';\n\n// ---- Helper functions ----\n\nfunction isTrashed(note: Note): boolean {\n  return typeof note.trashedAt === 'number' && Number.isFinite(note.trashedAt);\n}\n\nfunction isPrivate(note: Note): boolean {\n  return !!note.isPrivate;\n}\n\nfunction sortNotes(notes: Note[]): Note[] {\n  return [...notes].sort((a, b) => {\n    const ap = a.pinned ? 1 : 0;\n    const bp = b.pinned ? 1 : 0;\n    if (ap !== bp) return ap - bp;\n    return b.updatedAt - a.updatedAt;\n  });\n}\n\nfunction sortTodos(todos: NotesTodo[]): NotesTodo[] {\n  return [...todos].sort((a, b) => {\n    const ac = a.completed ? 1 : 0;\n    const bc = b.completed ? 1 : 0;\n    if (ac !== bc) return ac - bc;\n    return b.updatedAt - a.updatedAt;\n  });\n}\n\nfunction sortTrashedNotes(notes: Note[]): Note[] {\n  return [...notes]\n    .filter(isTrashed)\n    .sort((a, b) => (b.trashedAt ?? 0) - (a.trashedAt ?? 0));\n}\n\n// ---- Types ----\n\ninterface NotesState {\n  notes: Note[];\n  todos: NotesTodo[];\n  folders: NotesFolder[];\n  selectedFolderId: string;\n  settings: NotesSettings;\n}\n\ninterface NotesActions {\n  setSelectedFolderId: (folderId: string) => void;\n  addFolder: (name: string) => NotesFolder;\n  renameFolder: (id: string, name: string) => void;\n  deleteFolder: (id: string) => void;\n  updateSettings: (patch: Partial<NotesSettings>) => void;\n  addNote: (input?: Partial<Pick<Note, 'title' | 'content' | 'folderId'>>) => Note;\n  updateNote: (\n    id: string,\n    patch: Partial<\n      Pick<Note, 'title' | 'content' | 'folderId' | 'pinned' | 'locked' | 'isPrivate' | 'trashedAt' | 'alarmAt'>\n    >,\n  ) => void;\n  deleteNote: (id: string) => void;\n  restoreNote: (id: string) => void;\n  deleteNoteForever: (id: string) => void;\n  hideNote: (id: string) => void;\n  unhideNote: (id: string) => void;\n  addTodo: (text: string) => NotesTodo;\n  toggleTodo: (id: string) => void;\n  updateTodoText: (id: string, text: string) => void;\n  deleteTodo: (id: string) => void;\n}\n\n// ---- Store ----\n\nconst initialState: NotesState = {\n  notes: NOTES_CONFIG.sampleNotes,\n  todos: NOTES_CONFIG.sampleTodos,\n  folders: [...NOTES_CONFIG.folders],\n  selectedFolderId: NOTES_CONFIG.defaultFolderId as string,\n  settings: { ...(NOTES_CONFIG.settings as NotesSettings) },\n};\n\nexport const useNotesStore = createAppStoreWithActions<NotesState, NotesActions>(\n  'notes',\n  initialState,\n  (set, get) => ({\n    setSelectedFolderId: (folderId: string) => {\n      const ok = get().folders.some(f => f.id === folderId);\n      set({ selectedFolderId: ok ? folderId : NOTES_CONFIG.defaultFolderId });\n    },\n\n    addFolder: (name: string) => {\n      const trimmed = name.trim();\n      const newFolder: NotesFolder = {\n        id: `xf_${Math.random().toString(36).slice(2, 10)}`,\n        name: trimmed || '\u65b0\u5efa\u6587\u4ef6\u5939',\n        system: false,\n      };\n      set(state => ({\n        folders: [...state.folders, newFolder],\n        selectedFolderId: newFolder.id,\n      }));\n      return newFolder;\n    },\n\n    renameFolder: (id: string, name: string) => {\n      const trimmed = name.trim();\n      if (!trimmed) return;\n      set(state => ({\n        folders: state.folders.map(f => (f.id === id && !f.system ? { ...f, name: trimmed } : f)),\n      }));\n    },\n\n    deleteFolder: (id: string) => {\n      set(state => {\n        const target = state.folders.find(f => f.id === id);\n        if (!target || target.system) return {};\n        return {\n          folders: state.folders.filter(f => f.id !== id),\n          notes: sortNotes(state.notes.map(n => (n.folderId === id ? { ...n, folderId: 'unfiled' } : n))),\n          selectedFolderId: state.selectedFolderId === id ? 'all' : state.selectedFolderId,\n        };\n      });\n    },\n\n    updateSettings: (patch: Partial<NotesSettings>) => {\n      set(state => ({ settings: { ...state.settings, ...patch } }));\n    },\n\n    addNote: (input?) => {\n      const newNote: Note = {\n        id: Math.random().toString(36).slice(2, 10),\n        title: input?.title ?? '',\n        content: input?.content ?? '',\n        updatedAt: TimeService.now(),\n        folderId: input?.folderId ?? 'unfiled',\n      };\n      set(state => ({ notes: sortNotes([newNote, ...state.notes]) }));\n      return newNote;\n    },\n\n    updateNote: (id, patch) => {\n      set(state => ({\n        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, ...patch, updatedAt: TimeService.now() } : n))),\n      }));\n    },\n\n    deleteNote: (id: string) => {\n      const now = TimeService.now();\n      set(state => ({\n        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, trashedAt: now, updatedAt: now } : n))),\n      }));\n    },\n\n    restoreNote: (id: string) => {\n      const now = TimeService.now();\n      set(state => ({\n        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, trashedAt: undefined, updatedAt: now } : n))),\n      }));\n    },\n\n    deleteNoteForever: (id: string) => {\n      set(state => ({ notes: state.notes.filter(n => n.id !== id) }));\n    },\n\n    hideNote: (id: string) => {\n      const now = TimeService.now();\n      set(state => ({\n        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, isPrivate: true, updatedAt: now } : n))),\n      }));\n    },\n\n    unhideNote: (id: string) => {\n      const now = TimeService.now();\n      set(state => ({\n        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, isPrivate: false, updatedAt: now } : n))),\n      }));\n    },\n\n    addTodo: (text: string) => {\n      const trimmed = text.trim();\n      const newTodo: NotesTodo = {\n        id: Math.random().toString(36).slice(2, 10),\n        text: trimmed,\n        completed: false,\n        updatedAt: TimeService.now(),\n      };\n      set(state => ({ todos: sortTodos([newTodo, ...state.todos]) }));\n      return newTodo;\n    },\n\n    toggleTodo: (id: string) => {\n      set(state => ({\n        todos: sortTodos(\n          state.todos.map(t =>\n            t.id === id ? { ...t, completed: !t.completed, updatedAt: TimeService.now() } : t,\n          ),\n        ),\n      }));\n    },\n\n    updateTodoText: (id: string, text: string) => {\n      const trimmed = text.trim();\n      set(state => ({\n        todos: sortTodos(\n          state.todos.map(t =>\n            t.id === id ? { ...t, text: trimmed, updatedAt: TimeService.now() } : t,\n          ),\n        ),\n      }));\n    },\n\n    deleteTodo: (id: string) => {\n      set(state => ({ todos: state.todos.filter(t => t.id !== id) }));\n    },\n  }),\n);\n\n// ---- Memoized Selectors ----\n\ntype NotesStore = NotesState & NotesActions;\n\nexport const selectVisibleNotes = memoSelector(\n  (s: NotesStore) => s.notes,\n  notes => notes.filter(n => !isTrashed(n) && !isPrivate(n)),\n);\n\nexport const selectPrivateNotes = memoSelector(\n  (s: NotesStore) => s.notes,\n  notes => notes.filter(n => !isTrashed(n) && isPrivate(n)),\n);\n\nexport const selectTrashedNotes = memoSelector(\n  (s: NotesStore) => s.notes,\n  sortTrashedNotes,\n);\n",
+      "exit_code": 0
+    },
+    {
+      "sequence": 7,
+      "item_id": "item_6",
+      "source_records": [
+        14
+      ],
+      "kind": "agent_message",
+      "status": "completed",
+      "truncated": false,
+      "title": "Agent update",
+      "detail": "The defect is isolated to `sortNotes`: pinned notes are encoded as `1`, but the comparator sorts ascending, placing them after ordinary notes. Reversing only that comparison preserves the existing `pinned` field, timestamp ordering, action behavior, and persisted store shape."
+    },
+    {
+      "sequence": 8,
+      "item_id": "item_7",
+      "source_records": [
+        15,
+        16
+      ],
+      "kind": "edit",
+      "status": "completed",
+      "truncated": false,
+      "title": "Changed source files",
+      "detail": "update: <workspace>/system/Notes/state.ts",
+      "files": [
+        {
+          "path": "<workspace>/system/Notes/state.ts",
+          "kind": "update"
+        }
+      ]
+    },
+    {
+      "sequence": 9,
+      "item_id": "item_8",
+      "source_records": [
+        17,
+        18
+      ],
+      "kind": "command",
+      "status": "failed",
+      "truncated": false,
+      "title": "/bin/bash -lc 'npm run build -- --configLoader runner'",
+      "detail": "\n> mobile-gym@0.1.0 build\n> vite build --configLoader runner\n\nsh: 1: vite: not found\n",
+      "exit_code": 127
+    },
+    {
+      "sequence": 10,
+      "item_id": "item_9",
+      "source_records": [
+        19
+      ],
+      "kind": "agent_message",
+      "status": "completed",
+      "truncated": false,
+      "title": "Agent update",
+      "detail": "The focused change is in place. The public production build is running now; after it completes I\u2019ll record the required rollout note with the inspected file, exact change, and validation result."
+    },
+    {
+      "sequence": 11,
+      "item_id": "item_10",
+      "source_records": [
+        20
+      ],
+      "kind": "agent_message",
+      "status": "completed",
+      "truncated": false,
+      "title": "Agent update",
+      "detail": "The build could not start because workspace dependencies are unavailable (`vite: not found`), rather than because of a compile error. I\u2019ll do a small local comparator behavior check and then write the required rollout record, explicitly noting that build limitation."
+    },
+    {
+      "sequence": 12,
+      "item_id": "item_11",
+      "source_records": [
+        21,
+        24
+      ],
+      "kind": "command",
+      "status": "completed",
+      "truncated": false,
+      "title": "/bin/bash -lc \"node - <<'NODE'\nconst sortNotes = notes => [...notes].sort((a, b) => {\n  const ap = a.pinned ? 1 : 0;\n  const bp = b.pinned ? 1 : 0;\n  if (ap \"'!== bp) return bp - ap;\n  return b.updatedAt - a.updatedAt;\n});\nconst notes = [\n  { id: '\"'ordinary-new', updatedAt: 40 },\n  { id: 'pinned-old', pinned: true, updatedAt: 10 },\n  { id: 'ordinary-old', updatedAt: 20 },\n  { id: 'newly-pinned', pinned: true, updatedAt: 50 },\n];\nconst actual = sortNotes(notes).map(note => note.id);\nconst expected = ['newly-pinned', 'pinned-old', 'ordinary-new', 'ordinary-old'];\nif (actual.join('|') \"'!== expected.join('\"'|')) {\n  throw new Error(\"'`unexpected order: ${actual.join('\"', ')}\"'`);\n}\nconsole.log(actual.join('\"' -> '));\nNODE\"",
+      "detail": "newly-pinned -> pinned-old -> ordinary-new -> ordinary-old\n",
+      "exit_code": 0
+    },
+    {
+      "sequence": 13,
+      "item_id": "item_12",
+      "source_records": [
+        22,
+        23
+      ],
+      "kind": "command",
+      "status": "completed",
+      "truncated": false,
+      "title": "/bin/bash -lc \"sed -n '15,32p' system/Notes/state.ts && test \"'! -x node_modules/.bin/vite && echo '\"'vite executable absent'\"",
+      "detail": "  return typeof note.trashedAt === 'number' && Number.isFinite(note.trashedAt);\n}\n\nfunction isPrivate(note: Note): boolean {\n  return !!note.isPrivate;\n}\n\nfunction sortNotes(notes: Note[]): Note[] {\n  return [...notes].sort((a, b) => {\n    const ap = a.pinned ? 1 : 0;\n    const bp = b.pinned ? 1 : 0;\n    if (ap !== bp) return bp - ap;\n    return b.updatedAt - a.updatedAt;\n  });\n}\n\nfunction sortTodos(todos: NotesTodo[]): NotesTodo[] {\n  return [...todos].sort((a, b) => {\nvite executable absent\n",
+      "exit_code": 0
+    },
+    {
+      "sequence": 14,
+      "item_id": "item_13",
+      "source_records": [
+        25,
+        26
+      ],
+      "kind": "edit",
+      "status": "completed",
+      "truncated": false,
+      "title": "Changed source files",
+      "detail": "add: <rollout>/rollout_notes.md",
+      "files": [
+        {
+          "path": "<rollout>/rollout_notes.md",
+          "kind": "add"
+        }
+      ]
+    },
+    {
+      "sequence": 15,
+      "item_id": "item_14",
+      "source_records": [
+        27
+      ],
+      "kind": "agent_message",
+      "status": "completed",
+      "truncated": false,
+      "title": "Agent update",
+      "detail": "Fixed [state.ts](<workspace>/system/Notes/state.ts): pinned notes now appear first, with both sections newest-first.\n\nFocused ordering check passed. Build was blocked because `vite` is not installed (`vite: not found`). Rollout notes were written as required."
+    }
+  ],
+  "summary": {
+    "events": 15,
+    "commands": 7,
+    "file_changes": 2,
+    "computer_use_calls": 1,
+    "agent_messages": 5,
+    "plans": 0,
+    "screenshots": 1,
+    "unfinished_items": 0
+  },
+  "artifacts": {
+    "Full event data": "viewer/media/source/agent/mobile.audit-mobile-191/activity.json",
+    "Run provenance": "viewer/media/source/agent/mobile.audit-mobile-191/activity-provenance.json",
+    "Agent patch": "viewer/media/source/agent/mobile.audit-mobile-191/patch.diff"
+  }
+}

@@ -1,0 +1,106 @@
+diff --git a/src/relay_commit.js b/src/relay_commit.js
+index 3fe380e7d0b213abe9063844252b2ac018bfda50..364d46b759628f32140cef80e9b8571a62671b64 100644
+--- a/src/relay_commit.js
++++ b/src/relay_commit.js
+@@ -6,6 +6,7 @@
+     this.nextOwner = 0;
+     this.nextEntry = 0;
+     this.pending = [];
++    this.withdrawn = 0;
+     this.dropped = 0;
+   }
+ 
+@@ -13,6 +14,7 @@
+     this.nextOwner = 0;
+     this.nextEntry = 0;
+     this.pending.length = 0;
++    this.withdrawn = 0;
+     this.dropped = 0;
+   };
+ 
+@@ -35,6 +37,34 @@
+     return entry.id;
+   };
+ 
++  RelayLane.prototype.withdraw = function (owner) {
++    if (!owner) return 0;
++    var retained = [];
++    var removed = 0;
++    for (var index = 0; index < this.pending.length; index += 1) {
++      if (this.pending[index].owner === owner.key) {
++        removed += 1;
++      } else {
++        retained.push(this.pending[index]);
++      }
++    }
++    this.pending = retained;
++    this.withdrawn += removed;
++    return removed;
++  };
++
++  RelayLane.prototype.handoff = function (fromOwner, toOwner) {
++    if (!fromOwner || !toOwner) return 0;
++    var moved = 0;
++    for (var index = 0; index < this.pending.length; index += 1) {
++      if (this.pending[index].owner !== fromOwner.key) continue;
++      this.pending[index].owner = toOwner.key;
++      this.pending[index].port = toOwner.port;
++      moved += 1;
++    }
++    return moved;
++  };
++
+   RelayLane.prototype.take = function (now, owner) {
+     while (this.pending.length && this.pending[0].due <= now) {
+       var entry = this.pending.shift();
+@@ -47,6 +77,7 @@
+   RelayLane.prototype.snapshot = function () {
+     return {
+       pending: this.pending.length,
++      withdrawn: this.withdrawn,
+       dropped: this.dropped,
+       nextDue: this.pending.length ? this.pending[0].due : null
+     };
+diff --git a/src/vector_relay.js b/src/vector_relay.js
+index 1540307e6b245e4cc88a2ff2a664192ce0e97d16..acb3d47d108bae6cdd2a214bad8b8cb577223a8b 100644
+--- a/src/vector_relay.js
++++ b/src/vector_relay.js
+@@ -77,6 +77,10 @@
+   };
+ 
+   VectorRelay.prototype.attachBall = function (reason) {
++    var previousOwner = this.ball && this.ball.owner;
++    if (reason === "manual-redock") {
++      this.lane.withdraw(previousOwner);
++    }
+     this.contacts.clear();
+     this.attachmentCount += 1;
+     this.ball = {
+@@ -93,6 +97,9 @@
+       routeTime: 0,
+       overlapSlices: 0
+     };
++    if (reason === "life-replacement") {
++      this.lane.handoff(previousOwner, this.ball.owner);
++    }
+   };
+ 
+   VectorRelay.prototype.dockPort = function () {
+@@ -120,7 +127,9 @@
+     if (!this.ball.attached) return;
+     var port = this.dockPort();
+     if (this.ball.owner.port === port) return;
++    var previousOwner = this.ball.owner;
+     this.ball.owner = this.lane.open(port);
++    this.lane.handoff(previousOwner, this.ball.owner);
+   };
+ 
+   VectorRelay.prototype.redock = function () {
+@@ -351,6 +360,7 @@
+         contacts: this.tile.contacts,
+         commits: this.tile.commits,
+         pending: laneState.pending,
++        withdrawn: laneState.withdrawn,
+         dropped: laneState.dropped,
+         lastCommit: this.tile.lastCommit
+       },

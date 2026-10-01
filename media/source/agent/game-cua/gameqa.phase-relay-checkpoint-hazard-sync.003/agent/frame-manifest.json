@@ -1,0 +1,542 @@
+{
+  "format": "ordered_png_observation_sequence",
+  "frame_count": 28,
+  "frames": [
+    {
+      "action": null,
+      "file": "frames/frame-0001.png",
+      "sequence": 1,
+      "source_frame": "screenshot-0001.png",
+      "timestamp": "2026-09-02T15:17:39.170432+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Control+R",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0002.png",
+      "sequence": 2,
+      "source_frame": "screenshot-0002.png",
+      "timestamp": "2026-09-02T15:18:29.195551+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 1100,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "d",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0003.png",
+      "sequence": 3,
+      "source_frame": "screenshot-0003.png",
+      "timestamp": "2026-09-02T15:18:36.550640+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 400,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "d",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0004.png",
+      "sequence": 4,
+      "source_frame": "screenshot-0004.png",
+      "timestamp": "2026-09-02T15:18:43.831483+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 800,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "d",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0005.png",
+      "sequence": 5,
+      "source_frame": "screenshot-0005.png",
+      "timestamp": "2026-09-02T15:18:55.242437+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 1200,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0006.png",
+      "sequence": 6,
+      "source_frame": "screenshot-0006.png",
+      "timestamp": "2026-09-02T15:19:04.370629+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 2000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0007.png",
+      "sequence": 7,
+      "source_frame": "screenshot-0007.png",
+      "timestamp": "2026-09-02T15:19:32.892293+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 2000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0008.png",
+      "sequence": 8,
+      "source_frame": "screenshot-0008.png",
+      "timestamp": "2026-09-02T15:19:43.033536+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 350,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "d",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0009.png",
+      "sequence": 9,
+      "source_frame": "screenshot-0009.png",
+      "timestamp": "2026-09-02T15:19:57.456480+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 1000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0010.png",
+      "sequence": 10,
+      "source_frame": "screenshot-0010.png",
+      "timestamp": "2026-09-02T15:20:11.431544+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "F5",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0011.png",
+      "sequence": 11,
+      "source_frame": "screenshot-0011.png",
+      "timestamp": "2026-09-02T15:20:30.110477+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 1500,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "d",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0012.png",
+      "sequence": 12,
+      "source_frame": "screenshot-0012.png",
+      "timestamp": "2026-09-02T15:20:41.576696+00:00"
+    },
+    {
+      "action": null,
+      "file": "frames/frame-0013.png",
+      "sequence": 13,
+      "source_frame": "screenshot-0013.png",
+      "timestamp": "2026-09-02T15:20:54.729958+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "back",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0014.png",
+      "sequence": 14,
+      "source_frame": "screenshot-0014.png",
+      "timestamp": "2026-09-02T15:21:04.461203+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "forward",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0015.png",
+      "sequence": 15,
+      "source_frame": "screenshot-0015.png",
+      "timestamp": "2026-09-02T15:21:14.465869+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 1500,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "d",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0016.png",
+      "sequence": 16,
+      "source_frame": "screenshot-0016.png",
+      "timestamp": "2026-09-02T15:21:27.014570+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 800,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "d",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0017.png",
+      "sequence": 17,
+      "source_frame": "screenshot-0017.png",
+      "timestamp": "2026-09-02T15:21:44.985473+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 1000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0018.png",
+      "sequence": 18,
+      "source_frame": "screenshot-0018.png",
+      "timestamp": "2026-09-02T15:22:02.759100+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 2000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0019.png",
+      "sequence": 19,
+      "source_frame": "screenshot-0019.png",
+      "timestamp": "2026-09-02T15:22:15.856424+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 350,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "d",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0020.png",
+      "sequence": 20,
+      "source_frame": "screenshot-0020.png",
+      "timestamp": "2026-09-02T15:22:26.318315+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 1000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0021.png",
+      "sequence": 21,
+      "source_frame": "screenshot-0021.png",
+      "timestamp": "2026-09-02T15:22:38.155624+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 650,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "s",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0022.png",
+      "sequence": 22,
+      "source_frame": "screenshot-0022.png",
+      "timestamp": "2026-09-02T15:22:51.657710+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 330,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "w",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0023.png",
+      "sequence": 23,
+      "source_frame": "screenshot-0023.png",
+      "timestamp": "2026-09-02T15:23:10.732795+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 330,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "w",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0024.png",
+      "sequence": 24,
+      "source_frame": "screenshot-0024.png",
+      "timestamp": "2026-09-02T15:23:22.517099+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 650,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "d",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0025.png",
+      "sequence": 25,
+      "source_frame": "screenshot-0025.png",
+      "timestamp": "2026-09-02T15:23:42.185690+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 1000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0026.png",
+      "sequence": 26,
+      "source_frame": "screenshot-0026.png",
+      "timestamp": "2026-09-02T15:24:03.531701+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 330,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "s",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0027.png",
+      "sequence": 27,
+      "source_frame": "screenshot-0027.png",
+      "timestamp": "2026-09-02T15:24:19.699123+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 900,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "d",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0028.png",
+      "sequence": 28,
+      "source_frame": "screenshot-0028.png",
+      "timestamp": "2026-09-02T15:24:33.297592+00:00"
+    }
+  ],
+  "run_label": "cua-02",
+  "task_id": "gameqa.phase-relay-checkpoint-hazard-sync.003"
+}

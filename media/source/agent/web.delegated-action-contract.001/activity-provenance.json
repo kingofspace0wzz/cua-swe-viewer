@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "web.delegated-action-contract.001",
+  "run_relation": "replacement",
+  "provenance": "fresh_gpt56_luna_screenshot_cua_replacement_20260901",
+  "run_label": null,
+  "source_description": "eval-host EFS \u00b7 fresh GPT-5.6 Luna screenshot-only CUA rerun \u00b7 2026-09-01",
+  "terminal_status": "completed",
+  "activity_source_kind": "retained_timeline",
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 1. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+    }
+  },
+  "input_sha256": {
+    "viewer/media/source/agent/web.delegated-action-contract.001/activity-retained.json": "c98edca27dea1483c9de2133790908afc3b196591b095ddb08d2bed9b86aa897"
+  },
+  "activity_sha256": "29b6f8f743f6018f1b3f125c9d4e54d5317ece6931e1dd81e3cb263739de3e01",
+  "export_policy": {
+    "all_lifecycle_records_retained": false,
+    "text_truncated": true,
+    "deployment_metadata_redacted": true,
+    "historical_media_attached_to_replacement": false,
+    "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
+  }
+}

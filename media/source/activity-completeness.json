@@ -1,0 +1,2283 @@
+{
+  "schema_version": 1,
+  "domains": {
+    "web": {
+      "tasks": 33,
+      "complete_event_data": 0,
+      "partial_event_data": 33,
+      "event_data_downloads": 33,
+      "provenance_downloads": 33,
+      "agent_patch_downloads": 0,
+      "tasks_with_inline_screenshots": 0,
+      "inline_screenshots": 0,
+      "replacement_runs": 24
+    },
+    "game": {
+      "tasks": 29,
+      "complete_event_data": 4,
+      "partial_event_data": 25,
+      "event_data_downloads": 29,
+      "provenance_downloads": 29,
+      "agent_patch_downloads": 22,
+      "tasks_with_inline_screenshots": 26,
+      "inline_screenshots": 481,
+      "replacement_runs": 2
+    }
+  },
+  "tasks": {
+    "web.support-window-contract.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.support-window-contract.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.support-window-contract.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 35,
+        "commands": 11,
+        "file_changes": 5,
+        "computer_use_calls": 14,
+        "agent_messages": 4,
+        "plans": 1,
+        "screenshots": 0,
+        "truncated_events": 4,
+        "unfinished_items": 0
+      }
+    },
+    "web.tax-rounding-contract.002": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.tax-rounding-contract.002/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.tax-rounding-contract.002/activity-provenance.json"
+      },
+      "summary": {
+        "events": 27,
+        "commands": 11,
+        "file_changes": 5,
+        "computer_use_calls": 7,
+        "agent_messages": 4,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 5,
+        "unfinished_items": 0
+      }
+    },
+    "web.delegated-action-contract.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 1. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.delegated-action-contract.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.delegated-action-contract.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 30,
+        "commands": 10,
+        "file_changes": 6,
+        "computer_use_calls": 9,
+        "agent_messages": 5,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 1,
+        "unfinished_items": 0
+      }
+    },
+    "web.configuration-inheritance-contract.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.configuration-inheritance-contract.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.configuration-inheritance-contract.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 28,
+        "commands": 11,
+        "file_changes": 6,
+        "computer_use_calls": 7,
+        "agent_messages": 4,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 4,
+        "unfinished_items": 0
+      }
+    },
+    "web.account-recovery-frontier-anchor.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 1. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.account-recovery-frontier-anchor.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.account-recovery-frontier-anchor.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 25,
+        "commands": 9,
+        "file_changes": 2,
+        "computer_use_calls": 8,
+        "agent_messages": 5,
+        "plans": 1,
+        "screenshots": 0,
+        "truncated_events": 1,
+        "unfinished_items": 0
+      }
+    },
+    "web.account-recovery-frontier-easy.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 0. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.account-recovery-frontier-easy.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.account-recovery-frontier-easy.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 25,
+        "commands": 9,
+        "file_changes": 3,
+        "computer_use_calls": 7,
+        "agent_messages": 6,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 0,
+        "unfinished_items": 0
+      }
+    },
+    "web.subscription-renewal-frontier-anchor.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 1. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.subscription-renewal-frontier-anchor.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.subscription-renewal-frontier-anchor.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 21,
+        "commands": 9,
+        "file_changes": 3,
+        "computer_use_calls": 6,
+        "agent_messages": 3,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 1,
+        "unfinished_items": 0
+      }
+    },
+    "web.subscription-renewal-frontier-easy.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 2. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.subscription-renewal-frontier-easy.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.subscription-renewal-frontier-easy.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 22,
+        "commands": 10,
+        "file_changes": 2,
+        "computer_use_calls": 5,
+        "agent_messages": 4,
+        "plans": 1,
+        "screenshots": 0,
+        "truncated_events": 2,
+        "unfinished_items": 0
+      }
+    },
+    "web.warehouse-cutoff-frontier-anchor.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.warehouse-cutoff-frontier-anchor.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.warehouse-cutoff-frontier-anchor.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 25,
+        "commands": 11,
+        "file_changes": 4,
+        "computer_use_calls": 6,
+        "agent_messages": 4,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 4,
+        "unfinished_items": 0
+      }
+    },
+    "web.warehouse-cutoff-frontier-easy.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 1. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.warehouse-cutoff-frontier-easy.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.warehouse-cutoff-frontier-easy.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 26,
+        "commands": 8,
+        "file_changes": 5,
+        "computer_use_calls": 9,
+        "agent_messages": 4,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 1,
+        "unfinished_items": 0
+      }
+    },
+    "web.vue-sticky-table-columns.001": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 1. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.vue-sticky-table-columns.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.vue-sticky-table-columns.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 31,
+        "commands": 10,
+        "file_changes": 2,
+        "computer_use_calls": 14,
+        "agent_messages": 5,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 1,
+        "unfinished_items": 0
+      }
+    },
+    "web.maplibre-terrain-pinch-anchor.001": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 19. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.maplibre-terrain-pinch-anchor.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.maplibre-terrain-pinch-anchor.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 49,
+        "commands": 29,
+        "file_changes": 5,
+        "computer_use_calls": 7,
+        "agent_messages": 8,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 19,
+        "unfinished_items": 0
+      }
+    },
+    "web.handsontable-menu-scroll-anchor.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 23. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.handsontable-menu-scroll-anchor.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.handsontable-menu-scroll-anchor.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 58,
+        "commands": 35,
+        "file_changes": 6,
+        "computer_use_calls": 9,
+        "agent_messages": 7,
+        "plans": 1,
+        "screenshots": 0,
+        "truncated_events": 23,
+        "unfinished_items": 0
+      }
+    },
+    "web.responsive-masonry-overlap.001": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.responsive-masonry-overlap.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.responsive-masonry-overlap.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 21,
+        "commands": 11,
+        "file_changes": 1,
+        "computer_use_calls": 4,
+        "agent_messages": 5,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 5,
+        "unfinished_items": 0
+      }
+    },
+    "web.saleor-export-current-search.lower-1.001": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.saleor-export-current-search.lower-1.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.saleor-export-current-search.lower-1.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 51,
+        "commands": 18,
+        "file_changes": 12,
+        "computer_use_calls": 10,
+        "agent_messages": 11,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 4,
+        "unfinished_items": 0
+      }
+    },
+    "web.saleor-export-current-search.lower-2.001": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.saleor-export-current-search.lower-2.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.saleor-export-current-search.lower-2.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 41,
+        "commands": 17,
+        "file_changes": 7,
+        "computer_use_calls": 11,
+        "agent_messages": 6,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 4,
+        "unfinished_items": 0
+      }
+    },
+    "web.react-spectrum-combobox-selection.lower-1.001": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.react-spectrum-combobox-selection.lower-1.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.react-spectrum-combobox-selection.lower-1.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 37,
+        "commands": 12,
+        "file_changes": 2,
+        "computer_use_calls": 17,
+        "agent_messages": 6,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 4,
+        "unfinished_items": 0
+      }
+    },
+    "web.react-spectrum-combobox-selection.lower-2.001": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 3. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.react-spectrum-combobox-selection.lower-2.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.react-spectrum-combobox-selection.lower-2.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 33,
+        "commands": 13,
+        "file_changes": 2,
+        "computer_use_calls": 13,
+        "agent_messages": 5,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 3,
+        "unfinished_items": 0
+      }
+    },
+    "web.vue-sticky-table-columns.lower-1.001": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 3. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/web.vue-sticky-table-columns.lower-1.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/web.vue-sticky-table-columns.lower-1.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 33,
+        "commands": 13,
+        "file_changes": 3,
+        "computer_use_calls": 9,
+        "agent_messages": 8,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 3,
+        "unfinished_items": 0
+      }
+    },
+    "v3.recharts-responsive-pie.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/v3.recharts-responsive-pie.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/v3.recharts-responsive-pie.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 24,
+        "commands": 9,
+        "file_changes": 2,
+        "computer_use_calls": 8,
+        "agent_messages": 5,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 6,
+        "unfinished_items": 0
+      }
+    },
+    "v3.quill-paste-scroll-roundtrip.002": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/v3.quill-paste-scroll-roundtrip.002/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/v3.quill-paste-scroll-roundtrip.002/activity-provenance.json"
+      },
+      "summary": {
+        "events": 24,
+        "commands": 11,
+        "file_changes": 2,
+        "computer_use_calls": 6,
+        "agent_messages": 4,
+        "plans": 1,
+        "screenshots": 0,
+        "truncated_events": 4,
+        "unfinished_items": 0
+      }
+    },
+    "v3.tanstack-window-scroll-end.002": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 2. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/v3.tanstack-window-scroll-end.002/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/v3.tanstack-window-scroll-end.002/activity-provenance.json"
+      },
+      "summary": {
+        "events": 27,
+        "commands": 11,
+        "file_changes": 2,
+        "computer_use_calls": 9,
+        "agent_messages": 5,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 2,
+        "unfinished_items": 0
+      }
+    },
+    "v3.react-spectrum-grid-tab-jump.003": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/v3.react-spectrum-grid-tab-jump.003/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/v3.react-spectrum-grid-tab-jump.003/activity-provenance.json"
+      },
+      "summary": {
+        "events": 35,
+        "commands": 12,
+        "file_changes": 3,
+        "computer_use_calls": 15,
+        "agent_messages": 5,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 5,
+        "unfinished_items": 0
+      }
+    },
+    "v3.ag-grid-master-detail-sticky.003": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/v3.ag-grid-master-detail-sticky.003/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/v3.ag-grid-master-detail-sticky.003/activity-provenance.json"
+      },
+      "summary": {
+        "events": 21,
+        "commands": 10,
+        "file_changes": 2,
+        "computer_use_calls": 3,
+        "agent_messages": 5,
+        "plans": 1,
+        "screenshots": 0,
+        "truncated_events": 5,
+        "unfinished_items": 0
+      }
+    },
+    "v3.jupyterlab-shiftclick-cellselect.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/v3.jupyterlab-shiftclick-cellselect.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/v3.jupyterlab-shiftclick-cellselect.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 25,
+        "commands": 8,
+        "file_changes": 2,
+        "computer_use_calls": 10,
+        "agent_messages": 4,
+        "plans": 1,
+        "screenshots": 0,
+        "truncated_events": 5,
+        "unfinished_items": 0
+      }
+    },
+    "v3.moveable-svg-fillbox-origin.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 14. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/v3.moveable-svg-fillbox-origin.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/v3.moveable-svg-fillbox-origin.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 67,
+        "commands": 27,
+        "file_changes": 15,
+        "computer_use_calls": 19,
+        "agent_messages": 6,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 14,
+        "unfinished_items": 0
+      }
+    },
+    "v3.visx-parentsize-flex-growth.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/v3.visx-parentsize-flex-growth.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/v3.visx-parentsize-flex-growth.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 47,
+        "commands": 16,
+        "file_changes": 5,
+        "computer_use_calls": 18,
+        "agent_messages": 7,
+        "plans": 1,
+        "screenshots": 0,
+        "truncated_events": 6,
+        "unfinished_items": 0
+      }
+    },
+    "v3.react-datepicker-mask-clear-blur.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/v3.react-datepicker-mask-clear-blur.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/v3.react-datepicker-mask-clear-blur.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 36,
+        "commands": 11,
+        "file_changes": 4,
+        "computer_use_calls": 16,
+        "agent_messages": 5,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 5,
+        "unfinished_items": 0
+      }
+    },
+    "v3.echarts-linked-datazoom-toolbar.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/v3.echarts-linked-datazoom-toolbar.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/v3.echarts-linked-datazoom-toolbar.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 25,
+        "commands": 11,
+        "file_changes": 2,
+        "computer_use_calls": 7,
+        "agent_messages": 5,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 4,
+        "unfinished_items": 0
+      }
+    },
+    "v3.echarts-asymmetric-zoom-lock.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/v3.echarts-asymmetric-zoom-lock.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/v3.echarts-asymmetric-zoom-lock.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 24,
+        "commands": 11,
+        "file_changes": 2,
+        "computer_use_calls": 7,
+        "agent_messages": 4,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 6,
+        "unfinished_items": 0
+      }
+    },
+    "v3.tiptap-keyboard-focus-position.002": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/v3.tiptap-keyboard-focus-position.002/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/v3.tiptap-keyboard-focus-position.002/activity-provenance.json"
+      },
+      "summary": {
+        "events": 40,
+        "commands": 16,
+        "file_changes": 12,
+        "computer_use_calls": 9,
+        "agent_messages": 3,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 4,
+        "unfinished_items": 0
+      }
+    },
+    "v3.slate-softbreak-scroll.002": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/v3.slate-softbreak-scroll.002/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/v3.slate-softbreak-scroll.002/activity-provenance.json"
+      },
+      "summary": {
+        "events": 58,
+        "commands": 21,
+        "file_changes": 9,
+        "computer_use_calls": 17,
+        "agent_messages": 11,
+        "plans": 0,
+        "screenshots": 0,
+        "truncated_events": 6,
+        "unfinished_items": 0
+      }
+    },
+    "v3.fabric-viewport-rotation-controls.001": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 13. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/v3.fabric-viewport-rotation-controls.001/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/v3.fabric-viewport-rotation-controls.001/activity-provenance.json"
+      },
+      "summary": {
+        "events": 36,
+        "commands": 19,
+        "file_changes": 3,
+        "computer_use_calls": 8,
+        "agent_messages": 5,
+        "plans": 1,
+        "screenshots": 0,
+        "truncated_events": 13,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.captain-callisto-temporal-jetpack.006": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 13. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/gameqa.captain-callisto-temporal-jetpack.006/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/gameqa.captain-callisto-temporal-jetpack.006/activity-provenance.json"
+      },
+      "summary": {
+        "events": 82,
+        "commands": 23,
+        "file_changes": 2,
+        "computer_use_calls": 50,
+        "agent_messages": 6,
+        "plans": 1,
+        "screenshots": 0,
+        "truncated_events": 13,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.captain-callisto-temporal-jetpack.007": {
+      "run_relation": "replacement",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "This replacement run has no retained screenshots; the historical reel is a different run."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/gameqa.captain-callisto-temporal-jetpack.007/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/gameqa.captain-callisto-temporal-jetpack.007/activity-provenance.json"
+      },
+      "summary": {
+        "events": 24,
+        "commands": 10,
+        "file_changes": 2,
+        "computer_use_calls": 7,
+        "agent_messages": 4,
+        "plans": 1,
+        "screenshots": 0,
+        "truncated_events": 4,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.captain-callisto-goal-transition.005": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 8. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "partial",
+          "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "unavailable",
+          "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/gameqa.captain-callisto-goal-transition.005/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/gameqa.captain-callisto-goal-transition.005/activity-provenance.json"
+      },
+      "summary": {
+        "events": 47,
+        "commands": 15,
+        "file_changes": 2,
+        "computer_use_calls": 24,
+        "agent_messages": 5,
+        "plans": 1,
+        "screenshots": 0,
+        "truncated_events": 8,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.captain-callisto-visual-semantic-item.009": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "complete",
+          "reason": "Every original lifecycle record is retained, with image payloads replaced by verified references."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "17 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Full event data": "viewer/media/source/agent/gameqa.captain-callisto-visual-semantic-item.009/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/gameqa.captain-callisto-visual-semantic-item.009/activity-provenance.json"
+      },
+      "summary": {
+        "events": 57,
+        "commands": 25,
+        "file_changes": 5,
+        "computer_use_calls": 20,
+        "agent_messages": 6,
+        "plans": 1,
+        "screenshots": 17,
+        "truncated_events": 0,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.captain-callisto-collision-offset.005": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "complete",
+          "reason": "Every original lifecycle record is retained, with image payloads replaced by verified references."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "47 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Full event data": "viewer/media/source/agent/gameqa.captain-callisto-collision-offset.005/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/gameqa.captain-callisto-collision-offset.005/activity-provenance.json"
+      },
+      "summary": {
+        "events": 73,
+        "commands": 14,
+        "file_changes": 1,
+        "computer_use_calls": 52,
+        "agent_messages": 5,
+        "plans": 1,
+        "screenshots": 47,
+        "truncated_events": 0,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.captain-callisto-conditional-physics.002": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "complete",
+          "reason": "Every original lifecycle record is retained, with image payloads replaced by verified references."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "4 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Full event data": "viewer/media/source/agent/gameqa.captain-callisto-conditional-physics.002/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/gameqa.captain-callisto-conditional-physics.002/activity-provenance.json"
+      },
+      "summary": {
+        "events": 17,
+        "commands": 8,
+        "file_changes": 0,
+        "computer_use_calls": 5,
+        "agent_messages": 3,
+        "plans": 1,
+        "screenshots": 4,
+        "truncated_events": 0,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.captain-callisto-goal-transition.006": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "complete",
+          "reason": "Every original lifecycle record is retained, with image payloads replaced by verified references."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "unavailable",
+          "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "16 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Full event data": "viewer/media/source/agent/gameqa.captain-callisto-goal-transition.006/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/gameqa.captain-callisto-goal-transition.006/activity-provenance.json"
+      },
+      "summary": {
+        "events": 37,
+        "commands": 11,
+        "file_changes": 2,
+        "computer_use_calls": 18,
+        "agent_messages": 5,
+        "plans": 1,
+        "screenshots": 16,
+        "truncated_events": 0,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.2048-seeded-restart-parity.002": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "4 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.002/agent/patch.diff"
+      },
+      "summary": {
+        "events": 24,
+        "commands": 12,
+        "file_changes": 2,
+        "computer_use_calls": 4,
+        "agent_messages": 5,
+        "plans": 1,
+        "screenshots": 4,
+        "truncated_events": 5,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.2048-seeded-restart-parity.005": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "20 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/patch.diff"
+      },
+      "summary": {
+        "events": 48,
+        "commands": 14,
+        "file_changes": 6,
+        "computer_use_calls": 21,
+        "agent_messages": 6,
+        "plans": 1,
+        "screenshots": 20,
+        "truncated_events": 6,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.astray-level2-parallax-glass.009": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 7. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "9 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.astray-level2-parallax-glass.009/agent/patch.diff"
+      },
+      "summary": {
+        "events": 31,
+        "commands": 14,
+        "file_changes": 1,
+        "computer_use_calls": 11,
+        "agent_messages": 5,
+        "plans": 0,
+        "screenshots": 9,
+        "truncated_events": 7,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.core-ball-attachment-contract.003": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "13 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.core-ball-attachment-contract.003/agent/patch.diff"
+      },
+      "summary": {
+        "events": 42,
+        "commands": 15,
+        "file_changes": 3,
+        "computer_use_calls": 16,
+        "agent_messages": 7,
+        "plans": 1,
+        "screenshots": 13,
+        "truncated_events": 6,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.hextris-cascade-resettle-stable.001": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 10. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "20 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle-stable.001/agent/patch.diff"
+      },
+      "summary": {
+        "events": 52,
+        "commands": 16,
+        "file_changes": 6,
+        "computer_use_calls": 22,
+        "agent_messages": 7,
+        "plans": 1,
+        "screenshots": 20,
+        "truncated_events": 10,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.hextris-cascade-resettle.001": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "7 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.hextris-cascade-resettle.001/agent/patch.diff"
+      },
+      "summary": {
+        "events": 30,
+        "commands": 14,
+        "file_changes": 2,
+        "computer_use_calls": 7,
+        "agent_messages": 6,
+        "plans": 1,
+        "screenshots": 7,
+        "truncated_events": 4,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.maze-signal-mode-handoff.001": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 2. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "11 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.maze-signal-mode-handoff.001/agent/patch.diff"
+      },
+      "summary": {
+        "events": 38,
+        "commands": 17,
+        "file_changes": 2,
+        "computer_use_calls": 12,
+        "agent_messages": 6,
+        "plans": 1,
+        "screenshots": 11,
+        "truncated_events": 2,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.minesweeper-delayed-loss-episode-identity.002": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "19 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.002/agent/patch.diff"
+      },
+      "summary": {
+        "events": 46,
+        "commands": 15,
+        "file_changes": 3,
+        "computer_use_calls": 21,
+        "agent_messages": 6,
+        "plans": 1,
+        "screenshots": 19,
+        "truncated_events": 5,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.phase-relay-checkpoint-hazard-sync.003": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "28 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.phase-relay-checkpoint-hazard-sync.003/agent/patch.diff"
+      },
+      "summary": {
+        "events": 57,
+        "commands": 17,
+        "file_changes": 2,
+        "computer_use_calls": 30,
+        "agent_messages": 7,
+        "plans": 1,
+        "screenshots": 28,
+        "truncated_events": 6,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.vector-relay-deferred-ownership.002": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "20 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.vector-relay-deferred-ownership.002/agent/patch.diff"
+      },
+      "summary": {
+        "events": 40,
+        "commands": 8,
+        "file_changes": 2,
+        "computer_use_calls": 22,
+        "agent_messages": 7,
+        "plans": 1,
+        "screenshots": 20,
+        "truncated_events": 4,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.vector-relay-primed-pulse-balance-handoff.011": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "16 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.vector-relay-primed-pulse-balance-handoff.011/agent/patch.diff"
+      },
+      "summary": {
+        "events": 40,
+        "commands": 13,
+        "file_changes": 3,
+        "computer_use_calls": 17,
+        "agent_messages": 6,
+        "plans": 1,
+        "screenshots": 16,
+        "truncated_events": 6,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.wordle-finish-replay-inspection.006": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "30 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.wordle-finish-replay-inspection.006/agent/patch.diff"
+      },
+      "summary": {
+        "events": 68,
+        "commands": 17,
+        "file_changes": 8,
+        "computer_use_calls": 31,
+        "agent_messages": 11,
+        "plans": 1,
+        "screenshots": 30,
+        "truncated_events": 5,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.boxel-rebound-restart-camera-envelope.010": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 4. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "10 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.010/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.010/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.010/agent/patch.diff"
+      },
+      "summary": {
+        "events": 32,
+        "commands": 13,
+        "file_changes": 2,
+        "computer_use_calls": 11,
+        "agent_messages": 5,
+        "plans": 1,
+        "screenshots": 10,
+        "truncated_events": 4,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.boxel-rebound-restart-camera-envelope.011": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 3. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "11 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.011/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.011/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.011/agent/patch.diff"
+      },
+      "summary": {
+        "events": 37,
+        "commands": 16,
+        "file_changes": 2,
+        "computer_use_calls": 13,
+        "agent_messages": 5,
+        "plans": 1,
+        "screenshots": 11,
+        "truncated_events": 3,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.boxel-rebound-restart-camera-envelope.012": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 3. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "6 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.012/agent/patch.diff"
+      },
+      "summary": {
+        "events": 29,
+        "commands": 14,
+        "file_changes": 2,
+        "computer_use_calls": 7,
+        "agent_messages": 5,
+        "plans": 1,
+        "screenshots": 6,
+        "truncated_events": 3,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.boxel-rebound-restart-camera-envelope.013": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "9 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.013/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.013/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.013/agent/patch.diff"
+      },
+      "summary": {
+        "events": 35,
+        "commands": 15,
+        "file_changes": 3,
+        "computer_use_calls": 11,
+        "agent_messages": 5,
+        "plans": 1,
+        "screenshots": 9,
+        "truncated_events": 5,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.boxel-rebound-restart-camera-envelope.014": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 5. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "9 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.014/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.014/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.boxel-rebound-restart-camera-envelope.014/agent/patch.diff"
+      },
+      "summary": {
+        "events": 33,
+        "commands": 15,
+        "file_changes": 2,
+        "computer_use_calls": 10,
+        "agent_messages": 5,
+        "plans": 1,
+        "screenshots": 9,
+        "truncated_events": 5,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.flappy-bird-flight-lab.008": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 2. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "35 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.008/agent/patch.diff"
+      },
+      "summary": {
+        "events": 72,
+        "commands": 20,
+        "file_changes": 5,
+        "computer_use_calls": 37,
+        "agent_messages": 9,
+        "plans": 1,
+        "screenshots": 35,
+        "truncated_events": 2,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.flappy-bird-flight-lab.010": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 2. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "29 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.010/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.010/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.010/agent/patch.diff"
+      },
+      "summary": {
+        "events": 65,
+        "commands": 20,
+        "file_changes": 4,
+        "computer_use_calls": 31,
+        "agent_messages": 9,
+        "plans": 1,
+        "screenshots": 29,
+        "truncated_events": 2,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.flappy-bird-flight-lab.011": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 1. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "42 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.011/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.011/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.011/agent/patch.diff"
+      },
+      "summary": {
+        "events": 77,
+        "commands": 20,
+        "file_changes": 3,
+        "computer_use_calls": 44,
+        "agent_messages": 9,
+        "plans": 1,
+        "screenshots": 42,
+        "truncated_events": 1,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.flappy-bird-flight-lab.012": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 1. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "26 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.012/agent/patch.diff"
+      },
+      "summary": {
+        "events": 61,
+        "commands": 15,
+        "file_changes": 5,
+        "computer_use_calls": 28,
+        "agent_messages": 13,
+        "plans": 0,
+        "screenshots": 26,
+        "truncated_events": 1,
+        "unfinished_items": 0
+      }
+    },
+    "gameqa.minesweeper-delayed-loss-episode-identity.003": {
+      "run_relation": "historical_exact",
+      "artifact_status": {
+        "event_data": {
+          "status": "partial",
+          "reason": "Only the earlier compact event export is retained. Truncated event details: 1. Original lifecycle records and omitted text cannot be recovered from this export."
+        },
+        "run_provenance": {
+          "status": "verified",
+          "reason": "Source files and media associations are checked and hashed in the provenance download."
+        },
+        "agent_patch": {
+          "status": "available",
+          "reason": "Final patch from this representative run."
+        },
+        "screenshots": {
+          "status": "verified",
+          "reason": "23 screenshots matched to their recorded calls."
+        }
+      },
+      "artifacts": {
+        "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/activity-export.json",
+        "Run provenance": "viewer/media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/activity-provenance.json",
+        "Agent patch": "viewer/media/source/agent/game-cua/gameqa.minesweeper-delayed-loss-episode-identity.003/agent/patch.diff"
+      },
+      "summary": {
+        "events": 54,
+        "commands": 13,
+        "file_changes": 5,
+        "computer_use_calls": 25,
+        "agent_messages": 10,
+        "plans": 1,
+        "screenshots": 23,
+        "truncated_events": 1,
+        "unfinished_items": 0
+      }
+    }
+  }
+}

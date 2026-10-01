@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "task_id": "mobile.audit-mobile-161",
+  "candidate_id": "audit-mobile-161",
+  "selected_revision_digest": "bf99f74793820e35b45c1fd827904a97ce32430de87b1755d933e184df6a6a6f",
+  "matched_code_only_revision_digest": "7c7f488bf45b9438dad6655a7ce71ff8778e6cb8400a68f17bdaa7f4ae5c5185",
+  "model": "openai.gpt-5.6-sol",
+  "started_at": "2026-09-10T01:51:51.118995+00:00",
+  "finished_at": "2026-09-10T01:57:14.229319+00:00",
+  "result": "pass",
+  "raw_transcript_sha256": "502ca982c7951b42aed8cfd007b24a8058bf3ffe8479acd43a05f32e227a7b6d",
+  "raw_transcript_bytes": 49233,
+  "raw_record_count": 45,
+  "exported_record_count": 45,
+  "gate_report_sha256": "ebbcea4165b00aa88722284ea29c7cf46093fdc40f685316d18856cd8b8cbbb9",
+  "trajectory_sha256": "3167bb535593a7afb6d6c3e13a4fc4678c1b8a48d71bfec5e0e07e19bf210ca9",
+  "frame_sha256": {
+    "screenshot-0001.png": "4f49e2dde177a9d540b4db68272169d651b37554ae0cf42a5ed46864f78f8fa7",
+    "screenshot-0002.png": "4f49e2dde177a9d540b4db68272169d651b37554ae0cf42a5ed46864f78f8fa7"
+  },
+  "activity_sha256": "10b219cbdb610f91d4c753470468396e23ac9e884026643f1fd710e768505453",
+  "raw_transcript_retention": "Original EFS run and private recovery archive",
+  "export_policy": {
+    "all_records_retained": true,
+    "text_truncated": false,
+    "image_payloads": "Replaced by ordered, hash-verified screenshot references",
+    "machine_paths": "Replaced by workspace, rollout, run, or artifact placeholders",
+    "item_order": "First appearance; all lifecycle records retained in records"
+  },
+  "original_patch_sha256": "f2599a73ad8dda223cc206255793ab4df3b4aad3c3d85103bb593e63d55b1bb9",
+  "published_patch_sha256": "f2599a73ad8dda223cc206255793ab4df3b4aad3c3d85103bb593e63d55b1bb9"
+}

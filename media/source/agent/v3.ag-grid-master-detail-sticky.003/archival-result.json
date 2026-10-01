@@ -1,0 +1,8 @@
+{
+  "task_id": "v3.ag-grid-master-detail-sticky.003",
+  "success": false,
+  "progress": 0.5,
+  "patch_path": "/tmp/cua-swe-archive-v3-llm-shard01/trials/cua/gpt56-luna/v3.ag-grid-master-detail-sticky.003/attempt-1/result/v3.ag-grid-master-detail-sticky.003/patch.diff",
+  "verifier_report_path": "/tmp/cua-swe-archive-v3-llm-shard01/trials/cua/gpt56-luna/v3.ag-grid-master-detail-sticky.003/attempt-1/result/v3.ag-grid-master-detail-sticky.003/verifier_report.json",
+  "workspace_path": "/tmp/cua-swe-archive-v3-llm-shard01/trials/cua/gpt56-luna/v3.ag-grid-master-detail-sticky.003/attempt-1/isolated-workspace-removed"
+}

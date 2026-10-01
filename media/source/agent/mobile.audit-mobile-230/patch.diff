@@ -1,0 +1,286 @@
+--- a/apps/Railway12306/pages/PassengerListPage.tsx
++++ b/apps/Railway12306/pages/PassengerListPage.tsx
+@@ -200,7 +200,6 @@
+   const { passengers, selectedTrain } = useRailwayStore(
+     useShallow(s => ({ passengers: s.passengers, selectedTrain: s.selectedTrain })),
+   );
+-  const updatePassengers = useRailwayStore(s => s.updatePassengers);
+   const setSelectedTrain = useRailwayStore(s => s.setSelectedTrain);
+   const { bindBack, bindTap } = useRailwayGestures();
+   const location = useLocation();
+@@ -232,7 +231,21 @@
+   const doneBackBinding = bindBack<HTMLButtonElement>({
+     beforeTrigger: () => {
+       if (selectedTrain) {
+-        setSelectedTrain({ ...selectedTrain, passengerIds: selectedIds });
++        const availablePassengerIds = new Set(passengers.map(passenger => passenger.id));
++        const committedPassengerIds = selectedIds.filter(
++          (id, index) => availablePassengerIds.has(id) && selectedIds.indexOf(id) === index,
++        );
++        const committedPassengerIdSet = new Set(committedPassengerIds);
++        const seatPositionsByPassengerId = Object.fromEntries(
++          Object.entries(selectedTrain.seatPositionsByPassengerId ?? {})
++            .filter(([passengerId]) => committedPassengerIdSet.has(passengerId)),
++        );
++
++        setSelectedTrain({
++          ...selectedTrain,
++          passengerIds: committedPassengerIds,
++          seatPositionsByPassengerId,
++        });
+       }
+     },
+   });
+--- a/apps/Railway12306/pages/OrderConfirmPage.tsx
++++ b/apps/Railway12306/pages/OrderConfirmPage.tsx
+@@ -10,7 +10,9 @@
+ import { stringsEn } from '../res/strings.en';
+ import { useAppStrings } from '../../../os/useAppStrings';
+ import type { StringKey } from '../res/strings';
++import type { SelectedTrainDraft } from '../types';
+ type Strings = Record<StringKey, string>;
++type SeatPositionsByPassengerId = NonNullable<SelectedTrainDraft['seatPositionsByPassengerId']>;
+ 
+ function formatDatePill(dateStr: string, s: Strings): string {
+   const timestamp = parseToTimestamp(`${dateStr}T00:00:00`);
+@@ -25,6 +27,35 @@
+   if (count === -1) return s.seat_waitlist;
+   if (count === 0) return s.seat_none;
+   return s.seat_available_short;
++}
++
++function getSeatPositionColumns(seatType: string): Set<string> | null {
++  if (!supportsPositionPick(seatType)) return null;
++  if (seatType.includes('商务')) return new Set(['A', 'C', 'F']);
++  if (seatType.includes('一等')) return new Set(['A', 'C', 'D', 'F']);
++  return new Set(['A', 'B', 'C', 'D', 'F']);
++}
++
++function retainCompatibleSeatPositions(
++  preferences: SeatPositionsByPassengerId,
++  seatType: string,
++): SeatPositionsByPassengerId {
++  const columns = getSeatPositionColumns(seatType);
++  if (!columns) return {};
++
++  return Object.fromEntries(
++    Object.entries(preferences).filter(([, position]) => {
++      const [rawRow, column] = position.split('-');
++      const row = Number.parseInt(rawRow ?? '', 10);
++      return Number.isInteger(row) && row >= 0 && !!column && columns.has(column);
++    }),
++  );
++}
++
++function formatSeatPosition(position: string): string {
++  const [rawRow, column] = position.split('-');
++  const row = Number.parseInt(rawRow ?? '', 10);
++  return `${Number.isInteger(row) ? row + 1 : rawRow}排${column}座`;
+ }
+ 
+ export const OrderConfirmPage: React.FC = () => {
+@@ -41,7 +72,6 @@
+   const [selectedSeat, setSelectedSeat] = useState('');
+   const [showTip, setShowTip] = useState(true);
+   const [showProcessing, setShowProcessing] = useState(false);
+-  const [selectedSeatPositions, setSelectedSeatPositions] = useState<string[]>([]);
+   const submitTimerRef = useRef<number | null>(null);
+ 
+   const urlParams = new URLSearchParams(location.search);
+@@ -63,7 +93,12 @@
+   );
+ 
+   const selectedPassengerIds = hasMatchingDraft ? state.selectedTrain?.passengerIds ?? [] : [];
+-  const selectedPassengers = state.passengers.filter(passenger => selectedPassengerIds.includes(passenger.id));
++  const selectedPassengers = selectedPassengerIds
++    .map(passengerId => state.passengers.find(passenger => passenger.id === passengerId))
++    .filter((passenger): passenger is NonNullable<typeof passenger> => !!passenger);
++  const seatPositionsByPassengerId = hasMatchingDraft
++    ? state.selectedTrain?.seatPositionsByPassengerId ?? {}
++    : {};
+   const passengerIdsKey = selectedPassengerIds.join(',');
+ 
+   useEffect(() => {
+@@ -78,7 +113,7 @@
+     if (!train) return;
+ 
+     const draftSeat = hasMatchingDraft ? state.selectedTrain?.seatType : '';
+-    const resolvedSeat = querySeat || draftSeat || seatOptions[0]?.type || '';
++    const resolvedSeat = draftSeat || querySeat || seatOptions[0]?.type || '';
+     setSelectedSeat(resolvedSeat);
+ 
+     if (!hasMatchingDraft) {
+@@ -87,6 +122,7 @@
+         seatType: resolvedSeat,
+         trainIndex,
+         passengerIds: [],
++        seatPositionsByPassengerId: {},
+       });
+       return;
+     }
+@@ -98,6 +134,10 @@
+         trainIndex: state.selectedTrain?.trainIndex ?? trainIndex,
+         seatType: resolvedSeat,
+         passengerIds: selectedPassengerIds,
++        seatPositionsByPassengerId: retainCompatibleSeatPositions(
++          state.selectedTrain?.seatPositionsByPassengerId ?? {},
++          resolvedSeat,
++        ),
+       });
+     }
+ 
+@@ -125,12 +165,15 @@
+ 
+   const handleSeatSelect = (seatType: string) => {
+     setSelectedSeat(seatType);
+-    setSelectedSeatPositions([]);
+     setSelectedTrain({
+       trainNo: train.trainNo,
+       seatType,
+       trainIndex,
+       passengerIds: selectedPassengerIds,
++      seatPositionsByPassengerId: retainCompatibleSeatPositions(
++        seatPositionsByPassengerId,
++        seatType,
++      ),
+     });
+   };
+ 
+@@ -142,11 +185,16 @@
+     const createTime = getISOString();
+     const orderSeed = String(timeNow()).slice(-8);
+ 
+-    const validPassengers = selectedPassengerIds
+-      .map(pid => state.passengers.find(p => p.id === pid))
+-      .filter((p): p is NonNullable<typeof p> => !!p);
+-
+-    const canHonorPositions = supportsPositionPick(seatInfo.type) && selectedSeatPositions.length > 0;
++    const validPassengers = selectedPassengers;
++    const preferredSeats = validPassengers.flatMap(passenger => {
++      const position = retainCompatibleSeatPositions(
++        seatPositionsByPassengerId,
++        seatInfo.type,
++      )[passenger.id];
++      return position ? [{ passengerId: passenger.id, position }] : [];
++    });
++
++    const canHonorPositions = supportsPositionPick(seatInfo.type) && preferredSeats.length > 0;
+     // 失败概率以「本席别购票人数」为需求量(而非用户实际点中的格子数),
+     // 否则 2 人购票只点 1 个位置时会低估概率。
+     const reassignProb = canHonorPositions
+@@ -155,14 +203,20 @@
+     const seatReassigned = canHonorPositions && Math.random() < reassignProb;
+ 
+     const honoredSeatNos = canHonorPositions && !seatReassigned
+-      ? buildSeatNosFromPositions(seatInfo.type, selectedSeatPositions)
++      ? buildSeatNosFromPositions(seatInfo.type, preferredSeats.map(preference => preference.position))
+       : [];
+-
+-    const tickets = validPassengers.map((passenger, idx) => ({
++    const honoredSeatNosByPassengerId = Object.fromEntries(
++      preferredSeats.map((preference, index) => [
++        preference.passengerId,
++        honoredSeatNos[index],
++      ]),
++    );
++
++    const tickets = validPassengers.map(passenger => ({
+       passengerName: passenger.name,
+       ticketType: state.isStudent ? '学生票' : '成人票',
+       seatType: seatInfo.type,
+-      seatNo: honoredSeatNos[idx] ?? randomSeatNo(seatInfo.type),
++      seatNo: honoredSeatNosByPassengerId[passenger.id] ?? randomSeatNo(seatInfo.type),
+       price: seatInfo.price,
+     }));
+ 
+@@ -197,6 +251,7 @@
+         seatType: seatInfo.type,
+         trainIndex,
+         passengerIds: selectedPassengerIds,
++        seatPositionsByPassengerId,
+       });
+     },
+   });
+@@ -326,16 +381,24 @@
+                     <span>{passenger.name}</span>
+                     <span className="text-[12px] text-[#4FA4F7] font-normal">{state.isStudent ? '学生票' : '成人票'}</span>
+                     <span className="text-[12px] text-[#4FA4F7] font-normal">{seatInfo.type}</span>
++                    {seatPositionsByPassengerId[passenger.id] && (
++                      <span className="text-[12px] text-[#DE723D] font-normal">
++                        {formatSeatPosition(seatPositionsByPassengerId[passenger.id])}
++                      </span>
++                    )}
+                   </div>
+                   <div className="mt-1 flex items-center justify-between">
+                     <span className="text-[14px] text-[#9098A3] font-mono tracking-wider">{maskIdNo(passenger.idNo)}</span>
+                     <button onClick={() => {
+                       const newIds = selectedPassengerIds.filter(id => id !== passenger.id);
++                      const newSeatPositionsByPassengerId = { ...seatPositionsByPassengerId };
++                      delete newSeatPositionsByPassengerId[passenger.id];
+                       setSelectedTrain({
+                         trainNo: train.trainNo,
+                         seatType: seatInfo.type,
+                         trainIndex,
+                         passengerIds: newIds,
++                        seatPositionsByPassengerId: newSeatPositionsByPassengerId,
+                       });
+                     }}>
+                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#AAB2BD]"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6" /></svg>
+@@ -398,18 +461,39 @@
+             const rowCount = Math.min(maxSeats, 2);
+ 
+             const handleSeatClick = (seatId: string) => {
+-              setSelectedSeatPositions(prev => {
+-                const idx = prev.indexOf(seatId);
+-                if (idx !== -1) return prev.filter((_, i) => i !== idx);
+-                const next = [...prev, seatId];
+-                if (next.length > maxSeats) next.shift();
+-                return next;
++              const selectedPassengerIdSet = new Set(selectedPassengers.map(passenger => passenger.id));
++              const nextSeatPositionsByPassengerId = Object.fromEntries(
++                Object.entries(seatPositionsByPassengerId)
++                  .filter(([passengerId]) => selectedPassengerIdSet.has(passengerId)),
++              );
++              const currentOwnerId = selectedPassengers.find(
++                passenger => nextSeatPositionsByPassengerId[passenger.id] === seatId,
++              )?.id;
++
++              if (currentOwnerId) {
++                delete nextSeatPositionsByPassengerId[currentOwnerId];
++              } else {
++                const nextOwnerId = selectedPassengers.find(
++                  passenger => !nextSeatPositionsByPassengerId[passenger.id],
++                )?.id ?? selectedPassengers[0]?.id;
++                if (!nextOwnerId) return;
++                nextSeatPositionsByPassengerId[nextOwnerId] = seatId;
++              }
++
++              setSelectedTrain({
++                trainNo: train.trainNo,
++                seatType: seatInfo.type,
++                trainIndex,
++                passengerIds: selectedPassengerIds,
++                seatPositionsByPassengerId: nextSeatPositionsByPassengerId,
+               });
+             };
+ 
+             const renderSeat = (row: number, col: string) => {
+               const seatId = `${row}-${col}`;
+-              const active = selectedSeatPositions.includes(seatId);
++              const active = selectedPassengers.some(
++                passenger => seatPositionsByPassengerId[passenger.id] === seatId,
++              );
+               const fill = active ? '#DE723D' : '#EEF2F6';
+               const stroke = active ? '#DE723D' : '#DCE4EC';
+               const textColor = active ? 'text-white' : 'text-[#B8BEC8]';
+--- a/apps/Railway12306/types.ts
++++ b/apps/Railway12306/types.ts
+@@ -146,6 +146,8 @@
+   seatType: string;
+   trainIndex: number;
+   passengerIds: string[];
++  /** Seat-position preferences keyed by passenger identity, persisted with the order draft. */
++  seatPositionsByPassengerId?: Record<string, string>;
+ }
+ 
+ // ─── 列车类型 ─────────────────────────────────────────────────────────

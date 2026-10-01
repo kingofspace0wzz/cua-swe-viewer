@@ -1,0 +1,8 @@
+{
+  "task_id": "gameqa.boxel-rebound-restart-camera-envelope.011",
+  "success": true,
+  "progress": 1.0,
+  "patch_path": "agent/patch.diff",
+  "verifier_report_path": "agent/verifier-report.json",
+  "workspace_path": "<evaluation-workspace-not-exported>"
+}

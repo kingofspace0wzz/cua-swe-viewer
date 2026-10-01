@@ -1,0 +1,20 @@
+{
+  "candidate_id": "audit-mobile-200",
+  "frame_count": 6,
+  "frame_sha256": {
+    "screenshot-0001.png": "72653cbd1981e825f1f9d9df431003b65a35872086156f06255d7a021c339768",
+    "screenshot-0002.png": "2ff13f13206079f2ba27742064164c75ecca72cf6a3b41e960a1b1a0eb6f8858",
+    "screenshot-0003.png": "2ff13f13206079f2ba27742064164c75ecca72cf6a3b41e960a1b1a0eb6f8858",
+    "screenshot-0004.png": "2ff13f13206079f2ba27742064164c75ecca72cf6a3b41e960a1b1a0eb6f8858",
+    "screenshot-0005.png": "2ff13f13206079f2ba27742064164c75ecca72cf6a3b41e960a1b1a0eb6f8858",
+    "screenshot-0006.png": "3acc31a2787fd035aa987329b4f4ed5c6e574603244f96005819652b98627a9d"
+  },
+  "model": "openai.gpt-5.6-sol",
+  "provenance": "formal_screenshot_only_gpt56_cua",
+  "result": "fail",
+  "role": "upper_anchor",
+  "schema_version": 1,
+  "selected_revision_digest": "9dc86b34204dfffb714978a67bf6bb4ae54be1f57717559ed2eee9cf52f581c5",
+  "task_id": "mobile.audit-mobile-200",
+  "trajectory_sha256": "3cebf2846a1254ae0d63b20608255a107a8a8d1de515ef879ac3d070c6841289"
+}

@@ -1,0 +1,511 @@
+{
+  "coverage": "retained_codex_events_partial",
+  "events": [
+    {
+      "detail": "I\u2019ll trace the level-completion state transition, make the smallest source fix, build it, then replay Level 6 in the protected browser to confirm the cleared screen stays active. I\u2019ll also record the required rollout notes.",
+      "kind": "agent_message",
+      "sequence": 1,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "<evaluation-workspace>/workspace\npackage-lock.json\nserver.mjs\nbuild.js\nREADME.md\nUPSTREAM.md\ncallisto-big-screenshot.png\npackage.json\nLICENSE\nshadermin.js\ncallisto-small-screenshot.png\nsrc/music.js\nsrc/constants.js\nsrc/menu.js\nsrc/colors.js\nsrc/sound.js\nsrc/zzfxm.js\nsrc/index.html\nsrc/hud.js\nsrc/externs.js\nsrc/mapgen.js\nsrc/index.js\nsrc/game_api.js\nsrc/zzfx.js\nsrc/lib/bufferset.js\nsrc/lib/rng.js\nsrc/lib/engine.js\nsrc/lib/keyboard.js\nsrc/lib/debug.js\nsrc/lib/events.js\nsrc/lib/mat4.js\nsrc/lib/geometry.js\nsrc/lib/glconstants.js\nsrc/lib/os13k.js\nsrc/lib/shaders.js\nsrc/lib/fbo.js\nsrc/lib/vec3.js\nsrc/lib/lib.js\nsrc/lib/codegolf.js\nsrc/lib/camera.js\nsrc/lib/overlay.js\nsrc/entities/kang.js\nsrc/entities/shooter.js\nsrc/entities/particle.js\nsrc/entities/platform.js\nsrc/entities/coin.js\nsrc/entities/alien.js\nsrc/entities/mystery.js\nsrc/entities/spaceship.js\nsrc/entities/hero.js\nsrc/entities/fuel.js\nsrc/entities/flagpole.js\nsrc/entities/entity.js\nsrc/lib/shaders/main.frag\nsrc/lib/shaders/bloom.vert\nsrc/lib/shaders/shadow.vert\nsrc/lib/shaders/post.vert\nsrc/lib/shaders/shadow.frag\nsrc/lib/shaders/bloom.frag\nsrc/lib/shaders/main.vert\nsrc/lib/shaders/post.frag",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 2,
+      "status": "completed",
+      "title": "/bin/bash -lc \"pwd && rg --files -g '\"'!node_modules'\"' | sed -n '1,160p'\"",
+      "truncated": false
+    },
+    {
+      "detail": "<evaluation-workspace>/rollout",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 3,
+      "status": "completed",
+      "title": "/bin/bash -lc 'printenv CUA_SWE_AGENT_ROLLOUT_DIR'",
+      "truncated": false
+    },
+    {
+      "detail": "./build.js:17:      compilation_level: devMode ? 'SIMPLE' : 'ADVANCED',\n./build.js:19:      warning_level: 'VERBOSE',\n./build.js:20:      summary_detail_level: 3,\n./build.js:46:        'src/entities/coin.js',\n./build.js:166:    const archive = archiver('zip', {zlib: {level: 9}});\n./README.md:13:* R to restart level\n./README.md:53:My goal this year was to make something \"fun\", relatively easy (at least for the first few levels), and something with a more global appeal. I took a lot of inspiration from 3d Mario and Zelda games.\n./README.md:71:Next year I hope to use some form of FM Synthesis or Modular Synthesis. I am completely addicted to [Andrew Huang](https://www.youtube.com/channel/UCdcemy56JtVTrsFIOoqvV8g)'s videos such as [Modular synthesis EXPLAINED](https://www.youtube.com/watch?v=cWslSTTkiFU) or [5 Techniques for Generative & Ambient Music](https://www.youtube.com/watch?v=uNz1XfVfJak). I think these will translate well to the JavaScript audio API.\n./README.md:83:* The non-gameplay features such as the opening scene, after-level cutscene, and end-of-game cutscene were all praised.\n./README.md:88:* I still have a tendency to add features rather than exploring fun or novel gameplay. The level design was simplistic, primarily because I didn't spend enough time on it.\n./package.json:13:    \"test:replay\": \"python3 verifiers/replay_state.py --url http://127.0.0.1:49320/?benchmark=1&level=6\"\n./src/mapgen.js:2:// Use a clean RNG based on the current level.\n./src/mapgen.js:9:const levelDefinitions = [\n./src/mapgen.js:15:    log('Level 1 - Intro level');\n./src/mapgen.js:44:    log('Level 2 - Maze level');\n./src/mapgen.js:156:      // Compact ascending castle stair with a transporter landing.\n./src/mapgen.js:260:    createLift(2, 4.5, 30, 2, 8, 30); // Ground to level 2\n./s\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 4,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"cleared|complete|completion|transporter|coin|boost|level\\\" . -g '\"'!node_modules'\"' -g '\"'!dist'\"' -g '\"'!build'\"'\"",
+      "truncated": true
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 5,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "const introText = [,\n  [\n    [\n      // Intro Story 1\n      'OUR HERO, CAPTAIN CALLISTO, BLASTS THROUGH SPACE',\n      'SEEKING ADVENTURE',\n    ],\n  ],\n  [\n    [\n      // Intro Story 2\n      'APPROACHING THE ZETA AIR FORTRESS',\n      'BEWARE: SENSORS SHOW SIGNS OF LIFE',\n    ],\n  ],\n  [,\n    [\n      // Level 1\n      'COLLECT ALL TREASURE AND',\n      'REACH THE TRANSPORTER TO PROCEED',\n    ],\n    [\n      // Level 2\n      'THE PATH IS TREACHEROUS',\n      'PROCEED WITH CAUTION',\n    ],\n    [\n      // Level 3\n      'THERE\\'S MORE THAN ONE WAY TO SKIN A WOMP RAT',\n      '',\n    ],\n    [\n      // Level 4\n      'MORE ALIEN ACTIVITY THAN EXPECTED',\n      'PROCEED WITH CAUTION',\n    ],\n    [\n      // Level 5\n      'WE ARE DEEP INTO ALIEN TERRITORY',\n      'HIGH ALERT',\n    ],\n    [\n      // Level 6\n      'EVIDENCE OF COMPLEX CIVILIZATION',\n      'DO NOT UNDERESTIMATE THE ENEMY',\n    ],\n    [\n      // Level 7\n      'ALIEN DEFENSES ARRIVED',\n      'WATCH OUT FOR MISSILES',\n    ],\n    [\n      // Level 8\n      'CLIMB THE GREAT PYRAMID',\n      'TREASURE AWAITS',\n    ],\n    [\n      // Level 9\n      'THE GREAT SPIRES OF KODOS',\n      'WE MUST BE NEAR!',\n    ],\n    [\n      // Level 10\n      'THE INNER SANCTUM!  THE GREAT KANG!',\n      'YOU ARE DOOMED!',\n    ],\n  ],\n  [\n    [\n      // Level failed\n      'OH NO!',\n      'TRY AGAIN!',\n    ],\n  ],\n];\n\n/**\n * @typedef {{\n  *            callback:!Function\n  *          }}\n  */\nlet Menu;\n\n/**\n * Level intro screen.\n * Show current level and player details.\n * @return {!Menu}\n */\nconst levelIntro = () => ({\n  callback: () => {\n    gameState = GameState.PLAYING;\n    gameTime = 0;\n    setMenu(null);\n  },\n});\n\n/**\n * Death screen.\n * Show a sad message.\n * @const {!Menu}\n */\nconst deathScreen = {\n  callback: () => {\n    gameState = GameState.BEFORE_\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 6,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,460p' src/menu.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "/** @const {!vec3} */\nconst cameraTarget = vec3.fromValues(0, 0, 0);\n\n/** @const {!vec3} */\nconst preferredCameraPosition = vec3.fromValues(0, 0, 0);\n\n/** @const {!vec3} */\nconst lightPosition = vec3.fromValues(200, 400, -32);\n\n// 4 geometry types:\nconst cubeGeometry = buildRoundedCube(1, 2);\nconst sphereGeometry = buildRoundedCube(21, 1);\nbuffers.push(\n    new BufferSet(STATIC_DRAW, cubeGeometry, 200000),\n    new BufferSet(STATIC_DRAW, sphereGeometry, 1000),\n    new BufferSet(DYNAMIC_DRAW, cubeGeometry, 4000),\n    new BufferSet(DYNAMIC_DRAW, sphereGeometry, 2000),\n);\n\nconst entities = /** @const {!Array.<!GameEntity>} */ ([]);\nconst player = new Hero();\n\n/**\n * Current camera distance.\n * @type {number}\n */\nconst cameraDistance = 52;\n\n/**\n * Number of coins collected by the player.\n * @type {number}\n */\nlet coins = 0;\n\n/**\n * Number of coins available in the level.\n */\nlet availableCoins = 0;\n\n/**\n * Timestamp of the last coin.\n * This is used to reset the coin sound effect sequence.\n * @type {number}\n */\nlet lastCoinTime = 0;\n\n/**\n * How many coins in the sequence.\n * Resets if no coins for one second.\n * @type {number}\n */\nlet coinSequence = 0;\n\n/**\n * Never called.\n * Keeps eslint happy.\n */\nfunction throwaway() {\n  gameState = GameState.PLAYING;\n  coins++;\n  availableCoins++;\n  lastCoinTime++;\n  coinSequence++;\n}\n\n/**\n * Current level.\n * @type {number}\n */\nlet level = 0;\n\n/**\n * Time of last engine burst.\n * This is used in opening cinematic to control engine animations.\n * @type {number}\n */\nlet lastEngineBurst = 0;\n\n/**\n * Game state enum.\n * @enum {number}\n */\nconst GameState = {\n  WAITING_FOR_FIRST_CLICK: 0,\n  INTRO_STORY1: 1,\n  INTRO_STORY2: 2,\n  BEFORE_LEVEL: 3,\n  PLAYING: 4,\n  AFTER_LEVEL: 5,\n  MAIN_MENU: 99,\n  CREDITS: 100,\n};\n\n/**\n * Global game state.\n *\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 7,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,450p' src/index.js && sed -n '1,120p' src/entities/flagpole.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "createMetalPlatform(0, 4, 28, 32, 12, 32); // North ridge\n    createMetalPlatform(0, 4, 4, 4, 10, 28); // West ridge\n    createMetalPlatform(28, 4, 4, 32, 8, 28); // East ridge\n    vec3.set(player.pos, 30, 8, 2);\n\n    for (let z = 10; z <= 26; z += 4) {\n      const alien1 = new Alien(z, 4, z);\n      alien1.color = COLOR_ORANGE;\n      alien1.aggroRange = 12;\n      alien1.acceleration = 50;\n      alien1.waypoints = [\n        vec3.fromValues(22, 4, z),\n        vec3.fromValues(10, 4, z),\n      ];\n      entities.push(alien1);\n    }\n\n    createLift(6, 4, 26, 6, 15, 26);\n    createCoins(6, 5, 10, 0, 4, 4);\n    createCoins(26, 5, 10, 0, 4, 4);\n    createCoins(10, 13, 30, 4, 0, 4);\n    entities.push(new Flagpole(30, 12, 30));\n  },\n  () => {\n    log('Level 6 - Moat and Castle');\n    if (BENCHMARK_MODE) {\n      // Compact ascending castle stair with a transporter landing.\n      createMetalPlatform(0, 0, 0, 8, 4, 12);\n      createMetalPlatform(8, 0, 0, 14, 4.5, 12);\n      createMetalPlatform(14, 0, 0, 20, 5, 12);\n      createMetalPlatform(20, 0, 0, 26, 5.5, 12);\n      createMetalPlatform(26, 0, 0, 36, 6, 12);\n      entities.push(new Coin(11, 4.5, 6));\n      entities.push(new Coin(18, 5, 6));\n      entities.push(new Coin(25, 5.5, 6));\n      vec3.set(player.pos, 3, 4, 6);\n      player.fuel = 100;\n      entities.push(new Flagpole(33, 6, 6));\n      return;\n    }\n\n    // Base floor\n    createMetalPlatform(0, 0, 0, 32, 1, 32);\n    vec3.set(player.pos, 26, 2, 16);\n\n    createMetalPlatform(0, 0, 28, 32, 6, 32); // North wall\n\n    // Stairs to Northwest pillar\n    for (let i = 0; i < 10; i++) {\n      createMetalPlatform(4, 1, 18 + i, 8, 1 + i / 2, 19 + i);\n    }\n\n    createLift(2, 5, 26, 2, 5, 6); // Northwest to Southwest\n    createCoins(2, 7, 10, 0, 4, 4);\n\n    createMetalPlatform(0, 0, 0\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 8,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '130,190p' src/mapgen.js && sed -n '1,180p' src/game_api.js && cat package.json\"",
+      "truncated": true
+    },
+    {
+      "detail": "The regression is in the staged completion handshake: it opens the cleared screen, waits four updates, then cancels if movement/boost input changed or the player drifted out of transporter range. Holding forward + jetpack therefore invalidates an already-earned completion. I\u2019m checking surrounding history/state assumptions before removing that cancellation path.",
+      "kind": "agent_message",
+      "sequence": 9,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "e9553fd isolated source baseline",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 10,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git status --short && git log --oneline -8 -- src/menu.js src/entities/flagpole.js src/index.js'",
+      "truncated": false
+    },
+    {
+      "detail": "^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 175) \n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 176) /** @type {?Object} */\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 177) let pendingLevelCompletion = null;\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 178) \n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 179) /** @type {number} */\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 180) let nextLevelCompletionTicket = 0;\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 181) \n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 182) /**\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 183)  * Opens the success presentation before committing the level transition.\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 184)  * @param {!Object} detail\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 185)  * @return {number}\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 186)  */\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 187) function beginLevelCompletion(detail) {\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 188)   if (pendingLevelCompletion) {\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 189)     return pendingLevelCompletion['ticket'];\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 190)   }\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 191)   pendingLevelCompletion = {\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 192)     ticket: ++nextLevelCompletionTicket,\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 193)     detail: detail,\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 194)     controlRevision: getControlFrameRevision(),\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 195)     age: 0,\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 196)   };\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 197)   stopJetpackSound();\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 198)   setMenu(winScreen);\n^e9553fd (cua-swe 2026-08-31 11:11:01 +0000 199)   return\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 11,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git blame -L 175,235 src/menu.js && git blame -L 1,50 src/entities/flagpole.js'",
+      "truncated": true
+    },
+    {
+      "detail": "player.jump();\n    }\n    if (isKeyPressed(KEY_R)) {\n      playerDie();\n    }\n    if (isKeyPressed(KEY_M)) {\n      toggleBackgroundMusic();\n    }\n  }\n}\n\n/**\n * Creates jetpack particles.\n */\nfunction createJetpackParticles() {\n  if (Math.random() < 0.3) {\n    const blast = new Particle();\n    blast.size = 0.2;\n    blast.velocity[1] = (gameState === GameState.AFTER_LEVEL || gameState === GameState.CREDITS) ? -10 : -0.3;\n    vec3.copy(blast.pos, player.pos);\n    blast.pos[0] -= 0.3 * Math.sin(player.yaw);\n    blast.pos[1] += 0.8;\n    blast.pos[2] -= 0.3 * Math.cos(player.yaw);\n    entities.push(blast);\n  }\n}\n\n/**\n * Updates everything.\n */\nfunction updateWorld() {\n  if (Math.random() < 0.02) {\n    const floaty = new Particle();\n    floaty.size = 0.08;\n    floaty.velocity[1] = 1;\n    vec3.copy(floaty.pos, player.pos);\n    floaty.pos[0] += (Math.random() - 0.5) * 30.0;\n    floaty.pos[2] += (Math.random() - 0.5) * 30.0;\n    entities.push(floaty);\n  }\n\n  if (gameTime - lastCoinTime > 1.0) {\n    coinSequence = 0;\n  }\n\n  for (let i = 0; i < entities.length; i++) {\n    entities[i].update();\n  }\n\n  const playerWasAlive = player.health > 0;\n\n  for (let i = 0; i < entities.length; i++) {\n    for (let j = 0; j < entities.length; j++) {\n      if ((entities[i] instanceof Platform) && !(entities[j] instanceof Platform)) {\n        const platform = /** @type {!Platform} */ (entities[i]);\n        const actor = entities[j];\n        // Need actor size\n        // Assume actor is a cylinder\n        // Assume radius 1.0 and height 3.0\n        // actor.pos represents center of feet\n        const actorX = actor.pos[0];\n        const actorY = actor.pos[1];\n        const actorZ = actor.pos[2];\n        const projectile = actor instanceof Particle && actor.projectile > 0;\n        const actorRadius =\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 12,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '330,460p' src/index.js; sed -n '1,220p' src/entities/hero.js; sed -n '1,160p' src/lib/keyboard.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "{\"duration_ms\": 4000, \"kind\": \"key_hold\", \"text\": \"D+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 13,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"D+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 14,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"D+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 15,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"d\"}",
+      "kind": "computer_use",
+      "sequence": 16,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"d+shift\"}",
+      "kind": "computer_use",
+      "sequence": 17,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "update: src/entities/flagpole.js\nupdate: src/index.js\nupdate: src/menu.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "src/entities/flagpole.js"
+        },
+        {
+          "kind": "update",
+          "path": "src/index.js"
+        },
+        {
+          "kind": "update",
+          "path": "src/menu.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 18,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "> js13k-callisto@1.0.0 lint\n> eslint src/**/*.js\n\n\n<evaluation-workspace>/workspace/src/lib/codegolf.js\n  18:3  error  The body of a for-in should be wrapped in an if statement to filter unwanted properties from the prototype  guard-for-in\n\n<evaluation-workspace>/workspace/src/lib/shaders.js\n  0:0  warning  File ignored because of a matching ignore pattern. Use \"--no-ignore\" to override\n\n\u2716 2 problems (1 error, 1 warning)",
+      "exit_code": 1,
+      "kind": "command",
+      "sequence": 19,
+      "status": "failed",
+      "title": "/bin/bash -lc 'npm run lint'",
+      "truncated": false
+    },
+    {
+      "detail": "The fix is now in place: once the transporter accepts a valid all-coins entry, the four-frame presentation delay can no longer revoke completion because controls remain held or momentum carries the player onward. The targeted files lint clean in principle; the repository-wide lint command is blocked by an unrelated pre-existing `guard-for-in` error in `src/lib/codegolf.js`.",
+      "kind": "agent_message",
+      "sequence": 20,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "diff --git a/src/entities/flagpole.js b/src/entities/flagpole.js\nindex 1cf6a5d..9832f4e 100644\n--- a/src/entities/flagpole.js\n+++ b/src/entities/flagpole.js\n@@ -34,7 +34,7 @@ class Flagpole extends GameEntity {\n     }\n     if (this.completionTicket) {\n       const completionState =\n-          resolveLevelCompletion(this.completionTicket, eligible);\n+          resolveLevelCompletion(this.completionTicket);\n       if (completionState !== 0) {\n         this.completionTicket = 0;\n       }\ndiff --git a/src/index.js b/src/index.js\nindex 42ad52c..4245d52 100644\n--- a/src/index.js\n+++ b/src/index.js\n@@ -98,31 +98,6 @@ const GameState = {\n  */\n let gameState = GameState.WAITING_FOR_FIRST_CLICK;\n \n-/** @type {number} */\n-let controlFrameRevision = 0;\n-\n-/**\n- * Records gameplay controls that remain active across an update boundary.\n- */\n-function sampleControlFrame() {\n-  const movementActive =\n-      isKeyDown(KEY_UP) || isKeyDown(KEY_W) ||\n-      isKeyDown(KEY_DOWN) || isKeyDown(KEY_S) ||\n-      isKeyDown(KEY_LEFT) || isKeyDown(KEY_A) ||\n-      isKeyDown(KEY_RIGHT) || isKeyDown(KEY_D);\n-  const jetpackActive = isKeyDown(KEY_X) || isKeyDown(KEY_SHIFT);\n-  if (movementActive || jetpackActive) {\n-    controlFrameRevision++;\n-  }\n-}\n-\n-/**\n- * @return {number}\n- */\n-function getControlFrameRevision() {\n-  return controlFrameRevision;\n-}\n-\n initGame();\n registerSong('Milky Way by Ben Prunty', milkyWaySong);\n \n@@ -151,7 +126,6 @@ const flyoverCamera = () => {\n  * Updates game state.\n  */\n function update() {\n-  sampleControlFrame();\n   updateWorld();\n \n   if (menu !== mainMenu && isKeyPressed(KEY_ESCAPE)) {\ndiff --git a/src/menu.js b/src/menu.js\nindex 371a7af..6306e67 100644\n--- a/src/menu.js\n+++ b/src/menu.js\n@@ -191,7 +191,6 @@ function beginLevelCompletion(detail) {\n   pendingLeve\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 21,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && git diff -- src/index.js src/menu.js src/entities/flagpole.js'",
+      "truncated": true
+    },
+    {
+      "detail": "> js13k-callisto@1.0.0 build\n> node build.js --dev\n\nPackage: 22018 bytes (165.40%)",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 22,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npm run build'",
+      "truncated": false
+    },
+    {
+      "detail": "",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 23,
+      "status": "completed",
+      "title": "/bin/bash -lc 'npx eslint src/index.js src/menu.js src/entities/flagpole.js'",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"CTRL+R\"}",
+      "kind": "computer_use",
+      "sequence": 24,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+R\"}",
+      "kind": "computer_use",
+      "sequence": 25,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Space\"}",
+      "kind": "computer_use",
+      "sequence": 26,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"d+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 27,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"d+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 28,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"d+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 29,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"d+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 30,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"d+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 31,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"d+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 32,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"d+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 33,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"d+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 34,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"d+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 35,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"d+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 36,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"d+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 37,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"key_hold\", \"text\": \"d+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 38,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 1200, \"kind\": \"key_hold\", \"text\": \"d+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 39,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "{\"duration_ms\": 800, \"kind\": \"key_hold\", \"text\": \"d+Shift\"}",
+      "kind": "computer_use",
+      "sequence": 40,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "The protected replay reached all 3 coins and entered the transporter while `D+Shift` remained held. The cleared screen appeared at 27.1 seconds; I\u2019m leaving it untouched for an additional interval to verify it no longer drops back into gameplay.",
+      "kind": "agent_message",
+      "sequence": 41,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{\"duration_ms\": 2000, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 42,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "unavailable",
+      "image_reason": "The retained event export does not establish a verifiable screenshot association for this call."
+    },
+    {
+      "detail": "M src/entities/flagpole.js\n M src/index.js\n M src/menu.js",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 43,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git status --short'",
+      "truncated": false
+    },
+    {
+      "detail": "175\t\n   176\t/** @type {?Object} */\n   177\tlet pendingLevelCompletion = null;\n   178\t\n   179\t/** @type {number} */\n   180\tlet nextLevelCompletionTicket = 0;\n   181\t\n   182\t/**\n   183\t * Opens the success presentation before committing the level transition.\n   184\t * @param {!Object} detail\n   185\t * @return {number}\n   186\t */\n   187\tfunction beginLevelCompletion(detail) {\n   188\t  if (pendingLevelCompletion) {\n   189\t    return pendingLevelCompletion['ticket'];\n   190\t  }\n   191\t  pendingLevelCompletion = {\n   192\t    ticket: ++nextLevelCompletionTicket,\n   193\t    detail: detail,\n   194\t    age: 0,\n   195\t  };\n   196\t  stopJetpackSound();\n   197\t  setMenu(winScreen);\n   198\t  return pendingLevelCompletion['ticket'];\n   199\t}\n   200\t\n   201\t/**\n   202\t * Settles a staged level transition after the presentation has rendered.\n   203\t * @param {number} ticket\n   204\t * @return {number} -1 for stale, 0 for pending, 1 for committed\n   205\t */\n   206\tfunction resolveLevelCompletion(ticket) {\n   207\t  if (!pendingLevelCompletion ||\n   208\t      pendingLevelCompletion['ticket'] !== ticket) {\n   209\t    return -1;\n   210\t  }\n   211\t  pendingLevelCompletion['age']++;\n   212\t  if (pendingLevelCompletion['age'] < 4) {\n   213\t    return 0;\n   214\t  }\n   215\t  const detail = pendingLevelCompletion['detail'];\n   216\t  pendingLevelCompletion = null;\n   217\t  gameState = GameState.AFTER_LEVEL;\n   218\t  window.dispatchEvent(new CustomEvent('captaincallisto-level-complete', {\n   219\t    detail: detail,\n   220\t  }));\n   221\t  return 1;\n   222\t}\n   223\t\n   224\t/**\n   225\t * @return {boolean}\n   226\t */\n   227\tfunction isLevelCompletionPending() {\n   228\t  return pendingLevelCompletion !== null;\n   229\t}\n   230\t\n   231\t/** Clears staged completion state for a fresh episode. */\n   232\tfunctio\n\u2026 output truncated in viewer \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 44,
+      "status": "completed",
+      "title": "/bin/bash -lc \"nl -ba src/menu.js | sed -n '175,250p'; nl -ba src/entities/flagpole.js | sed -n '15,48p'; nl -ba src/index.js | sed -n '90,140p'\"",
+      "truncated": true
+    },
+    {
+      "detail": "add: rollout_notes.md",
+      "files": [
+        {
+          "kind": "add",
+          "path": "rollout_notes.md"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 45,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "Fixed the Level 6 completion regression. Completion is now sticky once triggered, even with movement/boost held.\n\nVerified:\n\n- `npm run build` passes.\n- Targeted ESLint passes.\n- Replayed Level 6 with `D+Shift`; cleared screen remained active after waiting.\n- Added required [rollout_notes.md](<evaluation-workspace>/rollout/rollout_notes.md).\n\nRepository-wide lint still has an unrelated pre-existing error in `src/lib/codegolf.js`.",
+      "kind": "agent_message",
+      "sequence": 46,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "\u2713 Inspect game source and locate completion/transporter state flow\n\u2713 Implement focused regression fix\n\u2713 Run build and relevant tests\n\u2713 Replay deterministic Level 6 route in protected browser\n\u2713 Write rollout_notes.md in required directory",
+      "kind": "plan",
+      "sequence": 47,
+      "status": "completed",
+      "title": "Agent plan",
+      "truncated": false
+    }
+  ],
+  "provenance": "exact_protected_matched_gpt56_sol_cua",
+  "run_relation": "historical_exact",
+  "source": "Retained protected matched GPT-5.6 Sol CUA run",
+  "status": "available",
+  "summary": {
+    "events": 47,
+    "commands": 15,
+    "file_changes": 2,
+    "computer_use_calls": 24,
+    "agent_messages": 5,
+    "plans": 1,
+    "screenshots": 0,
+    "truncated_events": 8,
+    "unfinished_items": 0
+  },
+  "task_id": "gameqa.captain-callisto-goal-transition.005",
+  "terminal_status": "completed",
+  "usage": {
+    "cache_write_input_tokens": 68407,
+    "cached_input_tokens": 1502979,
+    "input_tokens": 1590824,
+    "output_tokens": 6273,
+    "reasoning_output_tokens": 1935
+  },
+  "activity_source_kind": "retained_timeline",
+  "artifacts": {
+    "Retained event data (partial)": "viewer/media/source/agent/gameqa.captain-callisto-goal-transition.005/activity-export.json",
+    "Run provenance": "viewer/media/source/agent/gameqa.captain-callisto-goal-transition.005/activity-provenance.json"
+  },
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 8. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "partial",
+      "reason": "Only the prior timeline's source description and run relation are retained; original run identity files are unavailable."
+    },
+    "agent_patch": {
+      "status": "unavailable",
+      "reason": "The final patch for this timeline run is not retained. A gold patch or another attempt's patch is not substituted."
+    },
+    "screenshots": {
+      "status": "unavailable",
+      "reason": "The retained timeline lacks the evidence needed to verify per-event screenshot associations."
+    }
+  }
+}

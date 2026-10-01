@@ -1,0 +1,2 @@
+{"event": "overview", "timestamp": "2026-08-30T08:03:32.473137+00:00", "observation": {"screenshot_path": "/tmp/cua-swe-gold-maplibre2/web.maplibre-terrain-pinch-anchor.001/screenshot-0001.png", "url": "http://127.0.0.1:35913/runtime-task/index.html"}}
+{"event": "terrain-gesture-settled", "timestamp": "2026-08-30T08:03:32.607562+00:00", "observation": {"screenshot_path": "/tmp/cua-swe-gold-maplibre2/web.maplibre-terrain-pinch-anchor.001/screenshot-0002.png", "url": "http://127.0.0.1:35913/runtime-task/index.html"}}

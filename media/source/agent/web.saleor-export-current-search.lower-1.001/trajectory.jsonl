@@ -1,0 +1,10 @@
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-2j0bffp0/rollout/cua-adapter/screenshot-0001.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:11:16.201207+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-2j0bffp0/rollout/cua-adapter/screenshot-0002.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:11:22.403430+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-2j0bffp0/rollout/cua-adapter/screenshot-0003.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:11:28.431317+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-2j0bffp0/rollout/cua-adapter/screenshot-0004.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:11:34.579633+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-2j0bffp0/rollout/cua-adapter/screenshot-0005.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:11:40.661631+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-2j0bffp0/rollout/cua-adapter/screenshot-0006.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:11:47.500019+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-2j0bffp0/rollout/cua-adapter/screenshot-0007.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:14:50.788768+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-2j0bffp0/rollout/cua-adapter/screenshot-0008.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:17:32.215075+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-2j0bffp0/rollout/cua-adapter/screenshot-0009.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:17:46.297382+00:00"}
+{"arguments": {"delivery": "mcp_image_content", "path": "/tmp/cua-swe-eval-2j0bffp0/rollout/cua-adapter/screenshot-0010.png"}, "event": "tool", "name": "view_image", "timestamp": "2026-08-29T07:21:23.630833+00:00"}

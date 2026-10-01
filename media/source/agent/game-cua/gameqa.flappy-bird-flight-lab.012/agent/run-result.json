@@ -1,0 +1,8 @@
+{
+  "task_id": "gameqa.flappy-bird-flight-lab.012",
+  "success": false,
+  "progress": 0.5,
+  "patch_path": "agent/patch.diff",
+  "verifier_report_path": "agent/verifier-report.json",
+  "workspace_path": "<evaluation-workspace-not-exported>"
+}

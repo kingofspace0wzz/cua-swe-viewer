@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "name": "build: npm run build",
+      "group": "build",
+      "command": "npm run build",
+      "passed": true,
+      "expected": "exit code 0",
+      "actual": "exit code 0\n> boxel-rebound-quarantined-calibration@0.0.0 build\n> python3 -m py_compile server.py",
+      "expected_exit_code": 0,
+      "actual_exit_code": 0,
+      "stdout": "\n> boxel-rebound-quarantined-calibration@0.0.0 build\n> python3 -m py_compile server.py\n\n",
+      "stderr": "",
+      "evidence_path": null
+    },
+    {
+      "name": "state: \"${CUA_SWE_PYTHON:-python3}\" verifiers/browser_check.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:51700/?level=50}\" --evidence-dir verifier-artifacts",
+      "group": "state",
+      "command": "\"${CUA_SWE_PYTHON:-python3}\" verifiers/browser_check.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:51700/?level=50}\" --evidence-dir verifier-artifacts",
+      "passed": false,
+      "expected": "exit code 0",
+      "actual": "exit code 1\n{\"error\": \"AssertionError: checkpoint guide snapshot was not geometry-only: {\\\"camera_course_x\\\": 135.38999977111817, \\\"checkpoint_spawn_y\\\": 353.67803836684095, \\\"checkpoint_support_id\\\": \\\"9:7\\\", \\\"checkpoint_x\\\": 135.38999977111817, \\\"frame_keys\\\": [\\\"cameraProgress\\\", \\\"id\\\", \\\"motionTime\\\", \\\"tiles\\\", \\\"x\\\", \\\"y\\\"], \\\"guide\\\": {\\\"id\\\": \\\"9:7\\\", \\\"tiles\\\": 14, \\\"x\\\": 210, \\\"y\\\": 254.92803836684092}, \\\"guide_top\\\": 364.92803836684095, \\\"motion_time_ms\\\": 467.9000015258789, \\\"observed_camera_offset_x\\\": -89.79184511035112, \\\"observed_camera_progress\\\": 89.79184511035112, \\\"rider_offset\\\": -11.25, \\\"rider_y\\\": 353.67803836684095, \\\"support_id\\\": \\\"9:7\\\", \\\"support_top\\\": 364.92803836684095}\", \"evidence\": \"verifier-artifacts/state-replay.json\", \"status\": \"fail\"}",
+      "expected_exit_code": 0,
+      "actual_exit_code": 1,
+      "stdout": "{\"error\": \"AssertionError: checkpoint guide snapshot was not geometry-only: {\\\"camera_course_x\\\": 135.38999977111817, \\\"checkpoint_spawn_y\\\": 353.67803836684095, \\\"checkpoint_support_id\\\": \\\"9:7\\\", \\\"checkpoint_x\\\": 135.38999977111817, \\\"frame_keys\\\": [\\\"cameraProgress\\\", \\\"id\\\", \\\"motionTime\\\", \\\"tiles\\\", \\\"x\\\", \\\"y\\\"], \\\"guide\\\": {\\\"id\\\": \\\"9:7\\\", \\\"tiles\\\": 14, \\\"x\\\": 210, \\\"y\\\": 254.92803836684092}, \\\"guide_top\\\": 364.92803836684095, \\\"motion_time_ms\\\": 467.9000015258789, \\\"observed_camera_offset_x\\\": -89.79184511035112, \\\"observed_camera_progress\\\": 89.79184511035112, \\\"rider_offset\\\": -11.25, \\\"rider_y\\\": 353.67803836684095, \\\"support_id\\\": \\\"9:7\\\", \\\"support_top\\\": 364.92803836684095}\", \"evidence\": \"verifier-artifacts/state-replay.json\", \"status\": \"fail\"}\n",
+      "stderr": "",
+      "evidence_path": null
+    }
+  ],
+  "success": false,
+  "progress": 0.5
+}

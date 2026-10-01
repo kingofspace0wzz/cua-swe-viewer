@@ -1,0 +1,29 @@
+{
+  "excluded": [
+    "raw base64-heavy agent transcript",
+    "evaluation workspace and dependencies",
+    "browser profile and caches",
+    "non-representative screenshot sequences",
+    "verifier screenshots and construction artifacts"
+  ],
+  "game": "minesweeper",
+  "presentation_policy": "one representative scored CUA run plus aggregate matched results",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 10,
+      "commands": 13,
+      "computer_use_calls": 25,
+      "events": 54,
+      "file_changes": 5,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 23,
+    "label": "cua-03",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "successful CUA run with most retained observation frames",
+    "success": true
+  },
+  "task_id": "gameqa.minesweeper-delayed-loss-episode-identity.003"
+}

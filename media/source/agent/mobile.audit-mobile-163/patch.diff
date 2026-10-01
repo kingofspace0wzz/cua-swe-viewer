@@ -1,0 +1,11 @@
+--- a/apps/Reddit/state.ts
++++ b/apps/Reddit/state.ts
+@@ -412,7 +412,7 @@
+       const trimmed = body.trim();
+       if (!trimmed) return;
+       const s = get();
+-      const k = username;
++      const k = `${username}:${messageId}`;
+       const reply: ChatMessage = {
+         id: `reply_${Math.floor(TimeService.now() / 1000)}_${++localSeq}`,
+         from: 'me',

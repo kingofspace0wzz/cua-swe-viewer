@@ -1,0 +1,19 @@
+diff --git a/index.html b/index.html
+index 9e75a676dec30aa0167a57b9cb04dac616aba29e..dc8a61b08abe6558dcee5fe8b95226f060e08a4e 100644
+--- a/index.html
++++ b/index.html
+@@ -533,12 +533,12 @@
+                     var displayY = lensTrack[lensIndex];
+                     display.lock.visible = !resolved;
+                     display.lock.position.set(1, displayY, 0.95);
+-                    display.coreWarm.visible = resolved;
++                    display.coreWarm.visible = false;
+                     display.coreCool.visible = resolved;
+                     display.coreWarm.position.set(1, displayY - 0.03, 1.18);
+                     display.coreCool.position.set(1, displayY - 0.03, 1.18);
+                     display.crownWarm.visible = resolved;
+-                    display.crownCool.visible = resolved;
++                    display.crownCool.visible = false;
+                     display.crownWarm.position.set(1, displayY + 0.31, 1.18);
+                     display.crownCool.position.set(1, displayY + 0.31, 1.18);
+                 }

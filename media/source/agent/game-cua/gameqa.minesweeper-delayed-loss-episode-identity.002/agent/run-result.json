@@ -1,0 +1,8 @@
+{
+  "patch_path": "<artifact-path>",
+  "progress": 1.0,
+  "success": true,
+  "task_id": "gameqa.minesweeper-delayed-loss-episode-identity.002",
+  "verifier_report_path": "<artifact-path>",
+  "workspace_path": "<artifact-path>"
+}

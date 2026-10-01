@@ -1,0 +1,32 @@
+--- a/system/Notes/state.ts
++++ b/system/Notes/state.ts
+@@ -23,7 +23,7 @@
+   return [...notes].sort((a, b) => {
+     const ap = a.pinned ? 1 : 0;
+     const bp = b.pinned ? 1 : 0;
+-    if (ap !== bp) return ap - bp;
++    if (ap !== bp) return bp - ap;
+     return b.updatedAt - a.updatedAt;
+   });
+ }
+@@ -147,8 +147,18 @@
+     },
+ 
+     updateNote: (id, patch) => {
+-      set(state => ({
+-        notes: sortNotes(state.notes.map(n => (n.id === id ? { ...n, ...patch, updatedAt: TimeService.now() } : n))),
++      const isPinOnlyUpdate =
++        Object.prototype.hasOwnProperty.call(patch, 'pinned') &&
++        Object.keys(patch).every(key => key === 'pinned');
++      const now = isPinOnlyUpdate ? undefined : TimeService.now();
++      set(state => ({
++        notes: sortNotes(
++          state.notes.map(n =>
++            n.id === id
++              ? { ...n, ...patch, updatedAt: now ?? n.updatedAt }
++              : n,
++          ),
++        ),
+       }));
+     },
+ 

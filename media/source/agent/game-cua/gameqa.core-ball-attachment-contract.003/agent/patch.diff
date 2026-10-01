@@ -1,0 +1,741 @@
+diff --git a/src/game.js b/src/game.js
+index 7ea0fa362d136277611c35322ac02dfd14142158..61c4c03f7ec49393b6476f79466146ad646521a1 100644
+--- a/src/game.js
++++ b/src/game.js
+@@ -88,6 +88,8 @@ export class Game {
+         this.metrics.completed += 1;
+         this.phase = 'passed';
+         this.ui.showPass();
++      } else {
++        this.shots.launchWaiting(this.now);
+       }
+     }
+     this.publish();
+diff --git a/src/shot-controller.js b/src/shot-controller.js
+index ba3c5a0d2bc4cd6600293bd8da6c98fcd87d4327..715eed7af8f2e2f6ef81332c1ea4760baf2d460d 100644
+--- a/src/shot-controller.js
++++ b/src/shot-controller.js
+@@ -31,13 +31,9 @@ export class ShotController {
+   }
+ 
+   prepare(now, fromQueue) {
+-    const plannedFlightTime = fromQueue
+-      ? CRUISE_QUEUE_FLIGHT_TIME
+-      : this.flightTimeFor({fromQueue}, this.coreMotion.launchProfile);
+     return {
+       acceptedAt: now,
+       fromQueue,
+-      plannedCoreAngle: this.coreMotion.predictAngleAt(plannedFlightTime),
+     };
+   }
+ 
+@@ -67,18 +63,21 @@ export class ShotController {
+ 
+     const arrival = {
+       worldAngle: IMPACT_ANGLE,
+-      localAngle: normalizeAngle(IMPACT_ANGLE - this.active.plannedCoreAngle),
++      localAngle: normalizeAngle(IMPACT_ANGLE - this.coreMotion.angle),
+       acceptedAt: this.active.acceptedAt,
+       launchedAt: this.active.launchedAt,
+     };
+     this.active = null;
+-    if (this.waiting) {
+-      this.active = this.activate(this.waiting, now);
+-      this.waiting = null;
+-    }
+     return [arrival];
+   }
+ 
++  launchWaiting(now) {
++    if (this.active || !this.waiting) return false;
++    this.active = this.activate(this.waiting, now);
++    this.waiting = null;
++    return true;
++  }
++
+   getState() {
+     return {
+       active: this.active ? {
+
+diff --git a/dist/angles.js b/dist/angles.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..6387e0710482168d3b986697ca1f0470c7524b0e
+--- /dev/null
++++ b/dist/angles.js
+@@ -0,0 +1,8 @@
++export function normalizeAngle(value) {
++  return ((value % 360) + 360) % 360;
++}
++
++export function circularDistance(left, right) {
++  const distance = Math.abs(normalizeAngle(left) - normalizeAngle(right));
++  return Math.min(distance, 360 - distance);
++}
+
+diff --git a/dist/core-motion.js b/dist/core-motion.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..232b7ce76852f7ce0d3094ee857393e6a5fe7279
+--- /dev/null
++++ b/dist/core-motion.js
+@@ -0,0 +1,62 @@
++import {normalizeAngle} from './angles.js';
++
++const CRUISE_SPEED = 36;
++const SPRINT_SPEED = 144;
++const SHIFT_TIME = 800;
++
++export class CoreMotion {
++  constructor() {
++    this.reset();
++  }
++
++  reset() {
++    this.angle = 0;
++    this.speed = CRUISE_SPEED;
++    this.transition = null;
++  }
++
++  step(deltaMs) {
++    const seconds = deltaMs / 1000;
++    if (!this.transition) {
++      this.angle = normalizeAngle(this.angle + this.speed * seconds);
++      return;
++    }
++
++    const startProgress = Math.min(1, this.transition.elapsed / SHIFT_TIME);
++    const endElapsed = Math.min(SHIFT_TIME, this.transition.elapsed + deltaMs);
++    const endProgress = endElapsed / SHIFT_TIME;
++    const startSpeed = CRUISE_SPEED + (SPRINT_SPEED - CRUISE_SPEED) * startProgress;
++    const endSpeed = CRUISE_SPEED + (SPRINT_SPEED - CRUISE_SPEED) * endProgress;
++    this.angle = normalizeAngle(this.angle + ((startSpeed + endSpeed) / 2) * seconds);
++    this.transition.elapsed += deltaMs;
++    this.speed = endSpeed;
++    if (this.transition.elapsed >= SHIFT_TIME) {
++      this.speed = SPRINT_SPEED;
++      this.transition = null;
++    }
++  }
++
++  beginPaceChange() {
++    if (this.speed === CRUISE_SPEED && !this.transition) {
++      this.transition = {elapsed: 0};
++    }
++  }
++
++  predictAngleAt(deltaMs) {
++    return normalizeAngle(this.angle + this.speed * deltaMs / 1000);
++  }
++
++  get launchProfile() {
++    if (this.transition) return 'shifting';
++    return this.speed === SPRINT_SPEED ? 'sprint' : 'cruise';
++  }
++
++  get paceProgress() {
++    if (this.transition) return this.transition.elapsed / SHIFT_TIME;
++    return this.speed === SPRINT_SPEED ? 1 : 0;
++  }
++
++  get isTransitioning() {
++    return Boolean(this.transition);
++  }
++}
+
+diff --git a/dist/game.js b/dist/game.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..61c4c03f7ec49393b6476f79466146ad646521a1
+--- /dev/null
++++ b/dist/game.js
+@@ -0,0 +1,235 @@
++import {CoreMotion} from './core-motion.js';
++import {Occupancy} from './occupancy.js';
++import {ShotController} from './shot-controller.js';
++
++const STEP_MS = 20;
++const CENTER = {x: 380, y: 285};
++const CORE_RADIUS = 58;
++const PIN_ORBIT = 132;
++const SHOTS_TO_CLEAR = 4;
++
++export class Game {
++  constructor(canvas, ui) {
++    this.canvas = canvas;
++    this.context = canvas.getContext('2d');
++    this.ui = ui;
++    this.motion = new CoreMotion();
++    this.occupancy = new Occupancy();
++    this.shots = new ShotController(this.motion);
++    this.manual = false;
++    this.seed = 808;
++    this.level = 1;
++    this.lastFrame = performance.now();
++    this.accumulator = 0;
++    this.reset();
++    requestAnimationFrame((time) => this.frame(time));
++  }
++
++  reset(options = {}) {
++    this.manual = Boolean(options.manual);
++    this.seed = Number.isFinite(options.seed) ? options.seed : this.seed;
++    this.level = Number.isFinite(options.level) ? options.level : 1;
++    this.now = 0;
++    this.phase = 'ready';
++    this.remaining = SHOTS_TO_CLEAR;
++    this.motion.reset();
++    this.occupancy.reset();
++    this.shots.reset();
++    this.metrics = {inputs: 0, attachments: 0, failures: 0, completed: 0};
++    this.lastAttachment = null;
++    this.ui.showReady();
++    this.publish();
++    this.render();
++    return this.getState();
++  }
++
++  start() {
++    if (this.phase !== 'ready') return false;
++    this.phase = 'playing';
++    this.ui.hideOverlay();
++    this.publish();
++    return true;
++  }
++
++  fire() {
++    if (this.phase !== 'playing' || this.remaining <= 0) return 'ignored';
++    this.metrics.inputs += 1;
++    const result = this.shots.request(this.now);
++    this.ui.setStatus(result === 'queued' ? 'Next pin waiting' : result === 'launched' ? 'Pin launched' : 'Launcher full');
++    this.publish();
++    return result;
++  }
++
++  step(deltaMs = STEP_MS) {
++    if (this.phase !== 'playing') return;
++    this.now += deltaMs;
++    this.motion.step(deltaMs);
++    const arrivals = this.shots.step(this.now);
++    for (const arrival of arrivals) {
++      const result = this.occupancy.tryAttach(arrival.localAngle);
++      this.lastAttachment = {
++        accepted: result.accepted,
++        localAngle: result.angle,
++        worldAngle: arrival.worldAngle,
++        coreAngle: this.motion.angle,
++        at: this.now,
++      };
++      if (!result.accepted) {
++        this.metrics.failures += 1;
++        this.phase = 'failed';
++        this.ui.showFailure();
++        break;
++      }
++
++      this.metrics.attachments += 1;
++      this.remaining -= 1;
++      if (this.metrics.attachments === 1) this.motion.beginPaceChange();
++      if (this.remaining === 0) {
++        this.metrics.completed += 1;
++        this.phase = 'passed';
++        this.ui.showPass();
++      } else {
++        this.shots.launchWaiting(this.now);
++      }
++    }
++    this.publish();
++  }
++
++  advance(durationMs) {
++    this.manual = true;
++    const bounded = Math.max(0, Math.min(30000, Number(durationMs) || 0));
++    const steps = Math.floor(bounded / STEP_MS);
++    for (let index = 0; index < steps; index += 1) this.step(STEP_MS);
++    this.render();
++    return this.getState();
++  }
++
++  frame(timestamp) {
++    const elapsed = Math.min(100, timestamp - this.lastFrame);
++    this.lastFrame = timestamp;
++    if (!this.manual) {
++      this.accumulator += elapsed;
++      while (this.accumulator >= STEP_MS) {
++        this.step(STEP_MS);
++        this.accumulator -= STEP_MS;
++      }
++    }
++    this.render();
++    requestAnimationFrame((time) => this.frame(time));
++  }
++
++  pinPoint(localAngle, radius = PIN_ORBIT) {
++    const radians = (localAngle + this.motion.angle) * Math.PI / 180;
++    return {
++      x: CENTER.x + Math.cos(radians) * radius,
++      y: CENTER.y + Math.sin(radians) * radius,
++    };
++  }
++
++  render() {
++    const context = this.context;
++    context.clearRect(0, 0, this.canvas.width, this.canvas.height);
++    const wash = context.createRadialGradient(CENTER.x, CENTER.y, 10, CENTER.x, CENTER.y, 320);
++    wash.addColorStop(0, 'rgba(61, 194, 237, .14)');
++    wash.addColorStop(1, 'rgba(3, 9, 16, 0)');
++    context.fillStyle = wash;
++    context.fillRect(0, 0, this.canvas.width, this.canvas.height);
++
++    context.strokeStyle = 'rgba(116, 203, 234, .13)';
++    context.lineWidth = 1;
++    for (let radius = 92; radius <= 260; radius += 56) {
++      context.beginPath();
++      context.arc(CENTER.x, CENTER.y, radius, 0, Math.PI * 2);
++      context.stroke();
++    }
++
++    for (const localAngle of this.occupancy.pins) {
++      const pin = this.pinPoint(localAngle);
++      context.strokeStyle = '#9ddff5';
++      context.lineWidth = 3;
++      context.beginPath();
++      context.moveTo(CENTER.x, CENTER.y);
++      context.lineTo(pin.x, pin.y);
++      context.stroke();
++      context.fillStyle = '#effbff';
++      context.beginPath();
++      context.arc(pin.x, pin.y, 13, 0, Math.PI * 2);
++      context.fill();
++      context.fillStyle = '#0a1b28';
++      context.beginPath();
++      context.arc(pin.x, pin.y, 4, 0, Math.PI * 2);
++      context.fill();
++    }
++
++    context.save();
++    context.translate(CENTER.x, CENTER.y);
++    context.rotate(this.motion.angle * Math.PI / 180);
++    context.strokeStyle = '#67dcff';
++    context.lineWidth = 5;
++    context.beginPath();
++    context.arc(0, 0, CORE_RADIUS, 0, Math.PI * 1.62);
++    context.stroke();
++    context.restore();
++    context.fillStyle = '#102d40';
++    context.beginPath();
++    context.arc(CENTER.x, CENTER.y, CORE_RADIUS - 8, 0, Math.PI * 2);
++    context.fill();
++    context.fillStyle = '#eafaff';
++    context.font = '800 24px system-ui';
++    context.textAlign = 'center';
++    context.textBaseline = 'middle';
++    context.fillText(String(this.remaining), CENTER.x, CENTER.y);
++
++    const shot = this.shots.active;
++    if (shot) {
++      const startY = 635;
++      const endY = CENTER.y + PIN_ORBIT;
++      const eased = 1 - Math.pow(1 - shot.progress, 2);
++      const y = startY + (endY - startY) * eased;
++      context.strokeStyle = 'rgba(103, 220, 255, .38)';
++      context.lineWidth = 2;
++      context.beginPath();
++      context.moveTo(CENTER.x, y + 18);
++      context.lineTo(CENTER.x, 655);
++      context.stroke();
++      context.fillStyle = '#fff3b0';
++      context.beginPath();
++      context.arc(CENTER.x, y, 13, 0, Math.PI * 2);
++      context.fill();
++    }
++    if (this.shots.waiting) {
++      context.strokeStyle = 'rgba(255, 218, 107, .72)';
++      context.lineWidth = 2;
++      context.beginPath();
++      context.arc(CENTER.x, 657, 16, 0, Math.PI * 2);
++      context.stroke();
++      context.fillStyle = '#ffda6b';
++      context.beginPath();
++      context.arc(CENTER.x, 657, 9, 0, Math.PI * 2);
++      context.fill();
++      context.fillStyle = '#ffecad';
++      context.font = '800 11px system-ui';
++      context.fillText('NEXT', CENTER.x, 625);
++    }
++  }
++
++  publish() {
++    this.ui.update(this.getState());
++  }
++
++  getState() {
++    return {
++      scenario: {seed: this.seed, level: this.level, timeMs: this.now, manual: this.manual},
++      round: {phase: this.phase, remaining: this.remaining},
++      motion: {
++        angle: this.motion.angle,
++        speed: this.motion.speed,
++        transition: {active: this.motion.isTransitioning, progress: this.motion.paceProgress},
++      },
++      shots: this.shots.getState(),
++      occupancy: {pins: [...this.occupancy.pins]},
++      lastAttachment: this.lastAttachment ? {...this.lastAttachment} : null,
++      metrics: {...this.metrics},
++    };
++  }
++}
+
+diff --git a/dist/index.html b/dist/index.html
+new file mode 100644
+index 0000000000000000000000000000000000000000..ebd9b4809e638bd202e0fc4b9020bda5b401a52e
+--- /dev/null
++++ b/dist/index.html
+@@ -0,0 +1,35 @@
++<!doctype html>
++<html lang="en">
++  <head>
++    <meta charset="utf-8">
++    <meta name="viewport" content="width=device-width, initial-scale=1">
++    <title>Core Ball</title>
++    <link rel="stylesheet" href="styles.css">
++  </head>
++  <body>
++    <main class="shell">
++      <section class="playfield" aria-label="Core Ball game">
++        <canvas id="game" width="760" height="680" aria-label="Core Ball playfield"></canvas>
++        <div id="overlay" class="overlay">
++          <div class="mark" aria-hidden="true"><span></span><span></span><span></span></div>
++          <h1>CORE BALL</h1>
++          <p id="overlay-message">Place every pin without touching another.</p>
++          <button id="start" type="button">START ROUND</button>
++        </div>
++      </section>
++      <aside class="panel">
++        <p class="eyebrow">ROTATION LAB</p>
++        <h2>Attachment Run</h2>
++        <div class="readout"><span>ROUND</span><strong id="round">01</strong></div>
++        <div class="readout"><span>PINS LEFT</span><strong id="remaining">04</strong></div>
++        <div class="readout"><span>CORE PACE</span><strong id="pace">STEADY</strong></div>
++        <div class="pace-track"><i id="pace-fill"></i></div>
++        <div id="queue-cue" class="queue-cue"><i></i><strong id="queue-state">QUEUE OPEN</strong></div>
++        <p class="rules">Flights are deliberate. Tap again while the launch trail is visible to stage the next pin.</p>
++        <button id="restart" class="secondary" type="button">RESTART</button>
++        <p id="status" class="status" aria-live="polite">Ready</p>
++      </aside>
++    </main>
++    <script type="module" src="main.js"></script>
++  </body>
++</html>
+
+diff --git a/dist/main.js b/dist/main.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..97be3572c9acf1bdac4cfb67121a98887569241c
+--- /dev/null
++++ b/dist/main.js
+@@ -0,0 +1,94 @@
++import {Game} from './game.js';
++
++const canvas = document.querySelector('#game');
++const overlay = document.querySelector('#overlay');
++const overlayMessage = document.querySelector('#overlay-message');
++const startButton = document.querySelector('#start');
++const restartButton = document.querySelector('#restart');
++const status = document.querySelector('#status');
++const remaining = document.querySelector('#remaining');
++const pace = document.querySelector('#pace');
++const paceFill = document.querySelector('#pace-fill');
++const queueCue = document.querySelector('#queue-cue');
++const queueState = document.querySelector('#queue-state');
++
++const ui = {
++  hideOverlay() {
++    overlay.className = 'overlay hidden';
++  },
++  showReady() {
++    overlay.className = 'overlay';
++    overlayMessage.textContent = 'Place every pin without touching another.';
++    startButton.textContent = 'START ROUND';
++    status.textContent = 'Ready';
++  },
++  showFailure() {
++    overlay.className = 'overlay fail';
++    overlayMessage.textContent = 'Pins collided. Try the sequence again.';
++    startButton.textContent = 'TRY AGAIN';
++    status.textContent = 'Attachment collision';
++  },
++  showPass() {
++    overlay.className = 'overlay pass';
++    overlayMessage.textContent = 'All pins attached.';
++    startButton.textContent = 'PLAY AGAIN';
++    status.textContent = 'Round clear';
++  },
++  setStatus(message) {
++    status.textContent = message;
++  },
++  update(state) {
++    remaining.textContent = String(state.round.remaining).padStart(2, '0');
++    const progress = state.motion.transition.progress;
++    paceFill.style.width = `${12 + progress * 88}%`;
++    pace.textContent = state.motion.transition.active ? 'SHIFTING' : progress === 1 ? 'FAST' : 'STEADY';
++    const queued = state.shots.waiting === 1;
++    queueCue.className = queued ? 'queue-cue loaded' : 'queue-cue';
++    queueState.textContent = queued ? 'NEXT PIN READY' : state.shots.active ? 'TAP TO QUEUE' : 'QUEUE OPEN';
++  },
++};
++
++const game = new Game(canvas, ui);
++
++function restart() {
++  game.reset({seed: game.seed, level: game.level, manual: game.manual});
++}
++
++canvas.addEventListener('pointerdown', (event) => {
++  event.preventDefault();
++  game.fire();
++});
++startButton.addEventListener('click', () => {
++  if (game.phase === 'failed' || game.phase === 'passed') restart();
++  game.start();
++});
++restartButton.addEventListener('click', restart);
++window.addEventListener('keydown', (event) => {
++  if (event.code === 'Space') {
++    event.preventDefault();
++    game.fire();
++  }
++  if (event.code === 'KeyR') restart();
++});
++
++const replay = (actions) => {
++  if (!Array.isArray(actions) || actions.length > 40) throw new Error('Replay is out of bounds');
++  const output = [];
++  for (const action of actions) {
++    if (action.type === 'start') game.start();
++    else if (action.type === 'fire') game.fire();
++    else if (action.type === 'advance') game.advance(Math.min(30000, Math.max(0, action.ms)));
++    else if (action.type === 'reset') game.reset({seed: action.seed, level: action.level, manual: true});
++    else throw new Error('Unknown replay action');
++    output.push(game.getState());
++  }
++  return output;
++};
++
++window.gameAPI = {
++  reset: (options = {}) => game.reset({...options, manual: options.manual !== false}),
++  start: () => game.start(),
++  advance: (durationMs) => game.advance(durationMs),
++  getState: () => game.getState(),
++  replay,
++};
+
+diff --git a/dist/occupancy.js b/dist/occupancy.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..523c23f8f2e92e944ed7f1a40d598be14f2a205e
+--- /dev/null
++++ b/dist/occupancy.js
+@@ -0,0 +1,20 @@
++import {circularDistance, normalizeAngle} from './angles.js';
++
++const CLEARANCE = 24;
++
++export class Occupancy {
++  constructor() {
++    this.reset();
++  }
++
++  reset() {
++    this.pins = [180, 300, 359];
++  }
++
++  tryAttach(localAngle) {
++    const angle = normalizeAngle(localAngle);
++    const blocked = this.pins.some((pin) => circularDistance(pin, angle) < CLEARANCE);
++    this.pins.push(angle);
++    return {accepted: !blocked, angle};
++  }
++}
+
+diff --git a/dist/shot-controller.js b/dist/shot-controller.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..715eed7af8f2e2f6ef81332c1ea4760baf2d460d
+--- /dev/null
++++ b/dist/shot-controller.js
+@@ -0,0 +1,93 @@
++import {normalizeAngle} from './angles.js';
++
++const OPENING_FLIGHT_TIME = 20000;
++const CRUISE_QUEUE_FLIGHT_TIME = 770;
++const SHIFT_QUEUE_FLIGHT_TIME = 710;
++const SPRINT_FLIGHT_TIME = 600;
++const IMPACT_ANGLE = 90;
++
++export class ShotController {
++  constructor(coreMotion) {
++    this.coreMotion = coreMotion;
++    this.reset();
++  }
++
++  reset() {
++    this.active = null;
++    this.waiting = null;
++  }
++
++  request(now) {
++    const prepared = this.prepare(now, Boolean(this.active));
++    if (!this.active) {
++      this.active = this.activate(prepared, now);
++      return 'launched';
++    }
++    if (!this.waiting) {
++      this.waiting = prepared;
++      return 'queued';
++    }
++    return 'full';
++  }
++
++  prepare(now, fromQueue) {
++    return {
++      acceptedAt: now,
++      fromQueue,
++    };
++  }
++
++  activate(prepared, now) {
++    const launchProfile = this.coreMotion.launchProfile;
++    const flightTime = this.flightTimeFor(prepared, launchProfile);
++    return {
++      ...prepared,
++      flightTime,
++      launchProfile,
++      launchedAt: now,
++      progress: 0,
++    };
++  }
++
++  flightTimeFor(prepared, launchProfile) {
++    if (prepared.fromQueue) {
++      return launchProfile === 'shifting' ? SHIFT_QUEUE_FLIGHT_TIME : CRUISE_QUEUE_FLIGHT_TIME;
++    }
++    return launchProfile === 'sprint' ? SPRINT_FLIGHT_TIME : OPENING_FLIGHT_TIME;
++  }
++
++  step(now) {
++    if (!this.active) return [];
++    this.active.progress = Math.min(1, (now - this.active.launchedAt) / this.active.flightTime);
++    if (this.active.progress < 1) return [];
++
++    const arrival = {
++      worldAngle: IMPACT_ANGLE,
++      localAngle: normalizeAngle(IMPACT_ANGLE - this.coreMotion.angle),
++      acceptedAt: this.active.acceptedAt,
++      launchedAt: this.active.launchedAt,
++    };
++    this.active = null;
++    return [arrival];
++  }
++
++  launchWaiting(now) {
++    if (this.active || !this.waiting) return false;
++    this.active = this.activate(this.waiting, now);
++    this.waiting = null;
++    return true;
++  }
++
++  getState() {
++    return {
++      active: this.active ? {
++        progress: this.active.progress,
++        acceptedAt: this.active.acceptedAt,
++        launchedAt: this.active.launchedAt,
++        flightTime: this.active.flightTime,
++        launchProfile: this.active.launchProfile,
++      } : null,
++      waiting: this.waiting ? 1 : 0,
++    };
++  }
++}
+
+diff --git a/dist/styles.css b/dist/styles.css
+new file mode 100644
+index 0000000000000000000000000000000000000000..00a0b848d52766b7a2420833277a869043544a23
+--- /dev/null
++++ b/dist/styles.css
+@@ -0,0 +1,80 @@
++:root {
++  color-scheme: dark;
++  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
++  background: #07111c;
++  color: #eaf5ff;
++}
++
++* { box-sizing: border-box; }
++
++body {
++  min-width: 980px;
++  min-height: 720px;
++  margin: 0;
++  overflow: hidden;
++  background:
++    radial-gradient(circle at 28% 18%, rgba(46, 142, 190, .22), transparent 32%),
++    linear-gradient(135deg, #07111c 0%, #0b1c2d 58%, #07111c 100%);
++}
++
++.shell {
++  width: 1080px;
++  height: 680px;
++  margin: 20px auto;
++  display: grid;
++  grid-template-columns: 760px 320px;
++  border: 1px solid rgba(151, 210, 239, .25);
++  border-radius: 24px;
++  overflow: hidden;
++  box-shadow: 0 24px 90px rgba(0, 0, 0, .45);
++}
++
++.playfield { position: relative; background: rgba(3, 10, 18, .72); }
++#game { display: block; width: 760px; height: 680px; cursor: crosshair; }
++
++.panel {
++  padding: 44px 34px;
++  background: rgba(12, 28, 43, .96);
++  border-left: 1px solid rgba(151, 210, 239, .18);
++}
++
++.eyebrow { margin: 0 0 8px; color: #67dbff; font-size: 11px; font-weight: 800; letter-spacing: .24em; }
++h2 { margin: 0 0 36px; font-size: 30px; letter-spacing: -.04em; }
++.readout { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(151, 210, 239, .13); }
++.readout span { color: #7f9db0; font-size: 11px; letter-spacing: .14em; }
++.readout strong { color: #f3fbff; font-size: 19px; }
++.pace-track { height: 5px; margin: 13px 0 22px; overflow: hidden; border-radius: 9px; background: #20384a; }
++.pace-track i { display: block; width: 12%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #43d6ff, #ffda6b); transition: width .1s linear; }
++.queue-cue { display: flex; align-items: center; gap: 10px; min-height: 34px; color: #7f9db0; font-size: 11px; letter-spacing: .13em; }
++.queue-cue i { width: 10px; height: 10px; border: 2px solid #4c7187; border-radius: 50%; box-shadow: 0 0 0 5px rgba(76, 113, 135, .1); }
++.queue-cue.loaded { color: #ffda6b; }
++.queue-cue.loaded i { border-color: #ffda6b; background: #ffda6b; box-shadow: 0 0 0 5px rgba(255, 218, 107, .13); }
++.rules { min-height: 76px; margin-top: 12px; color: #91aabd; font-size: 14px; line-height: 1.55; }
++button { width: 100%; border: 0; border-radius: 12px; padding: 14px 18px; background: #59dcff; color: #05121c; font: inherit; font-weight: 850; letter-spacing: .08em; cursor: pointer; }
++button:hover { filter: brightness(1.08); }
++.secondary { margin-top: 20px; border: 1px solid #345266; background: transparent; color: #bbd4e3; }
++.status { margin-top: 28px; color: #67dbff; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
++
++.overlay {
++  position: absolute;
++  inset: 0;
++  display: flex;
++  flex-direction: column;
++  align-items: center;
++  justify-content: center;
++  background: rgba(4, 13, 22, .91);
++  backdrop-filter: blur(6px);
++}
++.overlay.hidden { display: none; }
++.overlay h1 { margin: 22px 0 8px; font-size: 58px; letter-spacing: .08em; }
++.overlay p { margin: 0 0 30px; color: #9ab2c2; }
++.overlay button { width: 210px; }
++.mark { position: relative; width: 92px; height: 92px; border: 3px solid #66ddff; border-radius: 50%; box-shadow: 0 0 38px rgba(89, 220, 255, .28); }
++.mark span { position: absolute; left: 43px; top: -24px; width: 4px; height: 30px; border-radius: 9px; background: #effbff; transform-origin: 2px 70px; }
++.mark span:nth-child(2) { transform: rotate(120deg); }
++.mark span:nth-child(3) { transform: rotate(240deg); }
++
++.overlay.fail { background: rgba(35, 7, 14, .92); }
++.overlay.fail .mark { border-color: #ff6177; box-shadow: 0 0 38px rgba(255, 74, 100, .26); }
++.overlay.pass { background: rgba(5, 31, 28, .92); }
++.overlay.pass .mark { border-color: #63f1bd; box-shadow: 0 0 38px rgba(76, 235, 177, .24); }

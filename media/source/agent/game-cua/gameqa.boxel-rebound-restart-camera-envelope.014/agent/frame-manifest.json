@@ -1,0 +1,175 @@
+{
+  "format": "ordered_png_observation_sequence",
+  "frame_count": 9,
+  "frames": [
+    {
+      "action": null,
+      "file": "frames/frame-0001.png",
+      "sequence": 1,
+      "source_frame": "screenshot-0001.png",
+      "timestamp": "2026-09-05T01:49:14.672603+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 2000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0002.png",
+      "sequence": 2,
+      "source_frame": "screenshot-0002.png",
+      "timestamp": "2026-09-05T01:49:36.967696+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Alt+R",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0003.png",
+      "sequence": 3,
+      "source_frame": "screenshot-0003.png",
+      "timestamp": "2026-09-05T01:49:59.896466+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "R",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0004.png",
+      "sequence": 4,
+      "source_frame": "screenshot-0004.png",
+      "timestamp": "2026-09-05T01:50:05.195470+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 2000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0005.png",
+      "sequence": 5,
+      "source_frame": "screenshot-0005.png",
+      "timestamp": "2026-09-05T01:50:18.965871+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "Alt+R",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0006.png",
+      "sequence": 6,
+      "source_frame": "screenshot-0006.png",
+      "timestamp": "2026-09-05T01:50:45.741411+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": null,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "press",
+        "steps": null,
+        "text": "R",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0007.png",
+      "sequence": 7,
+      "source_frame": "screenshot-0007.png",
+      "timestamp": "2026-09-05T01:50:51.790713+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 1000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "key_hold",
+        "steps": null,
+        "text": "Space",
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0008.png",
+      "sequence": 8,
+      "source_frame": "screenshot-0008.png",
+      "timestamp": "2026-09-05T01:51:05.190464+00:00"
+    },
+    {
+      "action": {
+        "delta_x": null,
+        "delta_y": null,
+        "duration_ms": 2000,
+        "end_x": null,
+        "end_y": null,
+        "height": null,
+        "kind": "wait",
+        "steps": null,
+        "text": null,
+        "width": null,
+        "x": null,
+        "y": null
+      },
+      "file": "frames/frame-0009.png",
+      "sequence": 9,
+      "source_frame": "screenshot-0009.png",
+      "timestamp": "2026-09-05T01:51:12.590431+00:00"
+    }
+  ],
+  "run_label": "cua-02",
+  "task_id": "gameqa.boxel-rebound-restart-camera-envelope.014"
+}

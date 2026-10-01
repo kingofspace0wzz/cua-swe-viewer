@@ -1,0 +1,44 @@
+diff --git a/js/game_manager.js b/js/game_manager.js
+index 803b4296dc230db713c8903f2789888ebcc7ec3b..f6e52a70685e9f37d3ffa321101fb402e0a51091 100644
+--- a/js/game_manager.js
++++ b/js/game_manager.js
+@@ -8,6 +8,7 @@ function GameManager(size, InputManager, Actuator) {
+ }
+ 
+ GameManager.prototype.restart = function () {
++  this.inputManager.cancelPendingMove();
+   this.actuator.restart();
+   this.setup();
+ };
+diff --git a/js/keyboard_input_manager.js b/js/keyboard_input_manager.js
+index 74c56bf1e283dc2f66586079b77883d450cd791a..53ebe0e547d74abe49ac8625ff712d320646a7c5 100644
+--- a/js/keyboard_input_manager.js
++++ b/js/keyboard_input_manager.js
+@@ -16,6 +16,14 @@ KeyboardInputManager.prototype.emit = function (event, data) {
+   if (callbacks) callbacks.forEach(function (callback) { callback(data); });
+ };
+ 
++KeyboardInputManager.prototype.cancelPendingMove = function () {
++  this.serial += 1;
++  if (this.pending !== null) {
++    window.clearTimeout(this.pending);
++    this.pending = null;
++  }
++};
++
+ KeyboardInputManager.prototype.listen = function () {
+   var self = this;
+   var map = { 38: 0, 39: 1, 40: 2, 37: 3, 75: 0, 76: 1, 74: 2, 72: 3 };
+@@ -45,11 +53,7 @@ KeyboardInputManager.prototype.listen = function () {
+     var direction = map[event.which];
+     if (direction === undefined) return;
+     delete self.down[direction];
+-    self.serial += 1;
+-    if (self.pending !== null) {
+-      window.clearTimeout(self.pending);
+-      self.pending = null;
+-    }
++    self.cancelPendingMove();
+   });
+ 
+   document.getElementsByClassName("retry-button")[0]

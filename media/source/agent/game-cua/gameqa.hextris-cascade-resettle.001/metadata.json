@@ -1,0 +1,29 @@
+{
+  "excluded": [
+    "raw base64-heavy agent transcript",
+    "evaluation workspace and dependencies",
+    "browser profile and caches",
+    "non-representative screenshot sequences",
+    "verifier screenshots and construction artifacts"
+  ],
+  "game": "hextris",
+  "presentation_policy": "one representative scored CUA run plus aggregate matched results",
+  "representative_run": {
+    "activity_summary": {
+      "agent_messages": 6,
+      "commands": 14,
+      "computer_use_calls": 7,
+      "events": 30,
+      "file_changes": 2,
+      "plans": 1
+    },
+    "condition": "cua",
+    "frame_count": 7,
+    "label": "cua-01",
+    "model": "gpt-5.6-sol",
+    "scorable": true,
+    "selection": "diagnostic failure with most retained observation frames",
+    "success": false
+  },
+  "task_id": "gameqa.hextris-cascade-resettle.001"
+}

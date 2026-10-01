@@ -1,0 +1,32 @@
+{
+  "progress": 0.5,
+  "results": [
+    {
+      "actual": "exit code 0\n> vector-relay@1.0.0 build\n> node --check src/relay_contact.js && node --check src/relay_commit.js && node --check src/vector_relay.js && node --check src/game_api.js && node --check server.mjs",
+      "actual_exit_code": 0,
+      "command": "npm run build",
+      "evidence_path": null,
+      "expected": "exit code 0",
+      "expected_exit_code": 0,
+      "group": "build",
+      "name": "build: npm run build",
+      "passed": true,
+      "stderr": "",
+      "stdout": "\n> vector-relay@1.0.0 build\n> node --check src/relay_contact.js && node --check src/relay_commit.js && node --check src/vector_relay.js && node --check src/game_api.js && node --check server.mjs\n\n"
+    },
+    {
+      "actual": "exit code 1\nTraceback (most recent call last):\n  File \"<artifact-path>\", line 182, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"<artifact-path>\", line 176, in main\n    raise AssertionError(\"; \".join(failures))\nAssertionError: shift: the visible return bounce did not clear the relay; shift: completion was not credited exactly once: {'schemaVersion': '1.0', 'gameId': 'vector-relay', 'status': 'playing', 'score': 0, 'lives': 1, 'isOver': False, 'isActionable': True, 'challenge': {'name': 'Relay Circuit', 'seed': 73, 'level': 3}, 'relay': {'phase': 'armed', 'contacts': 1, 'commits': 1, 'pending': 0, 'dropped': 1, 'lastCommit': 1}, 'orb': {'attached': True, 'attachReason': 'life-replacement', 'x': 467.05, 'y': 536, 'vx': 0, 'vy': 0, 'route': None, 'contactSlot': 'orb', 'contactSeries': 0, 'overlapSlices': 0}, 'ownership': {'port': 'west', 'active': 'lane-4', 'attachments': 3}, 'metrics': {'launches': 2, 'losses': 2, 'bounces': 2}, 'terminal': {'isTerminal': False, 'outcome': None, 'reason': None}}; shift: delayed settlement did not finish exactly once: {'schemaVersion': '1.0', 'gameId': 'vector-relay', 'status': 'playing', 'score': 0, 'lives': 1, 'isOver': False, 'isActionable': True, 'challenge': {'name': 'Relay Circuit', 'seed': 73, 'level': 3}, 'relay': {'phase': 'armed', 'contacts': 1, 'commits': 1, 'pending': 0, 'dropped': 1, 'lastCommit': 1}, 'orb': {'attached': True, 'attachReason': 'life-replacement', 'x': 467.05, 'y': 536, 'vx': 0, 'vy': 0, 'route': None, 'contactSlot': 'orb', 'contactSeries': 0, 'overlapSlices': 0}, 'ownership': {'port': 'west', 'active': 'lane-4', 'attachments': 3}, 'metrics': {'launches': 2, 'losses': 2, 'bounces': 2}, 'terminal': {'isTerminal': False, 'outcome': None, 'reason': None}}; shift: a reached relay settlement was discarded: {'schemaVersion': '1.0', 'gameId': 'vector-relay', 'status': 'playing', 'score': 0, 'lives': 1, 'isOver': False, 'isActionable': True, 'challenge': {'name': 'Relay Circuit', 'seed': 73, 'level': 3}, 'relay': {'phase': 'armed', 'contacts': 1, 'commits': 1, 'pending': 0, 'dropped': 1, 'lastCommit': 1}, 'orb': {'attached': True, 'attachReason': 'life-replacement', 'x': 467.05, 'y': 536, 'vx': 0, 'vy': 0, 'route': None, 'contactSlot': 'orb', 'contactSeries': 0, 'overlapSlices': 0}, 'ownership': {'port': 'west', 'active': 'lane-4', 'attachments': 3}, 'metrics': {'launches': 2, 'losses': 2, 'bounces': 2}, 'terminal': {'isTerminal': False, 'outcome': None, 'reason': None}}",
+      "actual_exit_code": 1,
+      "command": "\"${CUA_SWE_PYTHON:-python3}\" verifiers/browser_check.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:51320/?challenge=relay-circuit}\"",
+      "evidence_path": null,
+      "expected": "exit code 0",
+      "expected_exit_code": 0,
+      "group": "state",
+      "name": "state: \"${CUA_SWE_PYTHON:-python3}\" verifiers/browser_check.py --url \"${CUA_SWE_WEB_URL:-http://127.0.0.1:51320/?challenge=relay-circuit}\"",
+      "passed": false,
+      "stderr": "Traceback (most recent call last):\n  File \"<artifact-path>\", line 182, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"<artifact-path>\", line 176, in main\n    raise AssertionError(\"; \".join(failures))\nAssertionError: shift: the visible return bounce did not clear the relay; shift: completion was not credited exactly once: {'schemaVersion': '1.0', 'gameId': 'vector-relay', 'status': 'playing', 'score': 0, 'lives': 1, 'isOver': False, 'isActionable': True, 'challenge': {'name': 'Relay Circuit', 'seed': 73, 'level': 3}, 'relay': {'phase': 'armed', 'contacts': 1, 'commits': 1, 'pending': 0, 'dropped': 1, 'lastCommit': 1}, 'orb': {'attached': True, 'attachReason': 'life-replacement', 'x': 467.05, 'y': 536, 'vx': 0, 'vy': 0, 'route': None, 'contactSlot': 'orb', 'contactSeries': 0, 'overlapSlices': 0}, 'ownership': {'port': 'west', 'active': 'lane-4', 'attachments': 3}, 'metrics': {'launches': 2, 'losses': 2, 'bounces': 2}, 'terminal': {'isTerminal': False, 'outcome': None, 'reason': None}}; shift: delayed settlement did not finish exactly once: {'schemaVersion': '1.0', 'gameId': 'vector-relay', 'status': 'playing', 'score': 0, 'lives': 1, 'isOver': False, 'isActionable': True, 'challenge': {'name': 'Relay Circuit', 'seed': 73, 'level': 3}, 'relay': {'phase': 'armed', 'contacts': 1, 'commits': 1, 'pending': 0, 'dropped': 1, 'lastCommit': 1}, 'orb': {'attached': True, 'attachReason': 'life-replacement', 'x': 467.05, 'y': 536, 'vx': 0, 'vy': 0, 'route': None, 'contactSlot': 'orb', 'contactSeries': 0, 'overlapSlices': 0}, 'ownership': {'port': 'west', 'active': 'lane-4', 'attachments': 3}, 'metrics': {'launches': 2, 'losses': 2, 'bounces': 2}, 'terminal': {'isTerminal': False, 'outcome': None, 'reason': None}}; shift: a reached relay settlement was discarded: {'schemaVersion': '1.0', 'gameId': 'vector-relay', 'status': 'playing', 'score': 0, 'lives': 1, 'isOver': False, 'isActionable': True, 'challenge': {'name': 'Relay Circuit', 'seed': 73, 'level': 3}, 'relay': {'phase': 'armed', 'contacts': 1, 'commits': 1, 'pending': 0, 'dropped': 1, 'lastCommit': 1}, 'orb': {'attached': True, 'attachReason': 'life-replacement', 'x': 467.05, 'y': 536, 'vx': 0, 'vy': 0, 'route': None, 'contactSlot': 'orb', 'contactSeries': 0, 'overlapSlices': 0}, 'ownership': {'port': 'west', 'active': 'lane-4', 'attachments': 3}, 'metrics': {'launches': 2, 'losses': 2, 'bounces': 2}, 'terminal': {'isTerminal': False, 'outcome': None, 'reason': None}}\n",
+      "stdout": ""
+    }
+  ],
+  "success": false
+}

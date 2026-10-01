@@ -1,0 +1,633 @@
+{
+  "coverage": "retained_codex_events_partial",
+  "events": [
+    {
+      "detail": "I\u2019ll trace the restart/input lifecycle in the source, reproduce the parity lamp failure in the running app, then make a focused fix and validate all three restart paths plus the build.",
+      "kind": "agent_message",
+      "sequence": 1,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "UPSTREAM.md\ngame_api.js\nquality_monitor.js\nindex.html\nserve.py\nRIGHTS.md\njs/animframe_polyfill.js\n__pycache__/serve.cpython-312.pyc\njs/html_actuator.js\njs/grid.js\njs/hammer.min.js\njs/game_manager.js\njs/tile.js\njs/application.js\njs/keyboard_input_manager.js\nstyle/main.css",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 2,
+      "status": "completed",
+      "title": "/bin/bash -lc \"pwd && rg --files -g '\"'!node_modules'\"' -g '\"'!dist'\"' | sed -n '1,160p'\"",
+      "truncated": false
+    },
+    {
+      "detail": "./index.html:21:    function makeRng(seed) {\n./index.html:22:        return mulberry32(seed >>> 0);\n./index.html:51:    function normalizeSeed(seed) {\n./index.html:52:        var numeric = Number(seed);\n./index.html:59:    function applySeed(seed) {\n./index.html:60:        currentSeed = normalizeSeed(seed);\n./index.html:119:        var wrapped = function(seed, options) {\n./index.html:120:            if (seed === undefined || seed === null || seed === '') {\n./index.html:121:                seed = String(currentSeed);\n./index.html:123:            return fn.call(this, seed, options);\n./index.html:150:    hookSeedrandom(Math, 'seedrandom');\n./index.html:151:    hookSeedrandom(window, 'seedrandom');\n./index.html:153:    window.__setDeterministicSeed = function(seed) {\n./index.html:154:        return applySeed(seed);\n./index.html:159:    window.__resetRandom = function(seed) {\n./index.html:160:        if (seed !== undefined && seed !== null && seed !== '') {\n./index.html:161:            return applySeed(seed);\n./index.html:197:            <section class=\"opening-parity-panel\" aria-live=\"polite\">\n./index.html:198:                <span class=\"opening-parity-label\">Opening parity</span>\n./index.html:199:                <strong id=\"opening-parity-status\" class=\"opening-parity-status checking\">CHECKING</strong>\n./index.html:200:                <span id=\"opening-parity-detail\" class=\"opening-parity-detail\">Waiting for evaluator reference</span>\n./index.html:206:                        <a class=\"retry-button\">Try again</a>\n./game_api.js:8:    supports_seed: true,\n./game_api.js:19:    seed: DEFAULT_SEED,\n./game_api.js:50:      const seed = intOrNull(window.__getDeterministicSeed());\n./game_api.js:51:      if (seed !== null) return seed >>> 0;\n./game_api.js:59:      seed: normalizeSee\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 3,
+      "status": "completed",
+      "title": "/bin/bash -lc \"rg -n \\\"restart|Try again|Space|keydown|keyup|seed|parity|Opening|Game API|gameApi|game API\\\" -g '\"'!node_modules'\"' -g '\"'!dist'\"' .\"",
+      "truncated": true
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 4,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0001.png",
+          "sha256": "f04ba4f26ba7b8ea90a43d3f6cfc64a3c089f1d8ff9a8b55d6453864fc58238d"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "function GameManager(size, InputManager, Actuator) {\n  this.size = size;\n  this.inputManager = new InputManager();\n  this.actuator = new Actuator();\n  this.inputManager.on(\"move\", this.move.bind(this));\n  this.inputManager.on(\"restart\", this.restart.bind(this));\n  this.setup();\n}\n\nGameManager.prototype.restart = function () {\n  this.actuator.restart();\n  this.setup();\n};\n\nGameManager.prototype.setup = function () {\n  this.grid = new Grid(this.size);\n  this.grid.addStartTiles();\n  this.score = 0;\n  this.over = false;\n  this.won = false;\n  this.actuate();\n};\n\nGameManager.prototype.actuate = function () {\n  this.actuator.actuate(this.grid, {\n    score: this.score,\n    over: this.over,\n    won: this.won\n  });\n};\n\nGameManager.prototype.move = function (direction) {\n  var result = this.grid.move(direction);\n  this.score += result.score;\n  if (result.won) {\n    this.won = true;\n  } else if (result.moved) {\n    this.grid.computerMove();\n  }\n  if (!this.grid.movesAvailable()) this.over = true;\n  this.actuate();\n};\nanimationDelay = 100;\nminSearchTime = 100;\nwindow.requestAnimationFrame(function () {\n  var gameManager = new GameManager(4, KeyboardInputManager, HTMLActuator);\n  window.__gameManager = gameManager;\n});",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 5,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,180p' js/keyboard_input_manager.js && sed -n '1,150p' js/game_manager.js && sed -n '1,120p' js/application.js\"",
+      "truncated": false
+    },
+    {
+      "detail": "(function () {\n  const GAME_ID = '01_2048';\n  const DEFAULT_SEED = 160;\n\n  let storage = null;\n\n  const capabilities = {\n    supports_seed: true,\n    supports_level_select: false,\n    supports_difficulty: false,\n    supports_inplace_reset: true,\n    supports_reload_reset: false,\n    supports_pause_detection: false,\n    supports_menu_detection: false,\n    provides_actionable_flag: true\n  };\n\n  const session = {\n    seed: DEFAULT_SEED,\n    requestedLevel: null,\n    requestedDifficulty: null,\n    episodeStartMs: Date.now(),\n    episodeCount: 0\n  };\n\n  const runtime = {\n    lastResetMethod: null\n  };\n\n  function getManager() {\n    return window.__gameManager || null;\n  }\n\n  function finiteOrNull(value) {\n    return typeof value === 'number' && Number.isFinite(value) ? value : null;\n  }\n\n  function intOrNull(value) {\n    if (typeof value !== 'number' || !Number.isFinite(value)) return null;\n    return Math.trunc(value);\n  }\n\n  function normalizeSeed(value) {\n    if (typeof value !== 'number' || !Number.isFinite(value)) return null;\n    return value >>> 0;\n  }\n\n  function getCurrentSeed() {\n    if (typeof window.__getDeterministicSeed === 'function') {\n      const seed = intOrNull(window.__getDeterministicSeed());\n      if (seed !== null) return seed >>> 0;\n    }\n    return DEFAULT_SEED;\n  }\n\n  function normalizeOptions(options) {\n    const opts = options || {};\n    return {\n      seed: normalizeSeed(opts.seed),\n      level:\n        opts.level === undefined || opts.level === null\n          ? null\n          : (typeof opts.level === 'number' && Number.isFinite(opts.level))\n            ? Math.trunc(opts.level)\n            : String(opts.level),\n      difficulty:\n        opts.difficulty === undefined || opts.difficulty === null\n          ? null\n          : String(opts.difficulty)\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 6,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,460p' game_api.js\"",
+      "truncated": true
+    },
+    {
+      "detail": "(function () {\n  \"use strict\";\n\n  var badge = document.getElementById(\"opening-parity-status\");\n  var detail = document.getElementById(\"opening-parity-detail\");\n  var requestSerial = 0;\n\n  function paint(kind, label, message) {\n    badge.className = \"opening-parity-status \" + kind;\n    badge.textContent = label;\n    detail.textContent = message;\n  }\n\n  async function sample() {\n    if (!window.gameAPI || typeof window.gameAPI.getState !== \"function\") {\n      paint(\"checking\", \"CHECKING\", \"Waiting for the game state\");\n      return;\n    }\n\n    var state = window.gameAPI.getState();\n    if (!state || !state.game_state || !state.game_state.environment) {\n      paint(\"checking\", \"CHECKING\", \"Waiting for the opening board\");\n      return;\n    }\n\n    var serial = ++requestSerial;\n    try {\n      var response = await fetch(\"/api/runtime-check\", {\n        method: \"POST\",\n        headers: { \"Content-Type\": \"application/json\" },\n        body: JSON.stringify({\n          seed: state.seed,\n          board: state.game_state.environment\n        })\n      });\n      var result = await response.json();\n      if (serial !== requestSerial) return;\n      if (!result.available) {\n        paint(\"unavailable\", \"UNAVAILABLE\", \"Evaluator reference is offline\");\n      } else if (result.match) {\n        paint(\"match\", \"MATCH\", \"Board matches the seeded opening\");\n      } else {\n        paint(\"mismatch\", \"MISMATCH\", \"Board differs from the seeded opening\");\n      }\n    } catch (error) {\n      if (serial === requestSerial) {\n        paint(\"unavailable\", \"UNAVAILABLE\", \"Evaluator reference is offline\");\n      }\n    }\n  }\n\n  window.setInterval(sample, 120);\n  sample();\n})();",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 7,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,230p' index.html && sed -n '1,130p' quality_monitor.js\"",
+      "truncated": false
+    },
+    {
+      "detail": "The source points to a stale delayed move: direction keydown schedules a 260 ms move, but every restart rebuilds the board without invalidating that timer. I\u2019m reproducing it with overlapping held direction/restart input before changing anything.",
+      "kind": "agent_message",
+      "sequence": 8,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{\"duration_ms\": 800, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 9,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0002.png",
+          "sha256": "5eccdf9623a9d9e5957ffa2716c0dc73c5581a54e152c0dde96b876d03443ea5"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 120, \"kind\": \"key_hold\", \"text\": \"ArrowRight+Space\"}",
+      "kind": "computer_use",
+      "sequence": 10,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0003.png",
+          "sha256": "31a13b4744ac57c8d5000c583855a32d416b4162b598ba5b0621d42faaad780f"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 500, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 11,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0004.png",
+          "sha256": "1e3421f03670e69e46a8f1345e5f462acdb5523b33f03c5ef5853585a47e6ddd"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 800, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 12,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0005.png",
+          "sha256": "5c759fd98c868043eafcc2b11821d101d2900d5f126b254965b88150178e2ba9"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 13,
+      "status": "completed",
+      "title": "/bin/bash -lc \"ls -la && if [ -f package.json ]; then sed -n '1,220p' package.json; fi && git status --short\"",
+      "truncated": false
+    },
+    {
+      "detail": "function HTMLActuator() {\n  this.tileContainer = document.getElementsByClassName(\"tile-container\")[0];\n  this.scoreContainer = document.getElementsByClassName(\"score-container\")[0];\n  this.messageContainer = document.getElementsByClassName(\"game-message\")[0];\n  this.score = 0;\n}\n\nHTMLActuator.prototype.actuate = function (grid, metadata) {\n  var self = this;\n  window.requestAnimationFrame(function () {\n    self.clearContainer(self.tileContainer);\n    grid.cells.forEach(function (column) {\n      column.forEach(function (tile) {\n        if (tile) {\n          self.addTile(tile);\n        }\n      });\n    });\n    self.updateScore(metadata.score);\n    if (metadata.over) {\n      self.message(false);\n    }\n    if (metadata.won) {\n      self.message(true);\n    }\n  });\n};\n\nHTMLActuator.prototype.restart = function () {\n  this.clearMessage();\n};\n\nHTMLActuator.prototype.clearContainer = function (container) {\n  if (!container) {\n    return;\n  }\n  while (container.firstChild) {\n    container.removeChild(container.firstChild);\n  }\n};\n\nHTMLActuator.prototype.addTile = function (tile) {\n  var self = this;\n  var element = document.createElement(\"div\");\n  var previousPosition = tile.previousPosition || { x: tile.x, y: tile.y };\n  var positionClass = this.positionClass(previousPosition);\n  var classes = [\"tile\", \"tile-\" + tile.value, positionClass];\n\n  this.applyClasses(element, classes);\n  element.textContent = tile.value;\n\n  if (tile.previousPosition) {\n    window.requestAnimationFrame(function () {\n      classes[2] = self.positionClass({ x: tile.x, y: tile.y });\n      self.applyClasses(element, classes);\n    });\n  } else if (tile.mergedFrom) {\n    classes.push(\"tile-merged\");\n    this.applyClasses(element, classes);\n    tile.mergedFrom.forEach(function (mergedTile) {\n      self.addTile(\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 14,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '120,260p' js/grid.js && sed -n '1,100p' js/html_actuator.js && env | rg '\"'^CUA_SWE_AGENT_ROLLOUT_DIR='\"'\"",
+      "truncated": true
+    },
+    {
+      "detail": "update: game_manager.js\nupdate: keyboard_input_manager.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "game_manager.js"
+        },
+        {
+          "kind": "update",
+          "path": "keyboard_input_manager.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 15,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "The fix now invalidates only the scheduled pre-restart move and leaves the held-key state intact, so normal hold behavior is unchanged. I\u2019m reloading the test page to load the edited source, then checking the same overlap and a normal held direction.",
+      "kind": "agent_message",
+      "sequence": 16,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"CTRL+R\"}",
+      "kind": "computer_use",
+      "sequence": 17,
+      "status": "failed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "image_status": "not_recorded",
+      "image_reason": "No screenshot was returned for this call in the retained run."
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+R\"}",
+      "kind": "computer_use",
+      "sequence": 18,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0006.png",
+          "sha256": "5c759fd98c868043eafcc2b11821d101d2900d5f126b254965b88150178e2ba9"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 800, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 19,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0007.png",
+          "sha256": "5c759fd98c868043eafcc2b11821d101d2900d5f126b254965b88150178e2ba9"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Space\"}",
+      "kind": "computer_use",
+      "sequence": 20,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0008.png",
+          "sha256": "e4f1c1c47ee9ae3c60f0c93c5a6bb52adb086e8c18fcd5fd04dced61f15878bd"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 1000, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 21,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0009.png",
+          "sha256": "b086d0cab8702bfcaea25640d61d0558c00abf5377fff34b80d65ff34cd9aa28"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "The lamp exposed a second part of the restart contract: native Space/Try again rebuilds from the RNG\u2019s current position, so it is not actually a seeded restart. I\u2019m updating the same restart boundary to rewind the currently selected seed (not a hardcoded value) before board setup; Game API already selects the seed before calling this path.",
+      "kind": "agent_message",
+      "sequence": 22,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "update: game_manager.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "game_manager.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 23,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+R\"}",
+      "kind": "computer_use",
+      "sequence": 24,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0010.png",
+          "sha256": "b086d0cab8702bfcaea25640d61d0558c00abf5377fff34b80d65ff34cd9aa28"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 600, \"kind\": \"wait\"}",
+      "kind": "computer_use",
+      "sequence": 25,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0011.png",
+          "sha256": "b086d0cab8702bfcaea25640d61d0558c00abf5377fff34b80d65ff34cd9aa28"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+Shift+R\"}",
+      "kind": "computer_use",
+      "sequence": 26,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0012.png",
+          "sha256": "b086d0cab8702bfcaea25640d61d0558c00abf5377fff34b80d65ff34cd9aa28"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "diff --git a/js/game_manager.js b/js/game_manager.js\nindex 803b429..6cdaf51 100644\n--- a/js/game_manager.js\n+++ b/js/game_manager.js\n@@ -8,6 +8,10 @@ function GameManager(size, InputManager, Actuator) {\n }\n \n GameManager.prototype.restart = function () {\n+  this.inputManager.cancelPendingMove();\n+  if (typeof window.__resetRandom === \"function\") {\n+    window.__resetRandom();\n+  }\n   this.actuator.restart();\n   this.setup();\n };\ndiff --git a/js/keyboard_input_manager.js b/js/keyboard_input_manager.js\nindex 74c56bf..53ebe0e 100644\n--- a/js/keyboard_input_manager.js\n+++ b/js/keyboard_input_manager.js\n@@ -16,6 +16,14 @@ KeyboardInputManager.prototype.emit = function (event, data) {\n   if (callbacks) callbacks.forEach(function (callback) { callback(data); });\n };\n \n+KeyboardInputManager.prototype.cancelPendingMove = function () {\n+  this.serial += 1;\n+  if (this.pending !== null) {\n+    window.clearTimeout(this.pending);\n+    this.pending = null;\n+  }\n+};\n+\n KeyboardInputManager.prototype.listen = function () {\n   var self = this;\n   var map = { 38: 0, 39: 1, 40: 2, 37: 3, 75: 0, 76: 1, 74: 2, 72: 3 };\n@@ -45,11 +53,7 @@ KeyboardInputManager.prototype.listen = function () {\n     var direction = map[event.which];\n     if (direction === undefined) return;\n     delete self.down[direction];\n-    self.serial += 1;\n-    if (self.pending !== null) {\n-      window.clearTimeout(self.pending);\n-      self.pending = null;\n-    }\n+    self.cancelPendingMove();\n   });\n \n   document.getElementsByClassName(\"retry-button\")[0]",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 27,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '230,360p' index.html && git diff -- js/keyboard_input_manager.js js/game_manager.js\"",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Space\"}",
+      "kind": "computer_use",
+      "sequence": 28,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0013.png",
+          "sha256": "6e14d1d2495d43e7e29dd287c2f01a5d13ce39c70ff5a98308739a09772874f4"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"ArrowRight\"}",
+      "kind": "computer_use",
+      "sequence": 29,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0014.png",
+          "sha256": "7450ca18caa9ddbc2094469800e21f2d412a38c98792de29104a9b3dff622f17"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Space\"}",
+      "kind": "computer_use",
+      "sequence": 30,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0015.png",
+          "sha256": "3cd782d50b2ba3d045b12d31dfd62787e21ed44a8a53a6805c8b08a7465fa7e5"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "M js/game_manager.js\n M js/keyboard_input_manager.js",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 31,
+      "status": "completed",
+      "title": "/bin/bash -lc \"sed -n '1,260p' serve.py && git status --short\"",
+      "truncated": false
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 32,
+      "status": "completed",
+      "title": "visual_cua.start",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0016.png",
+          "sha256": "b9fd21c3d69b4dc599cebe8d34da28fdc9e0d6b57aa9c6273b07746ce00e4bb0"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+L\"}",
+      "kind": "computer_use",
+      "sequence": 33,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0017.png",
+          "sha256": "b9fd21c3d69b4dc599cebe8d34da28fdc9e0d6b57aa9c6273b07746ce00e4bb0"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "update: game_manager.js",
+      "files": [
+        {
+          "kind": "update",
+          "path": "game_manager.js"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 34,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "input timing checks passed",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 35,
+      "status": "completed",
+      "title": "/bin/bash -lc \"node --check js/keyboard_input_manager.js && node --check js/game_manager.js && node <<'NODE'\nconst fs = require('fs');\nconst vm = require('vm');\nconst listeners = {};\nconst retry = { addEventListener(type, fn) { listeners['retry:' + type] = fn; } };\nconst document = {\n  addEventListener(type, fn) { listeners[type] = fn; },\n  getElementsByClassName(name) { return name === 'retry-button' ? [retry] : [{}]; }\n};\nfunction Hammer() { return { on() {} }; }\nHammer.DIRECTION_UP = 1;\nHammer.DIRECTION_RIGHT = 2;\nHammer.DIRECTION_DOWN = 3;\nHammer.DIRECTION_LEFT = 4;\nconst context = {\n  document,\n  Hammer,\n  window: { setTimeout, clearTimeout },\n  console\n};\nvm.createContext(context);\nvm.runInContext(fs.readFileSync('js/keyboard_input_manager.js', 'utf8'), context);\nconst input = new context.KeyboardInputManager();\nlet moves = 0;\nlet restarts = 0;\ninput.on('move', () => { moves += 1;\n\u2026 output truncated in presentation bundle \u2026",
+      "truncated": true
+    },
+    {
+      "detail": "The timing regression is covered by a local event-level check: ordinary held input still produces its delayed move, while restarting during that delay suppresses only the stale post-restart move. I\u2019m finishing with restart-boundary/API checks, the required build command, and rollout notes.",
+      "kind": "agent_message",
+      "sequence": 36,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "js/game_manager.js           |  6 ++++++\n js/keyboard_input_manager.js | 14 +++++++++-----\n 2 files changed, 15 insertions(+), 5 deletions(-)\n M js/game_manager.js\n M js/keyboard_input_manager.js",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 37,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && git diff --stat && git status --short'",
+      "truncated": false
+    },
+    {
+      "detail": "restart boundary check passed: cancel,seed,actuator,setup\nnpm ERR! code ENOENT\nnpm ERR! syscall open\nnpm ERR! path <artifact-path>\nnpm ERR! errno -2\nnpm ERR! enoent ENOENT: no such file or directory, open '<artifact-path>'\nnpm ERR! enoent This is related to npm not being able to find a file.\nnpm ERR! enoent \n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     <artifact-path>",
+      "exit_code": 254,
+      "kind": "command",
+      "sequence": 38,
+      "status": "failed",
+      "title": "/bin/bash -lc \"node <<'NODE'\nconst fs = require('fs');\nconst vm = require('vm');\nconst calls = [];\nfunction InputManager() { this.handlers = {}; }\nInputManager.prototype.on = function (name, fn) { this.handlers[name] = fn; };\nInputManager.prototype.cancelPendingMove = function () { calls.push('cancel'); };\nfunction Actuator() {}\nActuator.prototype.restart = function () { calls.push('actuator'); };\nActuator.prototype.actuate = function () {};\nfunction Grid() { this.cells = []; }\nGrid.prototype.addStartTiles = function () { calls.push('setup'); };\nconst context = {\n  window: { __resetRandom() { calls.push('seed'); } },\n  Grid\n};\nvm.createContext(context);\nvm.runInContext(fs.readFileSync('js/game_manager.js', 'utf8'), context);\nconst manager = new context.GameManager(4, InputManager, Actuator);\ncalls.length = 0;\nmanager.restart();\nconst actual = calls.join(',');\nconst expected = 'cancel,see\n\u2026 output truncated in presentation bundle \u2026",
+      "truncated": true
+    },
+    {
+      "detail": "1\tfunction KeyboardInputManager() {\n     2\t  this.events = {};\n     3\t  this.down = {};\n     4\t  this.pending = null;\n     5\t  this.serial = 0;\n     6\t  this.listen();\n     7\t}\n     8\t\n     9\tKeyboardInputManager.prototype.on = function (event, callback) {\n    10\t  if (!this.events[event]) this.events[event] = [];\n    11\t  this.events[event].push(callback);\n    12\t};\n    13\t\n    14\tKeyboardInputManager.prototype.emit = function (event, data) {\n    15\t  var callbacks = this.events[event];\n    16\t  if (callbacks) callbacks.forEach(function (callback) { callback(data); });\n    17\t};\n    18\t\n    19\tKeyboardInputManager.prototype.cancelPendingMove = function () {\n    20\t  this.serial += 1;\n    21\t  if (this.pending !== null) {\n    22\t    window.clearTimeout(this.pending);\n    23\t    this.pending = null;\n    24\t  }\n    25\t};\n    26\t\n    27\tKeyboardInputManager.prototype.listen = function () {\n    28\t  var self = this;\n    29\t  var map = { 38: 0, 39: 1, 40: 2, 37: 3, 75: 0, 76: 1, 74: 2, 72: 3 };\n    30\t\n    31\t  document.addEventListener(\"keydown\", function (event) {\n    32\t    var modifiers = event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;\n    33\t    var direction = map[event.which];\n    34\t    if (modifiers) return;\n    35\t\n    36\t    if (direction !== undefined) {\n    37\t      event.preventDefault();\n    38\t      if (self.down[direction]) return;\n    39\t      self.down[direction] = true;\n    40\t      self.emit(\"move\", direction);\n    41\t      var serial = ++self.serial;\n    42\t      self.pending = window.setTimeout(function () {\n    43\t        if (self.down[direction] && serial === self.serial) {\n    44\t          self.emit(\"move\", direction);\n    45\t        }\n    46\t      }, 260);\n    47\t    }\n    48\t\n    49\t    if (event.which === 32) self.restart(event)\n\u2026 output truncated in presentation bundle \u2026",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 39,
+      "status": "completed",
+      "title": "/bin/bash -lc \"ls -ld <artifact-path> && git diff --check && nl -ba js/keyboard_input_manager.js | sed -n '1,105p' && nl -ba js/game_manager.js | sed -n '1,55p'\"",
+      "truncated": true
+    },
+    {
+      "detail": "update: index.html",
+      "files": [
+        {
+          "kind": "update",
+          "path": "index.html"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 40,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "{\"kind\": \"press\", \"text\": \"Control+R\"}",
+      "kind": "computer_use",
+      "sequence": 41,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0018.png",
+          "sha256": "b9fd21c3d69b4dc599cebe8d34da28fdc9e0d6b57aa9c6273b07746ce00e4bb0"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{}",
+      "kind": "computer_use",
+      "sequence": 42,
+      "status": "completed",
+      "title": "visual_cua.observe",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0019.png",
+          "sha256": "b9fd21c3d69b4dc599cebe8d34da28fdc9e0d6b57aa9c6273b07746ce00e4bb0"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "{\"duration_ms\": 120, \"kind\": \"key_hold\", \"text\": \"ArrowRight+Space\"}",
+      "kind": "computer_use",
+      "sequence": 43,
+      "status": "completed",
+      "title": "visual_cua.act",
+      "truncated": false,
+      "images": [
+        {
+          "path": "media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/frames/frame-0020.png",
+          "sha256": "012efa544272b732ee9588c2fc8f777bceac1e59e7c9400b7295f907599fd8a0"
+        }
+      ],
+      "image_status": "verified"
+    },
+    {
+      "detail": "update: index.html",
+      "files": [
+        {
+          "kind": "update",
+          "path": "index.html"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 44,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "add: rollout_notes.md",
+      "files": [
+        {
+          "kind": "add",
+          "path": "rollout_notes.md"
+        }
+      ],
+      "kind": "edit",
+      "sequence": 45,
+      "status": "completed",
+      "title": "Changed source files",
+      "truncated": false
+    },
+    {
+      "detail": "M js/game_manager.js\n M js/keyboard_input_manager.js",
+      "exit_code": 0,
+      "kind": "command",
+      "sequence": 46,
+      "status": "completed",
+      "title": "/bin/bash -lc 'git diff --check && git status --short && test -f <artifact-path>'",
+      "truncated": false
+    },
+    {
+      "detail": "Implemented the restart parity fix in:\n\n- [game_manager.js](<artifact-path>\n- [keyboard_input_manager.js](<artifact-path>\n\nRestarts now rewind the active seed and cancel stale delayed moves while preserving normal held-key movement. Syntax, timing, restart-order, and diff checks passed.\n\n`npm run build` was attempted but no `package.json` exists. Rollout notes were written as required.",
+      "kind": "agent_message",
+      "sequence": 47,
+      "status": "completed",
+      "title": "Agent update",
+      "truncated": false
+    },
+    {
+      "detail": "\u2713 Inspect the application structure and restart/input code\n\u2713 Reproduce the seeded restart parity regression in the live UI\n\u2713 Implement a focused source fix\n\u2713 Validate restart paths, held-key movement, and build\n\u2713 Write rollout notes",
+      "kind": "plan",
+      "sequence": 48,
+      "status": "completed",
+      "title": "Agent plan",
+      "truncated": false
+    }
+  ],
+  "provenance": "exact_protected_gpt56_sol_cua",
+  "run_label": "cua-02",
+  "run_relation": "historical_exact",
+  "status": "available",
+  "summary": {
+    "events": 48,
+    "commands": 14,
+    "file_changes": 6,
+    "computer_use_calls": 21,
+    "agent_messages": 6,
+    "plans": 1,
+    "screenshots": 20,
+    "truncated_events": 6,
+    "unfinished_items": 0
+  },
+  "task_id": "gameqa.2048-seeded-restart-parity.005",
+  "terminal_status": "completed",
+  "usage": {
+    "cache_write_input_tokens": 50685,
+    "cached_input_tokens": 1343468,
+    "input_tokens": 1414809,
+    "output_tokens": 9122,
+    "reasoning_output_tokens": 4686
+  },
+  "activity_source_kind": "representative_game_bundle",
+  "artifacts": {
+    "Retained event data (partial)": "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/activity-export.json",
+    "Run provenance": "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/activity-provenance.json",
+    "Agent patch": "viewer/media/source/agent/game-cua/gameqa.2048-seeded-restart-parity.005/agent/patch.diff"
+  },
+  "artifact_status": {
+    "event_data": {
+      "status": "partial",
+      "reason": "Only the earlier compact event export is retained. Truncated event details: 6. Original lifecycle records and omitted text cannot be recovered from this export."
+    },
+    "run_provenance": {
+      "status": "verified",
+      "reason": "Source files and media associations are checked and hashed in the provenance download."
+    },
+    "agent_patch": {
+      "status": "available",
+      "reason": "Final patch from this representative run."
+    },
+    "screenshots": {
+      "status": "verified",
+      "reason": "20 screenshots matched to their recorded calls."
+    }
+  }
+}
