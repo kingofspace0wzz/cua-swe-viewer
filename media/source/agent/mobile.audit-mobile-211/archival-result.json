@@ -15,7 +15,7 @@
       "CUA adapter/executor implementation",
       "CUA adapter/executor provenance metadata",
       "CUA adapter-only diff and hash manifest",
-      "[provider] proxy request-budget increase from 24 to 96"
+      "Bedrock proxy request-budget increase from 24 to 96"
     ],
     "fixture_overlay_change": false,
     "frozen_at": "2026-09-11T07:10:30.657652+00:00",
@@ -34,7 +34,7 @@
   "adapter_successor_sha256": "a6f6e1344da961e60512154afc32f4e256a61e4834dbabc696eb62de124ad4b8",
   "agent_returncode": 0,
   "agent_sandbox_backend": "bubblewrap",
-  "[provider]_proxy_request_budget": 96,
+  "bedrock_proxy_request_budget": 96,
   "broker_audit_sha256": "7cc898e8008fa2e7cf04c270e5eb2c1551c85eae31bf0f7a2824fef6a6a0ed62",
   "broker_network_audit_sha256": "ec615787d28945091ca2efa55ced766e7ef6ccb53c099f5447d1f8a10e6020d4",
   "candidate_id": "audit-mobile-211",
@@ -67,7 +67,7 @@
   "packet_adapter_selftest_returncode": 0,
   "packet_adapter_selftest_sha256": "677047ce87f6a0fe5ff9157ff74a68feaa99e256854f79e8ebe21519c0ad36ed",
   "post_repair_build_returncode": 0,
-  "provider": "[provider]",
+  "provider": "amazon-bedrock",
   "proxy_audit_sha256": "f50c3046162a1b65c85ff4e1dff7e7a58b96839d06b2dd4d3827d88af3d40c66",
   "reasoning_effort": "high",
   "schema_version": 2,

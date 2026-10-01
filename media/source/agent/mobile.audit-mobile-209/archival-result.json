@@ -48,7 +48,7 @@
   },
   "protected_behavioral_verifier_returncode": 1,
   "protected_behavioral_verifier_sha256": "0dabbabdc209572ba870e764db0061f841c5771bad0193eb73e1f076bc094ac0",
-  "provider": "[provider]",
+  "provider": "amazon-bedrock",
   "proxy_audit_sha256": "410d0da1f4fdf4bc1e2e6ee3a696719c5a833b0f21c630101de3d087ec1f022c",
   "proxy_process": {
     "pgid": 1538566,

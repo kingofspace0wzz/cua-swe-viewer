@@ -65,7 +65,7 @@
   "packet_adapter_selftest_returncode": 0,
   "packet_adapter_selftest_sha256": "677047ce87f6a0fe5ff9157ff74a68feaa99e256854f79e8ebe21519c0ad36ed",
   "post_repair_build_returncode": 0,
-  "provider": "[provider]",
+  "provider": "amazon-bedrock",
   "proxy_audit_sha256": "60cd9c9eb29fa98b100bd3999cc6c02551692b9310becd08ede1a060c813bfcd",
   "proxy_request_count": 68,
   "proxy_request_ids": [

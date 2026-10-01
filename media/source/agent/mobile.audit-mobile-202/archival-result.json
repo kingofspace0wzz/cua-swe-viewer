@@ -18,7 +18,7 @@
   "post_repair_build_returncode": 0,
   "protected_behavioral_verifier_returncode": 1,
   "protected_behavioral_verifier_sha256": "c5acfe86fc1ee9f60a06b35bf6c35f9ed8d1e1135436a43a7f1e515306b5564d",
-  "provider": "[provider]",
+  "provider": "amazon-bedrock",
   "schema_version": 1,
   "screenshot_hashes": {
     "rollout/cua-adapter/screenshot-0001.png": "3eff6d388e56d5f0959211c04efa5863cce52411e2ef84a7af5304896a43297e",

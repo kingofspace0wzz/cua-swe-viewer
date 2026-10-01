@@ -25,7 +25,7 @@
   "oracle_returncode": 1,
   "outcome": "fail",
   "post_repair_build_returncode": 0,
-  "provider": "[provider]",
+  "provider": "amazon-bedrock",
   "revision_digest": "166b770a965473a45b84fe53730c93d5bc0261c18942cf750e540d99b2f6f53f",
   "runtime_build_config_sha256": "8ef7e1e01f55582980229c15f2b34acfc29a78d5b28846ad9ddeed37807e4e2a",
   "schema_version": 1,

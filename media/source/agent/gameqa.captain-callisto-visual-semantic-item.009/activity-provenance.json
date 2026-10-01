@@ -36,11 +36,11 @@
     "viewer/media/source/agent/gameqa.captain-callisto-visual-semantic-item.009/trajectory.jsonl": "75a257f86d6bdff6b966048d1c661dc22045f6b5c553a0b1ca829da716119641",
     "viewer/media/agent-activity-sources.json": "a1951beeabaf3d90c707f488db36beaeb13532e03aa7f7c91520dda4670ba1ec"
   },
-  "activity_sha256": "314a621afa988ac60c5a1d30f7d9f2c3f17524fdc8dc528d1624c7ae6b1934d2",
+  "activity_sha256": "2b670746197e1652b8597285bd3068d443600a92578acaa5e6243fe46962a05b",
   "export_policy": {
     "all_lifecycle_records_retained": true,
     "text_truncated": false,
-    "deployment_metadata_redacted": true,
+    "private_account_and_host_metadata_redacted": true,
     "historical_media_attached_to_replacement": false,
     "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
   }

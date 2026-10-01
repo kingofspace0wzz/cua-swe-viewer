@@ -20,7 +20,7 @@
   "packet_adapter_selftest_returncode": 0,
   "packet_adapter_selftest_sha256": "677047ce87f6a0fe5ff9157ff74a68feaa99e256854f79e8ebe21519c0ad36ed",
   "post_repair_build_returncode": 0,
-  "provider": "[provider]",
+  "provider": "amazon-bedrock",
   "proxy_audit_sha256": "2a04f4bfda6e2bfc6d7178183231736b1d4f0a2ccf283bc989abe7df79050219",
   "schema_version": 1,
   "screenshot_hashes": {

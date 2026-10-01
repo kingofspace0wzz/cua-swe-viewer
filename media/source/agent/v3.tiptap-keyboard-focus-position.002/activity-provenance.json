@@ -26,13 +26,13 @@
     }
   },
   "input_sha256": {
-    "viewer/media/source/agent/v3.tiptap-keyboard-focus-position.002/activity-retained.json": "f76f320868ae8c633857a04d3b28d111bf19f794a44715f13c9f96db992d75ca"
+    "viewer/media/source/agent/v3.tiptap-keyboard-focus-position.002/activity-retained.json": "d98d4eb84aa76c30ea3a1c37d03455a53de5e43b309d0f61e2bdf0cb85f29a39"
   },
-  "activity_sha256": "27c09bbfa24f7240afea0a01e5acf29adde24fc9eb5265ea88ee2856ffb27f50",
+  "activity_sha256": "8bf20d15a45f3e756642ff6ebc4d571bd835313711b5a5c46ffe29f32f208e0e",
   "export_policy": {
     "all_lifecycle_records_retained": false,
     "text_truncated": true,
-    "deployment_metadata_redacted": true,
+    "private_account_and_host_metadata_redacted": true,
     "historical_media_attached_to_replacement": false,
     "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
   }

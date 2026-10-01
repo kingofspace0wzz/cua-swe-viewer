@@ -22,7 +22,7 @@
   "payload": 11,
   "post_repair_build_returncode": 0,
   "protected_oracle_returncode": 0,
-  "provider": "[provider]",
+  "provider": "amazon-bedrock",
   "proxy_audit_sha256": "c3ef2b553050b1d64591def7a0a82f24e8196e10497dfa67ee25508f12f31a30",
   "schema_version": 2,
   "screenshot_hashes": {

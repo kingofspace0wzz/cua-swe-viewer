@@ -8,4 +8,4 @@ Raw base64-heavy Codex stdout remains in the private source; the prepared event 
 
 Current inventory: 36 Web + 29 Game + 20 Mobile + 20 DevOps = 105 tasks. The domains retain separate reporting.
 
-Automatically exported from source revision `71622a66b5f1a9d267718029685b6c488a723df0`. See `publication.json` for exported file hashes. Do not edit generated files here; updates come from the private source repository's public-viewer workflow.
+Automatically exported from source revision `578a4721a7e1af8bb79660e5bcbeae0ce17f8603`. See `publication.json` for exported file hashes. Do not edit generated files here; updates come from the private source repository's public-viewer workflow.

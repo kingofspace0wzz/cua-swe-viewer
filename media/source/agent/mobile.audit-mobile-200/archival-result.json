@@ -19,7 +19,7 @@
   "protected_behavioral_verifier_returncode": 1,
   "protected_behavioral_verifier_sha256": "f65f6fb96ca0f84ad578d36cb24cc6996ec1126dc0859ba9358983dbaa03e62b",
   "protected_oracle_execution_valid": true,
-  "provider": "[provider]",
+  "provider": "amazon-bedrock",
   "proxy_request_ceiling": 40,
   "proxy_routing_enforced": true,
   "request_count": 19,

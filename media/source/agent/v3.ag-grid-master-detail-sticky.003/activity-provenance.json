@@ -32,7 +32,7 @@
   "export_policy": {
     "all_lifecycle_records_retained": false,
     "text_truncated": true,
-    "deployment_metadata_redacted": true,
+    "private_account_and_host_metadata_redacted": true,
     "historical_media_attached_to_replacement": false,
     "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
   }

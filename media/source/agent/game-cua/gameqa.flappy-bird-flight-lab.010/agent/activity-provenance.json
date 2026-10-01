@@ -278,7 +278,7 @@
     }
   },
   "input_sha256": {
-    "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.010/agent/activity.json": "0897d1b3f6c1b301bcef3270fd429ba70de5a9d178b59b8f51757c0597e9293a",
+    "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.010/agent/activity.json": "13f5bb764caf468a4645fd6693076f3977727e50e037259e0cf92a6936a2b076",
     "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.010/agent/frame-manifest.json": "084dadb8705dba395fdb4d355809f94ad32efd49819cc13c358c835c47f5471c",
     "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.010/agent/trajectory.jsonl": "3b46203b26c0b68ddc38fa2b66b2c28e5eeaae7785ff9ee5a275305aebcdcdae",
     "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.010/agent/cua-audit.jsonl": "7fc5fe14d15914d9a9b97e3552e85f9583cf2a7c06fa9d5e716c21fc65c0d8d5",
@@ -287,11 +287,11 @@
     "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.010/metadata.json": "123c8355385efd2c792b69ac1e01b78ea536180e4d3b3ef9113271c18ba57326",
     "viewer/media/source/agent/game-cua/gameqa.flappy-bird-flight-lab.010/agent/patch.diff": "05aba4cf65fc300e7aafb0afaf929988da1b15293e8076af7073167db7151ff2"
   },
-  "activity_sha256": "0fe8a109593d0cce6ee5de75d5eaefd902531bcab8f92bc0c081f0e6902c6dc3",
+  "activity_sha256": "9e13d8086c968754e77c83f9bcd190d36bb1f890785563965e634ed36e168596",
   "export_policy": {
     "all_lifecycle_records_retained": false,
     "text_truncated": true,
-    "deployment_metadata_redacted": true,
+    "private_account_and_host_metadata_redacted": true,
     "historical_media_attached_to_replacement": false,
     "missing_artifacts": "Explicitly unavailable; never reconstructed from other runs"
   }

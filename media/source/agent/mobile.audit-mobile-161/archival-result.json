@@ -23,7 +23,7 @@
   "post_repair_build_returncode": 0,
   "protected_behavioral_verifier_returncode": 0,
   "protected_behavioral_verifier_sha256": "ba116100f63c9c340328b37c7920004a85ec358f619a6d8756ef648956cedfd0",
-  "provider": "[provider]",
+  "provider": "amazon-bedrock",
   "proxy_audit_sha256": "228e1af9f14e1141debb638785feefd2628b1683a4fbc95122db4d940341f8ac",
   "schema_version": 1,
   "screenshot_hashes": {
